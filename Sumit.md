@@ -1,17 +1,21 @@
-1.User
-Booking
-cancellation
-selection of Restaurant => table
-Payment
-Restaurent
-Review
-Rating
+# Ideation
 
-2.Registration
-location
-seats availability
-Menu With Rate
-Table Availablity
+**1.User**
+
+    Booking
+    cancellation
+    selection of Restaurant => table
+    Payment
+    Restaurent
+    Review
+    Rating
+
+**2.Registration**
+
+    location
+    seats availability
+    Menu With Rate
+    Table Availablity
 
 Should be controlled by both (Restaurant and BMT)
 Basic modules
