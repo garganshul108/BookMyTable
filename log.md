@@ -58,3 +58,14 @@ Another way
 git checkout parent_name
 git checkout -b child_name parent_name
 ```
+
+#### 2019-07-26 18:07:19
+Want to work on the some branch/feature
+
+1. pull the branch to the local repo
+2. switch to the branch
+3. make a child/sub-branch out of the target branch
+4. work there
+5. git add -> commit -> push your_branch
+    it will get automatically added to the parent branch
+6. then merge can be done
