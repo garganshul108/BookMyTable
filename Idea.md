@@ -20,3 +20,8 @@ Modules:
        - Login
        - Signup, etc...
 
+
+Sumit Added
+   1. User
+       - Review
+       - Rating
