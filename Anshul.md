@@ -18,5 +18,5 @@ Modules:
    
    4.  Basic modules
        - Login
-       - Signup, etc.
+       - Signup, etc..
 
