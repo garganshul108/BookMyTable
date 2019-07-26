@@ -1,4 +1,4 @@
-#LOG
+# LOG
 
 #### 2019-07-26 17:48:13
 Since everyone had same ideas so I combined them to the same place
