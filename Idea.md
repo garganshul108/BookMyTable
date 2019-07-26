@@ -6,9 +6,11 @@ Modules:
        - cancellation
        - selection of Restaurant => table
        - Payment
+       
+       
 Sumit Added
-       - Review
-       - Rating
+   - Review
+   - Rating
 
    2. Restaurent
        - Registration
