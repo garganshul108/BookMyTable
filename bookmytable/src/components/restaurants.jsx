@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { getRestaurants } from "../dummyapi/restaurant";
+import { getRestaurants } from "../api/dump/restaurant";
 import TableRow from "./table/tableRow";
 
 class Restaurants extends Component {
