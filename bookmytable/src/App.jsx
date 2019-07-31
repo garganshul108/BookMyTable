@@ -7,15 +7,20 @@ import Restaurants from "./components/restaurants";
 import Login from "./components/login";
 import NotFound from "./components/notFound";
 
+import "./dummy.css";
+
 class App extends Component {
   render() {
     console.log("My App");
     return (
       <div className="container-fluid">
         <div className="row">
-          <div className="col">
+          <div className="container-fluid">
             <NaviagtionBar />
           </div>
+        </div>
+        <div className="row">
+          <div className="dummy" />
         </div>
         <div className="row">
           <div className="container">
