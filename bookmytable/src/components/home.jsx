@@ -9,7 +9,7 @@ class Home extends Component {
       <div id="homeTab">
         <input
           id="cityInput"
-          class="form-control"
+          className="form-control"
           type="search"
           placeholder="Search"
           aria-label="Search"
