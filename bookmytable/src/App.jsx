@@ -1,10 +1,12 @@
 import React, { Component } from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 
 import NaviagtionBar from "./components/navigationBar";
 import Home from "./components/home";
 import Restaurants from "./components/restaurants";
 import Login from "./components/login";
+import NotFound from "./components/notFound";
+
 class App extends Component {
   render() {
     console.log("My App");
@@ -18,9 +20,12 @@ class App extends Component {
         <div className="row">
           <div className="container">
             <Switch>
-              <Route path="/restaurants" component={Restaurants} />
-              <Route path="/login" component={Login} />
-              <Route path="/" component={Home} />
+              <Route path="/restaurants" render={() => <Restaurants />} />
+              <Route path="/login" render={() => <Login />} />
+              <Route path="/not-found" render={() => <NotFound />} />
+              <Route path="/home" render={() => <Home />} />
+              <Redirect from="/" exact to="/home" />
+              <Redirect to="/not-found" />
             </Switch>
           </div>
         </div>
