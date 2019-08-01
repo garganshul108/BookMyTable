@@ -8,12 +8,10 @@ import Login from "./components/login";
 import NotFound from "./components/notFound";
 
 import "./dummy.css";
-import columns from "./components/restaurantTableConfig.json";
 
 class App extends Component {
   render() {
-    console.log("My App");
-    console.log(columns);
+    console.log("My App loaded... ");
     return (
       <div className="container-fluid">
         <div className="row">
