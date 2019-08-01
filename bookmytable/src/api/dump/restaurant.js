@@ -43,6 +43,9 @@ const data = [
     },
 ];
 
+const jsonData = require('./JSON/R_data_Gurgaon0+20_filtered.json');
+
+// console.log(jsonData);
 export const getRestaurants = () => {
-    return data;
+    return jsonData;
 }

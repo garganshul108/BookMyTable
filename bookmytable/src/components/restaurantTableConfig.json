@@ -6,12 +6,23 @@
   },
   {
     "_id": "2",
-    "name": "cuisine",
-    "title": "Cuisine"
+    "name": "cuisines",
+    "title": "Cuisines"
   },
   {
     "_id": "3",
-    "name": "rating",
+    "name": "user_ratings",
     "title": "Ratings"
-  }
+  },
+  {
+    "_id": "4",
+    "name": "timings",
+    "title": "Time"
+  },
+  {
+    "_id": "5",
+    "name": "average_cost_for_two",
+    "title": "Av. Cost"
+  },
+  { "_id": "6", "name": "phone_numbers", "title": "Call at" }
 ]
