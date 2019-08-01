@@ -1,5 +1,17 @@
 # MYLOG
 
+#### 2019-08-02 01:58:33
+
+- Restaurants are being refactored to div from tables
+- Not-found page updated with new design and woring links
+- Zomato's Restaurant data collected
+- css for the various design models added
+- TODOS:
+  - Restaurant - Single page
+  - Booking interface
+  - Home / Search
+  - Implement Routing for the modules
+
 #### 2019-08-01 23:12:11
 
 - Config file test passed
