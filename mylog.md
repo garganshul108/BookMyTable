@@ -1,5 +1,10 @@
 # MYLOG
 
+#### 2019-08-01 23:12:11
+
+- Config file test passed
+- Table columns can be configured now independently
+
 #### 2019-08-01 00:31:05
 
 - Modeling Table rows problem
