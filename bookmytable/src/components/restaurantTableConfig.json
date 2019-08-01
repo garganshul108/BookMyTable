@@ -1,0 +1,17 @@
+[
+  {
+    "_id": "1",
+    "name": "name",
+    "title": "Name"
+  },
+  {
+    "_id": "2",
+    "name": "cuisine",
+    "title": "Cuisine"
+  },
+  {
+    "_id": "3",
+    "name": "rating",
+    "title": "Ratings"
+  }
+]

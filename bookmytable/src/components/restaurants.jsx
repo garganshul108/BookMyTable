@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { getRestaurants } from "../api/dump/restaurant";
 import TableRow from "./table/tableRow";
+import displayColumns from "./restaurantTableConfig.json";
 
 class Restaurants extends Component {
   state = {
@@ -22,9 +23,11 @@ class Restaurants extends Component {
         <h1>Restaurants: {count}</h1>
         <table className="table">
           <thead>
-            <th>Name</th>
-            <th>Rating</th>
-            <th>Cuisine</th>
+            <tr>
+              {displayColumns.map(column => {
+                return <th key={column._id}>{column.title}</th>;
+              })}
+            </tr>
           </thead>
           <tbody>
             {data.map(item => (

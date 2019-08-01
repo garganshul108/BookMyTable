@@ -1,14 +1,14 @@
 import React, { Component } from "react";
-
+import displayColumns from "../restaurantTableConfig.json";
 class TableRow extends Component {
   state = {};
   render() {
-    const { name, rating, cuisine } = this.props.content;
+    const item = this.props.content;
     return (
       <tr>
-        <td>{name}</td>
-        <td>{rating}</td>
-        <td>{cuisine}</td>
+        {displayColumns.map(column => {
+          return <td key={column._id}>{item[column["name"]]}</td>;
+        })}
       </tr>
     );
   }
