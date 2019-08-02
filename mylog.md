@@ -1,5 +1,10 @@
 # MYLOG
 
+#### 2019-08-02 15:33:08
+
+- Restaurants display refacotred
+- adjusted all the attributes of the json file into the page
+
 #### 2019-08-02 01:58:33
 
 - Restaurants are being refactored to div from tables
