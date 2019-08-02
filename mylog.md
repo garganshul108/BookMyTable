@@ -1,8 +1,22 @@
 # MYLOG
 
+#### 2019-08-02 18:19:49
+
+- Navigation bar refactoring started
+- Project On Hold due to:
+  - login forms and submit attributes
+  - user module
+  - restaurant actions implemantation
+- TODOS:
+  - refactor Home page
+  - build user
+  - build login
+  - restaurant actions
+  - **rest from #2019-08-02 01:58:33**
+
 #### 2019-08-02 15:33:08
 
-- Restaurants display refacotred
+- Restaurants display refactored
 - adjusted all the attributes of the json file into the page
 
 #### 2019-08-02 01:58:33
