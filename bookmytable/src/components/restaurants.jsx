@@ -47,10 +47,10 @@ class Restaurants extends Component {
     name = refactorName(name);
 
     function renderTags() {
-      let rtags = tags.slice(0, 5);
+      let rTags = tags.slice(0, 5);
       return (
         <React.Fragment>
-          {rtags.map(tag => (
+          {rTags.map(tag => (
             <span className="badge badge-warning">{tag}</span>
           ))}
         </React.Fragment>
@@ -58,9 +58,10 @@ class Restaurants extends Component {
     }
 
     function renderCuisines() {
+      let rCuisines = cuisines.slice(0, 5);
       return (
         <React.Fragment>
-          {cuisines.map(cuisine => (
+          {rCuisines.map(cuisine => (
             <span className="badge badge-info">{cuisine}</span>
           ))}
         </React.Fragment>
