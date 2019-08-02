@@ -29,7 +29,9 @@ class Restaurants extends Component {
         <div className="row" style={{ marginBottom: "150px" }}>
           {/* this is the left column with filters segement */}
           <div className="col-2">
-            <p>Filter</p>
+            <div className="filterBox">
+              <p>Filter</p>
+            </div>
           </div>
           {/**
            *
