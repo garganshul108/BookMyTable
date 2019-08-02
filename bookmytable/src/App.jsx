@@ -11,7 +11,7 @@ import "./dummy.css";
 
 class App extends Component {
   render() {
-    console.log("My App");
+    console.log("My App loaded... ");
     return (
       <div className="container-fluid">
         <div className="row">
