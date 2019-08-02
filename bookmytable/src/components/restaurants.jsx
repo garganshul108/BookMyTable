@@ -27,14 +27,19 @@ class Restaurants extends Component {
     }
 
     console.log(restaurant.id);
-    var {
+    let {
       id,
       name,
       highlights: tags,
       average_cost_for_two: avCost,
       cuisines,
-      currency
+      currency,
+      thumb,
+      user_rating: rating,
+      timings
     } = restaurant;
+
+    let { aggregate_rating: aggRating, votes } = rating;
 
     cuisines = refactorCuisines(cuisines);
     name = refactorName(name);
@@ -60,29 +65,81 @@ class Restaurants extends Component {
     }
 
     return (
-      <div className="row restaurantDisplay" key={id}>
-        <div className="col-2">
-          <h6 style={{ textAlign: "center" }}>Image</h6>
-          <p style={{ textAlign: "center" }}>
-            here the image will come once the path is set
-          </p>
-        </div>
+      <div className="container-fluid restaurantDisplay" key={id}>
+        {/* this is the upper portion */}
+        <div className="row">
+          <div className="col-2">
+            <img
+              className="restaurantThumbnail"
+              src={thumb}
+              alt="Image not Found"
+            />
+          </div>
 
-        <div className="col-7 restaurantDesc">
-          <h4>{name}</h4>
+          <div className="col restaurantDesc">
+            <h4>{name}</h4>
+          </div>
 
-          <p>
-            Av cost: {currency}
-            {avCost}
-          </p>
-          <div>{renderCuisines()}</div>
-          <div>{renderTags()}</div>
+          <div className="col-2 reviewDiv" style={{ textAlign: "right" }}>
+            <h4 style={{ marginTop: "50%" }}>
+              <span className="badge badge-success">{aggRating}</span>
+            </h4>
+            <span className="voteCount">{votes} votes</span>
+          </div>
         </div>
-
-        <div className="col-3">
-          <h6 style={{ textAlign: "center" }}>Extra</h6>
-          <p style={{ textAlign: "center" }}>Booking buttons etc</p>
+        <hr />
+        {/* this is the middle session */}
+        <div className="row features">
+          <table>
+            <tr>
+              <td className="header">CUISINES:</td>
+              <td className="data">{renderCuisines()}</td>
+            </tr>
+            <tr>
+              <td className="header">COST FOR TWO:</td>
+              <td className="data">
+                {currency} {avCost}
+              </td>
+            </tr>
+            <tr>
+              <td className="header">HOURS:</td>
+              <td className="data"> {timings}</td>
+            </tr>
+            <tr>
+              <td className="header">FEATURES:</td>
+              <td className="data"> {renderTags()}</td>
+            </tr>
+          </table>
         </div>
+        <hr />
+        {/* this is lower portion */}
+        <div className="row restaurantContacts">
+          <div className="col-4">
+            <button id="call" className="options">
+              <span>
+                <i className="fa fa-phone" aria-hidden="true" />
+              </span>{" "}
+              <span>Call</span>
+            </button>
+          </div>
+          <div className="col-4">
+            <button id="menu" className="options">
+              <span>
+                <i class="fa fa-book" aria-hidden="true" />
+              </span>{" "}
+              <span>Menu</span>
+            </button>
+          </div>
+          <div className="col-4">
+            <button id="book" className="options">
+              <span>
+                <i className="fa fa-calendar" aria-hidden="true" />
+              </span>{" "}
+              <span>Book Table</span>
+            </button>
+          </div>
+        </div>
+        {/* display ends */}
       </div>
     );
   }
@@ -94,15 +151,20 @@ class Restaurants extends Component {
     console.log(restaurants);
     return (
       <React.Fragment>
+        <h3 style={{ fontWeight: 900 }}>
+          Places available in this Region: {count}
+        </h3>
         <div className="row" style={{ marginBottom: "150px" }}>
           <div className="col-2">
             <p>Filter</p>
           </div>
           <div className="col">
-            <h3>Restaurants: {count}</h3>
             <div className="container-fluid restaurantCatalog">
               {restaurants.map(restaurant => this.renderRestaurant(restaurant))}
             </div>
+          </div>
+          <div className="col-2">
+            <p>Ads</p>
           </div>
         </div>
       </React.Fragment>
