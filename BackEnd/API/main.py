@@ -28,11 +28,20 @@ def get_restaurants():
     try:
         conn = mysql.connect()
         cursor = conn.cursor(pymysql.cursors.DictCursor)
-        cursor.execute("SELECT * FROM Restaurant")
+        cursor.execute(
+            "SELECT * FROM Restaurant ")
         rows = cursor.fetchall()
+        for row in rows:
+            cursor.execute("SELECT * FROM Location where id=%s",
+                           row['location_id'])
+            loc = cursor.fetchall()
+            row['location'] = loc[0]
+            del row['location_id']
+
         resp = jsonify(rows)
         resp.status_code = 200
         return resp
+        # return "good"
     except Exception as e:
         print(e)
     finally:
