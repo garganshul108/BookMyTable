@@ -36,19 +36,22 @@ class Restaurants extends Component {
       currency,
       thumb,
       user_rating: rating,
-      timings
+      timings,
+      location,
+      establishment: establishments
     } = restaurant;
 
     let { aggregate_rating: aggRating, votes } = rating;
-
+    let { locality: highLocals, address } = location;
     cuisines = refactorCuisines(cuisines);
     name = refactorName(name);
 
     function renderTags() {
+      let rtags = tags.slice(0, 5);
       return (
         <React.Fragment>
-          {tags.map(tag => (
-            <span className="badge badge-info">{tag}</span>
+          {rtags.map(tag => (
+            <span className="badge badge-warning">{tag}</span>
           ))}
         </React.Fragment>
       );
@@ -58,17 +61,25 @@ class Restaurants extends Component {
       return (
         <React.Fragment>
           {cuisines.map(cuisine => (
-            <span className="badge badge-danger">{cuisine}</span>
+            <span className="badge badge-info">{cuisine}</span>
           ))}
         </React.Fragment>
       );
+    }
+
+    function renderEstablishments() {
+      let establishmentString = "";
+      for (let establishment of establishments) {
+        establishmentString += establishment + " ";
+      }
+      return establishmentString;
     }
 
     return (
       <div className="container-fluid restaurantDisplay" key={id}>
         {/* this is the upper portion */}
         <div className="row">
-          <div className="col-2">
+          <div className="col-3">
             <img
               className="restaurantThumbnail"
               src={thumb}
@@ -77,7 +88,10 @@ class Restaurants extends Component {
           </div>
 
           <div className="col restaurantDesc">
-            <h4>{name}</h4>
+            <p className="establishment">{renderEstablishments()}</p>
+            <p className="banner">{name}</p>
+            <p className="location">{highLocals}</p>
+            <p className="address">{address}</p>
           </div>
 
           <div className="col-2 reviewDiv" style={{ textAlign: "right" }}>

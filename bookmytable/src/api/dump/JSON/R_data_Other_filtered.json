@@ -44,7 +44,8 @@
     "is_delivering_now": 0,
     "deeplink": "zomato://restaurant/19149885",
     "events_url": "https://www.zomato.com/makrana/gopal-juice-and-ice-cream-makrana-locality/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
-    "phone_numbers": "Not available for this place"
+    "phone_numbers": "Not available for this place",
+    "establishment": ["Beverage Shop"]
   },
   {
     "id": "19139870",
@@ -87,7 +88,8 @@
     "is_delivering_now": 1,
     "deeplink": "zomato://restaurant/19139870",
     "events_url": "https://www.zomato.com/akot/prerna-shopi-akot-locality/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
-    "phone_numbers": "+91 9096746005"
+    "phone_numbers": "+91 9096746005",
+    "establishment": ["Bakery"]
   },
   {
     "id": "19136354",
@@ -130,7 +132,8 @@
     "is_delivering_now": 0,
     "deeplink": "zomato://restaurant/19136354",
     "events_url": "https://www.zomato.com/azamgarh/hotel-grand-sr-azamgarh-locality/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
-    "phone_numbers": "Not available for this place"
+    "phone_numbers": "Not available for this place",
+    "establishment": []
   },
   {
     "id": "19118980",
@@ -180,7 +183,8 @@
     "is_delivering_now": 0,
     "deeplink": "zomato://restaurant/19118980",
     "events_url": "https://www.zomato.com/malappuram/bonfair-malappuram-locality/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
-    "phone_numbers": "Not available for this place"
+    "phone_numbers": "Not available for this place",
+    "establishment": ["Casual Dining"]
   },
   {
     "id": "19128322",
@@ -223,7 +227,8 @@
     "is_delivering_now": 1,
     "deeplink": "zomato://restaurant/19128322",
     "events_url": "https://www.zomato.com/chittoor/prabha-grand-inn-1-chittoor-locality/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
-    "phone_numbers": "Not available for this place"
+    "phone_numbers": "Not available for this place",
+    "establishment": ["Casual Dining"]
   },
   {
     "id": "19148264",
@@ -266,7 +271,8 @@
     "is_delivering_now": 1,
     "deeplink": "zomato://restaurant/19148264",
     "events_url": "https://www.zomato.com/ashoknagar/savariya-cake-house-ashoknagar-locality/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
-    "phone_numbers": "Not available for this place"
+    "phone_numbers": "Not available for this place",
+    "establishment": []
   },
   {
     "id": "19132624",
@@ -318,7 +324,8 @@
     "is_delivering_now": 1,
     "deeplink": "zomato://restaurant/19132624",
     "events_url": "https://www.zomato.com/jharsuguda/wafflez-jharsuguda-locality/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
-    "phone_numbers": "+91 9938222210"
+    "phone_numbers": "+91 9938222210",
+    "establishment": ["Café"]
   },
   {
     "id": "19141911",
@@ -361,7 +368,8 @@
     "is_delivering_now": 1,
     "deeplink": "zomato://restaurant/19141911",
     "events_url": "https://www.zomato.com/hardoi/hotel-basant-leela-hardoi-locality/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
-    "phone_numbers": "+91 8948944444"
+    "phone_numbers": "+91 8948944444",
+    "establishment": ["Fine Dining"]
   },
   {
     "id": "19151003",
@@ -404,7 +412,8 @@
     "is_delivering_now": 1,
     "deeplink": "zomato://restaurant/19151003",
     "events_url": "https://www.zomato.com/pilani/mini-punjab-restaurant-pilani-locality/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
-    "phone_numbers": "+91 8209242188, +91 9462060657"
+    "phone_numbers": "+91 8209242188, +91 9462060657",
+    "establishment": ["Casual Dining"]
   },
   {
     "id": "19139932",
@@ -447,7 +456,8 @@
     "is_delivering_now": 0,
     "deeplink": "zomato://restaurant/19139932",
     "events_url": "https://www.zomato.com/nipani/coffee-n-more-nipani-locality/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
-    "phone_numbers": "Not available for this place"
+    "phone_numbers": "Not available for this place",
+    "establishment": ["Dessert Parlour"]
   },
   {
     "id": "19130806",
@@ -501,7 +511,8 @@
     "is_delivering_now": 1,
     "deeplink": "zomato://restaurant/19130806",
     "events_url": "https://www.zomato.com/jharsuguda/la-cafeteria-jharsuguda-locality/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
-    "phone_numbers": "Not available for this place"
+    "phone_numbers": "Not available for this place",
+    "establishment": ["Beverage Shop"]
   },
   {
     "id": "19147011",
@@ -544,7 +555,8 @@
     "is_delivering_now": 1,
     "deeplink": "zomato://restaurant/19147011",
     "events_url": "https://www.zomato.com/theni/hotel-thatti-vilas-1-theni-locality/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
-    "phone_numbers": "+91 8870329317"
+    "phone_numbers": "+91 8870329317",
+    "establishment": ["Casual Dining"]
   },
   {
     "id": "19146513",
@@ -587,7 +599,8 @@
     "is_delivering_now": 1,
     "deeplink": "zomato://restaurant/19146513",
     "events_url": "https://www.zomato.com/janjgir/nice-cafe-the-food-zone-janjgir-locality/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
-    "phone_numbers": "Not available for this place"
+    "phone_numbers": "Not available for this place",
+    "establishment": ["Café"]
   },
   {
     "id": "19120844",
@@ -640,7 +653,8 @@
     "is_delivering_now": 0,
     "deeplink": "zomato://restaurant/19120844",
     "events_url": "https://www.zomato.com/nuzividu/valiveti-grand-nuzividu-locality/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
-    "phone_numbers": "+91 9808829999"
+    "phone_numbers": "+91 9808829999",
+    "establishment": ["Food Court"]
   },
   {
     "id": "19141523",
@@ -683,7 +697,8 @@
     "is_delivering_now": 0,
     "deeplink": "zomato://restaurant/19141523",
     "events_url": "https://www.zomato.com/botad/food-point-botad-locality/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
-    "phone_numbers": "Not available for this place"
+    "phone_numbers": "Not available for this place",
+    "establishment": ["Casual Dining"]
   },
   {
     "id": "19145729",
@@ -732,7 +747,8 @@
     "is_delivering_now": 0,
     "deeplink": "zomato://restaurant/19145729",
     "events_url": "https://www.zomato.com/karaikudi/amsavalli-bhavan-karaikudi-locality/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
-    "phone_numbers": "+91 9787786000"
+    "phone_numbers": "+91 9787786000",
+    "establishment": ["Casual Dining"]
   },
   {
     "id": "19092692",
@@ -785,7 +801,8 @@
     "is_delivering_now": 1,
     "deeplink": "zomato://restaurant/19092692",
     "events_url": "https://www.zomato.com/malout/beans-n-brewers-malout-locality/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
-    "phone_numbers": "+91 9501224304, +91 6280924728"
+    "phone_numbers": "+91 9501224304, +91 6280924728",
+    "establishment": ["Café"]
   },
   {
     "id": "19143450",
@@ -828,7 +845,8 @@
     "is_delivering_now": 0,
     "deeplink": "zomato://restaurant/19143450",
     "events_url": "https://www.zomato.com/nipani/oya-cafe-nipani-locality/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
-    "phone_numbers": "Not available for this place"
+    "phone_numbers": "Not available for this place",
+    "establishment": ["Café"]
   },
   {
     "id": "19146849",
@@ -880,7 +898,8 @@
     "is_delivering_now": 1,
     "deeplink": "zomato://restaurant/19146849",
     "events_url": "https://www.zomato.com/proddatur/baskin-robbins-proddatur-locality/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
-    "phone_numbers": "+91 8142240411"
+    "phone_numbers": "+91 8142240411",
+    "establishment": ["Dessert Parlour"]
   },
   {
     "id": "19144355",
@@ -930,6 +949,7 @@
     "is_delivering_now": 1,
     "deeplink": "zomato://restaurant/19144355",
     "events_url": "https://www.zomato.com/samrala/cafe-49-samrala-locality/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
-    "phone_numbers": "+91 9914436666"
+    "phone_numbers": "+91 9914436666",
+    "establishment": ["Fine Dining"]
   }
 ]
