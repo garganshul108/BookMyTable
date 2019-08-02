@@ -1,3 +1,4 @@
-export FLASK_APP=flask_src
+cd flask_src
+export FLASK_APP= app.py
 export FLASK_ENV=development
 flask run
