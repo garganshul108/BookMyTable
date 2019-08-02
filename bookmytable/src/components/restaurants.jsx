@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { getRestaurants } from "../api/dump/restaurant";
-import displayColumns from "./restaurantTableConfig.json";
 import { captialize } from "../util/util";
 
 import "./css/restaurants.css";
