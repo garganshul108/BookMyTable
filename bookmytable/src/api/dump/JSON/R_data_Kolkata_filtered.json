@@ -56,7 +56,8 @@
     "is_delivering_now": 0,
     "deeplink": "zomato://restaurant/18398880",
     "events_url": "https://www.zomato.com/kolkata/jw-kitchen-jw-marriott-hotel-science-city-area/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
-    "phone_numbers": "+91 7603037737, +91 7604070217, +91 6290728863"
+    "phone_numbers": "+91 7603037737, +91 7604070217, +91 6290728863",
+    "establishment": ["Casual Dining"]
   },
   {
     "id": "18712598",
@@ -113,7 +114,8 @@
     "is_delivering_now": 1,
     "deeplink": "zomato://restaurant/18712598",
     "events_url": "https://www.zomato.com/kolkata/seven-kingdom-1-sector-2-salt-lake/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
-    "phone_numbers": "+91 9831178085, +91 9903074575, +91 8609812641"
+    "phone_numbers": "+91 9831178085, +91 9903074575, +91 8609812641",
+    "establishment": ["Quick Bites"]
   },
   {
     "id": "18575757",
@@ -172,7 +174,8 @@
     "is_delivering_now": 1,
     "deeplink": "zomato://restaurant/18575757",
     "events_url": "https://www.zomato.com/kolkata/cafe-hq-tollygunge/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
-    "phone_numbers": "+91 9123790110, +91 8697913874, +91 9874581894"
+    "phone_numbers": "+91 9123790110, +91 8697913874, +91 9874581894",
+    "establishment": ["Café"]
   },
   {
     "id": "18761167",
@@ -232,7 +235,8 @@
     "is_delivering_now": 0,
     "deeplink": "zomato://restaurant/18761167",
     "events_url": "https://www.zomato.com/kolkata/echoes-kolkata-topsia/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
-    "phone_numbers": "00 03366044810"
+    "phone_numbers": "00 03366044810",
+    "establishment": ["Bar"]
   },
   {
     "id": "18414440",
@@ -297,7 +301,8 @@
     "is_delivering_now": 0,
     "deeplink": "zomato://restaurant/18414440",
     "events_url": "https://www.zomato.com/kolkata/traffic-gastropub-chinar-park/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
-    "phone_numbers": "+91 9903446566, +91 7797504404"
+    "phone_numbers": "+91 9903446566, +91 7797504404",
+    "establishment": ["Pub"]
   },
   {
     "id": "18634729",
@@ -353,7 +358,8 @@
     "is_delivering_now": 0,
     "deeplink": "zomato://restaurant/18634729",
     "events_url": "https://www.zomato.com/kolkata/carpe-diem-2-park-street-area/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
-    "phone_numbers": "033 46023235, +91 7003523869, +91 9748796871"
+    "phone_numbers": "033 46023235, +91 7003523869, +91 9748796871",
+    "establishment": ["Lounge"]
   },
   {
     "id": "19111824",
@@ -409,7 +415,8 @@
     "is_delivering_now": 0,
     "deeplink": "zomato://restaurant/19111824",
     "events_url": "https://www.zomato.com/kolkata/itc-royal-bengal-grand-market-pavilion-science-city-area/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
-    "phone_numbers": "033 23454545"
+    "phone_numbers": "033 23454545",
+    "establishment": ["Fine Dining"]
   },
   {
     "id": "18610904",
@@ -469,7 +476,8 @@
     "is_delivering_now": 1,
     "deeplink": "zomato://restaurant/18610904",
     "events_url": "https://www.zomato.com/kolkata/the-fatty-bao-camac-street-area/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
-    "phone_numbers": "033 46022744, +91 9123701014"
+    "phone_numbers": "033 46022744, +91 9123701014",
+    "establishment": ["Casual Dining"]
   },
   {
     "id": "18377098",
@@ -522,7 +530,8 @@
     "is_delivering_now": 1,
     "deeplink": "zomato://restaurant/18377098",
     "events_url": "https://www.zomato.com/kolkata/calcutta-64-sector-1-salt-lake/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
-    "phone_numbers": "033 40643464"
+    "phone_numbers": "033 40643464",
+    "establishment": ["Café"]
   },
   {
     "id": "18607141",
@@ -573,7 +582,8 @@
     "is_delivering_now": 1,
     "deeplink": "zomato://restaurant/18607141",
     "events_url": "https://www.zomato.com/kolkata/blu-orchid-ajoy-nagar/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
-    "phone_numbers": "+91 9903509427, +91 9903509428"
+    "phone_numbers": "+91 9903509427, +91 9903509428",
+    "establishment": []
   },
   {
     "id": "20404",
@@ -626,7 +636,8 @@
     "is_delivering_now": 1,
     "deeplink": "zomato://restaurant/20404",
     "events_url": "https://www.zomato.com/kolkata/peter-cat-park-street-area/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
-    "phone_numbers": "033 22298841"
+    "phone_numbers": "033 22298841",
+    "establishment": ["Casual Dining"]
   },
   {
     "id": "18017618",
@@ -678,7 +689,8 @@
     "is_delivering_now": 1,
     "deeplink": "zomato://restaurant/18017618",
     "events_url": "https://www.zomato.com/kolkata/49-maniktala/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
-    "phone_numbers": "+91 8336937782, +91 8336937781"
+    "phone_numbers": "+91 8336937782, +91 8336937781",
+    "establishment": ["Quick Bites"]
   },
   {
     "id": "25570",
@@ -733,7 +745,8 @@
     "is_delivering_now": 0,
     "deeplink": "zomato://restaurant/25570",
     "events_url": "https://www.zomato.com/kolkata/barbeque-nation-park-street-area/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
-    "phone_numbers": "18001086060, 033 64806060"
+    "phone_numbers": "18001086060, 033 64806060",
+    "establishment": ["Casual Dining"]
   },
   {
     "id": "18574357",
@@ -790,7 +803,8 @@
     "is_delivering_now": 0,
     "deeplink": "zomato://restaurant/18574357",
     "events_url": "https://www.zomato.com/kolkata/baccara-bhawanipur/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
-    "phone_numbers": "+91 8336041852, +91 9903480980"
+    "phone_numbers": "+91 8336041852, +91 9903480980",
+    "establishment": ["Café"]
   },
   {
     "id": "17983797",
@@ -839,7 +853,8 @@
     "is_delivering_now": 1,
     "deeplink": "zomato://restaurant/17983797",
     "events_url": "https://www.zomato.com/kolkata/dada-boudi-restaurant-barrackpore/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
-    "phone_numbers": "+91 9007614830"
+    "phone_numbers": "+91 9007614830",
+    "establishment": ["Casual Dining"]
   },
   {
     "id": "20842",
@@ -890,7 +905,8 @@
     "is_delivering_now": 0,
     "deeplink": "zomato://restaurant/20842",
     "events_url": "https://www.zomato.com/kolkata/barbeque-nation-sector-5-salt-lake/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
-    "phone_numbers": "18001086060, 033 64806060"
+    "phone_numbers": "18001086060, 033 64806060",
+    "establishment": ["Casual Dining"]
   },
   {
     "id": "18707652",
@@ -939,7 +955,8 @@
     "is_delivering_now": 1,
     "deeplink": "zomato://restaurant/18707652",
     "events_url": "https://www.zomato.com/kolkata/zam-zam-ballygunge/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
-    "phone_numbers": "033 22872079"
+    "phone_numbers": "033 22872079",
+    "establishment": ["Casual Dining"]
   },
   {
     "id": "18812843",
@@ -1000,7 +1017,8 @@
     "is_delivering_now": 1,
     "deeplink": "zomato://restaurant/18812843",
     "events_url": "https://www.zomato.com/kolkata/uno-chicago-bar-grill-kankurgachi/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
-    "phone_numbers": "+91 9971448700, +91 8898191933"
+    "phone_numbers": "+91 9971448700, +91 8898191933",
+    "establishment": ["Casual Dining"]
   },
   {
     "id": "18897756",
@@ -1055,7 +1073,8 @@
     "is_delivering_now": 0,
     "deeplink": "zomato://restaurant/18897756",
     "events_url": "https://www.zomato.com/kolkata/momo-i-am-sector-5-salt-lake/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
-    "phone_numbers": "+91 8017421170, +91 8017421310"
+    "phone_numbers": "+91 8017421170, +91 8017421310",
+    "establishment": ["Casual Dining"]
   },
   {
     "id": "18703712",
@@ -1117,6 +1136,7 @@
     "is_delivering_now": 1,
     "deeplink": "zomato://restaurant/18703712",
     "events_url": "https://www.zomato.com/kolkata/zaairah-sector-1-salt-lake/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
-    "phone_numbers": "+91 6292116140, +91 6292116144, +91 9874977771"
+    "phone_numbers": "+91 6292116140, +91 6292116144, +91 9874977771",
+    "establishment": ["Casual Dining"]
   }
 ]

@@ -52,7 +52,8 @@
     "is_delivering_now": 0,
     "deeplink": "zomato://restaurant/18895645",
     "events_url": "https://www.zomato.com/ncr/plum-by-bent-chair-aerocity-new-delhi/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
-    "phone_numbers": "011 61495178"
+    "phone_numbers": "011 61495178",
+    "establishment": ["Casual Dining"]
   },
   {
     "id": "18856789",
@@ -115,7 +116,8 @@
     "is_delivering_now": 0,
     "deeplink": "zomato://restaurant/18856789",
     "events_url": "https://www.zomato.com/ncr/air-an-ivory-region-punjabi-bagh-new-delhi/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
-    "phone_numbers": "011 66103930"
+    "phone_numbers": "011 66103930",
+    "establishment": ["Lounge"]
   },
   {
     "id": "18423151",
@@ -173,7 +175,8 @@
     "is_delivering_now": 0,
     "deeplink": "zomato://restaurant/18423151",
     "events_url": "https://www.zomato.com/TheDarziBar/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
-    "phone_numbers": "+91 9311714703, +91 9311714702, +91 9313314700"
+    "phone_numbers": "+91 9311714703, +91 9311714702, +91 9313314700",
+    "establishment": ["Casual Dining"]
   },
   {
     "id": "19042004",
@@ -225,7 +228,8 @@
     "is_delivering_now": 0,
     "deeplink": "zomato://restaurant/19042004",
     "events_url": "https://www.zomato.com/ncr/banter-rajinder-nagar-new-delhi/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
-    "phone_numbers": "011 66103710"
+    "phone_numbers": "011 66103710",
+    "establishment": ["Casual Dining"]
   },
   {
     "id": "18429148",
@@ -279,7 +283,8 @@
     "is_delivering_now": 0,
     "deeplink": "zomato://restaurant/18429148",
     "events_url": "https://www.zomato.com/ncr/pa-pa-ya-saket-new-delhi/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
-    "phone_numbers": "011 66103779"
+    "phone_numbers": "011 66103779",
+    "establishment": ["Fine Dining"]
   },
   {
     "id": "18238278",
@@ -339,7 +344,8 @@
     "is_delivering_now": 0,
     "deeplink": "zomato://restaurant/18238278",
     "events_url": "https://www.zomato.com/ncr/tamasha-connaught-place-new-delhi/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
-    "phone_numbers": "011 66103822"
+    "phone_numbers": "011 66103822",
+    "establishment": ["Bar"]
   },
   {
     "id": "307374",
@@ -390,7 +396,8 @@
     "is_delivering_now": 0,
     "deeplink": "zomato://restaurant/307374",
     "events_url": "https://www.zomato.com/ncr/ama-cafe-majnu-ka-tila-new-delhi/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
-    "phone_numbers": "011 66103668"
+    "phone_numbers": "011 66103668",
+    "establishment": ["Café"]
   },
   {
     "id": "18649486",
@@ -444,7 +451,8 @@
     "is_delivering_now": 0,
     "deeplink": "zomato://restaurant/18649486",
     "events_url": "https://www.zomato.com/ncr/the-drunken-botanist-dlf-cyber-city-gurgaon/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
-    "phone_numbers": "011 66992206"
+    "phone_numbers": "011 66992206",
+    "establishment": ["Bar"]
   },
   {
     "id": "308322",
@@ -507,7 +515,8 @@
     "is_delivering_now": 1,
     "deeplink": "zomato://restaurant/308322",
     "events_url": "https://www.zomato.com/HauzKhasSocial/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
-    "phone_numbers": "+91 7838652814"
+    "phone_numbers": "+91 7838652814",
+    "establishment": ["Lounge"]
   },
   {
     "id": "18382360",
@@ -564,7 +573,8 @@
     "is_delivering_now": 0,
     "deeplink": "zomato://restaurant/18382360",
     "events_url": "https://www.zomato.com/ncr/local-connaught-place-new-delhi/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
-    "phone_numbers": "011 66103919"
+    "phone_numbers": "011 66103919",
+    "establishment": ["Bar"]
   },
   {
     "id": "18625812",
@@ -618,7 +628,8 @@
     "is_delivering_now": 0,
     "deeplink": "zomato://restaurant/18625812",
     "events_url": "https://www.zomato.com/ncr/detroit-connaught-place-new-delhi/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
-    "phone_numbers": "+91 8448090403, +91 8448090404, +91 8448090402"
+    "phone_numbers": "+91 8448090403, +91 8448090404, +91 8448090402",
+    "establishment": ["Bar"]
   },
   {
     "id": "18418277",
@@ -679,7 +690,8 @@
     "is_delivering_now": 0,
     "deeplink": "zomato://restaurant/18418277",
     "events_url": "https://www.zomato.com/ncr/ministry-of-beer-connaught-place-new-delhi/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
-    "phone_numbers": "011 66992286"
+    "phone_numbers": "011 66992286",
+    "establishment": ["Microbrewery"]
   },
   {
     "id": "18851371",
@@ -736,7 +748,8 @@
     "is_delivering_now": 0,
     "deeplink": "zomato://restaurant/18851371",
     "events_url": "https://www.zomato.com/ncr/station-bar-connaught-place-new-delhi/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
-    "phone_numbers": "011 66103796"
+    "phone_numbers": "011 66103796",
+    "establishment": ["Bar"]
   },
   {
     "id": "313256",
@@ -793,7 +806,8 @@
     "is_delivering_now": 0,
     "deeplink": "zomato://restaurant/313256",
     "events_url": "https://www.zomato.com/ncr/the-junkyard-cafe-connaught-place-new-delhi/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
-    "phone_numbers": "011 66103778"
+    "phone_numbers": "011 66103778",
+    "establishment": ["Lounge"]
   },
   {
     "id": "18216901",
@@ -856,7 +870,8 @@
     "is_delivering_now": 0,
     "deeplink": "zomato://restaurant/18216901",
     "events_url": "https://www.zomato.com/ncr/unplugged-courtyard-connaught-place-new-delhi/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
-    "phone_numbers": "+91 9999396662, +91 9999396661"
+    "phone_numbers": "+91 9999396662, +91 9999396661",
+    "establishment": ["Bar"]
   },
   {
     "id": "2008",
@@ -910,7 +925,8 @@
     "is_delivering_now": 0,
     "deeplink": "zomato://restaurant/2008",
     "events_url": "https://www.zomato.com/ncr/hira-sweets-laxmi-nagar-new-delhi/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
-    "phone_numbers": "011 22522252, 011 22469756, 011 22469755"
+    "phone_numbers": "011 22522252, 011 22469756, 011 22469755",
+    "establishment": ["Sweet Shop"]
   },
   {
     "id": "18273556",
@@ -964,7 +980,8 @@
     "is_delivering_now": 1,
     "deeplink": "zomato://restaurant/18273556",
     "events_url": "https://www.zomato.com/ncr/pizzaexpress-sector-18-noida/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
-    "phone_numbers": "0120 6209981, 0120 6209982"
+    "phone_numbers": "0120 6209981, 0120 6209982",
+    "establishment": ["Casual Dining"]
   },
   {
     "id": "310470",
@@ -1010,7 +1027,8 @@
     "is_delivering_now": 0,
     "deeplink": "zomato://restaurant/310470",
     "events_url": "https://www.zomato.com/ncr/moolchand-parantha-lajpat-nagar-4-new-delhi/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
-    "phone_numbers": "+91 9871734042"
+    "phone_numbers": "+91 9871734042",
+    "establishment": []
   },
   {
     "id": "18562836",
@@ -1060,7 +1078,8 @@
     "is_delivering_now": 0,
     "deeplink": "zomato://restaurant/18562836",
     "events_url": "https://www.zomato.com/ncr/diggin-chanakyapuri-new-delhi/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
-    "phone_numbers": "011 26110787, 011 26110788, +91 8826655069"
+    "phone_numbers": "011 26110787, 011 26110788, +91 8826655069",
+    "establishment": ["Café"]
   },
   {
     "id": "307406",
@@ -1107,6 +1126,7 @@
     "is_delivering_now": 1,
     "deeplink": "zomato://restaurant/307406",
     "events_url": "https://www.zomato.com/ncr/pandit-ji-parantha-hut-ashok-vihar-phase-2-new-delhi/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
-    "phone_numbers": "+91 9810060397"
+    "phone_numbers": "+91 9810060397",
+    "establishment": ["Quick Bites"]
   }
 ]
