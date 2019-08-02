@@ -55,7 +55,8 @@
     "is_delivering_now": 1,
     "deeplink": "zomato://restaurant/18289242",
     "events_url": "https://www.zomato.com/CyberHubSocial/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
-    "phone_numbers": "+91 7838045182"
+    "phone_numbers": "+91 7838045182",
+    "establishment": ["Lounge"]
   },
   {
     "id": "310188",
@@ -110,7 +111,8 @@
     "is_delivering_now": 1,
     "deeplink": "zomato://restaurant/310188",
     "events_url": "https://www.zomato.com/ncr/pizzaexpress-dlf-phase-3-gurgaon/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
-    "phone_numbers": "0124 4665721, 0124 4665722"
+    "phone_numbers": "0124 4665721, 0124 4665722",
+    "establishment": ["Casual Dining"]
   },
   {
     "id": "18687573",
@@ -161,7 +163,8 @@
     "is_delivering_now": 1,
     "deeplink": "zomato://restaurant/18687573",
     "events_url": "https://www.zomato.com/ncr/eat-fit-mg-road-gurgaon/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
-    "phone_numbers": "Not available for this place"
+    "phone_numbers": "Not available for this place",
+    "establishment": []
   },
   {
     "id": "5056",
@@ -215,7 +218,8 @@
     "is_delivering_now": 1,
     "deeplink": "zomato://restaurant/5056",
     "events_url": "https://www.zomato.com/ncr/om-sweets-snacks-sector-14-gurgaon/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
-    "phone_numbers": "0124 2330451, 0124 2307691"
+    "phone_numbers": "0124 2330451, 0124 2307691",
+    "establishment": ["Quick Bites"]
   },
   {
     "id": "18415341",
@@ -270,7 +274,8 @@
     "is_delivering_now": 1,
     "deeplink": "zomato://restaurant/18415341",
     "events_url": "https://www.zomato.com/ncr/ihop-dlf-cyber-city-gurgaon/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
-    "phone_numbers": "+91 9999184486, +91 9999739599"
+    "phone_numbers": "+91 9999184486, +91 9999739599",
+    "establishment": ["Café"]
   },
   {
     "id": "311662",
@@ -323,7 +328,8 @@
     "is_delivering_now": 1,
     "deeplink": "zomato://restaurant/311662",
     "events_url": "https://www.zomato.com/ncr/la-pinoz-pizza-golf-course-road-gurgaon/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
-    "phone_numbers": "+91 9250000016, +91 9250000034, +91 9810154544"
+    "phone_numbers": "+91 9250000016, +91 9250000034, +91 9810154544",
+    "establishment": ["Casual Dining"]
   },
   {
     "id": "18168152",
@@ -376,7 +382,8 @@
     "is_delivering_now": 0,
     "deeplink": "zomato://restaurant/18168152",
     "events_url": "https://www.zomato.com/ncr/barbeque-nation-south-city-2-gurgaon/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
-    "phone_numbers": "+91 9654266060"
+    "phone_numbers": "+91 9654266060",
+    "establishment": ["Casual Dining"]
   },
   {
     "id": "306150",
@@ -435,7 +442,8 @@
     "is_delivering_now": 0,
     "deeplink": "zomato://restaurant/306150",
     "events_url": "https://www.zomato.com/ncr/imperfecto-dlf-cyber-city-gurgaon/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
-    "phone_numbers": "011 71565336"
+    "phone_numbers": "011 71565336",
+    "establishment": ["Casual Dining"]
   },
   {
     "id": "4766",
@@ -493,7 +501,8 @@
     "is_delivering_now": 1,
     "deeplink": "zomato://restaurant/4766",
     "events_url": "https://www.zomato.com/ncr/cafe-delhi-heights-dlf-phase-4-gurgaon/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
-    "phone_numbers": "+91 9555754033, 0124 4229797"
+    "phone_numbers": "+91 9555754033, 0124 4229797",
+    "establishment": ["Casual Dining"]
   },
   {
     "id": "313316",
@@ -548,7 +557,8 @@
     "is_delivering_now": 1,
     "deeplink": "zomato://restaurant/313316",
     "events_url": "https://www.zomato.com/ncr/bikanervala-golf-course-road-gurgaon/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
-    "phone_numbers": "0124 4707777, 0124 4707778"
+    "phone_numbers": "0124 4707777, 0124 4707778",
+    "establishment": ["Sweet Shop"]
   },
   {
     "id": "18418233",
@@ -606,7 +616,8 @@
     "is_delivering_now": 0,
     "deeplink": "zomato://restaurant/18418233",
     "events_url": "https://www.zomato.com/ncr/agent-jacks-bidding-bar-sector-29-gurgaon/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
-    "phone_numbers": "011 66103947"
+    "phone_numbers": "011 66103947",
+    "establishment": ["Pub"]
   },
   {
     "id": "18277179",
@@ -659,7 +670,8 @@
     "is_delivering_now": 0,
     "deeplink": "zomato://restaurant/18277179",
     "events_url": "https://www.zomato.com/ncr/yum-yum-cha-dlf-cyber-city-gurgaon/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
-    "phone_numbers": "+91 9810002993, 0124 4078133, 0124 4078233"
+    "phone_numbers": "+91 9810002993, 0124 4078133, 0124 4078233",
+    "establishment": ["Casual Dining"]
   },
   {
     "id": "18337897",
@@ -718,7 +730,8 @@
     "is_delivering_now": 1,
     "deeplink": "zomato://restaurant/18337897",
     "events_url": "https://www.zomato.com/ncr/vapour-bar-exchange-sohna-road-gurgaon/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
-    "phone_numbers": "+91 9582555610, +91 9582555611, +91 9582555614"
+    "phone_numbers": "+91 9582555610, +91 9582555611, +91 9582555614",
+    "establishment": ["Microbrewery"]
   },
   {
     "id": "308572",
@@ -773,7 +786,8 @@
     "is_delivering_now": 1,
     "deeplink": "zomato://restaurant/308572",
     "events_url": "https://www.zomato.com/ncr/fat-lulus-cafe-bar-dlf-phase-4-gurgaon/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
-    "phone_numbers": "+91 8800601746, +91 9560799795"
+    "phone_numbers": "+91 8800601746, +91 9560799795",
+    "establishment": ["Casual Dining"]
   },
   {
     "id": "18551512",
@@ -824,7 +838,8 @@
     "is_delivering_now": 1,
     "deeplink": "zomato://restaurant/18551512",
     "events_url": "https://www.zomato.com/ncr/mamagoto-1-dlf-cyber-city-gurgaon/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
-    "phone_numbers": "+91 9873739473, +91 9599933602"
+    "phone_numbers": "+91 9873739473, +91 9599933602",
+    "establishment": ["Casual Dining"]
   },
   {
     "id": "18224532",
@@ -875,7 +890,8 @@
     "is_delivering_now": 1,
     "deeplink": "zomato://restaurant/18224532",
     "events_url": "https://www.zomato.com/ncr/dilli-6-on-wheels-sector-31-gurgaon/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
-    "phone_numbers": "+91 9873372240"
+    "phone_numbers": "+91 9873372240",
+    "establishment": ["Quick Bites"]
   },
   {
     "id": "8597",
@@ -929,7 +945,8 @@
     "is_delivering_now": 1,
     "deeplink": "zomato://restaurant/8597",
     "events_url": "https://www.zomato.com/ncr/shawarma-house-golf-course-road-gurgaon/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
-    "phone_numbers": "0124 4148888, +91 8010018888"
+    "phone_numbers": "0124 4148888, +91 8010018888",
+    "establishment": ["Quick Bites"]
   },
   {
     "id": "18281957",
@@ -986,7 +1003,8 @@
     "is_delivering_now": 0,
     "deeplink": "zomato://restaurant/18281957",
     "events_url": "https://www.zomato.com/ncr/factory-by-sutra-sector-29-gurgaon/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
-    "phone_numbers": "+91 9205246700, +91 9205249700, +91 8920960204"
+    "phone_numbers": "+91 9205246700, +91 9205249700, +91 8920960204",
+    "establishment": ["Microbrewery"]
   },
   {
     "id": "18383453",
@@ -1040,7 +1058,8 @@
     "is_delivering_now": 1,
     "deeplink": "zomato://restaurant/18383453",
     "events_url": "https://www.zomato.com/ncr/circus-dlf-cyber-city-gurgaon/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
-    "phone_numbers": "0124 4966321, +91 9821772934, +91 9582085021"
+    "phone_numbers": "0124 4966321, +91 9821772934, +91 9582085021",
+    "establishment": ["Casual Dining"]
   },
   {
     "id": "311104",
@@ -1099,6 +1118,7 @@
     "is_delivering_now": 1,
     "deeplink": "zomato://restaurant/311104",
     "events_url": "https://www.zomato.com/ncr/impromptu-golf-course-road-gurgaon/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
-    "phone_numbers": "+91 7840055999, 0124 4119191"
+    "phone_numbers": "+91 7840055999, 0124 4119191",
+    "establishment": ["Bar"]
   }
 ]
