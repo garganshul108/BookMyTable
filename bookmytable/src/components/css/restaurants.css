@@ -3,6 +3,11 @@
   margin: 1px;
 }
 
+hr {
+  margin-bottom: 2px !important;
+  margin-top: 2px !important;
+}
+
 .restaurantCatalog {
   /* border: 2px dashed rgba(100, 1, 100, 0.4); */
   /* border-radius: 10px; */
@@ -66,11 +71,23 @@
   text-align: center;
   border: none;
   background: inherit;
-  padding: 20px;
+  padding: 10px 20px;
   font-weight: 700;
   cursor: pointer;
   color: #a5a5a5;
   outline: none;
+}
+
+.activeOption {
+  color: black !important;
+}
+
+.restaurantDisplay .optionText {
+  color: red;
+  font-size: 0.8rem;
+  margin-top: 5px;
+  text-align: center;
+  width: 98%;
 }
 
 .restaurantDisplay .restaurantContacts .options:hover {
@@ -78,6 +95,11 @@
   color: black;
 }
 
+.restaurantDisplay .restaurantContacts #book:hover {
+  background: green;
+  border-radius: 5px;
+  color: white;
+}
 .restaurantDisplay .restaurantDesc p {
   margin-bottom: 2px;
 }
@@ -104,4 +126,15 @@
   text-transform: capitalize;
   color: gray;
   font-size: 0.8rem;
+}
+
+.filterBox {
+  width: 100%;
+  padding: 5px;
+  margin-bottom: 12px;
+  box-sizing: border-box;
+  background: white;
+  border: 1px solid #a5a5a591;
+  border-radius: 3px;
+  box-shadow: 1px 1px 1px #a5a5a520;
 }
