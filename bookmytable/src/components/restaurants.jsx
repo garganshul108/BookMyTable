@@ -12,8 +12,16 @@ class Restaurants extends Component {
   handleCall = restaurant => {
     console.log("call clicked");
     let uRestaurants = this.state.restaurants;
-    let index = uRestaurants.indexOf(restaurant);
-    uRestaurants[index].showPhone = true;
+    let targetRestaurant = uRestaurants[uRestaurants.indexOf(restaurant)];
+    targetRestaurant.showPhone = !targetRestaurant.showPhone;
+    this.setState({ restaurants: uRestaurants });
+  };
+
+  handleMenu = restaurant => {
+    console.log("menu clicked");
+    let uRestaurants = this.state.restaurants;
+    let targetRestaurant = uRestaurants[uRestaurants.indexOf(restaurant)];
+    targetRestaurant.showMenu = !targetRestaurant.showMenu;
     this.setState({ restaurants: uRestaurants });
   };
 
@@ -54,6 +62,7 @@ class Restaurants extends Component {
               {restaurants.map(restaurant => {
                 return (
                   <Restaurant
+                    onMenu={this.handleMenu}
                     onCall={this.handleCall}
                     restaurant={restaurant}
                   />
