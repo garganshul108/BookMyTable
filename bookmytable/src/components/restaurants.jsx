@@ -165,20 +165,24 @@ class Restaurants extends Component {
     console.log(restaurants);
     return (
       <React.Fragment>
-        <h3 style={{ fontWeight: 900 }}>
-          Places available in this Region: {count}
-        </h3>
-        <div className="row" style={{ marginBottom: "150px" }}>
-          <div className="col-2">
-            <p>Filter</p>
-          </div>
-          <div className="col">
-            <div className="container-fluid restaurantCatalog">
-              {restaurants.map(restaurant => this.renderRestaurant(restaurant))}
+        <div className="container">
+          <h3 style={{ fontWeight: 900 }}>
+            Places available in this Region: {count}
+          </h3>
+          <div className="row" style={{ marginBottom: "150px" }}>
+            <div className="col-2">
+              <p>Filter</p>
             </div>
-          </div>
-          <div className="col-2">
-            <p>Ads</p>
+            <div className="col">
+              <div className="container-fluid restaurantCatalog">
+                {restaurants.map(restaurant =>
+                  this.renderRestaurant(restaurant)
+                )}
+              </div>
+            </div>
+            <div className="col-2">
+              <p>Ads</p>
+            </div>
           </div>
         </div>
       </React.Fragment>
