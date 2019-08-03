@@ -8,3 +8,17 @@
   border-radius: 3px;
   box-shadow: 1px 1px 1px #a5a5a520;
 }
+
+.filterBox p {
+  margin: 0;
+}
+
+.filterBox .headings {
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.filterBox .filterOption {
+  /* font-weight: 700; */
+  font-size: 0.8rem;
+}
