@@ -1,5 +1,19 @@
 # MYLOG
 
+#### 2019-08-04 00:21:49
+
+- Filter added for design
+- Ads added
+- JQuery for bootstrap elements added
+- userbar added
+- login page on hold
+- home page design thought
+- branches created today:
+  - implementing-filter (child to restaurent model; filter designin)
+  - restaurant-model (child to bookTable; refactoring the restaurants page)
+  - bookTable (child to app-front; created to implement the Book a Table logic on hold)
+  - login-form (added login form and sign up form basic design not implented totally)
+
 #### 2019-08-03 18:52:24
 
 - Restaurant as seprate module refactoring complete
