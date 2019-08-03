@@ -29,6 +29,7 @@ class Restaurants extends Component {
   // place for all the API calls etc
   componentDidMount() {
     let restaurants = getRestaurants();
+
     for (let restaurant of restaurants) {
       restaurant.showPhone = false;
       restaurant.showMenu = false;
