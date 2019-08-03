@@ -1,5 +1,15 @@
 # MYLOG
 
+#### 2019-08-03 18:52:24
+
+- Restaurant as seprate module refactoring complete
+- bookTable attribute is underprocess
+- Menu / Call functions done
+- App's common div refactored:
+  - container made component dependent
+- User from initiated
+- Home page and Navigation Bar refactoring begun (but on hold)
+
 #### 2019-08-02 18:19:49
 
 - Navigation bar refactoring started
