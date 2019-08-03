@@ -32,7 +32,8 @@ class Restaurant extends Component {
       establishment: establishments,
       showPhone,
       phone_numbers,
-      showMenu
+      showMenu,
+      showTables
     } = restaurant;
 
     let { aggregate_rating: aggRating, votes } = rating;
@@ -155,7 +156,13 @@ class Restaurant extends Component {
             </button>
           </div>
           <div className="col-4">
-            <button id="book" className="options">
+            <button
+              onClick={() => {
+                this.props.showAvailableTables(restaurant);
+              }}
+              id="book"
+              className="options"
+            >
               <span>
                 <i className="fa fa-calendar" aria-hidden="true" />
               </span>{" "}
@@ -189,6 +196,7 @@ class Restaurant extends Component {
             </small>
           </React.Fragment>
         )}
+        {showTables && <React.Fragment>Hello Tables HERE</React.Fragment>}
       </div>
     );
   }

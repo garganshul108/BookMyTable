@@ -25,11 +25,42 @@ class Restaurants extends Component {
     this.setState({ restaurants: uRestaurants });
   };
 
+  showAvailableTables = restaurant => {
+    console.log("Book Table clicked");
+    let uRestaurants = this.state.restaurants;
+    let targetRestaurant = uRestaurants[uRestaurants.indexOf(restaurant)];
+    targetRestaurant.showTables = !targetRestaurant.showTables;
+    this.setState({ restaurants: uRestaurants });
+  };
+
+  // to be deleted in future
+  addMiscPropertyToRestaurants(restaurants) {
+    let fakeTableProps = [
+      "size_ten",
+      "size_eight",
+      "size_six",
+      "size_four",
+      "size_two",
+      "size_one"
+    ];
+
+    for (let restaurant of restaurants) {
+      restaurant.showPhone = false;
+      restaurant.showMenu = false;
+      restaurant.showTables = false;
+      for (let fakeTableProp of fakeTableProps) {
+        restaurant[fakeTableProp] = 1;
+      }
+    }
+
+    return restaurants;
+  }
+
   // called once the component is initialized
   // place for all the API calls etc
   componentDidMount() {
     let restaurants = getRestaurants();
-
+    restaurants = this.addMiscPropertyToRestaurants(restaurants);
     for (let restaurant of restaurants) {
       restaurant.showPhone = false;
       restaurant.showMenu = false;
@@ -69,6 +100,7 @@ class Restaurants extends Component {
                       onMenu={this.handleMenu}
                       onCall={this.handleCall}
                       restaurant={restaurant}
+                      showAvailableTables={this.showAvailableTables}
                     />
                   );
                 })}
