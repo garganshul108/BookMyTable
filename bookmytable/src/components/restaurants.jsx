@@ -44,38 +44,40 @@ class Restaurants extends Component {
 
     return (
       <React.Fragment>
-        <h3 style={{ fontWeight: 900 }}>
-          Places available in this Region: {count}
-        </h3>
-        <div className="row" style={{ marginBottom: "150px" }}>
-          {/* this is the left column with filters segement */}
-          <div className="col-2">
-            <div className="filterBox">
-              <p>Filter</p>
+        <div className="container">
+          <h3 style={{ fontWeight: 900 }}>
+            Places available in this Region: {count}
+          </h3>
+          <div className="row" style={{ marginBottom: "150px" }}>
+            {/* this is the left column with filters segement */}
+            <div className="col-2">
+              <div className="filterBox">
+                <p>Filter</p>
+              </div>
             </div>
-          </div>
-          {/**
-           *
-           * this is the catalogue display for the restaurants
-           * each restaurant has its own div
-           *
-           */}
-          <div className="col">
-            <div className="container-fluid restaurantCatalog">
-              {restaurants.map(restaurant => {
-                return (
-                  <Restaurant
-                    onMenu={this.handleMenu}
-                    onCall={this.handleCall}
-                    restaurant={restaurant}
-                  />
-                );
-              })}
+            {/**
+             *
+             * this is the catalogue display for the restaurants
+             * each restaurant has its own div
+             *
+             */}
+            <div className="col">
+              <div className="container-fluid restaurantCatalog">
+                {restaurants.map(restaurant => {
+                  return (
+                    <Restaurant
+                      onMenu={this.handleMenu}
+                      onCall={this.handleCall}
+                      restaurant={restaurant}
+                    />
+                  );
+                })}
+              </div>
             </div>
-          </div>
-          {/* this is the ads section for the app */}
-          <div className="col-2">
-            <p>Ads</p>
+            {/* this is the ads section for the app */}
+            <div className="col-2">
+              <p>Ads</p>
+            </div>
           </div>
         </div>
       </React.Fragment>

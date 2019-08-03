@@ -23,16 +23,14 @@ class App extends Component {
           <div className="dummy" />
         </div>
         <div className="row">
-          <div className="container">
-            <Switch>
-              <Route path="/restaurants" render={() => <Restaurants />} />
-              <Route path="/login" render={() => <Login />} />
-              <Route path="/not-found" render={() => <NotFound />} />
-              <Route path="/home" render={() => <Home />} />
-              <Redirect from="/" exact to="/home" />
-              <Redirect to="/not-found" />
-            </Switch>
-          </div>
+          <Switch>
+            <Route path="/restaurants" render={() => <Restaurants />} />
+            <Route path="/login" render={() => <Login />} />
+            <Route path="/not-found" render={() => <NotFound />} />
+            <Route path="/home" render={() => <Home />} />
+            <Redirect from="/" exact to="/home" />
+            <Redirect to="/not-found" />
+          </Switch>
         </div>
       </div>
     );
