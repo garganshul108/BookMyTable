@@ -82,11 +82,7 @@ class Restaurant extends Component {
         {/* this is the upper portion */}
         <div className="row">
           <div className="col-3">
-            <img
-              className="restaurantThumbnail"
-              src={thumb}
-              alt="Image not Found"
-            />
+            <img className="restaurantThumbnail" src={thumb} alt="" />
           </div>
 
           <div className="col restaurantDesc">
