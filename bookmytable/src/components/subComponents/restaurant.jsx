@@ -167,7 +167,7 @@ class Restaurant extends Component {
                 <i className="fa fa-calendar" aria-hidden="true" />
               </span>{" "}
               &nbsp;&nbsp;
-              <span>Book Table</span>
+              <span>Book a Table</span>
             </button>
           </div>
         </div>

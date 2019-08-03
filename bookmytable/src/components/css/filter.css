@@ -1,0 +1,10 @@
+.filterBox {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 12px;
+  box-sizing: border-box;
+  background: white;
+  border: 1px solid #a5a5a591;
+  border-radius: 3px;
+  box-shadow: 1px 1px 1px #a5a5a520;
+}
