@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { getRestaurants } from "../api/dump/restaurant";
 
 import "./css/restaurants.css";
-import Restaurant from "./restaurant";
+import Restaurant from "./subComponents/restaurant";
 
 class Restaurants extends Component {
   state = {

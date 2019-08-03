@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { captialize } from "../util/util";
+import { captialize } from "../../util/util";
 
 class Restaurant extends Component {
   state = {};

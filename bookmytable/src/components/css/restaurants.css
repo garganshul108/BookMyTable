@@ -24,12 +24,12 @@ hr {
   box-shadow: 1px 1px 1px #a5a5a520;
 }
 
-.restaurantDisplay:hover {
-  /* border-bottom-left-radius: 40px;
+/* .restaurantDisplay:hover { */
+/* border-bottom-left-radius: 40px;
   border-top-right-radius: 40px; */
-  /* border: 1px solid #5555; */
-  /* background: #5551; */
-}
+/* border: 1px solid #5555; */
+/* background: #5551; */
+/* } */
 
 .restaurantDisplay .restaurantThumbnail {
   width: 100%;

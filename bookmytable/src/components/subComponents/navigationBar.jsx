@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link, NavLink } from "react-router-dom";
 
-import "./css/navigationBar.css";
+import "../css/navigationBar.css";
 class NaviagtionBar extends Component {
   state = {};
   render() {
