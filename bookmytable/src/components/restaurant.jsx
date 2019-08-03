@@ -17,7 +17,7 @@ class Restaurant extends Component {
       return cuisines.split(",");
     }
 
-    console.log(restaurant.id);
+    // console.log(restaurant.id);
     let {
       id,
       name,
@@ -29,7 +29,9 @@ class Restaurant extends Component {
       user_rating: rating,
       timings,
       location,
-      establishment: establishments
+      establishment: establishments,
+      showPhone,
+      phone_numbers
     } = restaurant;
 
     let { aggregate_rating: aggRating, votes } = rating;
@@ -121,11 +123,16 @@ class Restaurant extends Component {
         {/* this is lower portion */}
         <div className="row restaurantContacts">
           <div className="col-4">
-            <button id="call" className="options">
+            <button
+              onClick={() => this.props.onCall(restaurant)}
+              id="call"
+              className="options"
+            >
               <span>
                 <i className="fa fa-phone" aria-hidden="true" />
               </span>{" "}
               <span>Call</span>
+              {showPhone && <p>{phone_numbers}</p>}
             </button>
           </div>
           <div className="col-4">
