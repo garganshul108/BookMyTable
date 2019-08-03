@@ -17,7 +17,7 @@ class Restaurant extends Component {
       return cuisines.split(",");
     }
 
-    console.log(restaurant.id);
+    // console.log(restaurant.id);
     let {
       id,
       name,
@@ -29,7 +29,10 @@ class Restaurant extends Component {
       user_rating: rating,
       timings,
       location,
-      establishment: establishments
+      establishment: establishments,
+      showPhone,
+      phone_numbers,
+      showMenu
     } = restaurant;
 
     let { aggregate_rating: aggRating, votes } = rating;
@@ -65,6 +68,13 @@ class Restaurant extends Component {
         establishmentString += establishment + " ";
       }
       return establishmentString;
+    }
+
+    function setOptionClass(option) {
+      let classValue = "options";
+      if (option === "call" && showPhone) classValue += " activeOption";
+      if (option === "menu" && showMenu) classValue += " activeOption";
+      return classValue;
     }
 
     return (
@@ -121,7 +131,11 @@ class Restaurant extends Component {
         {/* this is lower portion */}
         <div className="row restaurantContacts">
           <div className="col-4">
-            <button id="call" className="options">
+            <button
+              onClick={() => this.props.onCall(restaurant)}
+              id="call"
+              className={setOptionClass("call")}
+            >
               <span>
                 <i className="fa fa-phone" aria-hidden="true" />
               </span>{" "}
@@ -129,7 +143,11 @@ class Restaurant extends Component {
             </button>
           </div>
           <div className="col-4">
-            <button id="menu" className="options">
+            <button
+              onClick={() => this.props.onMenu(restaurant)}
+              id="menu"
+              className={setOptionClass("menu")}
+            >
               <span>
                 <i class="fa fa-book" aria-hidden="true" />
               </span>{" "}
@@ -145,7 +163,32 @@ class Restaurant extends Component {
             </button>
           </div>
         </div>
-        {/* display ends */}
+        {showPhone && (
+          <React.Fragment>
+            <hr />
+            <small
+              className="text-danger"
+              style={{ textAlign: "center", display: "block" }}
+            >
+              Available at{" "}
+              <span>
+                <i className="fa fa-phone" aria-hidden="true" />
+              </span>
+              {phone_numbers}
+            </small>
+          </React.Fragment>
+        )}
+        {showMenu && (
+          <React.Fragment>
+            <hr />
+            <small
+              className="text-muted"
+              style={{ textAlign: "center", display: "block" }}
+            >
+              Sorry! MENU is not Available.
+            </small>
+          </React.Fragment>
+        )}
       </div>
     );
   }

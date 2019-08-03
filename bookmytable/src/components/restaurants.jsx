@@ -9,10 +9,32 @@ class Restaurants extends Component {
     restaurants: []
   };
 
+  handleCall = restaurant => {
+    console.log("call clicked");
+    let uRestaurants = this.state.restaurants;
+    let targetRestaurant = uRestaurants[uRestaurants.indexOf(restaurant)];
+    targetRestaurant.showPhone = !targetRestaurant.showPhone;
+    this.setState({ restaurants: uRestaurants });
+  };
+
+  handleMenu = restaurant => {
+    console.log("menu clicked");
+    let uRestaurants = this.state.restaurants;
+    let targetRestaurant = uRestaurants[uRestaurants.indexOf(restaurant)];
+    targetRestaurant.showMenu = !targetRestaurant.showMenu;
+    this.setState({ restaurants: uRestaurants });
+  };
+
   // called once the component is initialized
   // place for all the API calls etc
   componentDidMount() {
     let restaurants = getRestaurants();
+
+    for (let restaurant of restaurants) {
+      restaurant.showPhone = false;
+      restaurant.showMenu = false;
+    }
+    console.log(restaurants);
     this.setState({ restaurants });
   }
 
@@ -20,7 +42,6 @@ class Restaurants extends Component {
     const { restaurants } = this.state;
     const count = restaurants.length;
 
-    console.log(restaurants);
     return (
       <React.Fragment>
         <h3 style={{ fontWeight: 900 }}>
@@ -42,7 +63,13 @@ class Restaurants extends Component {
           <div className="col">
             <div className="container-fluid restaurantCatalog">
               {restaurants.map(restaurant => {
-                return <Restaurant restaurant={restaurant} />;
+                return (
+                  <Restaurant
+                    onMenu={this.handleMenu}
+                    onCall={this.handleCall}
+                    restaurant={restaurant}
+                  />
+                );
               })}
             </div>
           </div>
