@@ -1,12 +1,10 @@
 import React, { Component } from "react";
 import { getRestaurants } from "../api/dump/restaurant";
-
-import Restaurant from "./subComponents/restaurant";
-
-import "./css/restaurants.css";
 import RestaurantFilter from "./subComponents/restaurantFilter";
 import RestaurantCatalogue from "./subComponents/restaurantCatalogue";
 import SideAds from "./subComponents/sideAds";
+
+import "./css/restaurants.css";
 
 class Restaurants extends Component {
   /***

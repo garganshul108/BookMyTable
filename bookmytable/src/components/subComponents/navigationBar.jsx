@@ -68,14 +68,23 @@ class NaviagtionBar extends Component {
                 className="dropdown-menu"
                 aria-labelledby="dropdownMenuButton"
               >
-                <Link className="dropdown-item" to="#">
-                  Action
+                <Link className="dropdown-item" to="/profile">
+                  <span className="text-muted">
+                    <i className="fa fa-user" aria-hidden="true" />
+                  </span>
+                  &nbsp;&nbsp;Profile
                 </Link>
-                <Link className="dropdown-item" to="#">
-                  Another action
+                <Link className="dropdown-item" to="/logout">
+                  <span className="text-muted">
+                    <i className="fa fa-sign-out" aria-hidden="true" />
+                  </span>
+                  &nbsp;&nbsp;Logout
                 </Link>
-                <Link className="dropdown-item" to="#">
-                  Something else here
+                <Link className="dropdown-item" to="/contact">
+                  <span className="text-muted">
+                    <i className="fa fa-lightbulb-o" aria-hidden="true" />
+                  </span>
+                  &nbsp;&nbsp;About us
                 </Link>
               </div>
             </div>

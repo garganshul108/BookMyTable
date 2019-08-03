@@ -21,6 +21,7 @@ class SideAds extends Component {
               }}
               key={ad._id}
               src={ad.src}
+              alt="ad not available"
             />
           ))}
       </React.Fragment>
