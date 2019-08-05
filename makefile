@@ -4,5 +4,5 @@ menu:
 updateLog:
 	git checkout app-front
 	git add mylog.md
-	git commit -m "updated log"
+	git commit -m "updated mylog.md"
 	git push origin app-front
