@@ -40,7 +40,11 @@ class NaviagtionBar extends Component {
                   <NavLink className="nav-item nav-link" to="/restaurants">
                     Restaurant
                   </NavLink>
-                  <NavLink className="nav-item nav-link" to="/login">
+                  <NavLink
+                    className="nav-item nav-link"
+                    to="/login"
+                    onClick={this.props.openLogin}
+                  >
                     Login
                   </NavLink>
                 </div>
