@@ -1,5 +1,10 @@
 # MYLOG
 
+#### 2019-08-05 20:15:52
+
+- login form validated
+- connect to server left
+
 #### 2019-08-05 18:09:52
 
 - Everything mergerd back to app-front
