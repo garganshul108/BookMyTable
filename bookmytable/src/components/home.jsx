@@ -7,7 +7,7 @@ class Home extends Component {
   render() {
     return (
       <div className="container-fluid">
-        {/* <img width="100%" src={img} alt="ASAS" /> */}
+        <img width="100%" src={img} alt="ASAS" />
         <div id="homeTab">
           <input
             id="cityInput"

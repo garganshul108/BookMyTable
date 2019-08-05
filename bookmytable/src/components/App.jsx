@@ -1,17 +1,17 @@
 import React, { Component } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 
-import NaviagtionBar from "./components/subComponents/navigationBar";
-import Home from "./components/home";
-import Restaurants from "./components/restaurants";
-import Login from "./components/login";
-import NotFound from "./components/notFound";
+import NaviagtionBar from "./subComponents/navigationBar";
+import Home from "./home";
+import Restaurants from "./restaurants";
+import Login from "./login";
+import NotFound from "./notFound";
 
-import "./components/css/dummy.css";
+import "./css/dummy.css";
 
 class App extends Component {
   render() {
-    console.log("My App loaded.. ");
+    console.log("My App loaded.=000=... ");
     return (
       <div className="container-fluid">
         <div className="row">
