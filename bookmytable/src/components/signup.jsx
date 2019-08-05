@@ -1,12 +1,18 @@
 import React, { Component } from "react";
 import Joi from "joi-browser";
 import "./css/login.css";
-import welcomeback from "./images/welcomeback.jpg";
 
-class Login extends Component {
-  state = { account: { email: "", password: "" }, errors: {} };
+class SignUp extends Component {
+  state = {
+    account: { name: "", email: "", password: "", confirmPassword: "" },
+    errors: {}
+  };
 
   schema = {
+    name: Joi.string()
+      .min(3)
+      .required()
+      .label("Name"),
     email: Joi.string()
       .email()
       .required()
@@ -14,7 +20,11 @@ class Login extends Component {
     password: Joi.string()
       .min(3)
       .required()
-      .label("Password")
+      .label("Password"),
+    confirmPassword: Joi.any()
+      .valid(Joi.ref("password"))
+      .required()
+      .label("Confirm Password")
   };
   handleInputChange = e => {
     let account = { ...this.state.account };
@@ -51,7 +61,7 @@ class Login extends Component {
     this.setState({ errors: errors || {} });
 
     if (errors) return;
-    console.log("submitting LOGIN form");
+    console.log("submitting signup form");
   };
 
   render() {
@@ -70,9 +80,24 @@ class Login extends Component {
               <i className="fa fa-times" aria-hidden="true" />
             </button>
             <div className="loginDiv">
-              <small class="form-text text-muted">Already a User?</small>
-              <h4>Login to continue</h4>
+              <small class="form-text text-muted">New User?</small>
+              <h4>Welcome to SignUp</h4>
               <form onSubmit={this.handleSubmit}>
+                <div className="form-group">
+                  <input
+                    value={this.state.account.name}
+                    onChange={this.handleInputChange}
+                    name="name"
+                    autoFocus
+                    className="form-control"
+                    placeholder="Name"
+                  />
+                  {this.state.errors.name && (
+                    <div className="alert alert-danger">
+                      <small>{this.state.errors.name}</small>
+                    </div>
+                  )}
+                </div>
                 <div className="form-group">
                   <input
                     value={this.state.account.email}
@@ -111,12 +136,28 @@ class Login extends Component {
                     </div>
                   )}
                 </div>
+                <div className="form-group">
+                  <input
+                    value={this.state.account.confirmPassword}
+                    onChange={this.handleInputChange}
+                    type="password"
+                    name="confirmPassword"
+                    className="form-control"
+                    placeholder="Confirm Password"
+                  />
+                  {this.state.errors.confirmPassword && (
+                    <div>
+                      <div className="alert alert-danger">
+                        <small>{this.state.errors.confirmPassword}</small>
+                      </div>
+                    </div>
+                  )}
+                </div>
                 <button type="submit" className="btn btn-danger">
                   Submit
                 </button>
               </form>
             </div>
-            <img src={welcomeback} alt="happy image" />
           </div>
         </div>
       </div>
@@ -124,4 +165,4 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default SignUp;
