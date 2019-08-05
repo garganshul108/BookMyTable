@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Joi from "joi-browser";
+import { Link, Redirect } from "react-router-dom";
 import "./css/login.css";
 
 class SignUp extends Component {
@@ -43,12 +44,6 @@ class SignUp extends Component {
     for (let error of validationResult.error.details) {
       errors[error.path[0]] = error.message;
     }
-    // if (this.state.account.email.trim() === "") {
-    //   errors.email = "Email is req.";
-    // }
-    // if (this.state.account.password.trim() === "") {
-    //   errors.password = "Password is req.";
-    // }
 
     return errors;
   };
@@ -62,6 +57,12 @@ class SignUp extends Component {
 
     if (errors) return;
     console.log("submitting signup form");
+  };
+
+  handleGotoRegistration = e => {
+    this.props.closeTab(e);
+    window.location = "/restaurant/registration";
+    // this.history.push("/restaurant/registration");
   };
 
   render() {
@@ -80,7 +81,20 @@ class SignUp extends Component {
               <i className="fa fa-times" aria-hidden="true" />
             </button>
             <div className="loginDiv">
-              <small class="form-text text-muted">New User?</small>
+              <Link onClick={this.handleGotoRegistration}>
+                <small className="text">
+                  <span
+                    className="bg-warning"
+                    style={{ padding: "5px", borderRadius: "5px" }}
+                  >
+                    {" "}
+                    Are you a Restaurant?
+                  </span>
+                </small>
+                <br />
+                <hr />
+              </Link>
+              <small className="form-text text-muted">New User?</small>
               <h4>Welcome to SignUp</h4>
               <form onSubmit={this.handleSubmit}>
                 <div className="form-group">

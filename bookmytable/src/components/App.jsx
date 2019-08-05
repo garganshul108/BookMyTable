@@ -9,6 +9,7 @@ import NotFound from "./notFound";
 
 import "./css/dummy.css";
 import SignUp from "./signup";
+import RestaurantRegistration from "./restaurantRegistration";
 
 class App extends Component {
   handleCloseLogin = e => {
@@ -54,6 +55,10 @@ class App extends Component {
         </div>
         <div className="row">
           <Switch>
+            <Route
+              path="/restaurant/registration"
+              render={() => <RestaurantRegistration />}
+            />
             <Route path="/not-found" render={() => <NotFound />} />
             <Route path="/home" render={() => <Home />} />
             <Route path="/restaurants" render={() => <Restaurants />} />
