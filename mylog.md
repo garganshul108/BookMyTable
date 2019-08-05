@@ -1,5 +1,10 @@
 # MYLOG
 
+#### 2019-08-05 14:45:40
+
+- Target: User and Filter
+- Integrate the backend if possible
+
 #### 2019-08-04 00:21:49
 
 - Filter added for design
