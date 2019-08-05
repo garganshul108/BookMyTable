@@ -122,7 +122,10 @@ class NaviagtionBar extends Component {
                       &nbsp;&nbsp;Login
                     </Link>
                     <hr />
-                    <Link className="dropdown-item" to="/signup">
+                    <Link
+                      className="dropdown-item"
+                      onClick={this.props.openSignUp}
+                    >
                       <small className="text text-muted">New user?</small>
                       <br />
                       <span className="text-muted">
