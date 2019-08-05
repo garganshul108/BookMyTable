@@ -39,7 +39,6 @@ class App extends Component {
             <Route path="/not-found" render={() => <NotFound />} />
             <Route path="/home" render={() => <Home />} />
             <Route path="/restaurants" render={() => <Restaurants />} />
-            {/* <Route path="/login" render={() => <Login />} /> */}
             <Redirect from="/" exact to="/home" />
             <Redirect to="/not-found" />
           </Switch>
