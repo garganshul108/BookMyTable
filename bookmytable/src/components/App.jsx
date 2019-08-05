@@ -65,7 +65,7 @@ class App extends Component {
           <Login closeTab={this.handleCloseLogin} />
         </div>
         <div className="loginPage" style={{ display: "none" }}>
-          <SignUp closeTab={this.handleCloseLogin} />
+          <SignUp closeTab={this.handleCloseSignUp} />
         </div>
       </div>
     );
