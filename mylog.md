@@ -1,5 +1,15 @@
 # MYLOG
 
+#### 2019-08-05 18:09:52
+
+- Everything mergerd back to app-front
+- Filter designing done
+- login designing done
+- ads added
+- TODOS:
+  - implement JS functionality to the buttons
+  - booking table attribute
+
 #### 2019-08-05 14:45:40
 
 - Target: User and Filter
