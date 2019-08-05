@@ -1,5 +1,5 @@
 const getUser = () => {
-    return "";
+    return "null";
 }
 
 export default {
