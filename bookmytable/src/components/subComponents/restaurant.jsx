@@ -83,11 +83,7 @@ class Restaurant extends Component {
         {/* this is the upper portion */}
         <div className="row">
           <div className="col-3">
-            <img
-              className="restaurantThumbnail"
-              src={thumb}
-              alt="Image not Found"
-            />
+            <img className="restaurantThumbnail" src={thumb} alt="not Found" />
           </div>
 
           <div className="col restaurantDesc">
@@ -108,24 +104,26 @@ class Restaurant extends Component {
         {/* this is the middle session */}
         <div className="row features">
           <table>
-            <tr>
-              <td className="header">CUISINES:</td>
-              <td className="data">{renderCuisines()}</td>
-            </tr>
-            <tr>
-              <td className="header">COST FOR TWO:</td>
-              <td className="data">
-                {currency} {avCost}
-              </td>
-            </tr>
-            <tr>
-              <td className="header">HOURS:</td>
-              <td className="data"> {timings}</td>
-            </tr>
-            <tr>
-              <td className="header">FEATURES:</td>
-              <td className="data"> {renderTags()}</td>
-            </tr>
+            <tbody>
+              <tr>
+                <td className="header">CUISINES:</td>
+                <td className="data">{renderCuisines()}</td>
+              </tr>
+              <tr>
+                <td className="header">COST FOR TWO:</td>
+                <td className="data">
+                  {currency} {avCost}
+                </td>
+              </tr>
+              <tr>
+                <td className="header">HOURS:</td>
+                <td className="data"> {timings}</td>
+              </tr>
+              <tr>
+                <td className="header">FEATURES:</td>
+                <td className="data"> {renderTags()}</td>
+              </tr>
+            </tbody>
           </table>
         </div>
         <hr />
@@ -140,6 +138,7 @@ class Restaurant extends Component {
               <span>
                 <i className="fa fa-phone" aria-hidden="true" />
               </span>{" "}
+              &nbsp;&nbsp;
               <span>Call</span>
             </button>
           </div>
@@ -150,8 +149,9 @@ class Restaurant extends Component {
               className={setOptionClass("menu")}
             >
               <span>
-                <i class="fa fa-book" aria-hidden="true" />
+                <i className="fa fa-book" aria-hidden="true" />
               </span>{" "}
+              &nbsp;&nbsp;
               <span>Menu</span>
             </button>
           </div>
@@ -166,7 +166,8 @@ class Restaurant extends Component {
               <span>
                 <i className="fa fa-calendar" aria-hidden="true" />
               </span>{" "}
-              <span>Book Table</span>
+              &nbsp;&nbsp;
+              <span>Book a Table</span>
             </button>
           </div>
         </div>
@@ -181,6 +182,7 @@ class Restaurant extends Component {
               <span>
                 <i className="fa fa-phone" aria-hidden="true" />
               </span>
+              &nbsp;&nbsp;
               {phone_numbers}
             </small>
           </React.Fragment>

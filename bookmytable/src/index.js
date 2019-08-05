@@ -7,6 +7,8 @@ import App from './components/App';
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'font-awesome/css/font-awesome.css';
+import 'jquery/dist/jquery.min.js'
+import 'bootstrap/dist/js/bootstrap.min.js'
 
 ReactDOM.render(<BrowserRouter> <App /> </BrowserRouter>, document.getElementById('root'));
 
