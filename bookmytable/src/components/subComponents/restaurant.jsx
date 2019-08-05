@@ -82,12 +82,8 @@ class Restaurant extends Component {
       <div className="container-fluid restaurantDisplay" key={id}>
         {/* this is the upper portion */}
         <div className="row">
-          <div className="col-3">
-            <img
-              className="restaurantThumbnail"
-              src={thumb}
-              alt="Image not Found"
-            />
+          <div className="col-2">
+            <img className="restaurantThumbnail" src={thumb} alt="not Found" />
           </div>
 
           <div className="col restaurantDesc">
