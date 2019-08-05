@@ -37,3 +37,10 @@
 .loginPage .loginContainer img {
   width: 75%;
 }
+
+.loginPage .loginContainer .alert {
+  /* position: relative; */
+  widows: max-content !important;
+  font-size: 1rem;
+  padding: 2px 5px;
+}

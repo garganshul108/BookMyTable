@@ -1,9 +1,58 @@
 import React, { Component } from "react";
-
+import Joi from "joi-browser";
 import "./css/login.css";
 import welcomeback from "./images/welcomeback.jpg";
 
 class Login extends Component {
+  state = { account: { email: "", password: "" }, errors: {} };
+
+  schema = {
+    email: Joi.string()
+      .email()
+      .required()
+      .label("Email"),
+    password: Joi.string()
+      .min(3)
+      .required()
+      .label("Password")
+  };
+  handleInputChange = e => {
+    let account = { ...this.state.account };
+    account[e.currentTarget.name] = e.currentTarget.value;
+    this.setState({ account });
+  };
+
+  validate = () => {
+    let errors = {};
+
+    let validationResult = Joi.validate(this.state.account, this.schema, {
+      abortEarly: false
+    });
+    if (!validationResult.error) return errors;
+
+    for (let error of validationResult.error.details) {
+      errors[error.path[0]] = error.message;
+    }
+    // if (this.state.account.email.trim() === "") {
+    //   errors.email = "Email is req.";
+    // }
+    // if (this.state.account.password.trim() === "") {
+    //   errors.password = "Password is req.";
+    // }
+
+    return errors;
+  };
+
+  handleSubmit = e => {
+    e.preventDefault();
+
+    let errors = this.validate();
+    console.log(errors);
+    this.setState({ errors });
+
+    if (errors) return;
+    console.log("submitting form");
+  };
   render() {
     return (
       <div
@@ -22,40 +71,45 @@ class Login extends Component {
             <div className="loginDiv">
               <small class="form-text text-muted">Already a User?</small>
               <h4>Login to continue</h4>
-              <form>
+              <form onSubmit={this.handleSubmit}>
                 <div className="form-group">
-                  {/* <label htmlFor="exampleInputEmail1">Email address</label> */}
                   <input
-                    type="email"
+                    value={this.state.account.email}
+                    onChange={this.handleInputChange}
+                    name="email"
                     autoFocus
                     className="form-control"
                     id="exampleInputEmail1"
                     aria-describedby="emailHelp"
                     placeholder="Enter email"
                   />
+                  {this.state.errors.email && (
+                    <div className="alert alert-danger">
+                      <small>{this.state.errors.email}</small>
+                    </div>
+                  )}
                   <small id="emailHelp" className="form-text text-muted">
                     We'll never share your email with anyone else.
                   </small>
                 </div>
                 <div className="form-group">
-                  {/* <label htmlFor="exampleInputPassword1">Password</label> */}
                   <input
+                    value={this.state.account.password}
+                    onChange={this.handleInputChange}
                     type="password"
+                    name="password"
                     className="form-control"
                     id="exampleInputPassword1"
                     placeholder="Password"
                   />
+                  {this.state.errors.password && (
+                    <div>
+                      <div className="alert alert-danger">
+                        <small>{this.state.errors.password}</small>
+                      </div>
+                    </div>
+                  )}
                 </div>
-                {/* <div className="form-group form-check">
-                  <input
-                    type="checkbox"
-                    className="form-check-input"
-                    id="exampleCheck1"
-                  />
-                  <label className="form-check-label" htmlFor="exampleCheck1">
-                    Check me out
-                  </label>
-                </div> */}
                 <button type="submit" className="btn btn-danger">
                   Submit
                 </button>
