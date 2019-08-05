@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { Link, NavLink } from "react-router-dom";
 
 import "../css/navigationBar.css";
+import auth from "../../services/authServices";
+// import Login from '../login';
 class NaviagtionBar extends Component {
   state = {};
   render() {
@@ -40,13 +42,6 @@ class NaviagtionBar extends Component {
                   <NavLink className="nav-item nav-link" to="/restaurants">
                     Restaurant
                   </NavLink>
-                  <NavLink
-                    className="nav-item nav-link"
-                    to="/login"
-                    onClick={this.props.openLogin}
-                  >
-                    Login
-                  </NavLink>
                 </div>
               </div>
             </nav>
@@ -55,43 +50,90 @@ class NaviagtionBar extends Component {
         {/* this is the user bar will appear as user logsin */}
         <div className="container-fluid userBar-design">
           <div className="container" style={{ textAlign: "right" }}>
-            <div className="dropdown">
-              <button
-                style={{ padding: "1px 10px" }}
-                className="btn btn-info dropdown-toggle"
-                type="button"
-                id="dropdownMenuButton"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                <small>User</small>
-              </button>
+            {auth.getUser() && (
+              <React.Fragment>
+                <div className="dropdown">
+                  <button
+                    style={{ padding: "1px 10px" }}
+                    className="btn btn-info dropdown-toggle"
+                    type="button"
+                    id="dropdownMenuButton"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    <small>User</small>
+                  </button>
 
-              <div
-                className="dropdown-menu"
-                aria-labelledby="dropdownMenuButton"
-              >
-                <Link className="dropdown-item" to="/profile">
-                  <span className="text-muted">
-                    <i className="fa fa-user" aria-hidden="true" />
-                  </span>
-                  &nbsp;&nbsp;Profile
-                </Link>
-                <Link className="dropdown-item" to="/logout">
-                  <span className="text-muted">
-                    <i className="fa fa-sign-out" aria-hidden="true" />
-                  </span>
-                  &nbsp;&nbsp;Logout
-                </Link>
-                <Link className="dropdown-item" to="/contact">
-                  <span className="text-muted">
-                    <i className="fa fa-lightbulb-o" aria-hidden="true" />
-                  </span>
-                  &nbsp;&nbsp;About us
-                </Link>
-              </div>
-            </div>
+                  <div
+                    className="dropdown-menu"
+                    aria-labelledby="dropdownMenuButton"
+                  >
+                    <Link className="dropdown-item" to="/profile">
+                      <span className="text-muted">
+                        <i className="fa fa-user" aria-hidden="true" />
+                      </span>
+                      &nbsp;&nbsp;Profile
+                    </Link>
+                    <Link className="dropdown-item" to="/logout">
+                      <span className="text-muted">
+                        <i className="fa fa-sign-out" aria-hidden="true" />
+                      </span>
+                      &nbsp;&nbsp;Logout
+                    </Link>
+                    <Link className="dropdown-item" to="/contact">
+                      <span className="text-muted">
+                        <i className="fa fa-lightbulb-o" aria-hidden="true" />
+                      </span>
+                      &nbsp;&nbsp;About us
+                    </Link>
+                  </div>
+                </div>
+              </React.Fragment>
+            )}
+            {!auth.getUser() && (
+              <React.Fragment>
+                <div className="dropdown">
+                  <button
+                    style={{ padding: "1px 10px" }}
+                    className="btn btn-info dropdown-toggle"
+                    type="button"
+                    id="dropdownMenuButton"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    <small style={{ fontWeight: 900 }}>Login</small>
+                  </button>
+
+                  <div
+                    className="dropdown-menu"
+                    aria-labelledby="dropdownMenuButton"
+                  >
+                    <Link
+                      className="dropdown-item"
+                      onClick={this.props.openLogin}
+                    >
+                      <small className="text text-muted">Already a user?</small>
+                      <br />
+                      <span className="text-muted">
+                        <i className="fa fa-user" aria-hidden="true" />
+                      </span>
+                      &nbsp;&nbsp;Login
+                    </Link>
+                    <hr />
+                    <Link className="dropdown-item" to="/signup">
+                      <small className="text text-muted">New user?</small>
+                      <br />
+                      <span className="text-muted">
+                        <i className="fa fa-sign-out" aria-hidden="true" />
+                      </span>
+                      &nbsp;&nbsp;Sign Up
+                    </Link>
+                  </div>
+                </div>
+              </React.Fragment>
+            )}
           </div>
         </div>
       </div>
