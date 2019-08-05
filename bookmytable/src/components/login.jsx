@@ -5,13 +5,8 @@ import "./css/login.css";
 class Login extends Component {
   render() {
     return (
-<<<<<<< HEAD
-      <div className="container">
-        <h1>Login</h1>
-      </div>
-=======
       <React.Fragment>
-        <div className="container-fluid">
+        <div className="container">
           <div className="row">
             <div className="col-2">Left</div>
             <div className="col loginDiv">
@@ -100,7 +95,6 @@ class Login extends Component {
           </div>
         </div>
       </React.Fragment>
->>>>>>> login-form
     );
   }
 }
