@@ -1,6 +1,16 @@
+.homeTab img {
+  width: 100%;
+  z-index: 0;
+  height: 60%;
+}
+
 #cityInput {
-  margin-top: 100px;
-  font-size: 45px;
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  width: 40%;
+  font-size: 3rem;
   padding: 10px;
-  border-radius: 10px;
+  border-radius: 0px;
+  z-index: 10;
 }
