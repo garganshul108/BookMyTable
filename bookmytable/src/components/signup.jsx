@@ -87,10 +87,10 @@ class SignUp extends Component {
                     className="bg-warning"
                     style={{ padding: "5px", borderRadius: "5px" }}
                   >
-                    {" "}
                     Are you a Restaurant?
                   </span>
                 </small>
+                <br />
                 <br />
                 <hr />
               </Link>
