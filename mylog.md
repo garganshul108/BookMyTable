@@ -12,14 +12,14 @@
     - constists of the form skelton for registration with some inputs
     - no FormInput class
     - no scroll bar design
-  - top-bar-refactoring (child of adj-js)
-    - not initiated at time of commit
   - adj-js (child of app-front)
     - constists of the form skelton for registration only
     - no FormInput class
     - no scroll bar design
+  - top-bar-refactoring (child of app-front)
+    - not initiated at time of commit
 
--
+* app-front : consist of the login sign up vailation form only nothing from mentioned above; no registration form etc
 
 #### 2019-08-05 23:54:28
 
