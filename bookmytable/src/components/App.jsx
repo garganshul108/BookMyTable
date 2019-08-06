@@ -8,6 +8,7 @@ import Login from "./login";
 import NotFound from "./notFound";
 
 import "./css/dummy.css";
+import "./css/scrollbar.css";
 import SignUp from "./signup";
 import RestaurantRegistration from "./restaurantRegistration";
 

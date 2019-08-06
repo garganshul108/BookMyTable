@@ -165,7 +165,11 @@ class RestaurantRegistration extends Component {
                 </div>
                 {/* end of Characteristics info form */}
 
-                <button type="submit" className="btn btn-danger">
+                <button
+                  type="submit"
+                  style={{ width: "100%" }}
+                  className="btn btn-danger"
+                >
                   Submit
                 </button>
               </form>
