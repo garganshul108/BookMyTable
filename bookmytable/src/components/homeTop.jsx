@@ -64,9 +64,13 @@ class HomeTop extends Component {
                         placeholder="Your City"
                         aria-label="Search"
                       />
-                      <button class="btn btn-info my-2 my-sm-0" type="submit">
+                      <Link
+                        class="btn btn-info my-2 my-sm-0"
+                        to="/restaurants"
+                        type="submit"
+                      >
                         FIND PLACES
-                      </button>
+                      </Link>
                     </form>
                   </div>
                 </div>
