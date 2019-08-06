@@ -11,6 +11,9 @@
   - reg-form (child of adj-js)
   - top-bar-refactoring (child of adj-js)
   - adj-js (child of app-front)
+    - constists of the from skelton for registration only
+    - no FormIbnput class
+    - no scroll bar design
 
 -
 
