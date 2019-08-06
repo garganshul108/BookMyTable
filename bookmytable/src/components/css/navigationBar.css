@@ -2,6 +2,11 @@
   background: #da0023; /* rgb(124, 20, 20);*/
 }
 
+.navBar-design .navbar-brand {
+  font-weight: 900;
+  font-family: Geneva, Tahoma, sans-serif;
+}
+
 .userBar-design {
   background: white;
   padding: 3px;
