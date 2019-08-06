@@ -1,5 +1,11 @@
 # MYLOG
 
+#### 2019-08-06 16:24:38
+
+- top-bar-refactoring has the new navigation bar design
+- no js or css yet
+- now I am switching to work on registration model
+
 #### 2019-08-06 13:41:05
 
 - Current Branches:
