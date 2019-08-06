@@ -5,7 +5,7 @@
 merger:
 
 - input-component-test into auto-app's merge-input-cpmponent
-- merge input component is the new branch; not deleted
+- merge input component is the new branch; not deleted; renamed as ref-registration
 - input-component-test deleted
 
 - new branch: merge-input-component
