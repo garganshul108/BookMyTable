@@ -1,5 +1,60 @@
 # MYLOG
 
+#### 2019-08-06 23:45:31
+
+mergers:
+
+- ref-topbar merged to ref-navigation
+- ref-topbar deleted
+
+- ref-navigation:
+  - contains the new home page
+  - contains the new navigation bar
+
+#### 2019-08-06 23:00:35
+
+- ref-navigation
+  - home page design done
+
+#### 2019-08-06 22:12:04
+
+- ref-navigation
+  - home page -> designing structure
+
+#### 2019-08-06 19:44:20
+
+- ref-navigation
+  - figured out navigation history object
+  - figured out how to not have navigation bar on the home page
+  - this is made child to app-front (now only)
+
+#### 2019-08-06 16:24:38
+
+- top-bar-refactoring has the new navigation bar design; renamed as ref-topbar
+- no js or css yet
+- now I am switching to work on registration model
+
+#### 2019-08-06 13:41:05
+
+- Current Branches:
+
+  - input-component-test (child of reg-form) not merged any where
+    - made for implenting input as a seprate component
+    - designed scroll bar in it
+    - refactored the login form, Sign up with new FronInput tag
+  - reg-form (child of adj-js)
+    - constists of the form skelton for registration with some inputs
+    - no FormInput class
+    - no scroll bar design
+  - adj-js (child of app-front)
+    - constists of the form skelton for registration only
+    - no FormInput class
+    - no scroll bar design
+  - top-bar-refactoring (child of app-front)
+    - not initiated at time of commit
+
+* app-front : consist of the login sign up vailation form only nothing from mentioned above; no registration form etc
+
 #### 2019-08-05 23:54:28
 
 on branch adjusting-js

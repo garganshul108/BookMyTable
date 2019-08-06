@@ -8,47 +8,55 @@ class NaviagtionBar extends Component {
   state = {};
   render() {
     return (
-      <div className="container-fluid">
-        <div className="container-fluid  navBar-design">
+      <React.Fragment>
+        <div className="navBar-design">
           <div className="container">
             <nav className="navbar navbar-expand-lg navbar-dark">
-              <Link className="navbar-brand" to="/">
-                Book My Table
-              </Link>
+              <NavLink className="navbar-brand" to="/home">
+                BookMyTable
+              </NavLink>
               <button
                 className="navbar-toggler"
                 type="button"
                 data-toggle="collapse"
-                data-target="#navbarNavAltMarkup"
-                aria-controls="navbarNavAltMarkup"
+                data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
                 aria-expanded="false"
                 aria-label="Toggle navigation"
               >
                 <span className="navbar-toggler-icon" />
               </button>
-              <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <form className="form-inline active-red-3 active-red-4">
+
+              <div
+                className="collapse navbar-collapse"
+                id="navbarSupportedContent"
+              >
+                <ul className="navbar-nav mr-auto">
+                  <li className="nav-item active">
+                    <NavLink className="nav-link" to="#">
+                      Home <span className="sr-only">(current)</span>
+                    </NavLink>
+                  </li>
+                </ul>
+                <form className="form-inline my-2 my-lg-0">
                   <input
-                    className="form-control form-control-sm ml-3 w-75"
-                    type="text"
-                    placeholder="Search"
+                    className="form-control mr-sm-2"
+                    type="search"
                     aria-label="Search"
                   />
-                  <button type="submit">
+                  <button
+                    className="btn btn-danger btn-outine-info my-2 my-sm-0"
+                    to="/restaurants"
+                  >
                     <i className="fa fa-search" aria-hidden="true" />
                   </button>
                 </form>
-                <div className="navbar-nav">
-                  <NavLink className="nav-item nav-link" to="/restaurants">
-                    Restaurant
-                  </NavLink>
-                </div>
               </div>
             </nav>
           </div>
         </div>
         {/* this is the user bar will appear as user logsin */}
-        <div className="container-fluid userBar-design">
+        <div className="userBar-design">
           <div className="container" style={{ textAlign: "right" }}>
             {auth.getUser() && (
               <React.Fragment>
@@ -69,24 +77,24 @@ class NaviagtionBar extends Component {
                     className="dropdown-menu"
                     aria-labelledby="dropdownMenuButton"
                   >
-                    <Link className="dropdown-item" to="/profile">
+                    <NavLink className="dropdown-item" to="/profile">
                       <span className="text-muted">
                         <i className="fa fa-user" aria-hidden="true" />
                       </span>
                       &nbsp;&nbsp;Profile
-                    </Link>
-                    <Link className="dropdown-item" to="/logout">
+                    </NavLink>
+                    <NavLink className="dropdown-item" to="/logout">
                       <span className="text-muted">
                         <i className="fa fa-sign-out" aria-hidden="true" />
                       </span>
                       &nbsp;&nbsp;Logout
-                    </Link>
-                    <Link className="dropdown-item" to="/contact">
+                    </NavLink>
+                    <NavLink className="dropdown-item" to="/contact">
                       <span className="text-muted">
                         <i className="fa fa-lightbulb-o" aria-hidden="true" />
                       </span>
                       &nbsp;&nbsp;About us
-                    </Link>
+                    </NavLink>
                   </div>
                 </div>
               </React.Fragment>
@@ -110,7 +118,7 @@ class NaviagtionBar extends Component {
                     className="dropdown-menu"
                     aria-labelledby="dropdownMenuButton"
                   >
-                    <Link
+                    <NavLink
                       className="dropdown-item"
                       onClick={this.props.openLogin}
                     >
@@ -120,9 +128,9 @@ class NaviagtionBar extends Component {
                         <i className="fa fa-user" aria-hidden="true" />
                       </span>
                       &nbsp;&nbsp;Login
-                    </Link>
+                    </NavLink>
                     <hr />
-                    <Link
+                    <NavLink
                       className="dropdown-item"
                       onClick={this.props.openSignUp}
                     >
@@ -132,14 +140,14 @@ class NaviagtionBar extends Component {
                         <i className="fa fa-sign-out" aria-hidden="true" />
                       </span>
                       &nbsp;&nbsp;Sign Up
-                    </Link>
+                    </NavLink>
                   </div>
                 </div>
               </React.Fragment>
             )}
           </div>
         </div>
-      </div>
+      </React.Fragment>
     );
   }
 }
