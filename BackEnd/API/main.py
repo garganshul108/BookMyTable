@@ -41,6 +41,7 @@ def get_restaurants():
         resp = jsonify(rows)
         resp.status_code = 200
         return resp
+        # return "good"
     except Exception as e:
         print(e)
     finally:
