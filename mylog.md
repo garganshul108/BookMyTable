@@ -4,6 +4,18 @@
 
 mergers:
 
+- ref-navigation merged to app-front
+- ref-navigation deleted
+- app-front merged to master
+
+- app-front:
+  - contains the new home page
+  - contains the new navigation bar
+
+#### 2019-08-06 23:45:31
+
+mergers:
+
 - ref-topbar merged to ref-navigation
 - ref-topbar deleted
 
