@@ -1,8 +1,10 @@
 .navBar-design {
+  width: 100%;
   background: #da0023; /* rgb(124, 20, 20);*/
 }
 
 .userBar-design {
+  width: 100%;
   background: white;
   padding: 3px;
   border-bottom: 1px solid #5e5e5e50;

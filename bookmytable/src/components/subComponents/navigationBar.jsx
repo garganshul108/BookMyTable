@@ -8,8 +8,8 @@ class NaviagtionBar extends Component {
   state = {};
   render() {
     return (
-      <div className="container-fluid">
-        <div className="container-fluid  navBar-design">
+      <React.Fragment>
+        <div className="navBar-design">
           <div className="container">
             <nav className="navbar navbar-expand-lg navbar-dark">
               <Link className="navbar-brand" to="/">
@@ -48,7 +48,7 @@ class NaviagtionBar extends Component {
           </div>
         </div>
         {/* this is the user bar will appear as user logsin */}
-        <div className="container-fluid userBar-design">
+        <div className="userBar-design">
           <div className="container" style={{ textAlign: "right" }}>
             {auth.getUser() && (
               <React.Fragment>
@@ -139,7 +139,7 @@ class NaviagtionBar extends Component {
             )}
           </div>
         </div>
-      </div>
+      </React.Fragment>
     );
   }
 }
