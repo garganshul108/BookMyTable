@@ -1,5 +1,19 @@
 # MYLOG
 
+#### 2019-08-07 00:37:37
+
+merger:
+
+- input-component-test into auto-app's merge-input-cpmponent
+- merge input component is the new branch; not deleted
+- input-component-test deleted
+
+- new branch: merge-input-component
+  - merge input component (child of app-front)
+  - contains the new home page
+  - contains the new navigation bar
+  - registration form (incomplete form)
+
 #### 2019-08-07 00:08:44
 
 mergers:
