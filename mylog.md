@@ -9,10 +9,14 @@
     - designed scroll bar in it
     - refactored the login form, Sign up with new FronInput tag
   - reg-form (child of adj-js)
+    - constists of the form skelton for registration with some inputs
+    - no FormInput class
+    - no scroll bar design
   - top-bar-refactoring (child of adj-js)
+    - not initiated at time of commit
   - adj-js (child of app-front)
-    - constists of the from skelton for registration only
-    - no FormIbnput class
+    - constists of the form skelton for registration only
+    - no FormInput class
     - no scroll bar design
 
 -
