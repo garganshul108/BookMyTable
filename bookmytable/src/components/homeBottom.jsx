@@ -1,6 +1,6 @@
 import React from "react";
 const HomeBottom = () => {
-  return <h1>Home Bottom</h1>;
+  return null;
 };
 
 export default HomeBottom;

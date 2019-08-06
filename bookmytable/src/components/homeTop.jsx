@@ -1,23 +1,25 @@
 import React, { Component } from "react";
 import "./css/home.css";
-import img from "./images/HomeTab.jpeg";
+import img from "./images/HomeTab.jpg";
 class HomeTop extends Component {
   state = {};
 
   render() {
     return (
-      <div className="container-fluid homeTab">
-        <div className="row">
-          <div className="col">Name</div>
-          <div className="col-5">
+      <div className="homeTab">
+        <div className="row no-gutters">
+          <div className="col">
+            <div className="homeContent">h1</div>
+          </div>
+          <div className="col-7">
             <img src={img} alt="" />
           </div>
         </div>
-        <div
-          className="row"
-          style={{ width: "100%", height: "150px", backgroundColor: "black" }}
-        >
-          kk
+        <div className="row no-gutters">
+          <div
+            className="col"
+            style={{ height: "300px", background: "black" }}
+          />
         </div>
       </div>
     );

@@ -1,16 +1,12 @@
-.homeTab img {
+.homeTab {
   width: 100%;
-  z-index: 0;
-  height: 60%;
 }
 
-#cityInput {
-  position: absolute;
-  top: 0%;
-  left: 0%;
-  width: 40%;
-  font-size: 3rem;
-  padding: 10px;
-  border-radius: 0px;
-  z-index: 10;
+.homeTab img {
+  width: 100%;
+}
+
+.homeTab .homeContent {
+  background: white;
+  height: 100%;
 }
