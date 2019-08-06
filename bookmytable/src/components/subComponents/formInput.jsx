@@ -1,22 +1,34 @@
 import React, { Component } from "react";
 
 class FormInput extends Component {
-  state = {};
   render() {
-    const { name, placeholder } = this.props;
+    let {
+      name,
+      value,
+      placeholder,
+      onChange,
+      error,
+      type,
+      label,
+      ...rest
+    } = this.props;
+    type = type || "text";
+    console.log("rest " + name, rest);
     return (
       <div className="form-group">
+        {label && <small className="text-muted">{label}</small>}
         <input
-          value={name}
-          onChange={this.handleInputChange}
+          value={value}
+          onChange={onChange}
           name={name}
-          autoFocus
           className="form-control"
-          placeholder={pla}
+          placeholder={placeholder}
+          type={type}
+          {...rest}
         />
-        {this.state.errors.name && (
+        {error && (
           <div className="alert alert-danger">
-            <small>{this.state.errors.name}</small>
+            <small>{error}</small>
           </div>
         )}
       </div>
