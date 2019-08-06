@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import FormInput from "./subComponents/formInput";
 import "../components/css/restaurantRegistration.css";
+import FormCheckbox from "./subComponents/formCheckbox";
+// import { captialize } from '../util/util';
 
 class RestaurantRegistration extends Component {
   state = {
@@ -9,7 +11,8 @@ class RestaurantRegistration extends Component {
       city: "",
       email: "",
       password: "",
-      confirmPassword: ""
+      confirmPassword: "",
+      tableSize: { ten: "" }
     },
     errors: {}
   };
@@ -164,6 +167,175 @@ class RestaurantRegistration extends Component {
                   </div>
                 </div>
                 {/* end of Characteristics info form */}
+                {/* Capacity info form */}
+                <div className="subForm">
+                  <h6 className="title">Capacity</h6>
+                  <small
+                    className="text text-muted"
+                    style={{ textTransform: "captialize !important" }}
+                  >
+                    FULL HOUSE
+                  </small>
+                  <div className="subFormContainer capacity">
+                    <div className="row">
+                      <div className="col-6">
+                        <table>
+                          <tbody>
+                            <tr>
+                              <td className="header">1</td>
+                              <td className="data">
+                                <FormInput
+                                  value={this.state.account.tableSize.ten}
+                                  onChange={this.handleInputChange}
+                                  name="phone"
+                                  type="number"
+                                  error={this.state.errors.phone}
+                                />
+                              </td>
+                            </tr>
+                            <tr>
+                              <td className="header">2</td>
+                              <td className="data">
+                                <FormInput
+                                  value={this.state.account.tableSize.ten}
+                                  onChange={this.handleInputChange}
+                                  name="phone"
+                                  type="number"
+                                  error={this.state.errors.phone}
+                                />
+                              </td>
+                            </tr>
+                            <tr>
+                              <td className="header">4</td>
+                              <td className="data">
+                                {" "}
+                                <FormInput
+                                  value={this.state.account.tableSize.ten}
+                                  onChange={this.handleInputChange}
+                                  name="phone"
+                                  type="number"
+                                  error={this.state.errors.phone}
+                                />
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div className="col-6">
+                        <table>
+                          <tbody>
+                            <tr>
+                              <td className="header">6</td>
+                              <td className="data">
+                                <FormInput
+                                  value={this.state.account.tableSize.ten}
+                                  onChange={this.handleInputChange}
+                                  name="phone"
+                                  type="number"
+                                  error={this.state.errors.phone}
+                                />
+                              </td>
+                            </tr>
+                            <tr>
+                              <td className="header">10</td>
+                              <td className="data">
+                                <FormInput
+                                  value={this.state.account.tableSize.ten}
+                                  onChange={this.handleInputChange}
+                                  name="phone"
+                                  type="number"
+                                  error={this.state.errors.phone}
+                                />
+                              </td>
+                            </tr>
+                            <tr>
+                              <td className="header">12</td>
+                              <td className="data">
+                                <FormInput
+                                  value={this.state.account.tableSize.ten}
+                                  onChange={this.handleInputChange}
+                                  name="phone"
+                                  type="number"
+                                  error={this.state.errors.phone}
+                                />
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {/* end of Capacity info form */}
+
+                {/* Slot info form */}
+                <div className="subForm">
+                  <h6 className="title">Slots Availabe</h6>
+                  <div className="subFormContainer slots">
+                    <div className="daysCheckboxDiv">
+                      <FormCheckbox
+                        label="Monday"
+                        xClass="d-inline dayCheckbox"
+                      />
+                      <FormCheckbox
+                        label="Tuesday"
+                        xClass="d-inline dayCheckbox"
+                      />
+                      <FormCheckbox
+                        label="Wednesday"
+                        xClass="d-inline dayCheckbox"
+                      />
+                      <FormCheckbox
+                        label="Thursday"
+                        xClass="d-inline dayCheckbox"
+                      />
+                      <FormCheckbox
+                        label="Friday"
+                        xClass="d-inline dayCheckbox"
+                      />
+                      <FormCheckbox
+                        label="Saturday"
+                        xClass="d-inline dayCheckbox"
+                      />
+                      <FormCheckbox
+                        label="Sunday"
+                        xClass="d-inline dayCheckbox"
+                      />
+                    </div>
+                    <div className="row">
+                      <div className="col-4">
+                        <FormInput
+                          label="LOCALITY"
+                          value={this.state.account.std}
+                          onChange={this.handleInputChange}
+                          name="std"
+                          type="number"
+                          placeholder=""
+                          error={this.state.errors.std}
+                        />
+                      </div>
+                      <div className="col">
+                        <FormInput
+                          label="LOCALITY IN DETAIL"
+                          value={this.state.account.phone}
+                          onChange={this.handleInputChange}
+                          name="phone"
+                          placeholder="Phone"
+                          error={this.state.errors.phone}
+                        />
+                      </div>
+                    </div>
+                    <FormInput
+                      label="Establishment"
+                      value={this.state.account.establishment}
+                      onChange={this.handleInputChange}
+                      name="establishment"
+                      placeholder="Bar / Pub / Family Restaurant"
+                      error={this.state.errors.establishment}
+                    />
+                  </div>
+                </div>
+                {/* end of Slot info form */}
 
                 <button
                   type="submit"
