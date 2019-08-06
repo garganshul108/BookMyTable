@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Aug 06, 2019 at 04:36 PM
+-- Generation Time: Aug 06, 2019 at 06:19 PM
 -- Server version: 5.7.26-0ubuntu0.18.04.1
 -- PHP Version: 7.2.19-0ubuntu0.18.04.1
 
@@ -31,12 +31,7 @@ CREATE TABLE `Booking` (
   `user_id` int(11) DEFAULT NULL,
   `slot_id` int(11) DEFAULT NULL,
   `reference_no` varchar(1000) DEFAULT NULL,
-  `size_ten` int(11) DEFAULT '0',
-  `size_eight` int(11) DEFAULT '0',
-  `size_six` int(11) DEFAULT '0',
-  `size_four` int(11) DEFAULT '0',
-  `size_two` int(11) DEFAULT '0',
-  `size_one` int(11) DEFAULT '0'
+  `size_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -60,93 +55,93 @@ CREATE TABLE `Hall_Size` (
 --
 
 INSERT INTO `Hall_Size` (`id`, `size_ten`, `size_eight`, `size_six`, `size_four`, `size_two`, `size_one`) VALUES
-(1, 6, 9, 11, 10, 20, 21),
-(2, 4, 6, 10, 12, 21, 24),
-(3, 4, 7, 10, 10, 24, 23),
-(4, 5, 8, 11, 19, 18, 26),
-(5, 5, 5, 11, 17, 24, 20),
-(6, 4, 5, 13, 15, 15, 24),
-(7, 5, 7, 14, 11, 22, 26),
-(8, 6, 6, 11, 11, 23, 20),
-(9, 7, 6, 12, 12, 23, 24),
-(10, 6, 9, 10, 13, 16, 20),
-(11, 7, 5, 14, 15, 22, 21),
-(12, 5, 7, 13, 12, 18, 28),
-(13, 4, 6, 10, 19, 19, 21),
-(14, 6, 6, 11, 10, 15, 23),
-(15, 5, 8, 10, 14, 23, 26),
-(16, 5, 8, 9, 11, 20, 22),
-(17, 5, 7, 12, 10, 21, 29),
-(18, 6, 8, 8, 15, 18, 24),
-(19, 6, 9, 8, 10, 15, 23),
-(20, 6, 9, 10, 16, 20, 23),
-(21, 6, 5, 12, 10, 22, 27),
-(22, 4, 8, 10, 15, 22, 22),
-(23, 7, 7, 11, 15, 24, 20),
-(24, 6, 9, 8, 19, 19, 28),
-(25, 4, 6, 8, 11, 24, 20),
-(26, 7, 5, 10, 13, 20, 29),
-(27, 7, 6, 10, 13, 24, 28),
-(28, 5, 9, 14, 14, 15, 22),
-(29, 4, 8, 13, 11, 21, 22),
-(30, 7, 6, 9, 13, 22, 27),
-(31, 4, 6, 11, 13, 17, 21),
-(32, 5, 9, 8, 12, 23, 27),
-(33, 6, 8, 12, 11, 15, 29),
-(34, 4, 6, 10, 17, 21, 23),
-(35, 5, 5, 8, 12, 19, 23),
-(36, 6, 6, 12, 12, 21, 23),
-(37, 5, 5, 8, 19, 24, 25),
-(38, 6, 9, 13, 12, 24, 27),
-(39, 4, 7, 9, 19, 15, 23),
-(40, 6, 6, 8, 16, 23, 20),
-(41, 5, 5, 10, 10, 24, 23),
-(42, 7, 9, 13, 11, 19, 24),
-(43, 7, 5, 8, 10, 15, 29),
-(44, 6, 7, 11, 14, 19, 25),
-(45, 6, 7, 12, 10, 17, 24),
-(46, 7, 8, 11, 10, 17, 20),
-(47, 6, 9, 12, 16, 15, 24),
-(48, 4, 8, 8, 13, 20, 29),
-(49, 7, 5, 14, 16, 16, 23),
-(50, 4, 6, 11, 17, 23, 22),
-(51, 7, 5, 10, 10, 16, 21),
-(52, 5, 8, 14, 19, 22, 21),
-(53, 7, 6, 14, 10, 18, 20),
-(54, 7, 5, 13, 13, 21, 23),
-(55, 4, 9, 12, 15, 17, 26),
-(56, 7, 5, 14, 15, 18, 21),
-(57, 6, 9, 11, 10, 23, 29),
-(58, 7, 5, 9, 15, 19, 26),
-(59, 7, 7, 12, 17, 20, 20),
-(60, 7, 7, 12, 18, 16, 29),
-(61, 7, 5, 13, 11, 15, 21),
-(62, 6, 6, 14, 13, 22, 22),
-(63, 5, 5, 11, 14, 18, 27),
-(64, 6, 5, 8, 19, 24, 25),
-(65, 6, 8, 11, 19, 20, 29),
-(66, 7, 6, 10, 11, 24, 26),
-(67, 7, 9, 11, 12, 20, 24),
-(68, 4, 9, 10, 14, 22, 24),
-(69, 5, 7, 13, 18, 21, 26),
-(70, 7, 7, 12, 13, 17, 21),
-(71, 4, 8, 14, 15, 19, 25),
-(72, 4, 7, 9, 16, 18, 26),
-(73, 7, 8, 11, 17, 17, 21),
-(74, 6, 6, 8, 12, 17, 27),
-(75, 5, 7, 9, 16, 18, 22),
-(76, 5, 7, 13, 16, 23, 21),
-(77, 5, 7, 14, 18, 23, 26),
-(78, 7, 8, 12, 19, 22, 21),
-(79, 4, 8, 9, 10, 24, 22),
-(80, 7, 8, 8, 12, 17, 28),
-(81, 4, 9, 14, 15, 23, 20),
-(82, 5, 6, 14, 13, 24, 28),
-(83, 6, 7, 9, 12, 23, 26),
-(84, 6, 5, 13, 19, 17, 22),
-(85, 7, 8, 12, 17, 21, 20),
-(86, 6, 7, 12, 14, 23, 24),
-(87, 6, 9, 13, 12, 22, 24);
+(1, 4, 7, 8, 12, 24, 26),
+(2, 7, 8, 10, 16, 15, 29),
+(3, 7, 6, 12, 10, 20, 26),
+(4, 4, 6, 10, 14, 21, 25),
+(5, 6, 9, 13, 11, 17, 27),
+(6, 5, 8, 10, 18, 16, 22),
+(7, 7, 6, 9, 16, 20, 25),
+(8, 5, 9, 14, 10, 22, 29),
+(9, 7, 8, 10, 11, 18, 20),
+(10, 5, 8, 12, 10, 18, 29),
+(11, 7, 9, 12, 15, 19, 26),
+(12, 7, 6, 13, 14, 16, 21),
+(13, 6, 5, 9, 11, 15, 29),
+(14, 5, 8, 14, 15, 20, 21),
+(15, 4, 8, 12, 14, 16, 23),
+(16, 6, 9, 9, 19, 16, 25),
+(17, 4, 7, 11, 15, 22, 25),
+(18, 5, 7, 9, 11, 22, 27),
+(19, 6, 5, 14, 17, 24, 23),
+(20, 5, 5, 14, 10, 22, 26),
+(21, 5, 9, 12, 19, 17, 20),
+(22, 4, 5, 11, 16, 23, 28),
+(23, 6, 9, 14, 19, 21, 24),
+(24, 5, 6, 10, 11, 16, 27),
+(25, 6, 7, 9, 11, 21, 21),
+(26, 4, 9, 13, 10, 17, 21),
+(27, 6, 7, 9, 16, 20, 20),
+(28, 5, 9, 13, 12, 18, 25),
+(29, 5, 7, 13, 15, 20, 24),
+(30, 4, 7, 12, 10, 22, 21),
+(31, 4, 9, 10, 17, 24, 23),
+(32, 5, 9, 13, 13, 20, 22),
+(33, 5, 5, 12, 19, 21, 22),
+(34, 6, 7, 9, 17, 19, 27),
+(35, 4, 8, 13, 13, 23, 28),
+(36, 6, 9, 11, 10, 19, 27),
+(37, 6, 5, 12, 16, 20, 28),
+(38, 7, 8, 9, 17, 15, 22),
+(39, 7, 9, 14, 15, 20, 22),
+(40, 4, 9, 10, 12, 23, 29),
+(41, 4, 8, 13, 15, 19, 21),
+(42, 5, 5, 13, 13, 16, 23),
+(43, 5, 8, 11, 14, 17, 20),
+(44, 7, 7, 14, 12, 18, 29),
+(45, 5, 6, 13, 18, 21, 26),
+(46, 6, 5, 13, 13, 19, 21),
+(47, 7, 7, 14, 10, 15, 29),
+(48, 4, 9, 12, 12, 17, 21),
+(49, 5, 8, 14, 18, 17, 21),
+(50, 7, 5, 11, 13, 21, 22),
+(51, 7, 9, 12, 18, 20, 26),
+(52, 4, 9, 12, 16, 17, 21),
+(53, 5, 7, 13, 12, 24, 23),
+(54, 4, 5, 14, 17, 24, 20),
+(55, 7, 5, 10, 12, 15, 25),
+(56, 6, 8, 10, 14, 19, 20),
+(57, 5, 9, 10, 13, 21, 23),
+(58, 4, 7, 14, 13, 15, 22),
+(59, 4, 9, 12, 14, 17, 25),
+(60, 5, 7, 8, 13, 16, 25),
+(61, 5, 8, 8, 14, 21, 20),
+(62, 7, 9, 11, 13, 21, 26),
+(63, 4, 6, 9, 19, 24, 29),
+(64, 4, 7, 10, 11, 18, 20),
+(65, 6, 5, 12, 10, 24, 20),
+(66, 6, 8, 11, 15, 17, 27),
+(67, 5, 9, 11, 14, 15, 22),
+(68, 6, 6, 9, 12, 21, 27),
+(69, 7, 7, 13, 14, 21, 27),
+(70, 6, 8, 12, 12, 16, 28),
+(71, 6, 5, 11, 13, 23, 21),
+(72, 7, 5, 13, 17, 20, 21),
+(73, 6, 8, 14, 11, 23, 27),
+(74, 7, 7, 12, 19, 19, 28),
+(75, 7, 8, 13, 10, 23, 25),
+(76, 6, 9, 8, 19, 16, 27),
+(77, 4, 7, 14, 16, 19, 22),
+(78, 6, 6, 12, 18, 20, 21),
+(79, 4, 7, 10, 16, 17, 29),
+(80, 6, 7, 13, 17, 24, 24),
+(81, 6, 6, 12, 15, 24, 21),
+(82, 5, 6, 12, 15, 24, 25),
+(83, 7, 5, 13, 18, 21, 27),
+(84, 6, 9, 11, 16, 24, 28),
+(85, 5, 8, 10, 10, 22, 21),
+(86, 4, 7, 14, 10, 22, 25),
+(87, 5, 6, 12, 13, 23, 26);
 
 -- --------------------------------------------------------
 
@@ -257,6 +252,17 @@ INSERT INTO `Location` (`id`, `city`, `zipcode`, `locality`, `address`, `localit
 (85, 'New Delhi', NULL, 'Select Citywalk Mall, Saket', 'Dome, Level 4, Select Citywalk, A-3, District Centre, Saket, New Delhi', 'Select Citywalk Mall, Saket, New Delhi', 28.5283913089, 77.2186108679),
 (86, 'New Delhi', 110001, 'Connaught Place', '28, Block A, Kasturba Gandhi Marg, Connaught Place, New Delhi', 'Connaught Place, New Delhi', 28.6296624581, 77.2218600288),
 (87, 'New Delhi', 110054, 'Majnu ka Tila', 'House 6, New Colony, Majnu ka Tila, New Delhi', 'Majnu ka Tila, New Delhi', 28.7025817618, 77.2284193709);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Photos`
+--
+
+CREATE TABLE `Photos` (
+  `review_id` int(11) NOT NULL,
+  `url` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -374,6 +380,21 @@ INSERT INTO `Restaurant` (`id`, `location_id`, `name`, `average_cost_for_two`, `
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `Review`
+--
+
+CREATE TABLE `Review` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `restaurant_id` int(11) NOT NULL,
+  `comment` varchar(1000) DEFAULT NULL,
+  `rating` float NOT NULL DEFAULT '0',
+  `rating_text` varchar(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `Slot`
 --
 
@@ -428,12 +449,26 @@ ALTER TABLE `Location`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `Photos`
+--
+ALTER TABLE `Photos`
+  ADD PRIMARY KEY (`review_id`);
+
+--
 -- Indexes for table `Restaurant`
 --
 ALTER TABLE `Restaurant`
   ADD PRIMARY KEY (`id`),
   ADD KEY `location_id` (`location_id`),
   ADD KEY `capacity_id` (`capacity_id`);
+
+--
+-- Indexes for table `Review`
+--
+ALTER TABLE `Review`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `restaurant_id` (`restaurant_id`);
 
 --
 -- Indexes for table `Slot`
@@ -475,6 +510,11 @@ ALTER TABLE `Location`
 ALTER TABLE `Restaurant`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19151004;
 --
+-- AUTO_INCREMENT for table `Review`
+--
+ALTER TABLE `Review`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT for table `Slot`
 --
 ALTER TABLE `Slot`
@@ -496,11 +536,24 @@ ALTER TABLE `Booking`
   ADD CONSTRAINT `Booking_ibfk_2` FOREIGN KEY (`slot_id`) REFERENCES `Slot` (`id`);
 
 --
+-- Constraints for table `Photos`
+--
+ALTER TABLE `Photos`
+  ADD CONSTRAINT `Photos_ibfk_1` FOREIGN KEY (`review_id`) REFERENCES `Review` (`id`);
+
+--
 -- Constraints for table `Restaurant`
 --
 ALTER TABLE `Restaurant`
   ADD CONSTRAINT `Restaurant_ibfk_1` FOREIGN KEY (`location_id`) REFERENCES `Location` (`id`),
   ADD CONSTRAINT `Restaurant_ibfk_2` FOREIGN KEY (`capacity_id`) REFERENCES `Hall_Size` (`id`);
+
+--
+-- Constraints for table `Review`
+--
+ALTER TABLE `Review`
+  ADD CONSTRAINT `Review_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `User` (`id`),
+  ADD CONSTRAINT `Review_ibfk_2` FOREIGN KEY (`restaurant_id`) REFERENCES `Restaurant` (`id`);
 
 --
 -- Constraints for table `Slot`
