@@ -44,9 +44,19 @@ class App extends Component {
     return (
       <div className="container-fluid">
         <div className="row">
-          <NaviagtionBar
-            openLogin={this.handleOpenLogin}
-            openSignUp={this.handleOpenSignUp}
+          <Switch>
+            <Route path="/home" exact render={() => null} />
+            <Route
+              path="/"
+              render={props => (
+                <NaviagtionBar
+                  openLogin={this.handleOpenLogin}
+                  openSignUp={this.handleOpenSignUp}
+                  {...props}
+                />
+              )}
+            />
+          </Switch>
           />
         </div>
         <div className="row">
