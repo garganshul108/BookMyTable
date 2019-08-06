@@ -37,6 +37,7 @@ class App extends Component {
 
   handleOpenSignUp = e => {
     e.preventDefault();
+
     let target = document.getElementsByClassName("loginPage")[1];
     // console.log(target);
     target.style.display = "block";
@@ -93,7 +94,12 @@ class App extends Component {
             <Login closeTab={this.handleCloseLogin} />
           </div>
           <div className="loginPage" style={{ display: "none" }}>
-            <SignUp closeTab={this.handleCloseSignUp} />
+            <Route
+              path="/"
+              render={props => (
+                <SignUp {...props} closeTab={this.handleCloseSignUp} />
+              )}
+            />
           </div>
         </div>
 

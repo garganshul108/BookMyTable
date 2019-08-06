@@ -62,7 +62,7 @@ class SignUp extends Component {
 
   handleGotoRegistration = e => {
     this.props.closeTab(e);
-    window.location = "/restaurant/registration";
+    return this.props.history.push("/restaurant/registration");
     // this.history.push("/restaurant/registration");
   };
 
