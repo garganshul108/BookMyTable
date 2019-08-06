@@ -70,6 +70,7 @@ def get_restaurants():
         return resp
     except Exception as e:
         print(e)
+        return "error"
     finally:
         cursor.close()
         conn.close()
