@@ -1,5 +1,10 @@
 # MYLOG
 
+#### 2019-08-06 22:12:04
+
+- ref-navigation
+  - home page -> designing structure
+
 #### 2019-08-06 19:44:20
 
 - ref-navigation
