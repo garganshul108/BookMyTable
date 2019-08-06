@@ -47,7 +47,16 @@ class App extends Component {
         <div className="container-fluid">
           <div className="row">
             <Switch>
-              <Route path="/home" exact render={() => <HomeTop />} />
+              <Route
+                path="/home"
+                exact
+                render={() => (
+                  <HomeTop
+                    openLogin={this.handleOpenLogin}
+                    openSignUp={this.handleOpenSignUp}
+                  />
+                )}
+              />
               <Route
                 path="/"
                 render={props => (

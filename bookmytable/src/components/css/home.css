@@ -1,4 +1,5 @@
 .homeTab {
+  font-family: "Courier New", Courier, monospace;
   width: 100%;
 }
 
@@ -9,4 +10,35 @@
 .homeTab .homeContent {
   background: white;
   height: 100%;
+  padding: 40px;
+}
+
+.homeTab .homeContent .userButtons {
+  text-align: right;
+}
+
+.homeTab .homeContent .userButtons .buttons {
+  margin: 5px;
+  padding: 2px 5px;
+}
+
+.homeTab .homeContent .title {
+  font-weight: 900;
+  line-height: unset;
+}
+
+.homeTab .homeContent .desc big {
+  font-size: 2.2rem;
+  font-weight: bold;
+  display: block;
+}
+
+.homeTab .homeContent .desc small {
+  font-size: 1rem;
+  /* font-weight: bold; */
+  display: block;
+}
+
+.homeTab .homeContent .searchBox {
+  margin: 20px auto 40px;
 }
