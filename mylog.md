@@ -1,5 +1,12 @@
 # MYLOG
 
+#### 2019-08-06 19:44:20
+
+- ref-navigation
+  - figured out navigation history object
+  - figured out how to not have navigation bar on the home page
+  - this is made child to app-front (now only)
+
 #### 2019-08-06 16:24:38
 
 - top-bar-refactoring has the new navigation bar design
