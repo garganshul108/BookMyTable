@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import Joi from "joi-browser";
+import { Link, Redirect } from "react-router-dom";
 import "./css/login.css";
+import FormInput from "./subComponents/formInput";
 
 class SignUp extends Component {
   state = {
@@ -43,12 +45,6 @@ class SignUp extends Component {
     for (let error of validationResult.error.details) {
       errors[error.path[0]] = error.message;
     }
-    // if (this.state.account.email.trim() === "") {
-    //   errors.email = "Email is req.";
-    // }
-    // if (this.state.account.password.trim() === "") {
-    //   errors.password = "Password is req.";
-    // }
 
     return errors;
   };
@@ -62,6 +58,12 @@ class SignUp extends Component {
 
     if (errors) return;
     console.log("submitting signup form");
+  };
+
+  handleGotoRegistration = e => {
+    this.props.closeTab(e);
+    window.location = "/restaurant/registration";
+    // this.history.push("/restaurant/registration");
   };
 
   render() {
@@ -80,79 +82,55 @@ class SignUp extends Component {
               <i className="fa fa-times" aria-hidden="true" />
             </button>
             <div className="loginDiv">
-              <small class="form-text text-muted">New User?</small>
+              <Link onClick={this.handleGotoRegistration}>
+                <small className="text">
+                  <span
+                    className="bg-warning"
+                    style={{ padding: "5px", borderRadius: "5px" }}
+                  >
+                    Are you a Restaurant?
+                  </span>
+                </small>
+                <br />
+                <br />
+                <hr />
+              </Link>
+              <small className="form-text text-muted">New User?</small>
               <h4>Welcome to SignUp</h4>
               <form onSubmit={this.handleSubmit}>
-                <div className="form-group">
-                  <input
-                    value={this.state.account.name}
-                    onChange={this.handleInputChange}
-                    name="name"
-                    autoFocus
-                    className="form-control"
-                    placeholder="Name"
-                  />
-                  {this.state.errors.name && (
-                    <div className="alert alert-danger">
-                      <small>{this.state.errors.name}</small>
-                    </div>
-                  )}
-                </div>
-                <div className="form-group">
-                  <input
-                    value={this.state.account.email}
-                    onChange={this.handleInputChange}
-                    name="email"
-                    autoFocus
-                    className="form-control"
-                    id="exampleInputEmail1"
-                    aria-describedby="emailHelp"
-                    placeholder="Enter email"
-                  />
-                  {this.state.errors.email && (
-                    <div className="alert alert-danger">
-                      <small>{this.state.errors.email}</small>
-                    </div>
-                  )}
-                  <small id="emailHelp" className="form-text text-muted">
-                    We'll never share your email with anyone else.
-                  </small>
-                </div>
-                <div className="form-group">
-                  <input
-                    value={this.state.account.password}
-                    onChange={this.handleInputChange}
-                    type="password"
-                    name="password"
-                    className="form-control"
-                    id="exampleInputPassword1"
-                    placeholder="Password"
-                  />
-                  {this.state.errors.password && (
-                    <div>
-                      <div className="alert alert-danger">
-                        <small>{this.state.errors.password}</small>
-                      </div>
-                    </div>
-                  )}
-                </div>
-                <div className="form-group">
-                  <input
-                    value={this.state.account.confirmPassword}
-                    onChange={this.handleInputChange}
-                    type="password"
-                    name="confirmPassword"
-                    className="form-control"
-                    placeholder="Confirm Password"
-                  />
-                  {this.state.errors.confirmPassword && (
-                    <div>
-                      <div className="alert alert-danger">
-                        <small>{this.state.errors.confirmPassword}</small>
-                      </div>
-                    </div>
-                  )}
-                </div>
+                <FormInput
+                  value={this.state.account.name}
+                  onChange={this.handleInputChange}
+                  name="name"
+                  placeholder="Name"
+                  error={this.state.errors.name}
+                />
+                <small id="emailHelp" className="form-text text-muted">
+                  We'll never share your email with anyone else.
+                </small>
+                <FormInput
+                  value={this.state.account.email}
+                  onChange={this.handleInputChange}
+                  name="email"
+                  placeholder="Enter email"
+                  error={this.state.errors.email}
+                />
+                <FormInput
+                  value={this.state.account.password}
+                  onChange={this.handleInputChange}
+                  type="password"
+                  name="password"
+                  placeholder="Password"
+                  error={this.state.errors.password}
+                />
+                <FormInput
+                  value={this.state.account.confirmPassword}
+                  onChange={this.handleInputChange}
+                  type="password"
+                  name="confirmPassword"
+                  placeholder="Confirm Password"
+                  error={this.state.errors.confirmPassword}
+                />
                 <button type="submit" className="btn btn-danger">
                   Submit
                 </button>
