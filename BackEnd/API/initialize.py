@@ -6,6 +6,7 @@ from flask import jsonify
 from flask import flash, request
 from werkzeug import generate_password_hash, check_password_hash
 import random
+from decimal import Decimal
 
 with open('all_data.json') as json_file:
     data = json.load(json_file)
@@ -17,13 +18,16 @@ def update_location(tt, loc_id, cursor):
     _zipcode = tt['location']['zipcode']
     _address = tt['location']['address']
     _verbose = tt['location']['locality_verbose']
+    _latitude = Decimal(tt['location']['latitude'])
+    _longitude = Decimal(tt['location']['longitude'])
     if _zipcode == "":
         _zipcode = None
     else:
         _zipcode = int(_zipcode)
 
-    sql = "INSERT INTO Location(id,city,zipcode,locality,address,locality_verbose) VALUES(%s,%s,%s,%s,%s,%s)"
-    value = (loc_id, _city, _zipcode, _locality, _address, _verbose)
+    sql = "INSERT INTO Location(id,city,zipcode,locality,address,locality_verbose,latitude,longitude) VALUES(%s,%s,%s,%s,%s,%s,%s,%s)"
+    value = (loc_id, _city, _zipcode, _locality,
+             _address, _verbose, _latitude, _longitude)
     cursor.execute(sql, value)
 
 
