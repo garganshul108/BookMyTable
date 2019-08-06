@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import FormInput from "./subComponents/formInput";
 import "../components/css/restaurantRegistration.css";
 import FormCheckbox from "./subComponents/formCheckbox";
+
 // import { captialize } from '../util/util';
 
 class RestaurantRegistration extends Component {
@@ -87,45 +88,89 @@ class RestaurantRegistration extends Component {
                   <h6 className="title">Location</h6>
                   <div className="subFormContainer">
                     <FormInput
-                      label="ADDRESS"
-                      value={this.state.account.name}
+                      label="ADDRESS LINE 1"
+                      // value={this.state.account.name}
                       onChange={this.handleInputChange}
-                      name="restName"
-                      placeholder="Enter Restaurant's Name..."
-                      error={this.state.errors.restName}
+                      // name="restName"
+                      // placeholder="Enter Restaurant's Name..."
+                      // error={this.state.errors.restName}
+                    />
+                    <FormInput
+                      label="ADDRESS  LINE 2"
+                      // value={this.state.account.name}
+                      onChange={this.handleInputChange}
+                      // name="restName"
+                      // placeholder="Enter Restaurant's Name..."
+                      // error={this.state.errors.restName}
                     />
 
                     <div className="row">
                       <div className="col-4">
                         <FormInput
                           label="LOCALITY"
-                          value={this.state.account.std}
+                          // value={this.state.account.std}
                           onChange={this.handleInputChange}
-                          name="std"
-                          type="number"
-                          placeholder=""
-                          error={this.state.errors.std}
+                          // name="std"
+                          // type="number"
+                          // placeholder=""
+                          // error={this.state.errors.std}
                         />
                       </div>
                       <div className="col">
                         <FormInput
                           label="LOCALITY IN DETAIL"
-                          value={this.state.account.phone}
+                          // value={this.state.account.phone}
                           onChange={this.handleInputChange}
-                          name="phone"
-                          placeholder="Phone"
-                          error={this.state.errors.phone}
+                          // name="phone"
+                          // placeholder="Phone"
+                          // error={this.state.errors.phone}
+                        />
+                      </div>
+                      <div className="col-2">
+                        <FormInput
+                          label="ZIPCODE"
+                          // value={this.state.account.phone}
+                          onChange={this.handleInputChange}
+                          // name="phone"
+                          // placeholder="Phone"
+                          // error={this.state.errors.phone}
                         />
                       </div>
                     </div>
-                    <FormInput
-                      label="Establishment"
-                      value={this.state.account.establishment}
-                      onChange={this.handleInputChange}
-                      name="establishment"
-                      placeholder="Bar / Pub / Family Restaurant"
-                      error={this.state.errors.establishment}
-                    />
+                    <div className="row">
+                      <div className="col">
+                        <form id="establishmentForm">
+                          <div className="row">
+                            <div className="col-8">
+                              <FormInput
+                                label="ESTABLISHMENT TYPE"
+                                // value={this.state.account.std}
+                                // onChange={this.handleInputChange}
+                                // name="std"
+                                // type="dropdown"
+                                placeholder="Bar / Pub / Family Restaurant"
+                                // error={this.state.errors.std}
+                                // min="09:00"
+                                // max="18:00"
+                              />
+                            </div>
+                            <div className="col">
+                              <FormInput
+                                label="&nbsp;"
+                                value="ADD"
+                                // onChange={this.handleInputChange}
+                                // name="std"
+                                type="submit"
+                                // placeholder=""
+                                // error={this.state.errors.std}
+                                // min="09:00"
+                                // max="18:00"
+                              />
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
                   </div>
                 </div>
                 {/* end of Location info form */}
@@ -137,33 +182,84 @@ class RestaurantRegistration extends Component {
                       <div className="col-4">
                         <FormInput
                           label="COST FOR TWO"
-                          value={this.state.account.std}
+                          // value={this.state.account.std}
                           onChange={this.handleInputChange}
-                          name="std"
+                          // name="std"
                           type="number"
-                          placeholder=""
-                          error={this.state.errors.std}
+                          // placeholder=""
+                          // error={this.state.errors.std}
                         />
                       </div>
+                      <div className="col" />
+                    </div>
+                    <div className="row">
                       <div className="col">
-                        <FormInput
-                          label="LOCALITY IN DETAIL"
-                          value={this.state.account.phone}
-                          onChange={this.handleInputChange}
-                          name="phone"
-                          placeholder="Phone"
-                          error={this.state.errors.phone}
-                        />
+                        <form id="cuisineForm">
+                          <div className="row">
+                            <div className="col-8">
+                              <FormInput
+                                label="CUISINES AVAILABLE"
+                                // value={this.state.account.std}
+                                // onChange={this.handleInputChange}
+                                // name="std"
+                                // type="dropdown"
+                                placeholder="North Indian / Thai / Chinese"
+                                // error={this.state.errors.std}
+                                // min="09:00"
+                                // max="18:00"
+                              />
+                            </div>
+                            <div className="col">
+                              <FormInput
+                                label="&nbsp;"
+                                value="ADD"
+                                // onChange={this.handleInputChange}
+                                // name="std"
+                                type="submit"
+                                // placeholder=""
+                                // error={this.state.errors.std}
+                                // min="09:00"
+                                // max="18:00"
+                              />
+                            </div>
+                          </div>
+                        </form>
                       </div>
                     </div>
-                    <FormInput
-                      label="Establishment"
-                      value={this.state.account.establishment}
-                      onChange={this.handleInputChange}
-                      name="establishment"
-                      placeholder="Bar / Pub / Family Restaurant"
-                      error={this.state.errors.establishment}
-                    />
+                    <div className="row">
+                      <div className="col">
+                        <form id="featuresForm">
+                          <div className="row">
+                            <div className="col-8">
+                              <FormInput
+                                label="FEATURES AVAILABLE"
+                                // value={this.state.account.std}
+                                // onChange={this.handleInputChange}
+                                // name="std"
+                                // type="dropdown"
+                                placeholder="Pay by Card/ Cash / Five Star"
+                                // error={this.state.errors.std}
+                                // min="09:00"
+                                // max="18:00"
+                              />
+                            </div>
+                            <div className="col">
+                              <FormInput
+                                label="&nbsp;"
+                                value="ADD"
+                                // onChange={this.handleInputChange}
+                                // name="std"
+                                type="submit"
+                                // placeholder=""
+                                // error={this.state.errors.std}
+                                min="09:00"
+                                max="18:00"
+                              />
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
                   </div>
                 </div>
                 {/* end of Characteristics info form */}
@@ -270,84 +366,68 @@ class RestaurantRegistration extends Component {
 
                 {/* Slot info form */}
                 <div className="subForm">
-                  <h6 className="title">Slots Availabe</h6>
-                  <div className="subFormContainer slots">
-                    <div className="daysCheckboxDiv">
-                      <FormCheckbox
-                        label="Monday"
-                        xClass="d-inline dayCheckbox"
-                      />
-                      <FormCheckbox
-                        label="Tuesday"
-                        xClass="d-inline dayCheckbox"
-                      />
-                      <FormCheckbox
-                        label="Wednesday"
-                        xClass="d-inline dayCheckbox"
-                      />
-                      <FormCheckbox
-                        label="Thursday"
-                        xClass="d-inline dayCheckbox"
-                      />
-                      <FormCheckbox
-                        label="Friday"
-                        xClass="d-inline dayCheckbox"
-                      />
-                      <FormCheckbox
-                        label="Saturday"
-                        xClass="d-inline dayCheckbox"
-                      />
-                      <FormCheckbox
-                        label="Sunday"
-                        xClass="d-inline dayCheckbox"
-                      />
-                    </div>
+                  <h6 className="title">Contact Info</h6>
+                  <div className="subFormContainer contactInfo">
                     <div className="row">
-                      <div className="col-4">
+                      <div className="col-6">
                         <FormInput
-                          label="LOCALITY"
-                          value={this.state.account.std}
-                          onChange={this.handleInputChange}
-                          name="std"
-                          type="number"
-                          placeholder=""
-                          error={this.state.errors.std}
+                          label="RESTAURANT EMAIL"
+                          // value={this.state.account.std}
+                          // onChange={this.handleInputChange}
+                          // name="std"
+                          type="email"
+                          // placeholder=""
+                          // error={this.state.errors.std}
                         />
                       </div>
-                      <div className="col">
+                      <div className="col-6">
                         <FormInput
-                          label="LOCALITY IN DETAIL"
-                          value={this.state.account.phone}
-                          onChange={this.handleInputChange}
-                          name="phone"
-                          placeholder="Phone"
-                          error={this.state.errors.phone}
+                          label="RESTAURANT WEBSITE"
+                          // value={this.state.account.std}
+                          // onChange={this.handleInputChange}
+                          // name="std"
+                          // placeholder=""
+                          // error={this.state.errors.std}
                         />
                       </div>
                     </div>
-                    <FormInput
-                      label="Establishment"
-                      value={this.state.account.establishment}
-                      onChange={this.handleInputChange}
-                      name="establishment"
-                      placeholder="Bar / Pub / Family Restaurant"
-                      error={this.state.errors.establishment}
-                    />
                   </div>
                 </div>
                 {/* end of Slot info form */}
 
                 <button
                   type="submit"
-                  style={{ width: "100%" }}
-                  className="btn btn-danger"
+                  style={{ width: "100%", marginTop: "20px" }}
+                  className="btn btn-success"
                 >
                   Submit
                 </button>
               </form>
             </div>
           </div>
-          <div className="col-4">Right Space</div>
+          <div className="col-4">
+            <small className="form-text text-muted">Happy to have you!</small>
+            <h4>HELP!</h4>
+            <div className="registrationInstructions">
+              <strong> How it works</strong>
+              <br />
+              <ul>
+                <li>
+                  If you are the owner of a restaurant, or a representative, let
+                  us know using this form.
+                </li>
+                <li>
+                  Once you send the information to us, our awesome content team
+                  will verify it. To help speed up the process, please provide a
+                  contact number or email address.
+                </li>
+                <li>
+                  That's it! Once verified the listing will start appearing
+                  on&nbsp;<strong>BookMyTable.com</strong>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
     );
