@@ -1,5 +1,19 @@
 # MYLOG
 
+#### 2019-08-06 13:41:05
+
+- Current Branches:
+
+  - input-component-test (child of reg-form) not merged any where
+    - made for implenting input as a seprate component
+    - designed scroll bar in it
+    - refactored the login form, Sign up with new FronInput tag
+  - reg-form (child of adj-js)
+  - top-bar-refactoring (child of adj-js)
+  - adj-js (child of app-front)
+
+-
+
 #### 2019-08-05 23:54:28
 
 on branch adjusting-js
