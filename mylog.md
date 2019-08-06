@@ -1,5 +1,16 @@
 # MYLOG
 
+#### 2019-08-06 23:45:31
+
+mergers:
+
+- ref-topbar merged to ref-navigation
+- ref-topbar deleted
+
+- ref-navigation:
+  - contains the new home page
+  - contains the new navigation bar
+
 #### 2019-08-06 23:00:35
 
 - ref-navigation
@@ -19,7 +30,7 @@
 
 #### 2019-08-06 16:24:38
 
-- top-bar-refactoring has the new navigation bar design
+- top-bar-refactoring has the new navigation bar design; renamed as ref-topbar
 - no js or css yet
 - now I am switching to work on registration model
 
