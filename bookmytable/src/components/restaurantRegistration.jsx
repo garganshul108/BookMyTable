@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import FormInput from "./subComponents/formInput";
 import "../components/css/restaurantRegistration.css";
 import FormCheckbox from "./subComponents/formCheckbox";
-
+import RegistrationSubForm from "./subComponents/registrationSubForm";
 class RestaurantRegistration extends Component {
   state = {
     data: {
@@ -365,6 +365,7 @@ class RestaurantRegistration extends Component {
             className="text text-muted"
             style={{ textTransform: "captialize !important" }}
           >
+            {" "}
             FULL HOUSE
           </small>
           <div className="subFormContainer capacity">
@@ -583,6 +584,8 @@ class RestaurantRegistration extends Component {
       );
     };
 
+    const renderTrial = () => <RegistrationSubForm label="trial" />;
+
     return (
       <div className="container">
         <div className="row">
@@ -599,7 +602,7 @@ class RestaurantRegistration extends Component {
                 {renderCapacityForm()}
                 {renderSlotForm()}
                 {renderContactInfo()}
-
+                {renderTrial()}
                 <button
                   type="submit"
                   style={{ width: "100%", marginTop: "20px" }}
