@@ -1,5 +1,10 @@
 # MYLOG
 
+#### 2019-08-07 08:11:20
+
+- ref-registraion
+- incomplete code for the inner form
+
 #### 2019-08-07 06:59:55
 
 - ref-registration updated
