@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import FormInput from "./subComponents/formInput";
 import "../components/css/restaurantRegistration.css";
+import FormCheckbox from "./subComponents/formCheckbox";
 
 // import { captialize } from '../util/util';
 /***
@@ -62,9 +63,38 @@ class RestaurantRegistration extends Component {
       timings: "",
       opening_status: "",
       email: "",
-      website: ""
+      website: "",
+      days: {
+        Monday: false,
+        Tuesday: false,
+        Wednesday: false,
+        Thursday: false,
+        Friday: false,
+        Saturday: false,
+        Sunday: false
+      },
+      slots: ""
     },
     errors: {}
+  };
+
+  handleCheckboxChange = ({ currentTarget: checkbox }) => {
+    console.log(
+      "name " + checkbox.name,
+      "\nch " + checkbox.checked,
+      "\npa " + checkbox.dataset.parent,
+      "\nga " + checkbox.dataset.gparent
+    );
+    let data = { ...this.state.data };
+    if (checkbox.dataset.gparent) {
+      data[checkbox.dataset.gparent][checkbox.dataset.parent][checkbox.name] =
+        checkbox.checked;
+    } else if (checkbox.dataset.parent) {
+      data[checkbox.dataset.parent][checkbox.name] = checkbox.checked;
+    } else {
+      data[checkbox.name] = checkbox.checked;
+    }
+    this.setState({ data });
   };
 
   handleInputChange = ({ currentTarget: input }) => {
@@ -458,6 +488,123 @@ class RestaurantRegistration extends Component {
                   </div>
                 </div>
                 {/* end of Capacity info form */}
+
+                {/* SLOT form */}
+                <div className="subForm">
+                  <h6 className="title">Slots Availabe</h6>
+                  <div className="subFormContainer slots">
+                    <div className="row">
+                      <div className="col">
+                        <div className="daysCheckboxDiv">
+                          <FormCheckbox
+                            label="Monday"
+                            xClass="d-inline dayCheckbox"
+                            checked={this.state.data.days.Monday}
+                            name="Monday"
+                            data-parent="days"
+                            onChange={this.handleCheckboxChange}
+                          />
+                          <FormCheckbox
+                            label="Tuesday"
+                            xClass="d-inline dayCheckbox"
+                            checked={this.state.data.days.Tuesday}
+                            name="Tuesday"
+                            data-parent="days"
+                            onChange={this.handleCheckboxChange}
+                          />
+                          <FormCheckbox
+                            label="Wednesday"
+                            xClass="d-inline dayCheckbox"
+                            checked={this.state.data.days.Wednesday}
+                            name="Wednesday"
+                            data-parent="days"
+                            onChange={this.handleCheckboxChange}
+                          />
+                          <FormCheckbox
+                            label="Thursday"
+                            xClass="d-inline dayCheckbox"
+                            checked={this.state.data.days.Thursday}
+                            name="Thursday"
+                            data-parent="days"
+                            onChange={this.handleCheckboxChange}
+                          />
+                          <FormCheckbox
+                            label="Friday"
+                            xClass="d-inline dayCheckbox"
+                            checked={this.state.data.days.Friday}
+                            name="Friday"
+                            data-parent="days"
+                            onChange={this.handleCheckboxChange}
+                          />
+                          <FormCheckbox
+                            label="Saturday"
+                            xClass="d-inline dayCheckbox"
+                            checked={this.state.data.days.Saturday}
+                            name="Saturday"
+                            data-parent="days"
+                            onChange={this.handleCheckboxChange}
+                          />
+                          <FormCheckbox
+                            label="Sunday"
+                            xClass="d-inline dayCheckbox"
+                            checked={this.state.data.days.Sunday}
+                            name="Sunday"
+                            data-parent="days"
+                            onChange={this.handleCheckboxChange}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="col">
+                        <form id="cuisineForm">
+                          <div className="row">
+                            <div className="col-4">
+                              <FormInput
+                                label="START"
+                                // value={this.state.data.std}
+                                // // onChange={this.handleInputChange}
+                                // name="std"
+                                type="time"
+                                // placeholder="North Indian / Thai / Chinese"
+                                // // error={this.state.errors.std}
+                                // min="09:00"
+                                // max="18:00"
+                              />
+                            </div>
+                            <div className="col-4">
+                              <FormInput
+                                label="END"
+                                // // value={this.state.data.std}
+                                // // onChange={this.handleInputChange}
+                                // name="std"
+                                type="Time"
+                                // placeholder="North Indian / Thai / Chinese"
+                                // // error={this.state.errors.std}
+                                // min="09:00"
+                                // max="18:00"
+                              />
+                            </div>
+                            <div className="col">
+                              <FormInput
+                                label="&nbsp;"
+                                // value="ADD"
+                                // // onChange={this.handleInputChange}
+                                // name="std"
+                                type="submit"
+                                // placeholder=""
+                                // // error={this.state.errors.std}
+                                // min="09:00"
+                                // max="18:00"
+                              />
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {/* end of slot form */}
 
                 {/* CONTACT info form */}
                 <div className="subForm">
