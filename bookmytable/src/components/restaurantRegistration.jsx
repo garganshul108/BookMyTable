@@ -7,6 +7,8 @@ import RAdditionForm from "./subComponents/rAdditionForm";
 class RestaurantRegistration extends Component {
   state = {
     data: {
+      no_of_slots: "0",
+      slots: [],
       average_cost_for_two: "",
       cuisines: [],
       establishment: [],
@@ -48,18 +50,60 @@ class RestaurantRegistration extends Component {
         Friday: false,
         Saturday: false,
         Sunday: false
-      },
-      slots: ""
+      }
     },
     errors: {},
     establishmentForm: "",
     cuisineForm: "",
     featureForm: "",
+    noOfSlots: "",
     slotForm: {
+      id: "",
       start: "",
       end: ""
     }
   };
+
+  handleDeleteSlot = ({ currentTarget: btn }) => {
+    let { data } = this.state;
+    for (let i = 0; i < data.slots.length; i++) {
+      if (data.slots[i].id === btn.id) {
+        data.slots.splice(i, 1);
+        break;
+      }
+    }
+    this.setState({ data });
+  };
+
+  handleSlotFormSubmit = e => {
+    e.preventDefault();
+    e.stopPropagation();
+    let newId = parseInt(this.state.data.no_of_slots) + 1;
+    let newSlot = { ...this.state.slotForm };
+    // console.log(" newID", newId);
+    // console.log("sting newID", newId.toString());
+    newSlot.id = newId.toString();
+    let { data, slotForm } = this.state;
+    // console.log(data);
+    data.slots.push(newSlot);
+    data.no_of_slots = newId;
+    this.setState({ data });
+    slotForm.id = "";
+    slotForm.start = "";
+    slotForm.end = "";
+    this.setState({ slotForm });
+    console.log(this.state);
+    console.log("Slots Form submit");
+  };
+
+  handleSlotFormInputChange = ({ currentTarget: input }) => {
+    // console.log("InputChange slot", input.name, input.value);
+    let { slotForm } = this.state;
+    slotForm[input.name] = input.value;
+    this.setState({ slotForm });
+    // console.log(this.state);
+  };
+
   // THIS IS COMMING FROM THE ADDN FORM DELETE BUTTON
   handleDeleteOption = ({ currentTarget: btn }) => {
     let { data } = this.state;
@@ -470,15 +514,45 @@ class RestaurantRegistration extends Component {
               </div>
             </div>
           </div>
+
+          {/* ------------------------------------------------------------------------------------------------------ */}
+          {/* ------------------------------------------------------------------------------------------------------ */}
+          {/* ------------------------------------------------------------------------------------------------------ */}
+          {/* ------------------------------------------------------------------------------------------------------ */}
+          {/* ------------------------------------------------------------------------------------------------------ */}
+          {/* ------------------------------------------------------------------------------------------------------ */}
+          {/* ------------------------------------------------------------------------------------------------------ */}
+          {/* ------------------------------------------------------------------------------------------------------ */}
+          {/* ------------------------------------------------------------------------------------------------------ */}
+          {/* ------------------------------------------------------------------------------------------------------ */}
+          {/* ------------------------------------------------------------------------------------------------------ */}
+          {/* ------------------------------------------------------------------------------------------------------ */}
+          {/* ------------------------------------------------------------------------------------------------------ */}
           <div className="row">
             <div className="col">
-              <form>
+              <form
+                onSubmit={this.handleSlotFormSubmit}
+                data-datakey="slots"
+                name="slotForm"
+              >
                 <div className="row">
                   <div className="col-4">
-                    <FormInput label="START" type="time" />
+                    <FormInput
+                      label="START"
+                      name="start"
+                      value={this.state.slotForm.start}
+                      onChange={this.handleSlotFormInputChange}
+                      type="time"
+                    />
                   </div>
                   <div className="col-4">
-                    <FormInput label="END" type="Time" />
+                    <FormInput
+                      label="END"
+                      type="Time"
+                      name="end"
+                      value={this.state.slotForm.end}
+                      onChange={this.handleSlotFormInputChange}
+                    />
                   </div>
                   <div className="col">
                     <FormInput label="&nbsp;" value="ADD" type="submit" />
@@ -487,6 +561,44 @@ class RestaurantRegistration extends Component {
               </form>
             </div>
           </div>
+
+          {/*--------------------------------------------------------------------------- */}
+          {/* ------------------------------------------------------------------------------------------------------ */}
+          {/* ---------------------------*/}
+
+          <div className="row">
+            <div className="col">
+              <div className="slotsDisplay">
+                {this.state.data.slots.map(slot => {
+                  return (
+                    <span className="badge badge-danger">
+                      <button
+                        className="btn btn-sm btn-danger"
+                        type="button"
+                        onClick={this.handleDeleteSlot}
+                        id={slot.id}
+                      >
+                        {slot.start}&nbsp;-&nbsp;{slot.end}&nbsp;
+                        <i className="fa fa-times" aria-hidden="true" />
+                      </button>
+                    </span>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+          {/* ------------------------------------------------------------------------------------------------------ */}
+          {/* ------------------------------------------------------------------------------------------------------ */}
+          {/* ------------------------------------------------------------------------------------------------------ */}
+          {/* ------------------------------------------------------------------------------------------------------ */}
+          {/* ------------------------------------------------------------------------------------------------------ */}
+          {/* ------------------------------------------------------------------------------------------------------ */}
+          {/* ------------------------------------------------------------------------------------------------------ */}
+          {/* ------------------------------------------------------------------------------------------------------ */}
+          {/* ------------------------------------------------------------------------------------------------------ */}
+          {/* ------------------------------------------------------------------------------------------------------ */}
+          {/* ------------------------------------------------------------------------------------------------------ */}
+          {/* ------------------------------------------------------------------------------------------------------ */}
         </RegistrationSubForm>
       );
     };
