@@ -2,4 +2,4 @@ BackEnd/venv/
 
 BackEnd/.vscode/
 
-BackEnd/API/__pycache__
+BackEnd/API/**/__pycache__/
