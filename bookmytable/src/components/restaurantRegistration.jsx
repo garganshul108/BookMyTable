@@ -3,13 +3,14 @@ import FormInput from "./subComponents/formInput";
 import "../components/css/restaurantRegistration.css";
 import FormCheckbox from "./subComponents/formCheckbox";
 import RegistrationSubForm from "./subComponents/registrationSubForm";
+import RAdditionForm from "./subComponents/rAdditionForm";
 class RestaurantRegistration extends Component {
   state = {
     data: {
       average_cost_for_two: "",
-      cuisines: "",
+      cuisines: [],
       establishment: ["one", "two", "three"],
-      highlights: "",
+      features: [],
       location: {
         address: {
           line_1: "",
@@ -52,16 +53,30 @@ class RestaurantRegistration extends Component {
     },
     errors: {},
     establishmentForm: "",
+    cuisineForm: "",
+    featureForm: "",
     slotForm: {
       start: "",
       end: ""
     }
   };
 
-  handleDeleteOption = e => {
-    e.preventDefault();
-    e.stopPropagation();
-    console.log("deletebtn", e.currentTarget);
+  handleDeleteOption = ({ currentTarget: btn }) => {
+    // console.log(
+    //   "deletebtn",
+    //   btn.value,
+    //   btn.dataset.datakey
+    // );
+    let { data } = this.state;
+    console.log(data[btn.dataset.datakey]);
+    for (let i = 0; i < data[btn.dataset.datakey].length; i++) {
+      console.log(i);
+      if (data[btn.dataset.datakey][i] === btn.value) {
+        data[btn.dataset.datakey].splice(i, 1);
+        break;
+      }
+    }
+    this.setState({ data });
   };
 
   // THIS IS COMMING FROM THE FORM ON SUBMIT ATTR
@@ -77,7 +92,9 @@ class RestaurantRegistration extends Component {
     let data = this.state.data;
     // console.log("datakey ", datakey);
     // console.log("namekey ", formkey);
-    data[datakey].push(this.state[target.name]);
+    let newValue = this.state[target.name];
+    if (!newValue) return;
+    data[datakey].push(newValue);
     this.setState({ data });
     // console.log(this.state.data);
     this.setState({ [target.name]: "" });
@@ -237,7 +254,7 @@ class RestaurantRegistration extends Component {
               />
             </div>
           </div>
-          <div className="row">
+          {/* <div className="row">
             <div className="col">
               <form
                 onSubmit={this.handleAdditionFormSubmit}
@@ -273,6 +290,7 @@ class RestaurantRegistration extends Component {
                         type="button"
                         onClick={this.handleDeleteOption}
                         value={estb}
+                        data-datakey="establishment"
                       >
                         {estb}&nbsp;
                         <i className="fa fa-times" aria-hidden="true" />
@@ -282,7 +300,19 @@ class RestaurantRegistration extends Component {
                 })}
               </div>
             </div>
-          </div>
+          </div> */}
+          <RAdditionForm
+            onSubmit={this.handleAdditionFormSubmit}
+            datakey="establishment"
+            formname="establishmentForm"
+            inputname="establishmentForm"
+            label="ESTABLISHMENT TYPE"
+            placeholder="Bar / Pub / Family Restaurant"
+            value={this.state.establishmentForm}
+            onChange={this.handleAdditionFormInputChange}
+            displayItems={this.state.data.establishment}
+            onDelete={this.handleDeleteOption}
+          />
         </RegistrationSubForm>
       );
     };
@@ -302,7 +332,7 @@ class RestaurantRegistration extends Component {
             </div>
             <div className="col" />
           </div>
-          <div className="row">
+          {/* <div className="row">
             <div className="col">
               <form>
                 <div className="row">
@@ -318,8 +348,21 @@ class RestaurantRegistration extends Component {
                 </div>
               </form>
             </div>
-          </div>
-          <div className="row">
+          </div> */}
+          <RAdditionForm
+            onSubmit={this.handleAdditionFormSubmit}
+            datakey="cuisines"
+            formname="cuisineForm"
+            inputname="cuisineForm"
+            label="CUISINES AVAILABLE"
+            placeholder="North Indian / Thai / Chinese"
+            value={this.state.cuisineForm}
+            onChange={this.handleAdditionFormInputChange}
+            displayItems={this.state.data.cuisines}
+            onDelete={this.handleDeleteOption}
+          />
+
+          {/* <div className="row">
             <div className="col">
               <form>
                 <div className="row">
@@ -335,7 +378,19 @@ class RestaurantRegistration extends Component {
                 </div>
               </form>
             </div>
-          </div>
+          </div> */}
+          <RAdditionForm
+            label="FEATURES AVAILABLE"
+            placeholder="CASH / CARD / AC"
+            datakey="features"
+            formname="featureForm"
+            inputname="featureForm"
+            value={this.state.featureForm}
+            displayItems={this.state.data.features}
+            onSubmit={this.handleAdditionFormSubmit}
+            onChange={this.handleAdditionFormInputChange}
+            onDelete={this.handleDeleteOption}
+          />
         </RegistrationSubForm>
       );
     };

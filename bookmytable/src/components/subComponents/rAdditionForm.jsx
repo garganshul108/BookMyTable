@@ -1,41 +1,46 @@
 import React, { Component } from "react";
+import FormInput from "./formInput";
+//onSubmit = this.handleAdditionFormSubmit
+//onChange = this.handleAdditionFormInputChange
+
+// datakey="establishment"
+// formname="establishmentForm"
+
+// label="ESTABLISHMENT TYPE"
+// name="establishmenForm"
+
+// value={this.state.establishmentForm.establishment}
+// placeholder="Bar / Pub / Family Restaurant"
+// displayItems = this.state.data.establishment
 
 class RAdditionForm extends Component {
   state = {};
   render() {
-    data-datakey="establishment"
-    name="establishmentForm"
-    data-formkey="establishment"
-    
-    label="ESTABLISHMENT TYPE"
-    onChange={this.handleAdditionFormInputChange}
-    name="establishment"
-    data-form="establishmentForm"
-    value={this.state.establishmentForm.establishment}
-    placeholder="Bar / Pub / Family Restaurant"
-
-    display:
-    this.state.data.establishment
-    
+    const {
+      onSubmit,
+      datakey,
+      formname,
+      inputname,
+      label,
+      placeholder,
+      value,
+      onChange,
+      displayItems,
+      onDelete
+    } = this.props;
     return (
       <React.Fragment>
         <div className="row">
           <div className="col">
-            <form
-              onSubmit={this.handleAdditionFormSubmit}
-              data-datakey="establishment"
-              name="establishmentForm"
-              data-formkey="establishment"
-            >
+            <form onSubmit={onSubmit} data-datakey={datakey} name={formname}>
               <div className="row">
                 <div className="col-8">
                   <FormInput
-                    label="ESTABLISHMENT TYPE"
-                    onChange={this.handleAdditionFormInputChange}
-                    name="establishment"
-                    data-form="establishmentForm"
-                    value={this.state.establishmentForm.establishment}
-                    placeholder="Bar / Pub / Family Restaurant"
+                    label={label}
+                    name={inputname}
+                    placeholder={placeholder}
+                    value={value}
+                    onChange={onChange}
                   />
                 </div>
                 <div className="col">
@@ -48,17 +53,18 @@ class RAdditionForm extends Component {
 
         <div className="row">
           <div className="col">
-            <div className="additionItemDisplay">
-              {this.state.data.establishment.map(estb => {
+            <div className="addItemDisplay">
+              {displayItems.map(item => {
                 return (
                   <span className="badge badge-info">
                     <button
                       className="btn btn-sm btn-info"
                       type="button"
-                      onClick={this.handleDeleteOption}
-                      value={estb}
+                      onClick={onDelete}
+                      value={item}
+                      data-datakey={datakey}
                     >
-                      {estb}&nbsp;
+                      {item}&nbsp;
                       <i className="fa fa-times" aria-hidden="true" />
                     </button>
                   </span>
