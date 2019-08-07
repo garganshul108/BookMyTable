@@ -33,7 +33,7 @@ class RestaurantRegistration extends Component {
     data: {
       average_cost_for_two: "",
       cuisines: "",
-      establishment: [],
+      establishment: ["one", "two", "three"],
       highlights: "",
       location: {
         address: {
@@ -81,38 +81,44 @@ class RestaurantRegistration extends Component {
     }
   };
 
-  handleAddFormSubmit = e => {
+  handleDeleteOption = e => {
     e.preventDefault();
     e.stopPropagation();
-    // console.log(e.currentTarget);
-    console.log("establishment", this.state[e.currentTarget.name]);
-    let array = [...this.state.data[e.currentTarget.dataset.formAttr]];
-    array.push(this.state[e.currentTarget.name]);
-    this.setState({ [data[e.currentTarget.dataset.formAttr]]: array });
-    this.setState;
+    console.log("deletebtn", e.currentTarget);
   };
 
-  handleAddFormInputChange = ({ currentTarget: input }) => {
-    // console.log("EstbIN", e.currentTarget);
-    // console.log(
-    //   input.dataset.form,
-    //   input.name,
-    //   input.value,
-    //   input.dataset.parent,
-    //   input.dataset.gparent
-    // );
-    let tForm = { ...this.state[input.dataset.form] };
-    // console.log(tForm);
-    if (input.dataset.gparent) {
-      tForm[input.dataset.gparent][input.dataset.parent][input.name] =
-        input.value;
-    } else if (input.dataset.parent) {
-      tForm[input.dataset.parent][input.name] = input.value;
+  // THIS IS COMMING FROM THE FORM ON SUBMIT ATTR
+  handleAdditionFormSubmit = e => {
+    e.preventDefault();
+    e.stopPropagation();
+    const target = e.currentTarget;
+    const { datakey, formkey } = target.dataset;
+    // console.log("target ", target);
+    let data = this.state.data;
+    // console.log("datakey ", datakey);
+    // console.log("namekey ", formkey);
+    data[datakey].push(this.state[target.name][formkey]);
+    this.setState({ data });
+    console.log(this.state.data);
+    const emptyList = [];
+    this.setState({ [this.state[target.name]]: emptyList });
+  };
+
+  // THIS IS COMING FROM INPUT ON CHANGE ATTR
+  handleAdditionFormInputChange = ({ currentTarget: input }) => {
+    const { form: formName, parent, gparent: grandParent } = input.dataset;
+
+    console.log(formName, parent, grandParent, input.name, input.value);
+
+    let targetForm = { ...this.state[formName] };
+    if (grandParent) {
+      targetForm[grandParent][parent][input.name] = input.value;
+    } else if (parent) {
+      targetForm[parent][input.name] = input.value;
     } else {
-      tForm[input.name] = input.value;
+      targetForm[input.name] = input.value;
     }
-    // console.log(tForm);
-    this.setState({ [input.dataset.form]: tForm });
+    this.setState({ [formName]: targetForm });
   };
 
   handleCheckboxChange = ({ currentTarget: checkbox }) => {
@@ -276,15 +282,16 @@ class RestaurantRegistration extends Component {
                     <div className="row">
                       <div className="col">
                         <form
-                          onSubmit={this.handleAddFormSubmit}
-                          id="establishmentForm"
+                          onSubmit={this.handleAdditionFormSubmit}
+                          data-datakey="establishment"
                           name="establishmentForm"
+                          data-formkey="establishment"
                         >
                           <div className="row">
                             <div className="col-8">
                               <FormInput
                                 label="ESTABLISHMENT TYPE"
-                                onChange={this.handleAddFormInputChange}
+                                onChange={this.handleAdditionFormInputChange}
                                 name="establishment"
                                 data-form="establishmentForm"
                                 value={
@@ -302,6 +309,31 @@ class RestaurantRegistration extends Component {
                             </div>
                           </div>
                         </form>
+                      </div>
+                    </div>
+
+                    <div className="row">
+                      <div className="col">
+                        <div className="establishmentDisplay">
+                          {this.state.data.establishment.map(estb => {
+                            return (
+                              <span className="badge badge-info">
+                                <button
+                                  className="btn btn-sm btn-info"
+                                  type="button"
+                                  onClick={this.handleDeleteOption}
+                                  value={estb}
+                                >
+                                  {estb}&nbsp;
+                                  <i
+                                    className="fa fa-times"
+                                    aria-hidden="true"
+                                  />
+                                </button>
+                              </span>
+                            );
+                          })}
+                        </div>
                       </div>
                     </div>
                   </div>
