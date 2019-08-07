@@ -1,5 +1,5 @@
 [
- {
+  {
     "id": "19149885",
     "name": "Gopal Juice and Ice Cream",
     "url": "https://www.zomato.com/makrana/gopal-juice-and-ice-cream-makrana-locality?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
@@ -951,9 +951,9 @@
     "events_url": "https://www.zomato.com/samrala/cafe-49-samrala-locality/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
     "phone_numbers": "+91 9914436666",
     "establishment": ["Fine Dining"]
-  }
+  },
 
-,{
+  {
     "id": "18398880",
     "name": "JW Kitchen - JW Marriott Hotel",
     "url": "https://www.zomato.com/kolkata/jw-kitchen-jw-marriott-hotel-science-city-area?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
@@ -2092,8 +2092,8 @@
     "events_url": "https://www.zomato.com/kolkata/zaairah-sector-1-salt-lake/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
     "phone_numbers": "+91 6292116140, +91 6292116144, +91 9874977771",
     "establishment": ["Casual Dining"]
-  }
-,{
+  },
+  {
     "id": "18289242",
     "name": "Cyber Hub Social",
     "url": "https://www.zomato.com/CyberHubSocial?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
@@ -3214,9 +3214,8 @@
     "events_url": "https://www.zomato.com/ncr/impromptu-golf-course-road-gurgaon/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
     "phone_numbers": "+91 7840055999, 0124 4119191",
     "establishment": ["Bar"]
-  }
-,
-{
+  },
+  {
     "id": "18649486",
     "name": "The Drunken Botanist",
     "url": "https://www.zomato.com/ncr/the-drunken-botanist-dlf-cyber-city-gurgaon?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
@@ -4362,8 +4361,8 @@
     "events_url": "https://www.zomato.com/ncr/cervesia-sector-29-gurgaon/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
     "phone_numbers": "+91 7289912000, +91 7289913000",
     "establishment": ["Pub"]
-  }
-,  {
+  },
+  {
     "id": "18895645",
     "name": "Plum By Bent Chair",
     "url": "https://www.zomato.com/ncr/plum-by-bent-chair-aerocity-new-delhi?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
