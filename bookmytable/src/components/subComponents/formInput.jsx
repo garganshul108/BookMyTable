@@ -13,7 +13,6 @@ class FormInput extends Component {
       ...rest
     } = this.props;
     type = type || "text";
-    console.log("rest " + name, rest);
     return (
       <div className="form-group">
         {label && <small className="text-muted">{label}</small>}
