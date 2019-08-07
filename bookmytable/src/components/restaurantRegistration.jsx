@@ -9,7 +9,7 @@ class RestaurantRegistration extends Component {
     data: {
       average_cost_for_two: "",
       cuisines: [],
-      establishment: ["one", "two", "three"],
+      establishment: [],
       features: [],
       location: {
         address: {
@@ -60,17 +60,10 @@ class RestaurantRegistration extends Component {
       end: ""
     }
   };
-
+  // THIS IS COMMING FROM THE ADDN FORM DELETE BUTTON
   handleDeleteOption = ({ currentTarget: btn }) => {
-    // console.log(
-    //   "deletebtn",
-    //   btn.value,
-    //   btn.dataset.datakey
-    // );
     let { data } = this.state;
-    console.log(data[btn.dataset.datakey]);
     for (let i = 0; i < data[btn.dataset.datakey].length; i++) {
-      console.log(i);
       if (data[btn.dataset.datakey][i] === btn.value) {
         data[btn.dataset.datakey].splice(i, 1);
         break;
@@ -83,28 +76,19 @@ class RestaurantRegistration extends Component {
   handleAdditionFormSubmit = e => {
     e.preventDefault();
     e.stopPropagation();
-    // datakey me push/add karna hai
-    // name se uthana hai
-    // console.log("from ADDN SUBMIT");
     const target = e.currentTarget;
     const { datakey } = target.dataset;
-    // console.log("target ", target);
     let data = this.state.data;
-    // console.log("datakey ", datakey);
-    // console.log("namekey ", formkey);
     let newValue = this.state[target.name];
     if (!newValue) return;
     data[datakey].push(newValue);
     this.setState({ data });
-    // console.log(this.state.data);
     this.setState({ [target.name]: "" });
   };
 
   // THIS IS COMING FROM INPUT ON CHANGE ATTR
   handleAdditionFormInputChange = ({ currentTarget: input }) => {
-    // console.log(input.name, input.value);
     this.setState({ [input.name]: input.value });
-    // console.log(this.state);
   };
 
   handleInputChange = ({ currentTarget: input }) => {
@@ -254,53 +238,7 @@ class RestaurantRegistration extends Component {
               />
             </div>
           </div>
-          {/* <div className="row">
-            <div className="col">
-              <form
-                onSubmit={this.handleAdditionFormSubmit}
-                data-datakey="establishment"
-                name="establishmentForm"
-              >
-                <div className="row">
-                  <div className="col-8">
-                    <FormInput
-                      label="ESTABLISHMENT TYPE"
-                      name="establishmentForm"
-                      placeholder="Bar / Pub / Family Restaurant"
-                      value={this.state.establishmentForm}
-                      onChange={this.handleAdditionFormInputChange}
-                    />
-                  </div>
-                  <div className="col">
-                    <FormInput label="&nbsp;" value="ADD" type="submit" />
-                  </div>
-                </div>
-              </form>
-            </div>
-          </div>
 
-          <div className="row">
-            <div className="col">
-              <div className="establishmentDisplay">
-                {this.state.data.establishment.map(estb => {
-                  return (
-                    <span className="badge badge-info">
-                      <button
-                        className="btn btn-sm btn-info"
-                        type="button"
-                        onClick={this.handleDeleteOption}
-                        value={estb}
-                        data-datakey="establishment"
-                      >
-                        {estb}&nbsp;
-                        <i className="fa fa-times" aria-hidden="true" />
-                      </button>
-                    </span>
-                  );
-                })}
-              </div>
-            </div>
-          </div> */}
           <RAdditionForm
             onSubmit={this.handleAdditionFormSubmit}
             datakey="establishment"
@@ -332,23 +270,7 @@ class RestaurantRegistration extends Component {
             </div>
             <div className="col" />
           </div>
-          {/* <div className="row">
-            <div className="col">
-              <form>
-                <div className="row">
-                  <div className="col-8">
-                    <FormInput
-                      label="CUISINES AVAILABLE"
-                      placeholder="North Indian / Thai / Chinese"
-                    />
-                  </div>
-                  <div className="col">
-                    <FormInput label="&nbsp;" value="ADD" type="submit" />
-                  </div>
-                </div>
-              </form>
-            </div>
-          </div> */}
+
           <RAdditionForm
             onSubmit={this.handleAdditionFormSubmit}
             datakey="cuisines"
@@ -362,23 +284,6 @@ class RestaurantRegistration extends Component {
             onDelete={this.handleDeleteOption}
           />
 
-          {/* <div className="row">
-            <div className="col">
-              <form>
-                <div className="row">
-                  <div className="col-8">
-                    <FormInput
-                      label="FEATURES AVAILABLE"
-                      placeholder="Pay by Card/ Cash / Five Star"
-                    />
-                  </div>
-                  <div className="col">
-                    <FormInput label="&nbsp;" value="ADD" type="submit" />
-                  </div>
-                </div>
-              </form>
-            </div>
-          </div> */}
           <RAdditionForm
             label="FEATURES AVAILABLE"
             placeholder="CASH / CARD / AC"
