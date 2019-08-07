@@ -51,8 +51,10 @@ class RestaurantRegistration extends Component {
       slots: ""
     },
     errors: {},
-    establishmentForm: {
-      establishment: ""
+    establishmentForm: "",
+    slotForm: {
+      start: "",
+      end: ""
     }
   };
 
@@ -66,53 +68,26 @@ class RestaurantRegistration extends Component {
   handleAdditionFormSubmit = e => {
     e.preventDefault();
     e.stopPropagation();
+    // datakey me push/add karna hai
+    // name se uthana hai
+    // console.log("from ADDN SUBMIT");
     const target = e.currentTarget;
-    const { datakey, formkey } = target.dataset;
+    const { datakey } = target.dataset;
     // console.log("target ", target);
     let data = this.state.data;
     // console.log("datakey ", datakey);
     // console.log("namekey ", formkey);
-    data[datakey].push(this.state[target.name][formkey]);
+    data[datakey].push(this.state[target.name]);
     this.setState({ data });
-    console.log(this.state.data);
-    const emptyList = [];
-    this.setState({ [this.state[target.name]]: emptyList });
+    // console.log(this.state.data);
+    this.setState({ [target.name]: "" });
   };
 
   // THIS IS COMING FROM INPUT ON CHANGE ATTR
   handleAdditionFormInputChange = ({ currentTarget: input }) => {
-    const { form: formName, parent, gparent: grandParent } = input.dataset;
-
-    console.log(formName, parent, grandParent, input.name, input.value);
-
-    let targetForm = { ...this.state[formName] };
-    if (grandParent) {
-      targetForm[grandParent][parent][input.name] = input.value;
-    } else if (parent) {
-      targetForm[parent][input.name] = input.value;
-    } else {
-      targetForm[input.name] = input.value;
-    }
-    this.setState({ [formName]: targetForm });
-  };
-
-  handleCheckboxChange = ({ currentTarget: checkbox }) => {
-    console.log(
-      "name " + checkbox.name,
-      "\nch " + checkbox.checked,
-      "\npa " + checkbox.dataset.parent,
-      "\nga " + checkbox.dataset.gparent
-    );
-    let data = { ...this.state.data };
-    if (checkbox.dataset.gparent) {
-      data[checkbox.dataset.gparent][checkbox.dataset.parent][checkbox.name] =
-        checkbox.checked;
-    } else if (checkbox.dataset.parent) {
-      data[checkbox.dataset.parent][checkbox.name] = checkbox.checked;
-    } else {
-      data[checkbox.name] = checkbox.checked;
-    }
-    this.setState({ data });
+    // console.log(input.name, input.value);
+    this.setState({ [input.name]: input.value });
+    // console.log(this.state);
   };
 
   handleInputChange = ({ currentTarget: input }) => {
@@ -130,6 +105,25 @@ class RestaurantRegistration extends Component {
       data[input.dataset.parent][input.name] = input.value;
     } else {
       data[input.name] = input.value;
+    }
+    this.setState({ data });
+  };
+
+  handleCheckboxChange = ({ currentTarget: checkbox }) => {
+    console.log(
+      "name " + checkbox.name,
+      "\nch " + checkbox.checked,
+      "\npa " + checkbox.dataset.parent,
+      "\nga " + checkbox.dataset.gparent
+    );
+    let data = { ...this.state.data };
+    if (checkbox.dataset.gparent) {
+      data[checkbox.dataset.gparent][checkbox.dataset.parent][checkbox.name] =
+        checkbox.checked;
+    } else if (checkbox.dataset.parent) {
+      data[checkbox.dataset.parent][checkbox.name] = checkbox.checked;
+    } else {
+      data[checkbox.name] = checkbox.checked;
     }
     this.setState({ data });
   };
@@ -249,17 +243,15 @@ class RestaurantRegistration extends Component {
                 onSubmit={this.handleAdditionFormSubmit}
                 data-datakey="establishment"
                 name="establishmentForm"
-                data-formkey="establishment"
               >
                 <div className="row">
                   <div className="col-8">
                     <FormInput
                       label="ESTABLISHMENT TYPE"
-                      onChange={this.handleAdditionFormInputChange}
-                      name="establishment"
-                      data-form="establishmentForm"
-                      value={this.state.establishmentForm.establishment}
+                      name="establishmentForm"
                       placeholder="Bar / Pub / Family Restaurant"
+                      value={this.state.establishmentForm}
+                      onChange={this.handleAdditionFormInputChange}
                     />
                   </div>
                   <div className="col">

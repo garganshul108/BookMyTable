@@ -3,6 +3,20 @@ import React, { Component } from "react";
 class RAdditionForm extends Component {
   state = {};
   render() {
+    data-datakey="establishment"
+    name="establishmentForm"
+    data-formkey="establishment"
+    
+    label="ESTABLISHMENT TYPE"
+    onChange={this.handleAdditionFormInputChange}
+    name="establishment"
+    data-form="establishmentForm"
+    value={this.state.establishmentForm.establishment}
+    placeholder="Bar / Pub / Family Restaurant"
+
+    display:
+    this.state.data.establishment
+    
     return (
       <React.Fragment>
         <div className="row">
@@ -34,7 +48,7 @@ class RAdditionForm extends Component {
 
         <div className="row">
           <div className="col">
-            <div className="establishmentDisplay">
+            <div className="additionItemDisplay">
               {this.state.data.establishment.map(estb => {
                 return (
                   <span className="badge badge-info">
