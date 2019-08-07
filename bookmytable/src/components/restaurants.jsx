@@ -51,6 +51,7 @@ class Restaurants extends Component {
   componentDidMount() {
     let restaurants = getRestaurants();
     restaurants = this.addMiscPropertyToRestaurants(restaurants);
+    console.log(restaurants);
 
     /***
      * render related properties

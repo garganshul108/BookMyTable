@@ -1,7 +1,11 @@
 import React, { Component } from "react";
 import Joi from "joi-browser";
-import "./css/login.css";
+
+import FormInput from "./subComponents/formInput";
+
 import welcomeback from "./images/welcomeback.jpg";
+
+import "./css/login.css";
 
 class Login extends Component {
   state = { account: { email: "", password: "" }, errors: {} };
@@ -73,44 +77,20 @@ class Login extends Component {
               <small class="form-text text-muted">Already a User?</small>
               <h4>Login to continue</h4>
               <form onSubmit={this.handleSubmit}>
-                <div className="form-group">
-                  <input
-                    value={this.state.account.email}
-                    onChange={this.handleInputChange}
-                    name="email"
-                    autoFocus
-                    className="form-control"
-                    id="exampleInputEmail1"
-                    aria-describedby="emailHelp"
-                    placeholder="Enter email"
-                  />
-                  {this.state.errors.email && (
-                    <div className="alert alert-danger">
-                      <small>{this.state.errors.email}</small>
-                    </div>
-                  )}
-                  <small id="emailHelp" className="form-text text-muted">
-                    We'll never share your email with anyone else.
-                  </small>
-                </div>
-                <div className="form-group">
-                  <input
-                    value={this.state.account.password}
-                    onChange={this.handleInputChange}
-                    type="password"
-                    name="password"
-                    className="form-control"
-                    id="exampleInputPassword1"
-                    placeholder="Password"
-                  />
-                  {this.state.errors.password && (
-                    <div>
-                      <div className="alert alert-danger">
-                        <small>{this.state.errors.password}</small>
-                      </div>
-                    </div>
-                  )}
-                </div>
+                <FormInput
+                  value={this.state.account.email}
+                  onChange={this.handleInputChange}
+                  name="email"
+                  placeholder="Enter email"
+                  error={this.state.errors.email}
+                />
+                <FormInput
+                  value={this.state.account.password}
+                  onChange={this.handleInputChange}
+                  type="password"
+                  name="password"
+                  placeholder="Password"
+                />
                 <button type="submit" className="btn btn-danger">
                   Submit
                 </button>

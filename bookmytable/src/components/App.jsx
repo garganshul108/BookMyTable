@@ -8,8 +8,10 @@ import Login from "./login";
 import NotFound from "./notFound";
 
 import "./css/dummy.css";
+import "./css/scrollbar.css";
 import SignUp from "./signup";
 import HomeBottom from "./homeBottom";
+import RestaurantRegistration from "./restaurantRegistration";
 
 class App extends Component {
   handleCloseLogin = e => {
@@ -35,6 +37,7 @@ class App extends Component {
 
   handleOpenSignUp = e => {
     e.preventDefault();
+
     let target = document.getElementsByClassName("loginPage")[1];
     // console.log(target);
     target.style.display = "block";
@@ -76,6 +79,10 @@ class App extends Component {
           </div>
           <div className="row">
             <Switch>
+              <Route
+                path="/restaurant/registration"
+                render={() => <RestaurantRegistration />}
+              />
               <Route path="/not-found" render={() => <NotFound />} />
               <Route path="/home" render={() => <HomeBottom />} />
               <Route path="/restaurants" render={() => <Restaurants />} />
@@ -87,9 +94,16 @@ class App extends Component {
             <Login closeTab={this.handleCloseLogin} />
           </div>
           <div className="loginPage" style={{ display: "none" }}>
-            <SignUp closeTab={this.handleCloseSignUp} />
+            <Route
+              path="/"
+              render={props => (
+                <SignUp {...props} closeTab={this.handleCloseSignUp} />
+              )}
+            />
           </div>
         </div>
+
+        {/* yaha se alag hai */}
       </React.Fragment>
     );
   }

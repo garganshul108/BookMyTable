@@ -1,5 +1,42 @@
 # MYLOG
 
+#### 2019-08-07 08:11:20
+
+- ref-registraion
+- incomplete code for the inner form
+
+#### 2019-08-07 06:59:55
+
+- ref-registration updated
+  - consists of all the new form and form starts to work for simple inputs
+  - slots lost in btw but recovered
+
+#### 2019-08-07 00:37:37
+
+merger:
+
+- input-component-test into auto-app's merge-input-cpmponent
+- merge input component is the new branch; not deleted; renamed as ref-registration
+- input-component-test deleted
+
+- new branch: merge-input-component
+  - merge input component (child of app-front)
+  - contains the new home page
+  - contains the new navigation bar
+  - registration form (incomplete form)
+
+#### 2019-08-07 00:08:44
+
+mergers:
+
+- ref-navigation merged to app-front
+- ref-navigation deleted
+- app-front merged to master
+
+- app-front:
+  - contains the new home page
+  - contains the new navigation bar
+
 #### 2019-08-06 23:45:31
 
 mergers:
