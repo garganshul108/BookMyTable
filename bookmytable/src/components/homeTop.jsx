@@ -38,7 +38,7 @@ class HomeTop extends Component {
                           <span className="text text-default">
                             <i className="fa fa-sign-out" aria-hidden="true" />
                           </span>
-                          &nbsp;&nbsp;Sign Up
+                          &nbsp;&nbsp;New ?
                         </small>
                       </Link>
                     </div>
