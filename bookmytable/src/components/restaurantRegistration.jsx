@@ -273,10 +273,11 @@ class RestaurantRegistration extends Component {
                             <div className="col">
                               <FormInput
                                 label="&nbsp;"
-                                // value="ADD"
+                                value="ADD"
                                 // // onChange={this.handleInputChange}
                                 // name="std"
                                 type="submit"
+
                                 // placeholder=""
                                 // // error={this.state.errors.std}
                                 // min="09:00"
@@ -328,7 +329,7 @@ class RestaurantRegistration extends Component {
                             <div className="col">
                               <FormInput
                                 label="&nbsp;"
-                                // value="ADD"
+                                value="ADD"
                                 // // onChange={this.handleInputChange}
                                 // name="std"
                                 type="submit"
@@ -362,7 +363,7 @@ class RestaurantRegistration extends Component {
                             <div className="col">
                               <FormInput
                                 label="&nbsp;"
-                                // value="ADD"
+                                value="ADD"
                                 // // onChange={this.handleInputChange}
                                 // name="std"
                                 type="submit"
@@ -588,7 +589,7 @@ class RestaurantRegistration extends Component {
                             <div className="col">
                               <FormInput
                                 label="&nbsp;"
-                                // value="ADD"
+                                value="ADD"
                                 // // onChange={this.handleInputChange}
                                 // name="std"
                                 type="submit"
