@@ -2,14 +2,24 @@ import React, { Component } from "react";
 
 class RegistrationSubForm extends Component {
   render() {
-    const { label } = this.props;
+    const { title, children, xClass } = this.props;
     return (
       <React.Fragment>
-        <h1>{label}</h1>
-        {this.props.children}
+        <div className="subForm">
+          <h6 className="title">{title}</h6>
+          <div className={"subFormContainer " + xClass}>{children}</div>
+        </div>
       </React.Fragment>
     );
   }
 }
 
 export default RegistrationSubForm;
+
+/***
+ * <div className="subForm">
+          <h6 className="title">Contact Info</h6>
+          <div className="subFormContainer contactInfo">
+          </div>
+        </div>
+ */
