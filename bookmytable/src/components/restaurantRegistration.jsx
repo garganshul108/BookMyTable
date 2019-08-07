@@ -33,7 +33,7 @@ class RestaurantRegistration extends Component {
     data: {
       average_cost_for_two: "",
       cuisines: "",
-      establishment: "",
+      establishment: [],
       highlights: "",
       location: {
         address: {
@@ -75,7 +75,44 @@ class RestaurantRegistration extends Component {
       },
       slots: ""
     },
-    errors: {}
+    errors: {},
+    establishmentForm: {
+      establishment: ""
+    }
+  };
+
+  handleAddFormSubmit = e => {
+    e.preventDefault();
+    e.stopPropagation();
+    // console.log(e.currentTarget);
+    console.log("establishment", this.state[e.currentTarget.name]);
+    let array = [...this.state.data[e.currentTarget.dataset.formAttr]];
+    array.push(this.state[e.currentTarget.name]);
+    this.setState({ [data[e.currentTarget.dataset.formAttr]]: array });
+    this.setState;
+  };
+
+  handleAddFormInputChange = ({ currentTarget: input }) => {
+    // console.log("EstbIN", e.currentTarget);
+    // console.log(
+    //   input.dataset.form,
+    //   input.name,
+    //   input.value,
+    //   input.dataset.parent,
+    //   input.dataset.gparent
+    // );
+    let tForm = { ...this.state[input.dataset.form] };
+    // console.log(tForm);
+    if (input.dataset.gparent) {
+      tForm[input.dataset.gparent][input.dataset.parent][input.name] =
+        input.value;
+    } else if (input.dataset.parent) {
+      tForm[input.dataset.parent][input.name] = input.value;
+    } else {
+      tForm[input.name] = input.value;
+    }
+    // console.log(tForm);
+    this.setState({ [input.dataset.form]: tForm });
   };
 
   handleCheckboxChange = ({ currentTarget: checkbox }) => {
@@ -142,7 +179,6 @@ class RestaurantRegistration extends Component {
                       onChange={this.handleInputChange}
                       name="name"
                       placeholder="Enter Restaurant's Name"
-                      // error={this.state.errors.name}
                     />
                     <FormInput
                       label="CITY"
@@ -151,7 +187,6 @@ class RestaurantRegistration extends Component {
                       data-parent="location"
                       onChange={this.handleInputChange}
                       placeholder="Enter Location City"
-                      // error={this.state.errors.location.city}
                     />
                     <div className="row">
                       <div className="col-3">
@@ -163,7 +198,6 @@ class RestaurantRegistration extends Component {
                           data-parent="phone"
                           type="number"
                           placeholder="Area Code..."
-                          // // error={this.state.errors.std}
                         />
                       </div>
                       <div className="col">
@@ -175,7 +209,6 @@ class RestaurantRegistration extends Component {
                           data-parent="phone"
                           placeholder="Phone"
                           type="number"
-                          // // error={this.state.errors.phone}
                         />
                       </div>
                     </div>
@@ -185,7 +218,6 @@ class RestaurantRegistration extends Component {
                       onChange={this.handleInputChange}
                       name="opening_status"
                       placeholder="Exisiting / Opening Soon"
-                      // error={this.state.errors.openingStatus}
                     />
                   </div>
                 </div>
@@ -201,8 +233,6 @@ class RestaurantRegistration extends Component {
                       name="line_1"
                       data-parent="address"
                       data-gparent="location"
-                      // placeholder="Enter Restaurant's Name..."
-                      // // error={this.state.errors.restName}
                     />
                     <FormInput
                       label="ADDRESS LINE 2"
@@ -211,8 +241,6 @@ class RestaurantRegistration extends Component {
                       name="line_2"
                       data-parent="address"
                       data-gparent="location"
-                      // placeholder="Enter Restaurant's Name..."
-                      // // error={this.state.errors.restName}
                     />
 
                     <div className="row">
@@ -223,9 +251,6 @@ class RestaurantRegistration extends Component {
                           onChange={this.handleInputChange}
                           name="locality"
                           data-parent="location"
-                          // type="number"
-                          // placeholder=""
-                          // // error={this.state.errors.std}
                         />
                       </div>
                       <div className="col">
@@ -235,9 +260,6 @@ class RestaurantRegistration extends Component {
                           onChange={this.handleInputChange}
                           name="locality_verbose"
                           data-parent="location"
-                          // type="number"
-                          // placeholder=""
-                          // // error={this.state.errors.std}
                         />
                       </div>
                       <div className="col-2">
@@ -248,40 +270,34 @@ class RestaurantRegistration extends Component {
                           name="zipcode"
                           data-parent="location"
                           type="number"
-                          // placeholder=""
-                          // // error={this.state.errors.std}
                         />
                       </div>
                     </div>
                     <div className="row">
                       <div className="col">
-                        <form id="establishmentForm">
+                        <form
+                          onSubmit={this.handleAddFormSubmit}
+                          id="establishmentForm"
+                          name="establishmentForm"
+                        >
                           <div className="row">
                             <div className="col-8">
                               <FormInput
                                 label="ESTABLISHMENT TYPE"
-                                // // value={this.state.data.std}
-                                // // onChange={this.handleInputChange}
-                                // name="std"
-                                // type="dropdown"
+                                onChange={this.handleAddFormInputChange}
+                                name="establishment"
+                                data-form="establishmentForm"
+                                value={
+                                  this.state.establishmentForm.establishment
+                                }
                                 placeholder="Bar / Pub / Family Restaurant"
-                                // // error={this.state.errors.std}
-                                // min="09:00"
-                                // max="18:00"
                               />
                             </div>
                             <div className="col">
                               <FormInput
                                 label="&nbsp;"
                                 value="ADD"
-                                // // onChange={this.handleInputChange}
-                                // name="std"
                                 type="submit"
-
-                                // placeholder=""
-                                // // error={this.state.errors.std}
-                                // min="09:00"
-                                // max="18:00"
                               />
                             </div>
                           </div>
@@ -303,8 +319,6 @@ class RestaurantRegistration extends Component {
                           onChange={this.handleInputChange}
                           name="average_cost_for_two"
                           type="number"
-                          // placeholder=""
-                          // // error={this.state.errors.std}
                         />
                       </div>
                       <div className="col" />
@@ -316,27 +330,14 @@ class RestaurantRegistration extends Component {
                             <div className="col-8">
                               <FormInput
                                 label="CUISINES AVAILABLE"
-                                // // value={this.state.data.std}
-                                // // onChange={this.handleInputChange}
-                                // name="std"
-                                // type="dropdown"
                                 placeholder="North Indian / Thai / Chinese"
-                                // // error={this.state.errors.std}
-                                // min="09:00"
-                                // max="18:00"
                               />
                             </div>
                             <div className="col">
                               <FormInput
                                 label="&nbsp;"
                                 value="ADD"
-                                // // onChange={this.handleInputChange}
-                                // name="std"
                                 type="submit"
-                                // placeholder=""
-                                // // error={this.state.errors.std}
-                                // min="09:00"
-                                // max="18:00"
                               />
                             </div>
                           </div>
@@ -350,25 +351,14 @@ class RestaurantRegistration extends Component {
                             <div className="col-8">
                               <FormInput
                                 label="FEATURES AVAILABLE"
-                                // // value={this.state.data.std}
-                                // // onChange={this.handleInputChange}
-                                // name="std"
-                                // type="dropdown"
                                 placeholder="Pay by Card/ Cash / Five Star"
-                                // // error={this.state.errors.std}
-                                // min="09:00"
-                                // max="18:00"
                               />
                             </div>
                             <div className="col">
                               <FormInput
                                 label="&nbsp;"
                                 value="ADD"
-                                // // onChange={this.handleInputChange}
-                                // name="std"
                                 type="submit"
-                                // placeholder=""
-                                // // error={this.state.errors.std}
                               />
                             </div>
                           </div>
@@ -402,7 +392,6 @@ class RestaurantRegistration extends Component {
                                   data-parent="tables"
                                   type="number"
                                   min="0"
-                                  // error={this.state.errors.phone}
                                 />
                               </td>
                             </tr>
@@ -416,7 +405,6 @@ class RestaurantRegistration extends Component {
                                   data-parent="tables"
                                   type="number"
                                   min="0"
-                                  // error={this.state.errors.phone}
                                 />
                               </td>
                             </tr>
@@ -430,7 +418,6 @@ class RestaurantRegistration extends Component {
                                   data-parent="tables"
                                   type="number"
                                   min="0"
-                                  // error={this.state.errors.phone}
                                 />
                               </td>
                             </tr>
@@ -450,7 +437,6 @@ class RestaurantRegistration extends Component {
                                   data-parent="tables"
                                   type="number"
                                   min="0"
-                                  // error={this.state.errors.phone}
                                 />
                               </td>
                             </tr>
@@ -464,7 +450,6 @@ class RestaurantRegistration extends Component {
                                   data-parent="tables"
                                   type="number"
                                   min="0"
-                                  // error={this.state.errors.phone}
                                 />
                               </td>
                             </tr>
@@ -478,7 +463,6 @@ class RestaurantRegistration extends Component {
                                   data-parent="tables"
                                   type="number"
                                   min="0"
-                                  // error={this.state.errors.phone}
                                 />
                               </td>
                             </tr>
@@ -561,42 +545,16 @@ class RestaurantRegistration extends Component {
                         <form id="cuisineForm">
                           <div className="row">
                             <div className="col-4">
-                              <FormInput
-                                label="START"
-                                // value={this.state.data.std}
-                                // // onChange={this.handleInputChange}
-                                // name="std"
-                                type="time"
-                                // placeholder="North Indian / Thai / Chinese"
-                                // // error={this.state.errors.std}
-                                // min="09:00"
-                                // max="18:00"
-                              />
+                              <FormInput label="START" type="time" />
                             </div>
                             <div className="col-4">
-                              <FormInput
-                                label="END"
-                                // // value={this.state.data.std}
-                                // // onChange={this.handleInputChange}
-                                // name="std"
-                                type="Time"
-                                // placeholder="North Indian / Thai / Chinese"
-                                // // error={this.state.errors.std}
-                                // min="09:00"
-                                // max="18:00"
-                              />
+                              <FormInput label="END" type="Time" />
                             </div>
                             <div className="col">
                               <FormInput
                                 label="&nbsp;"
                                 value="ADD"
-                                // // onChange={this.handleInputChange}
-                                // name="std"
                                 type="submit"
-                                // placeholder=""
-                                // // error={this.state.errors.std}
-                                // min="09:00"
-                                // max="18:00"
                               />
                             </div>
                           </div>
@@ -619,8 +577,6 @@ class RestaurantRegistration extends Component {
                           onChange={this.handleInputChange}
                           name="email"
                           type="email"
-                          // placeholder=""
-                          // // error={this.state.errors.std}
                         />
                       </div>
                       <div className="col-6">
@@ -629,8 +585,6 @@ class RestaurantRegistration extends Component {
                           value={this.state.data.website}
                           onChange={this.handleInputChange}
                           name="website"
-                          // placeholder=""
-                          // // error={this.state.errors.std}
                         />
                       </div>
                     </div>
