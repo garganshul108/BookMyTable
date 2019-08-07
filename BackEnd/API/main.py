@@ -4,6 +4,8 @@ from db_config import mysql
 from flask import jsonify
 from flask import flash, request
 from werkzeug import generate_password_hash, check_password_hash
+from testing import test
+
 
 
 
@@ -149,12 +151,14 @@ def insert_restaurant(cursor,data,_loc_id,_capacity_id):
         _opening_status=data['opening_status']
         _email=data['email']
         _website=data['website']
-        sql="""INSERT INTO Restaurant(location_id,name,email,average_cost_for_two,cuisines,timings,establishment,highlights,thumb,phone_numbers,capacity_id,opening_status,website)
+        sql="""INSERT INTO 
+            Restaurant(location_id,name,email,average_cost_for_two,cuisines,timings,establishment,highlights,thumb,phone_numbers,capacity_id,opening_status,website)
             VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
         values=(_loc_id,_name,_email,_ave_cost,_cuisines,_timings,_establishment,_highlights,_thumb,_phone,_capacity_id,_opening_status,_website)
         cursor.execute(sql,values)
     except Exception as e:
         print("resta",e,"resta")
+
 
 @app.route('/restaurant',methods=['POST'])
 def add_restaurant():
@@ -176,15 +180,11 @@ def add_restaurant():
         
     except Exception as e:
         print("ERROR",e,"ERROR")
-        # print(e)
-        # print("ERROR")
         return "error"
     finally:
         conn.close()
         cursor.close()
         return jsonify(resp)
-
-        
 
 
 @app.route('/restaurants/<city_name>')
