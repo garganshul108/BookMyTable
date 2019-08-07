@@ -1,5 +1,11 @@
 # MYLOG
 
+#### 2019-08-07 06:59:55
+
+- ref-registration updated
+  - consists of all the new form and form starts to work for simple inputs
+  - slots lost in btw but recovered
+
 #### 2019-08-07 00:37:37
 
 merger:
