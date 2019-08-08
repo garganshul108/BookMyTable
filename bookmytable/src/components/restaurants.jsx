@@ -18,8 +18,17 @@ class Restaurants extends Component {
    */
   state = {
     restaurants: [],
-    seachQuery: ""
+    seachQuery: "",
+    filters: []
   };
+
+  /**
+   *
+   * structure of a filter
+   * {id:"", targetProperty:"", expectedValue:""}
+   *
+   *
+   */
 
   /***
    * TBD:
@@ -77,7 +86,28 @@ class Restaurants extends Component {
     this.setState({ seachQuery: query });
   };
 
+  filterByName = restaurants => {
+    if (this.state.seachQuery)
+      restaurants = restaurants.filter(restaurant => {
+        let nameLiterals = restaurant.name.split(" ");
+        for (let literal of nameLiterals) {
+          if (
+            literal
+              .toLowerCase()
+              .startsWith(this.state.seachQuery.toLowerCase())
+          )
+            return true;
+        }
+        return false;
+      });
+
+    return restaurants;
+  };
+
   render() {
+    const applyFilters = restaurants => {
+      return this.filterByName(restaurants);
+    };
     /***
      * this is the point where data as restaurants
      * is passed onto the renderer
@@ -85,13 +115,7 @@ class Restaurants extends Component {
      * without filtering this is passed on to same as this.state (full data)
      */
     let { restaurants } = this.state;
-
-    if (this.state.seachQuery)
-      restaurants = restaurants.filter(restaurant =>
-        restaurant.name
-          .toLowerCase()
-          .startsWith(this.state.seachQuery.toLowerCase())
-      );
+    restaurants = applyFilters(restaurants);
 
     return (
       <div className="container">
@@ -111,6 +135,7 @@ class Restaurants extends Component {
                 <div className="col">
                   <SearchBox
                     placeholder="Find by Name"
+                    idForLabel="searchName"
                     value={this.state.seachQuery}
                     onChange={this.handleSearchRestaurant}
                   />

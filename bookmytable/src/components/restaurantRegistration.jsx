@@ -130,7 +130,7 @@ class RestaurantRegistration extends Component {
     e.stopPropagation();
     let newId = parseInt(this.state.data.no_of_slots) + 1;
     let newSlot = { ...this.state.slotForm };
-    if (newSlot.end == "" || newSlot.start == "") return;
+    if (newSlot.end === "" || newSlot.start === "") return;
     newSlot.id = newId.toString();
     let { data, slotForm } = this.state;
     // console.log(data);
