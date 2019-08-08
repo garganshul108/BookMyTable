@@ -10,7 +10,8 @@ from decimal import Decimal
 
 with open('all_data.json') as json_file:
     data = json.load(json_file)
-
+with open('Cities.json') as json_file:
+    cities_data=json.load(json_file)
 
 def update_location(tt, loc_id, cursor):
     _city = tt['location']['city']
@@ -77,8 +78,14 @@ def get_restaurant():
         cursor.execute("DELETE FROM Restaurant")
         cursor.execute("DELETE FROM Hall_Size")
         cursor.execute("DELETE FROM Location")
+        cursor.execute("DELETE FROM Cities")
         conn.commit()
         loc_id = 1
+        for tt in cities_data:
+            sql="INSERT INTO Cities(id,name,state) VALUES(%s,%s,%s)"
+            values=(int(tt['id']),tt['name'],tt['state'])
+            cursor.execute(sql,values)
+            conn.commit()
         for tt in data:
 
             update_location(tt, loc_id, cursor)
