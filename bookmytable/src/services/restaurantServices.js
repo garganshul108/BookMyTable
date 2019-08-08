@@ -44,11 +44,11 @@
 // ];
 
 const jsonData = [
-    ...require('./JSON/R_data_Gurgaon0+20_filtered.json'),
-    // ...require('./JSON/R_data_Gurgaon21+20_filtered.json'),
-    // ...require('./JSON/R_data_Delhi_Filtered.json'),
-    // ...require('./JSON/R_data_Kolkata_filtered.json'),
-    ...require('./JSON/R_data_Other_filtered.json')
+    ...require('./dump/JSON/R_data_Gurgaon0+20_filtered.json'),
+    // ...require('./dump/JSON/R_data_Gurgaon21+20_filtered.json'),
+    // ...require('./dump/JSON/R_data_Delhi_Filtered.json'),
+    // ...require('./dump/JSON/R_data_Kolkata_filtered.json'),
+    ...require('./dump/JSON/R_data_Other_filtered.json')
 ];
 
 // console.log(jsonData);

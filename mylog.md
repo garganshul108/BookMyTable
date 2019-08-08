@@ -1,5 +1,9 @@
 # MYLOG
 
+#### 2019-08-08 16:29:31
+
+- Registration form done with everything except Radio buttons
+
 #### 2019-08-07 08:11:20
 
 - ref-registraion

@@ -3,7 +3,12 @@ import FormInput from "./subComponents/formInput";
 import "../components/css/restaurantRegistration.css";
 import FormCheckbox from "./subComponents/formCheckbox";
 import RegistrationSubForm from "./subComponents/registrationSubForm";
-import RAdditionForm from "./subComponents/rAdditionForm";
+import SeachableList from "./subComponents/searchableList";
+import { getCities } from "../services/cityServices";
+import { getCuisines } from "../services/cuisineServices";
+import { getFeatures } from "../services/featureServices";
+import RAdditionFormII from "./subComponents/rAdditionFormII";
+import { getEstablishment } from "../services/establishmentServices";
 class RestaurantRegistration extends Component {
   state = {
     data: {
@@ -61,7 +66,31 @@ class RestaurantRegistration extends Component {
       id: "",
       start: "",
       end: ""
-    }
+    },
+    cities_data: [],
+    cuisines_data: [],
+    features_data: [],
+    establishment_data: []
+  };
+
+  componentDidMount() {
+    let cities_data = getCities();
+    let cuisines_data = getCuisines();
+    let features_data = getFeatures();
+    let establishment_data = getEstablishment();
+    this.setState(
+      { cities_data, establishment_data, cuisines_data, features_data },
+      () => {
+        console.log(this.state);
+      }
+    );
+  }
+
+  handleCityInputChange = ({ currentTarget: input }) => {
+    // console.log("city", input);
+    let { data } = this.state;
+    data.location.city = input.value;
+    this.setState({ data });
   };
 
   handleDeleteSlot = ({ currentTarget: btn }) => {
@@ -75,13 +104,33 @@ class RestaurantRegistration extends Component {
     this.setState({ data });
   };
 
+  // handleSlotFormSubmit = e => {
+  //   e.preventDefault();
+  //   e.stopPropagation();
+  //   let newId = parseInt(this.state.data.no_of_slots) + 1;
+  //   let newSlot = { ...this.state.slotForm };
+  //   // console.log(" newID", newId);
+  //   // console.log("sting newID", newId.toString());
+  //   newSlot.id = newId.toString();
+  //   let { data, slotForm } = this.state;
+  //   // console.log(data);
+  //   data.slots.push(newSlot);
+  //   data.no_of_slots = newId;
+  //   this.setState({ data });
+  //   slotForm.id = "";
+  //   slotForm.start = "";
+  //   slotForm.end = "";
+  //   this.setState({ slotForm: newSlot });
+  //   console.log(this.state);
+  //   console.log("Slots Form submit");
+  // };
+
   handleSlotFormSubmit = e => {
     e.preventDefault();
     e.stopPropagation();
     let newId = parseInt(this.state.data.no_of_slots) + 1;
     let newSlot = { ...this.state.slotForm };
-    // console.log(" newID", newId);
-    // console.log("sting newID", newId.toString());
+    if (newSlot.end == "" || newSlot.start == "") return;
     newSlot.id = newId.toString();
     let { data, slotForm } = this.state;
     // console.log(data);
@@ -155,12 +204,12 @@ class RestaurantRegistration extends Component {
   };
 
   handleCheckboxChange = ({ currentTarget: checkbox }) => {
-    console.log(
-      "name " + checkbox.name,
-      "\nch " + checkbox.checked,
-      "\npa " + checkbox.dataset.parent,
-      "\nga " + checkbox.dataset.gparent
-    );
+    // console.log(
+    //   "name " + checkbox.name,
+    //   "\nch " + checkbox.checked,
+    //   "\npa " + checkbox.dataset.parent,
+    //   "\nga " + checkbox.dataset.gparent
+    // );
     let data = { ...this.state.data };
     if (checkbox.dataset.gparent) {
       data[checkbox.dataset.gparent][checkbox.dataset.parent][checkbox.name] =
@@ -179,6 +228,9 @@ class RestaurantRegistration extends Component {
   };
 
   render() {
+    const cityValue = item => {
+      return item.name;
+    };
     const renderBasicInfoForm = () => {
       return (
         <RegistrationSubForm title="Basic Information" xClass=" ">
@@ -189,14 +241,16 @@ class RestaurantRegistration extends Component {
             name="name"
             placeholder="Enter Restaurant's Name"
           />
-          <FormInput
-            label="CITY"
-            value={this.state.data.location.city}
-            name="city"
-            data-parent="location"
-            onChange={this.handleInputChange}
+          <SeachableList
             placeholder="Enter Location City"
-          />
+            listName="cities"
+            value={this.state.data.location.city}
+            onChange={this.handleCityInputChange}
+          >
+            {this.state.cities_data.map(item => (
+              <option value={cityValue(item)} label={item.state} />
+            ))}
+          </SeachableList>
           <div className="row">
             <div className="col-3">
               <FormInput
@@ -283,18 +337,26 @@ class RestaurantRegistration extends Component {
             </div>
           </div>
 
-          <RAdditionForm
-            onSubmit={this.handleAdditionFormSubmit}
+          <RAdditionFormII
             datakey="establishment"
             formname="establishmentForm"
-            inputname="establishmentForm"
-            label="ESTABLISHMENT TYPE"
-            placeholder="Bar / Pub / Family Restaurant"
-            value={this.state.establishmentForm}
-            onChange={this.handleAdditionFormInputChange}
             displayItems={this.state.data.establishment}
+            onSubmit={this.handleAdditionFormSubmit}
             onDelete={this.handleDeleteOption}
-          />
+          >
+            <SeachableList
+              placeholder="Bar / Pub / Family Restaurant"
+              label="ESTABLISHMENT TYPE"
+              name="establishmentForm"
+              listName="establishment-list"
+              value={this.state.establishmentForm}
+              onChange={this.handleAdditionFormInputChange}
+            >
+              {this.state.establishment_data.map(item => (
+                <option value={item} />
+              ))}
+            </SeachableList>
+          </RAdditionFormII>
         </RegistrationSubForm>
       );
     };
@@ -315,31 +377,47 @@ class RestaurantRegistration extends Component {
             <div className="col" />
           </div>
 
-          <RAdditionForm
-            onSubmit={this.handleAdditionFormSubmit}
+          <RAdditionFormII
             datakey="cuisines"
             formname="cuisineForm"
-            inputname="cuisineForm"
-            label="CUISINES AVAILABLE"
-            placeholder="North Indian / Thai / Chinese"
-            value={this.state.cuisineForm}
-            onChange={this.handleAdditionFormInputChange}
             displayItems={this.state.data.cuisines}
+            onSubmit={this.handleAdditionFormSubmit}
             onDelete={this.handleDeleteOption}
-          />
+          >
+            <SeachableList
+              placeholder="Type and Select"
+              label="Cuisines"
+              name="cuisineForm"
+              listName="cuisine-list"
+              value={this.state.cuisineForm}
+              onChange={this.handleAdditionFormInputChange}
+            >
+              {this.state.cuisines_data.map(item => (
+                <option value={item} />
+              ))}
+            </SeachableList>
+          </RAdditionFormII>
 
-          <RAdditionForm
-            label="FEATURES AVAILABLE"
-            placeholder="CASH / CARD / AC"
+          <RAdditionFormII
             datakey="features"
             formname="featureForm"
-            inputname="featureForm"
-            value={this.state.featureForm}
             displayItems={this.state.data.features}
             onSubmit={this.handleAdditionFormSubmit}
-            onChange={this.handleAdditionFormInputChange}
             onDelete={this.handleDeleteOption}
-          />
+          >
+            <SeachableList
+              placeholder="Features"
+              label="FEATURES"
+              name="featureForm"
+              listName="features-list"
+              value={this.state.featureForm}
+              onChange={this.handleAdditionFormInputChange}
+            >
+              {this.state.features_data.map(item => (
+                <option value={item} />
+              ))}
+            </SeachableList>
+          </RAdditionFormII>
         </RegistrationSubForm>
       );
     };
@@ -515,19 +593,6 @@ class RestaurantRegistration extends Component {
             </div>
           </div>
 
-          {/* ------------------------------------------------------------------------------------------------------ */}
-          {/* ------------------------------------------------------------------------------------------------------ */}
-          {/* ------------------------------------------------------------------------------------------------------ */}
-          {/* ------------------------------------------------------------------------------------------------------ */}
-          {/* ------------------------------------------------------------------------------------------------------ */}
-          {/* ------------------------------------------------------------------------------------------------------ */}
-          {/* ------------------------------------------------------------------------------------------------------ */}
-          {/* ------------------------------------------------------------------------------------------------------ */}
-          {/* ------------------------------------------------------------------------------------------------------ */}
-          {/* ------------------------------------------------------------------------------------------------------ */}
-          {/* ------------------------------------------------------------------------------------------------------ */}
-          {/* ------------------------------------------------------------------------------------------------------ */}
-          {/* ------------------------------------------------------------------------------------------------------ */}
           <div className="row">
             <div className="col">
               <form
@@ -562,10 +627,6 @@ class RestaurantRegistration extends Component {
             </div>
           </div>
 
-          {/*--------------------------------------------------------------------------- */}
-          {/* ------------------------------------------------------------------------------------------------------ */}
-          {/* ---------------------------*/}
-
           <div className="row">
             <div className="col">
               <div className="slotsDisplay">
@@ -587,18 +648,6 @@ class RestaurantRegistration extends Component {
               </div>
             </div>
           </div>
-          {/* ------------------------------------------------------------------------------------------------------ */}
-          {/* ------------------------------------------------------------------------------------------------------ */}
-          {/* ------------------------------------------------------------------------------------------------------ */}
-          {/* ------------------------------------------------------------------------------------------------------ */}
-          {/* ------------------------------------------------------------------------------------------------------ */}
-          {/* ------------------------------------------------------------------------------------------------------ */}
-          {/* ------------------------------------------------------------------------------------------------------ */}
-          {/* ------------------------------------------------------------------------------------------------------ */}
-          {/* ------------------------------------------------------------------------------------------------------ */}
-          {/* ------------------------------------------------------------------------------------------------------ */}
-          {/* ------------------------------------------------------------------------------------------------------ */}
-          {/* ------------------------------------------------------------------------------------------------------ */}
         </RegistrationSubForm>
       );
     };
