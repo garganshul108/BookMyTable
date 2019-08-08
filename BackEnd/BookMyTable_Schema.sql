@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Aug 08, 2019 at 12:27 PM
+-- Generation Time: Aug 08, 2019 at 07:05 PM
 -- Server version: 5.7.26-0ubuntu0.18.04.1
 -- PHP Version: 7.2.19-0ubuntu0.18.04.1
 
@@ -19,23 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `BookMyTable`
 --
-
--- --------------------------------------------------------
-
---
--- Table structure for table `Availablity`
---
-
-CREATE TABLE `Availablity` (
-  `id` int(11) NOT NULL,
-  `Monday` tinyint(1) NOT NULL DEFAULT '0',
-  `Tuesday` tinyint(1) NOT NULL DEFAULT '0',
-  `Wednesday` tinyint(1) NOT NULL DEFAULT '0',
-  `Thrusday` tinyint(1) NOT NULL DEFAULT '0',
-  `Friday` tinyint(1) NOT NULL DEFAULT '0',
-  `Saturday` tinyint(1) NOT NULL DEFAULT '0',
-  `Sunday` tinyint(1) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -61,6 +44,23 @@ CREATE TABLE `Cities` (
   `id` int(11) NOT NULL,
   `name` varchar(60) NOT NULL,
   `state` varchar(60) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Days`
+--
+
+CREATE TABLE `Days` (
+  `id` int(11) NOT NULL,
+  `Monday` tinyint(1) NOT NULL DEFAULT '0',
+  `Tuesday` tinyint(1) NOT NULL DEFAULT '0',
+  `Wednesday` tinyint(1) NOT NULL DEFAULT '0',
+  `Thrusday` tinyint(1) NOT NULL DEFAULT '0',
+  `Friday` tinyint(1) NOT NULL DEFAULT '0',
+  `Saturday` tinyint(1) NOT NULL DEFAULT '0',
+  `Sunday` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -185,23 +185,24 @@ CREATE TABLE `User` (
 --
 
 --
--- Indexes for table `Availablity`
---
-ALTER TABLE `Availablity`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `Booking`
 --
 ALTER TABLE `Booking`
   ADD PRIMARY KEY (`id`),
   ADD KEY `user_id` (`user_id`),
-  ADD KEY `slot_id` (`slot_id`);
+  ADD KEY `slot_id` (`slot_id`),
+  ADD KEY `size_id` (`size_id`);
 
 --
 -- Indexes for table `Cities`
 --
 ALTER TABLE `Cities`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `Days`
+--
+ALTER TABLE `Days`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -260,15 +261,15 @@ ALTER TABLE `User`
 --
 
 --
--- AUTO_INCREMENT for table `Availablity`
---
-ALTER TABLE `Availablity`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
 -- AUTO_INCREMENT for table `Booking`
 --
 ALTER TABLE `Booking`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `Days`
+--
+ALTER TABLE `Days`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
 --
 -- AUTO_INCREMENT for table `Hall_Size`
 --
@@ -308,7 +309,8 @@ ALTER TABLE `User`
 --
 ALTER TABLE `Booking`
   ADD CONSTRAINT `Booking_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `User` (`id`),
-  ADD CONSTRAINT `Booking_ibfk_2` FOREIGN KEY (`slot_id`) REFERENCES `Slot` (`id`);
+  ADD CONSTRAINT `Booking_ibfk_2` FOREIGN KEY (`slot_id`) REFERENCES `Slot` (`id`),
+  ADD CONSTRAINT `Booking_ibfk_3` FOREIGN KEY (`size_id`) REFERENCES `Hall_Size` (`id`);
 
 --
 -- Constraints for table `Photos`
@@ -322,7 +324,7 @@ ALTER TABLE `Photos`
 ALTER TABLE `Restaurant`
   ADD CONSTRAINT `Restaurant_ibfk_1` FOREIGN KEY (`location_id`) REFERENCES `Location` (`id`),
   ADD CONSTRAINT `Restaurant_ibfk_2` FOREIGN KEY (`capacity_id`) REFERENCES `Hall_Size` (`id`),
-  ADD CONSTRAINT `Restaurant_ibfk_3` FOREIGN KEY (`availablity_id`) REFERENCES `Availablity` (`id`);
+  ADD CONSTRAINT `Restaurant_ibfk_3` FOREIGN KEY (`availablity_id`) REFERENCES `Days` (`id`);
 
 --
 -- Constraints for table `Review`
