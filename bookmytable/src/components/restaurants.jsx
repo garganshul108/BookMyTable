@@ -19,7 +19,8 @@ class Restaurants extends Component {
   state = {
     restaurants: [],
     seachQuery: "",
-    filters: []
+    filters: [],
+    no_of_filter: "0"
   };
 
   /**
@@ -104,6 +105,16 @@ class Restaurants extends Component {
     return restaurants;
   };
 
+  handleAddFilter = filter => {
+    let newId = (parseInt(this.state.no_of_filter) + 1).toString();
+    let { filters } = this.state;
+    filter.id = newId;
+    filters.push(filter);
+    this.setState({ filters, no_of_filter: newId }, () => {
+      console.log("fomr res", this.state);
+    });
+  };
+
   render() {
     const applyFilters = restaurants => {
       return this.filterByName(restaurants);
@@ -125,7 +136,7 @@ class Restaurants extends Component {
           {/* this is the left column with filters segement */}
           <div className="col-2">
             {/* to be replaced by RestaurantFilter in Future */}
-            <RestaurantFilter />
+            <RestaurantFilter addFilter={this.handleAddFilter} />
             {/* filter section ends */}
           </div>
           <div className="col">
@@ -141,6 +152,18 @@ class Restaurants extends Component {
                   />
                 </div>
               </div>
+              {parseInt(this.state.no_of_filter) > 0 && (
+                <div className="filterDisplay">
+                  {this.state.filters.map(filter => (
+                    <button className="btn smallBtn btn-secondary">
+                      <small>
+                        {filter.expectedValue}&nbsp;
+                        <i className="fa fa-times" aria-hidden="true" />
+                      </small>
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
             <RestaurantCatalogue restaurants={restaurants} />
             {/* end of display catalogue */}

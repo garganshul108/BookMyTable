@@ -127,3 +127,21 @@ hr {
   color: gray;
   font-size: 0.8rem;
 }
+
+.filterDisplay {
+  padding: 5px;
+  margin-bottom: 12px;
+  box-sizing: border-box;
+  background: #fff9;
+  border: 1px solid #a5a5a591;
+  border-radius: 3px;
+  box-shadow: 1px 1px 1px #a5a5a520;
+}
+
+.smallBtn {
+  padding: 1px 5px !important;
+  border-radius: 5px !important;
+  font-size: 1rem !important;
+  font-weight: bold !important;
+  margin: 2px;
+}

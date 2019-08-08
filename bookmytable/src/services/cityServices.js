@@ -8,3 +8,9 @@ export const getCities = () => {
     });
     return cities;
 }
+
+export const getCitiesByNames = () => {
+    let cityNames = cities.map(city => city.name);
+    cityNames.sort();
+    return cityNames;
+}
