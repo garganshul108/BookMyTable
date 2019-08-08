@@ -14,6 +14,13 @@ def convert_restaurant(cursor, rows):
                        row['capacity_id'])
         table = cursor.fetchall()
         row['table'] = table[0]
+
+        cursor.execute("SELECT * FROM Availablity where id=%s",
+                       row['availablity_id'])
+        days=cursor.fetchall()
+        row['days']=days[0]
+       
+        del row['availablity_id']
         del row['location_id']
         del row['capacity_id']
 
