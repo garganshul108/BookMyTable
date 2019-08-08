@@ -4,6 +4,8 @@ import "../components/css/restaurantRegistration.css";
 import FormCheckbox from "./subComponents/formCheckbox";
 import RegistrationSubForm from "./subComponents/registrationSubForm";
 import RAdditionForm from "./subComponents/rAdditionForm";
+import SeachableList from "./subComponents/searchableList";
+import { getCities } from "../services/cityServices";
 class RestaurantRegistration extends Component {
   state = {
     data: {
@@ -61,7 +63,25 @@ class RestaurantRegistration extends Component {
       id: "",
       start: "",
       end: ""
-    }
+    },
+    cities: []
+  };
+
+  componentDidMount() {
+    let cities = getCities();
+    this.setState({ cities }, () => {
+      console.log(this.state);
+    });
+  }
+
+  handleCityInputChange = ({ currentTarget: input }) => {
+    console.log("city", input);
+    let { data } = this.state;
+    console.log("input.value", input.value);
+    data.location.city = input.value;
+    this.setState({ data }, () => {
+      console.log(this.state);
+    });
   };
 
   handleDeleteSlot = ({ currentTarget: btn }) => {
@@ -179,6 +199,34 @@ class RestaurantRegistration extends Component {
   };
 
   render() {
+    /****
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     */
     const renderBasicInfoForm = () => {
       return (
         <RegistrationSubForm title="Basic Information" xClass=" ">
@@ -189,14 +237,16 @@ class RestaurantRegistration extends Component {
             name="name"
             placeholder="Enter Restaurant's Name"
           />
-          <FormInput
-            label="CITY"
-            value={this.state.data.location.city}
-            name="city"
-            data-parent="location"
-            onChange={this.handleInputChange}
+          <SeachableList
             placeholder="Enter Location City"
-          />
+            listName="cities"
+            value={this.state.data.location.city}
+            onChange={this.handleCityInputChange}
+          >
+            {this.state.cities.map(item => (
+              <option value={item.name} label={item.state} />
+            ))}
+          </SeachableList>
           <div className="row">
             <div className="col-3">
               <FormInput
@@ -231,6 +281,33 @@ class RestaurantRegistration extends Component {
         </RegistrationSubForm>
       );
     };
+
+    /****
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     */
 
     const renderLocationForm = () => {
       return (
@@ -515,19 +592,6 @@ class RestaurantRegistration extends Component {
             </div>
           </div>
 
-          {/* ------------------------------------------------------------------------------------------------------ */}
-          {/* ------------------------------------------------------------------------------------------------------ */}
-          {/* ------------------------------------------------------------------------------------------------------ */}
-          {/* ------------------------------------------------------------------------------------------------------ */}
-          {/* ------------------------------------------------------------------------------------------------------ */}
-          {/* ------------------------------------------------------------------------------------------------------ */}
-          {/* ------------------------------------------------------------------------------------------------------ */}
-          {/* ------------------------------------------------------------------------------------------------------ */}
-          {/* ------------------------------------------------------------------------------------------------------ */}
-          {/* ------------------------------------------------------------------------------------------------------ */}
-          {/* ------------------------------------------------------------------------------------------------------ */}
-          {/* ------------------------------------------------------------------------------------------------------ */}
-          {/* ------------------------------------------------------------------------------------------------------ */}
           <div className="row">
             <div className="col">
               <form
@@ -562,10 +626,6 @@ class RestaurantRegistration extends Component {
             </div>
           </div>
 
-          {/*--------------------------------------------------------------------------- */}
-          {/* ------------------------------------------------------------------------------------------------------ */}
-          {/* ---------------------------*/}
-
           <div className="row">
             <div className="col">
               <div className="slotsDisplay">
@@ -587,18 +647,6 @@ class RestaurantRegistration extends Component {
               </div>
             </div>
           </div>
-          {/* ------------------------------------------------------------------------------------------------------ */}
-          {/* ------------------------------------------------------------------------------------------------------ */}
-          {/* ------------------------------------------------------------------------------------------------------ */}
-          {/* ------------------------------------------------------------------------------------------------------ */}
-          {/* ------------------------------------------------------------------------------------------------------ */}
-          {/* ------------------------------------------------------------------------------------------------------ */}
-          {/* ------------------------------------------------------------------------------------------------------ */}
-          {/* ------------------------------------------------------------------------------------------------------ */}
-          {/* ------------------------------------------------------------------------------------------------------ */}
-          {/* ------------------------------------------------------------------------------------------------------ */}
-          {/* ------------------------------------------------------------------------------------------------------ */}
-          {/* ------------------------------------------------------------------------------------------------------ */}
         </RegistrationSubForm>
       );
     };

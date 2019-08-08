@@ -5,15 +5,7 @@ class SeachableList extends Component {
     console.log("option select", e.currentTarget);
   };
   render() {
-    const {
-      listToDisplay,
-      listName,
-      display,
-      value,
-      label,
-      onChange,
-      ...rest
-    } = this.props;
+    const { listName, value, onChange, children, ...rest } = this.props;
     return (
       <div className="form-group">
         <input
@@ -23,12 +15,7 @@ class SeachableList extends Component {
           onChange={onChange}
           {...rest}
         />
-
-        <datalist id={listName}>
-          {listToDisplay.map(item => (
-            <option value={item[display]} label={item[label]} />
-          ))}
-        </datalist>
+        <datalist id={listName}>{children}</datalist>
       </div>
     );
   }

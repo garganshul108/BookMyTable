@@ -96,14 +96,15 @@ class HomeTop extends Component {
                     {/* --------------------------------------------------------------------------------- */}
                     <form className="form-inline">
                       <SeachableList
-                        listToDisplay={this.state.cities}
-                        display="name"
-                        label="state"
-                        placeholder="City / State"
+                        placeholder="Enter Location City"
                         listName="cities"
                         value={this.state.city}
                         onChange={this.handleCityInputChange}
-                      />
+                      >
+                        {this.state.cities.map(item => (
+                          <option value={item.name} label={item.state} />
+                        ))}
+                      </SeachableList>
                       <div className="form-group">
                         <Link
                           className="btn btn-info my-2 my-sm-0"
