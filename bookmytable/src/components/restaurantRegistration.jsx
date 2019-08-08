@@ -104,13 +104,33 @@ class RestaurantRegistration extends Component {
     this.setState({ data });
   };
 
+  // handleSlotFormSubmit = e => {
+  //   e.preventDefault();
+  //   e.stopPropagation();
+  //   let newId = parseInt(this.state.data.no_of_slots) + 1;
+  //   let newSlot = { ...this.state.slotForm };
+  //   // console.log(" newID", newId);
+  //   // console.log("sting newID", newId.toString());
+  //   newSlot.id = newId.toString();
+  //   let { data, slotForm } = this.state;
+  //   // console.log(data);
+  //   data.slots.push(newSlot);
+  //   data.no_of_slots = newId;
+  //   this.setState({ data });
+  //   slotForm.id = "";
+  //   slotForm.start = "";
+  //   slotForm.end = "";
+  //   this.setState({ slotForm: newSlot });
+  //   console.log(this.state);
+  //   console.log("Slots Form submit");
+  // };
+
   handleSlotFormSubmit = e => {
     e.preventDefault();
     e.stopPropagation();
     let newId = parseInt(this.state.data.no_of_slots) + 1;
     let newSlot = { ...this.state.slotForm };
-    // console.log(" newID", newId);
-    // console.log("sting newID", newId.toString());
+    if (newSlot.end == "" || newSlot.start == "") return;
     newSlot.id = newId.toString();
     let { data, slotForm } = this.state;
     // console.log(data);
@@ -120,7 +140,7 @@ class RestaurantRegistration extends Component {
     slotForm.id = "";
     slotForm.start = "";
     slotForm.end = "";
-    this.setState({ slotForm: newSlot });
+    this.setState({ slotForm });
     console.log(this.state);
     console.log("Slots Form submit");
   };
