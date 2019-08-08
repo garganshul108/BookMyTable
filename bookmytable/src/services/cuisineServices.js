@@ -1,3 +1,3 @@
 export const getCuisines = () => {
-    return ["thai", "chai"];
+    return require('./dump/JSON/cuisines.json');
 }

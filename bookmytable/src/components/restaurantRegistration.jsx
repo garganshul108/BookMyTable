@@ -8,7 +8,7 @@ import { getCities } from "../services/cityServices";
 import { getCuisines } from "../services/cuisineServices";
 import { getFeatures } from "../services/featureServices";
 import RAdditionFormII from "./subComponents/rAdditionFormII";
-import { getEstablishment } from "../services/esatablishmentServices";
+import { getEstablishment } from "../services/establishmentServices";
 class RestaurantRegistration extends Component {
   state = {
     data: {
