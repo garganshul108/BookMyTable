@@ -5,6 +5,7 @@ import RestaurantCatalogue from "./subComponents/restaurantCatalogue";
 import SideAds from "./subComponents/sideAds";
 
 import "./css/restaurants.css";
+import SearchBox from "./subComponents/searchBox";
 
 class Restaurants extends Component {
   /***
@@ -16,7 +17,8 @@ class Restaurants extends Component {
    *  - Data must be passed onto the diplay only after filter
    */
   state = {
-    restaurants: []
+    restaurants: [],
+    seachQuery: ""
   };
 
   /***
@@ -71,6 +73,10 @@ class Restaurants extends Component {
     this.setState({ restaurants });
   }
 
+  handleSearchRestaurant = query => {
+    this.setState({ seachQuery: query });
+  };
+
   render() {
     /***
      * this is the point where data as restaurants
@@ -78,11 +84,19 @@ class Restaurants extends Component {
      *
      * without filtering this is passed on to same as this.state (full data)
      */
-    const { restaurants } = this.state;
+    let { restaurants } = this.state;
+
+    if (this.state.seachQuery)
+      restaurants = restaurants.filter(restaurant =>
+        restaurant.name
+          .toLowerCase()
+          .startsWith(this.state.seachQuery.toLowerCase())
+      );
 
     return (
       <div className="container">
         <h3 style={{ fontWeight: 900 }}>Places available in this Region</h3>
+
         <div className="row" style={{ marginBottom: "150px" }}>
           {/* this is the left column with filters segement */}
           <div className="col-2">
@@ -92,6 +106,17 @@ class Restaurants extends Component {
           </div>
           <div className="col">
             {/* this is the Restaurant Catalog Display */}
+            <div className="container-fluid">
+              <div className="row">
+                <div className="col">
+                  <SearchBox
+                    placeholder="Find by Name"
+                    value={this.state.seachQuery}
+                    onChange={this.handleSearchRestaurant}
+                  />
+                </div>
+              </div>
+            </div>
             <RestaurantCatalogue restaurants={restaurants} />
             {/* end of display catalogue */}
           </div>
