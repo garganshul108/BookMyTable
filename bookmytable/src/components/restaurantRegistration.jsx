@@ -199,34 +199,9 @@ class RestaurantRegistration extends Component {
   };
 
   render() {
-    /****
-     *
-     *
-     *
-     *
-     *
-     *
-     *
-     *
-     *
-     *
-     *
-     *
-     *
-     *
-     *
-     *
-     *
-     *
-     *
-     *
-     *
-     *
-     *
-     *
-     *
-     *
-     */
+    const cityValue = item => {
+      return item.name;
+    };
     const renderBasicInfoForm = () => {
       return (
         <RegistrationSubForm title="Basic Information" xClass=" ">
@@ -244,7 +219,7 @@ class RestaurantRegistration extends Component {
             onChange={this.handleCityInputChange}
           >
             {this.state.cities.map(item => (
-              <option value={item.name} label={item.state} />
+              <option value={cityValue(item)} label={item.state} />
             ))}
           </SeachableList>
           <div className="row">
@@ -281,33 +256,6 @@ class RestaurantRegistration extends Component {
         </RegistrationSubForm>
       );
     };
-
-    /****
-     *
-     *
-     *
-     *
-     *
-     *
-     *
-     *
-     *
-     *
-     *
-     *
-     *
-     *
-     *
-     *
-     *
-     *
-     *
-     *
-     *
-     *
-     *
-     *
-     */
 
     const renderLocationForm = () => {
       return (
@@ -376,6 +324,35 @@ class RestaurantRegistration extends Component {
       );
     };
 
+    /****
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     */
+
     const renderCharacteristicForm = () => {
       return (
         <RegistrationSubForm title="Characteristics" xClass=" ">
@@ -420,6 +397,34 @@ class RestaurantRegistration extends Component {
         </RegistrationSubForm>
       );
     };
+    /****
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     */
 
     const renderCapacityForm = () => {
       return (
@@ -525,6 +530,35 @@ class RestaurantRegistration extends Component {
         </RegistrationSubForm>
       );
     };
+
+    /****
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     */
 
     const renderSlotForm = () => {
       return (
