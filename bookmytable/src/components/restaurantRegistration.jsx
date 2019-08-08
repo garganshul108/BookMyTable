@@ -3,7 +3,6 @@ import FormInput from "./subComponents/formInput";
 import "../components/css/restaurantRegistration.css";
 import FormCheckbox from "./subComponents/formCheckbox";
 import RegistrationSubForm from "./subComponents/registrationSubForm";
-// import RAdditionForm from "./subComponents/rAdditionForm";
 import SeachableList from "./subComponents/searchableList";
 import { getCities } from "../services/cityServices";
 import { getCuisines } from "../services/cuisineServices";
