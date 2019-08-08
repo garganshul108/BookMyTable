@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { getRestaurants } from "../services/dump/restaurant";
+import { getRestaurants } from "../services/restaurantServices";
 import RestaurantFilter from "./subComponents/restaurantFilter";
 import RestaurantCatalogue from "./subComponents/restaurantCatalogue";
 import SideAds from "./subComponents/sideAds";
