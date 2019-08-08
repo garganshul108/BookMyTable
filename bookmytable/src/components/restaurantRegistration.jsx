@@ -91,7 +91,7 @@ class RestaurantRegistration extends Component {
     slotForm.id = "";
     slotForm.start = "";
     slotForm.end = "";
-    this.setState({ slotForm });
+    this.setState({ slotForm: newSlot });
     console.log(this.state);
     console.log("Slots Form submit");
   };
