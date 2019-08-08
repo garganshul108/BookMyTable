@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Aug 07, 2019 at 03:50 PM
+-- Generation Time: Aug 08, 2019 at 12:27 PM
 -- Server version: 5.7.26-0ubuntu0.18.04.1
 -- PHP Version: 7.2.19-0ubuntu0.18.04.1
 
@@ -23,6 +23,23 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `Availablity`
+--
+
+CREATE TABLE `Availablity` (
+  `id` int(11) NOT NULL,
+  `Monday` tinyint(1) NOT NULL DEFAULT '0',
+  `Tuesday` tinyint(1) NOT NULL DEFAULT '0',
+  `Wednesday` tinyint(1) NOT NULL DEFAULT '0',
+  `Thrusday` tinyint(1) NOT NULL DEFAULT '0',
+  `Friday` tinyint(1) NOT NULL DEFAULT '0',
+  `Saturday` tinyint(1) NOT NULL DEFAULT '0',
+  `Sunday` tinyint(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `Booking`
 --
 
@@ -32,6 +49,18 @@ CREATE TABLE `Booking` (
   `slot_id` int(11) DEFAULT NULL,
   `reference_no` varchar(1000) DEFAULT NULL,
   `size_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Cities`
+--
+
+CREATE TABLE `Cities` (
+  `id` int(11) NOT NULL,
+  `name` varchar(60) NOT NULL,
+  `state` varchar(60) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -87,6 +116,7 @@ CREATE TABLE `Photos` (
 CREATE TABLE `Restaurant` (
   `id` int(11) NOT NULL,
   `location_id` int(11) DEFAULT NULL,
+  `availablity_id` int(11) DEFAULT NULL,
   `name` varchar(40) NOT NULL,
   `email` varchar(255) DEFAULT NULL,
   `average_cost_for_two` int(11) DEFAULT NULL,
@@ -155,12 +185,24 @@ CREATE TABLE `User` (
 --
 
 --
+-- Indexes for table `Availablity`
+--
+ALTER TABLE `Availablity`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `Booking`
 --
 ALTER TABLE `Booking`
   ADD PRIMARY KEY (`id`),
   ADD KEY `user_id` (`user_id`),
   ADD KEY `slot_id` (`slot_id`);
+
+--
+-- Indexes for table `Cities`
+--
+ALTER TABLE `Cities`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `Hall_Size`
@@ -186,7 +228,8 @@ ALTER TABLE `Photos`
 ALTER TABLE `Restaurant`
   ADD PRIMARY KEY (`id`),
   ADD KEY `location_id` (`location_id`),
-  ADD KEY `capacity_id` (`capacity_id`);
+  ADD KEY `capacity_id` (`capacity_id`),
+  ADD KEY `availablity_id` (`availablity_id`);
 
 --
 -- Indexes for table `Review`
@@ -217,6 +260,11 @@ ALTER TABLE `User`
 --
 
 --
+-- AUTO_INCREMENT for table `Availablity`
+--
+ALTER TABLE `Availablity`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT for table `Booking`
 --
 ALTER TABLE `Booking`
@@ -225,17 +273,17 @@ ALTER TABLE `Booking`
 -- AUTO_INCREMENT for table `Hall_Size`
 --
 ALTER TABLE `Hall_Size`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=98;
 --
 -- AUTO_INCREMENT for table `Location`
 --
 ALTER TABLE `Location`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19149900;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19149903;
 --
 -- AUTO_INCREMENT for table `Restaurant`
 --
 ALTER TABLE `Restaurant`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19151007;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19151010;
 --
 -- AUTO_INCREMENT for table `Review`
 --
@@ -273,7 +321,8 @@ ALTER TABLE `Photos`
 --
 ALTER TABLE `Restaurant`
   ADD CONSTRAINT `Restaurant_ibfk_1` FOREIGN KEY (`location_id`) REFERENCES `Location` (`id`),
-  ADD CONSTRAINT `Restaurant_ibfk_2` FOREIGN KEY (`capacity_id`) REFERENCES `Hall_Size` (`id`);
+  ADD CONSTRAINT `Restaurant_ibfk_2` FOREIGN KEY (`capacity_id`) REFERENCES `Hall_Size` (`id`),
+  ADD CONSTRAINT `Restaurant_ibfk_3` FOREIGN KEY (`availablity_id`) REFERENCES `Availablity` (`id`);
 
 --
 -- Constraints for table `Review`
