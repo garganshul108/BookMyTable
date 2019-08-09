@@ -5,7 +5,7 @@ from flask import jsonify
 from flask import flash, request
 from decimal import Decimal
 
-@app.route(/booking,method='POST')
+@app.route('/booking',methods=['POST'])
 # data=[
 #     date:"1999-08-23"
 #     time:"23:00"

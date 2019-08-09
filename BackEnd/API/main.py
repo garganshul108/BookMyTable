@@ -10,6 +10,9 @@ from Restaurant import insert
 from Restaurant import getByCity
 from Restaurant.Location import getAll
 from Restaurant.Location import getLocalityByCityName
+from LoginSignUp import signup
+from LoginSignUp import login
+
 
 
 
