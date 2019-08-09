@@ -87,17 +87,48 @@ class Restaurants extends Component {
     this.setState({ seachQuery: query });
   };
 
-  filterByName = restaurants => {
+  handleDeleteFilter = targetFilter => {
+    let { filters } = this.state;
+    for (let i = 0; i < filters.length; i++) {
+      if (filters[i].id === targetFilter.id) {
+        filters.splice(i, 1);
+        break;
+      }
+    }
+    let updatedNoOfFilters = (parseInt(this.state.no_of_filter) - 1).toString();
+    this.setState({ filters, no_of_filter: updatedNoOfFilters });
+  };
+
+  handleAddFilter = newFilter => {
+    let { filters } = this.state;
+    for (let i = 0; i < filters.length; i++) {
+      if (filters[i].id === newFilter.id) {
+        return;
+      }
+    }
+    let updatedNoOfFilters = (parseInt(this.state.no_of_filter) + 1).toString();
+
+    filters.push(newFilter);
+    this.setState({ filters, no_of_filter: updatedNoOfFilters }, () => {
+      console.log("fomr res", this.state);
+    });
+  };
+
+  filterByNameSearch = restaurants => {
     if (this.state.seachQuery)
       restaurants = restaurants.filter(restaurant => {
         let nameLiterals = restaurant.name.split(" ");
-        for (let literal of nameLiterals) {
-          if (
-            literal
-              .toLowerCase()
-              .startsWith(this.state.seachQuery.toLowerCase())
-          )
-            return true;
+        let searchLiters = this.state.seachQuery.split(" ");
+        // console.log("name:", nameLiterals);
+        // console.log("seach:", searchLiters);
+        for (let search of searchLiters) {
+          for (let literal of nameLiterals) {
+            if (
+              search &&
+              literal.toLowerCase().startsWith(search.toLowerCase())
+            )
+              return true;
+          }
         }
         return false;
       });
@@ -105,19 +136,22 @@ class Restaurants extends Component {
     return restaurants;
   };
 
-  handleAddFilter = filter => {
-    let newId = (parseInt(this.state.no_of_filter) + 1).toString();
-    let { filters } = this.state;
-    filter.id = newId;
-    filters.push(filter);
-    this.setState({ filters, no_of_filter: newId }, () => {
-      console.log("fomr res", this.state);
-    });
+  filterByFilterTypes = restaurants => {
+    // this.setState({ seachQuery: "" });
+    const { filters } = this.state;
+    let filteredRestaurants = restaurants;
+    for (let filter of filters) {
+      filteredRestaurants = filteredRestaurants.filter(restaurant => {
+        return restaurant[filter.targetProperty] === filter.expectedValue;
+      });
+    }
+    return filteredRestaurants;
   };
 
   render() {
+    // console.log(md5("hello"));
     const applyFilters = restaurants => {
-      return this.filterByName(restaurants);
+      return this.filterByFilterTypes(restaurants);
     };
     /***
      * this is the point where data as restaurants
@@ -152,14 +186,41 @@ class Restaurants extends Component {
                   />
                 </div>
               </div>
-              {parseInt(this.state.no_of_filter) > 0 && (
+              {(parseInt(this.state.no_of_filter) > 0 ||
+                this.state.seachQuery) && (
                 <div className="filterDisplay">
+                  <p>Showing {restaurants.length}</p>
+                  {this.state.seachQuery && (
+                    <button
+                      className="deleteFBtn badge badge-danger btn-danger btn-outline-danger"
+                      onClick={e => {
+                        this.setState({ seachQuery: "" });
+                      }}
+                    >
+                      {/* <small> */}
+                      {this.state.seachQuery}&nbsp;
+                      <i className="fa fa-times" aria-hidden="true" />
+                      {/* </small> */}
+                    </button>
+                  )}
                   {this.state.filters.map(filter => (
-                    <button className="btn smallBtn btn-secondary">
-                      <small>
-                        {filter.expectedValue}&nbsp;
-                        <i className="fa fa-times" aria-hidden="true" />
-                      </small>
+                    <button
+                      className={
+                        filter.colorClass
+                          ? "deleteFBtn badge badge-" +
+                            filter.colorClass +
+                            " btn-" +
+                            filter.colorClass +
+                            " btn-outline-" +
+                            filter.colorClass
+                          : "deleteFBtn badge badge-default btn-dark btn-outline-dark"
+                      }
+                      onClick={e => this.handleDeleteFilter(filter)}
+                    >
+                      {/* <small> */}
+                      {filter.expectedValue}&nbsp;
+                      <i className="fa fa-times" aria-hidden="true" />
+                      {/* </small> */}
                     </button>
                   ))}
                 </div>

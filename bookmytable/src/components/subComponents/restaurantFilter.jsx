@@ -6,6 +6,7 @@ import { getCuisines } from "../../services/cuisineServices";
 import { getEstablishment } from "../../services/establishmentServices";
 import { getFeatures } from "../../services/featureServices";
 import { getCitiesByNames } from "../../services/cityServices";
+import md5 from "md5/md5";
 class RestaurantFilter extends Component {
   state = {
     cuisines: [],
@@ -13,7 +14,8 @@ class RestaurantFilter extends Component {
     features: [],
     localities: [],
     costs: [],
-    filter: { targetProperty: "", expectedValue: "" }
+    colorClasses: {},
+    filter: { targetProperty: "", expectedValue: "", id: "", colorClass: "" }
   };
 
   componentDidMount() {
@@ -21,15 +23,30 @@ class RestaurantFilter extends Component {
     let establishments = getEstablishment();
     let features = getFeatures();
     let localities = getCitiesByNames();
+    let colorClasses = {
+      cuisine: "info",
+      establishment: "secondary",
+      features: "warning",
+      locality: "primary"
+    };
     let costs = ["Rs. 250+", "Rs. 500+", "Rs. 1000+", "Rs. 1500+", "Rs. 2000+"];
 
-    this.setState({ cuisines, establishments, features, localities, costs });
+    this.setState({
+      cuisines,
+      establishments,
+      features,
+      localities,
+      costs,
+      colorClasses
+    });
   }
 
   setLocalFilter = ({ currentTarget: target }) => {
     let { filter } = this.state;
     filter.expectedValue = target.innerHTML;
     filter.targetProperty = target.name;
+    filter.id = md5(filter.targetProperty + "-" + filter.expectedValue);
+    filter.colorClass = this.state.colorClasses[filter.targetProperty];
     this.setState({ filter });
   };
 
@@ -38,7 +55,8 @@ class RestaurantFilter extends Component {
     let filter = {
       id: "",
       expectedValue: "",
-      targetProperty: ""
+      targetProperty: "",
+      colorClass: ""
     };
     this.setState({ filter });
   };
