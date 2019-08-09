@@ -19,6 +19,28 @@ def convert_time(time):
         return Double(ans)
     return (Double(ans)+(0.5))
 
+def get_shifts(cursor,res_id):
+    cursor.execute("SELECT * FROM Slot WHERE restaurant_id=%s" ,res_id)
+    shifts=cursor.fetchall()
+    for shift in shifts:
+        shift['start_time']=convert_time(shift['start_time'])
+        shift['end_time']=convert_time(shift['end_time'])
+
+    shifts=sorted(shifts,key=itemgetter('start_time','end_time'))
+    return shifts
+
+def get_capacity(cursor,res_id):
+    cursor.execute("SELECT capacity FROM Restaurant WHERE id=%s",res_id)
+    return (cursor.fetchall())[0]['capacity']
+
+def get_slots(cursor,date,res_id):
+    cursor.execute("SELECT * FROM Booking WHERE date=%s AND restaurant_id=%s",date,res_id)
+    slots=cursor.fetchall()
+    for slot in slots:
+        slot['start_time']=convert_time(slot['start_time'])
+        slot['end_time']=convert_time(slot['end_time'])
+    return slots
+
 def book_table():
     _date=data['date']
     _time=convert_time(data['time'])
@@ -32,16 +54,20 @@ def book_table():
     }
     if(size>8)
         newSlot['end']=newSlot['end']+1
-    
     conn=mysql.connect()
-    cursor=conn.cursor()
-    cursor.execute("SELECT * FROM Slot WHERE date=%s AND restaurant_id=%s" ,date,res_id)
-    slots=cursor.fetchall()
-    for slot in slots:
-        slot['start_time']=convert_time(slot['start_time'])
-        slot['end_time']=convert_time(slot['end_time'])
-    cursor.execute("SELECT capacity FROM Restaurant WHERE id=%s",res_id)
-    slots=sorted(slots,key=itemgetter('start_time','end_time'))
+    cursor=conn.cursor(mysql.cursors.DictCursor)
+
+    shifts=get_shifts(cursor)
+    capacity=get_capacity(cursor)
+    slots=get_slots(cursor,_date,_res_id)
+    
+
+    arr=
+
+
+
+
+    
 
 
 
