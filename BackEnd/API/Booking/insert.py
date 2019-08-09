@@ -9,7 +9,7 @@ from decimal import Decimal
 # data=[
 #     date:"1999-08-23"
 #     time:"23:00"
-#     size:"4"
+#     size:4
 #     res_id:"1"
 #     user_id:"1"
 # ]
@@ -22,9 +22,9 @@ def convert_time(time):
 def book_table():
     _date=data['date']
     _time=convert_time(data['time'])
-    _size=int(data['size'])
-    _res_id=int(res_id)
-    _user_id=int(user_id)
+    _size=data['size']
+    _res_id=data['res_id']
+    _user_id=data['user_id']
 
     newSlot={
         start:_time
