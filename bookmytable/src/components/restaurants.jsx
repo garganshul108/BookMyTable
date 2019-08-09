@@ -8,14 +8,6 @@ import "./css/restaurants.css";
 import SearchBox from "./subComponents/searchBox";
 
 class Restaurants extends Component {
-  /***
-   * controls every data to the page
-   *
-   * Filter | Display | Pagination (may be in future)
-   *
-   * Point to implement:
-   *  - Data must be passed onto the diplay only after filter
-   */
   state = {
     restaurants: [],
     seachQuery: "",
@@ -23,62 +15,13 @@ class Restaurants extends Component {
     no_of_filter: "0"
   };
 
-  /**
-   *
-   * structure of a filter
-   * {id:"", targetProperty:"", expectedValue:""}
-   *
-   *
-   */
-
-  /***
-   * TBD:
-   *  till the DB integrates
-   */
-  addMiscPropertyToRestaurants(restaurants) {
-    let fakeTableProps = [
-      "size_ten",
-      "size_eight",
-      "size_six",
-      "size_four",
-      "size_two",
-      "size_one"
-    ];
-
-    for (let restaurant of restaurants) {
-      restaurant.showPhone = false;
-      restaurant.showMenu = false;
-      restaurant.showTables = false;
-      for (let fakeTableProp of fakeTableProps) {
-        restaurant[fakeTableProp] = 1;
-      }
-    }
-
-    return restaurants;
-  }
-  /***
-   * TBD ends
-   */
-
   componentDidMount() {
     let restaurants = getRestaurants();
-    restaurants = this.addMiscPropertyToRestaurants(restaurants);
-    console.log(restaurants);
 
-    /***
-     * render related properties
-     * @boolean showPhone
-     * @boolean showMenu
-     * @boolean showTables(To be configured)
-     */
     for (let restaurant of restaurants) {
       restaurant.showPhone = false;
       restaurant.showMenu = false;
     }
-    /***
-     * checking for the properties onto the console
-     * TBD after done
-     */
     console.log(restaurants);
     this.setState({ restaurants });
   }
@@ -109,9 +52,12 @@ class Restaurants extends Component {
     let updatedNoOfFilters = (parseInt(this.state.no_of_filter) + 1).toString();
 
     filters.push(newFilter);
-    this.setState({ filters, no_of_filter: updatedNoOfFilters }, () => {
-      console.log("fomr res", this.state);
-    });
+    this.setState(
+      { filters, no_of_filter: updatedNoOfFilters, seachQuery: "" },
+      () => {
+        console.log("fomr res", this.state);
+      }
+    );
   };
 
   filterByNameSearch = restaurants => {
@@ -125,6 +71,7 @@ class Restaurants extends Component {
           for (let literal of nameLiterals) {
             if (
               search &&
+              literal &&
               literal.toLowerCase().startsWith(search.toLowerCase())
             )
               return true;
@@ -136,23 +83,40 @@ class Restaurants extends Component {
     return restaurants;
   };
 
-  filterByFilterTypes = restaurants => {
-    // this.setState({ seachQuery: "" });
+  filterByFilterTypes = () => {
+    let { restaurants } = this.state;
+    if (!restaurants[0]) return restaurants;
+    console.log("filtering");
     const { filters } = this.state;
-    let filteredRestaurants = restaurants;
-    for (let filter of filters) {
-      filteredRestaurants = filteredRestaurants.filter(restaurant => {
-        return restaurant[filter.targetProperty] === filter.expectedValue;
-      });
+    let sample = restaurants[0];
+    let left = restaurants;
+    let filtered = [];
+    for (let { targetProperty, expectedValue } of filters) {
+      console.log("target: ", targetProperty, "ex: ", expectedValue);
+      if (Array.isArray(sample[targetProperty])) {
+        console.log("filtering from array");
+        let filteredTop = filtered.filter(restaurant =>
+          restaurant[targetProperty].includes(expectedValue)
+        );
+        let filteredBottom = filtered.filter(
+          restaurant => !restaurant[targetProperty].includes(expectedValue)
+        );
+        filtered = [
+          ...filteredTop,
+          ...filteredBottom,
+          ...left.filter(restaurant =>
+            restaurant[targetProperty].includes(expectedValue)
+          )
+        ];
+        left = left.filter(
+          restaurant => !restaurant[targetProperty].includes(expectedValue)
+        );
+      }
     }
-    return filteredRestaurants;
+    return filtered.length > 0 ? filtered : restaurants;
   };
 
   render() {
-    // console.log(md5("hello"));
-    const applyFilters = restaurants => {
-      return this.filterByFilterTypes(restaurants);
-    };
     /***
      * this is the point where data as restaurants
      * is passed onto the renderer
@@ -160,18 +124,21 @@ class Restaurants extends Component {
      * without filtering this is passed on to same as this.state (full data)
      */
     let { restaurants } = this.state;
-    restaurants = applyFilters(restaurants);
+    if (parseInt(this.state.no_of_filter) > 0) {
+      restaurants = this.filterByFilterTypes();
+    }
+
+    restaurants = this.filterByNameSearch(restaurants);
 
     return (
       <div className="container">
-        <h3 style={{ fontWeight: 900 }}>Places available in this Region</h3>
+        <h3 style={{ fontWeight: 900 }}>
+          Places available in this Region : {restaurants.length}
+        </h3>
 
         <div className="row" style={{ marginBottom: "150px" }}>
-          {/* this is the left column with filters segement */}
           <div className="col-2">
-            {/* to be replaced by RestaurantFilter in Future */}
             <RestaurantFilter addFilter={this.handleAddFilter} />
-            {/* filter section ends */}
           </div>
           <div className="col">
             {/* this is the Restaurant Catalog Display */}
@@ -189,7 +156,6 @@ class Restaurants extends Component {
               {(parseInt(this.state.no_of_filter) > 0 ||
                 this.state.seachQuery) && (
                 <div className="filterDisplay">
-                  <p>Showing {restaurants.length}</p>
                   {this.state.seachQuery && (
                     <button
                       className="deleteFBtn badge badge-danger btn-danger btn-outline-danger"
@@ -197,10 +163,8 @@ class Restaurants extends Component {
                         this.setState({ seachQuery: "" });
                       }}
                     >
-                      {/* <small> */}
                       {this.state.seachQuery}&nbsp;
                       <i className="fa fa-times" aria-hidden="true" />
-                      {/* </small> */}
                     </button>
                   )}
                   {this.state.filters.map(filter => (
@@ -217,10 +181,8 @@ class Restaurants extends Component {
                       }
                       onClick={e => this.handleDeleteFilter(filter)}
                     >
-                      {/* <small> */}
                       {filter.expectedValue}&nbsp;
                       <i className="fa fa-times" aria-hidden="true" />
-                      {/* </small> */}
                     </button>
                   ))}
                 </div>
@@ -229,7 +191,6 @@ class Restaurants extends Component {
             <RestaurantCatalogue restaurants={restaurants} />
             {/* end of display catalogue */}
           </div>
-          {/* this is the ads section for the app */}
           <div className="col-2">
             <SideAds />
           </div>

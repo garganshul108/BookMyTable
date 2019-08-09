@@ -1,6 +1,5 @@
 let cities = require('./dump/JSON/cities.json');
 
-// refactoringCitiesstruct
 
 export const getCities = () => {
     cities.sort(({ name: A }, { name: B }) => {

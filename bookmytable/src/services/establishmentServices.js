@@ -1,4 +1,4 @@
 export const getEstablishment = () => {
-    return require('./dump/JSON/establishments.json');
+    return require('./dump/JSON/establishments.json').sort();
 
 }

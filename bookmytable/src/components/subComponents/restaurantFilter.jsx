@@ -85,7 +85,7 @@ class RestaurantFilter extends Component {
           <small className="text-muted">old to new</small>
         </p> */}
         <Filter
-          targetProperty="average_cost_for_two"
+          targetProperty="cost"
           label="Average Cost"
           content={this.state.costs}
           sendFilter={this.sendFilter}
@@ -99,14 +99,14 @@ class RestaurantFilter extends Component {
           setLocalFilter={this.setLocalFilter}
         />
         <Filter
-          targetProperty="cuisine"
+          targetProperty="cuisines"
           label="Cuisine"
           content={this.state.cuisines}
           sendFilter={this.sendFilter}
           setLocalFilter={this.setLocalFilter}
         />
         <Filter
-          targetProperty="establishment"
+          targetProperty="establishments"
           label="Establishment Type"
           content={this.state.establishments}
           sendFilter={this.sendFilter}
