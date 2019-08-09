@@ -19,7 +19,6 @@ def drop_id():
         conn = mysql.connect()
         cursor = conn.cursor()
         cursor.execute("DELETE FROM Restaurant")
-        cursor.execute("DELETE FROM Hall_Size")
         cursor.execute("DELETE FROM Location")
         conn.commit()
     except Exception as e:

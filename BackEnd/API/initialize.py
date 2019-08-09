@@ -7,6 +7,7 @@ from flask import flash, request
 from werkzeug import generate_password_hash, check_password_hash
 import random
 from decimal import Decimal
+from Restaurant.util.LastId import get_last_id
 
 with open('all_data.json') as json_file:
     data = json.load(json_file)
@@ -38,8 +39,8 @@ def update_location(tt, loc_id, cursor):
     else:
         _zipcode = int(_zipcode)
 
-    sql = "INSERT INTO Location(id,city,zipcode,locality,address,locality_verbose,latitude,longitude) VALUES(%s,%s,%s,%s,%s,%s,%s,%s)"
-    value = (loc_id, _city, _zipcode, _locality,
+    sql = "INSERT INTO Location(city,zipcode,locality,address,locality_verbose,latitude,longitude) VALUES(%s,%s,%s,%s,%s,%s,%s)"
+    value = ( _city, _zipcode, _locality,
              _address, _verbose, _latitude, _longitude)
     cursor.execute(sql, value)
 
@@ -76,8 +77,8 @@ def update_restaurant(tt, loc_id, cursor):
     _thumb = tt['thumb']
     _phone_numbers = tt['phone_numbers']
     _capacity=random.randrange(20,50)
-    sql = "INSERT INTO Restaurant(id,location_id,availablity_id,name,average_cost_for_two,cuisines,timings,establishment,highlights,thumb,phone_numbers,capacity) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
-    value = (_id, loc_id, loc_id, _name, _average_cost, _cuisines, _timings, _establishment, _highlights,
+    sql = "INSERT INTO Restaurant(id,location_id,name,average_cost_for_two,cuisines,timings,establishment,highlights,thumb,phone_numbers,capacity) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+    value = (_id, loc_id, _name, _average_cost, _cuisines, _timings, _establishment, _highlights,
              _thumb, _phone_numbers,_capacity)
     cursor.execute(sql, value)
 
@@ -88,7 +89,7 @@ def get_restaurant():
         conn = mysql.connect()
         cursor = conn.cursor()
         cursor.execute("DELETE FROM Restaurant")
-        # cursor.execute("DELETE FROM Hall_Size")
+        cursor.execute("DELETE FROM Days")
         cursor.execute("DELETE FROM Location")
         cursor.execute("DELETE FROM Cities")
         # cursor.execute("DELETE FROM Availablity")
@@ -100,8 +101,9 @@ def get_restaurant():
         #     cursor.execute(sql,values)
         #     conn.commit()
         for tt in data:
-            update_availablity(loc_id,cursor)
-            update_location(tt, loc_id, cursor)
+            # update_availablity(loc_id,cursor)
+            update_location(tt, loc_id,cursor)
+            loc_id=get_last_id(cursor)
             # update_Hall_Size(tt, loc_id, cursor)
             update_restaurant(tt, loc_id, cursor)
 
