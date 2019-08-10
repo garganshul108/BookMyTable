@@ -81,7 +81,7 @@ class HomeTop extends Component {
                 </div>
                 <div className="row">
                   <div className="col">
-                    <form className="form-inline">
+                    <div className="form-inline">
                       <SeachableList
                         className="searchBox"
                         placeholder="City"
@@ -96,25 +96,38 @@ class HomeTop extends Component {
                       <div className="form-group">
                         <Link
                           // className=""
-                          className="btn btn-danger searchBox"
-                          to="/restaurants"
-                          type="submit"
+                          className="btn btn-danger searchBox m-2"
+                          to={"/restaurants/" + this.state.city.toLowerCase()}
+                          // type="submit"
                         >
                           <i className="fa fa-search" aria-hidden="true" />
                         </Link>
                       </div>
-                    </form>
+                    </div>
                   </div>
                 </div>
                 <div className="row">
                   <div className="col desc">
                     <small className="text text-muted">
-                      <p>Popular Cities</p>
-
                       <strong>
-                        <a>Delhi</a>
-                        <a>KolKata</a>
-                        <a>Gurgaon</a>
+                        <Link
+                          className="btn btn-success buttons m-2"
+                          to="/restaurants/delhi"
+                        >
+                          Delhi
+                        </Link>
+                        <Link
+                          className="btn btn-success buttons m-2"
+                          to="/restaurants/kolkata"
+                        >
+                          KolKata
+                        </Link>
+                        <Link
+                          className="btn btn-success buttons m-2"
+                          to="/restaurants/gurgaon"
+                        >
+                          Gurgaon
+                        </Link>
                       </strong>
                     </small>
                   </div>

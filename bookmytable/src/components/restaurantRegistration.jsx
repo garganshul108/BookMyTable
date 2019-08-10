@@ -681,6 +681,9 @@ class RestaurantRegistration extends Component {
     return (
       <div className="container">
         <div className="row">
+          <div className="dummy" />
+        </div>
+        <div className="row">
           <div className="col">
             <div className="restaurantRegistrationDiv">
               <small className="form-text text-muted">

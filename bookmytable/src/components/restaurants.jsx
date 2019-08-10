@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { getRestaurants } from "../services/restaurantServices";
+import { getRestaurantsByCity } from "../services/restaurantServices";
 import RestaurantFilter from "./subComponents/restaurantFilter";
 import RestaurantCatalogue from "./subComponents/restaurantCatalogue";
 import SideAds from "./subComponents/sideAds";
@@ -7,6 +7,7 @@ import SideAds from "./subComponents/sideAds";
 import "./css/restaurants.css";
 import SearchBox from "./subComponents/searchBox";
 // import MyMap from "./subComponents/myMap";
+import { captialize } from "../util/util";
 
 class Restaurants extends Component {
   state = {
@@ -22,7 +23,7 @@ class Restaurants extends Component {
   };
 
   componentDidMount() {
-    let restaurants = getRestaurants();
+    let restaurants = getRestaurantsByCity(this.props.match.params.city);
 
     for (let restaurant of restaurants) {
       restaurant.showPhone = false;
@@ -153,7 +154,7 @@ class Restaurants extends Component {
       for (let i = 0; i < this.state.pagination.pages; i++) {
         pages[i] = (
           <li className="page-item">
-            <a className="page-link" href="#">
+            <a className="page-link" href="/restaurants">
               {i + 1}
             </a>
           </li>
@@ -164,12 +165,17 @@ class Restaurants extends Component {
 
     return (
       <div className="container">
+        <div className="row">
+          <div className="dummy" />
+        </div>
         <h3 style={{ fontWeight: 900 }}>
-          Places available in this Region : {restaurants.length}
+          Places available in {captialize(this.props.match.params.city)} :{" "}
+          {restaurants.length}
         </h3>
 
         <div className="row no-gutters" style={{ marginBottom: "150px" }}>
           <div className="col-2">
+            {/* <p>{this.props.match.params.city}</p> */}
             <RestaurantFilter
               deleteFilter={this.handleDeleteFilter}
               addFilter={this.handleAddFilter}

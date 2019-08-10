@@ -6,6 +6,7 @@ import auth from "../../services/authServices";
 // import Login from '../login';
 import SeachableList from "./searchableList";
 import { getCities } from "../../services/cityServices";
+import { captialize } from "../../util/util";
 
 class NaviagtionBar extends Component {
   state = {
@@ -17,6 +18,18 @@ class NaviagtionBar extends Component {
     let cities = getCities();
     this.setState({ cities });
   }
+
+  handleCityInputChange = ({ currentTarget: input }) => {
+    console.log("city", input);
+    let { city } = this.state;
+    console.log("input.value", input.value);
+    city = input.value;
+    console.log("cc:", city);
+    this.setState({ city }, () => {
+      console.log(this.state);
+    });
+  };
+
   render() {
     return (
       <React.Fragment>
@@ -47,14 +60,11 @@ class NaviagtionBar extends Component {
                     <NavLink className="nav-link" to="#" />
                   </li>
                 </ul>
-                <form className="form-inline">
+                <div className="form-inline">
                   <SeachableList
                     // className="searchBox"
                     placeholder="City"
                     listName="cities"
-                    className="form-control mr-sm-2"
-                    type="search"
-                    aria-label="Search"
                     value={this.state.city}
                     onChange={this.handleCityInputChange}
                   >
@@ -65,14 +75,19 @@ class NaviagtionBar extends Component {
                   <div className="form-group">
                     <Link
                       // className=""
-                      className="btn btn-danger btn-outine-info my-2 my-sm-0"
-                      to="/restaurants"
-                      type="submit"
+                      className="btn btn-danger searchBox m-2"
+                      to={"/restaurants/dummy/" + this.state.city.toLowerCase()}
+                      // type="submit"
+                      // onClick={e => {
+                      //   e.preventDefault();
+                      //   window.location =
+                      //     "/restaurants/" + this.state.city.toLowerCase();
+                      // }}
                     >
                       <i className="fa fa-search" aria-hidden="true" />
                     </Link>
                   </div>
-                </form>
+                </div>
                 {/* <form className="form-inline my-2 my-lg-0">
                   <input
                     className="form-control mr-sm-2"

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import "../css/filter.css";
 import Filter from "./filter";
-import { getCuisines, getCuisinesByName } from "../../services/cuisineServices";
+import { getCuisines } from "../../services/cuisineServices";
 import { getEstablishments } from "../../services/establishmentServices";
 import { getFeatures } from "../../services/featureServices";
 import { getCitiesByNames } from "../../services/cityServices";
@@ -66,7 +66,15 @@ class RestaurantFilter extends Component {
     return (
       <div className="filtersBox">
         <hr />
-        <h6 style={{ fontWeight: "900" }}>Filters</h6>
+        <h6
+          style={{
+            fontWeight: "900",
+            letterSpacing: "1px",
+            fontSize: "1.25rem"
+          }}
+        >
+          Filters
+        </h6>
         <hr />
         {/* City
         <hr />
