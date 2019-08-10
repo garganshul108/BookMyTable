@@ -136,7 +136,7 @@ class Restaurants extends Component {
           Places available in this Region : {restaurants.length}
         </h3>
 
-        <div className="row" style={{ marginBottom: "150px" }}>
+        <div className="row no-gutters" style={{ marginBottom: "150px" }}>
           <div className="col-2">
             <RestaurantFilter addFilter={this.handleAddFilter} />
           </div>

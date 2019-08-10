@@ -58,8 +58,7 @@
   border-radius: 1px;
   /* box-shadow: 0px 0px 2px gray; */
 }
-
-.filtersBox .filterDiv .extraOptions .subHeading {
+button .filtersBox .filterDiv .extraOptions .subHeading {
   font-size: 0.8rem;
   vertical-align: 50%;
 }
@@ -78,4 +77,19 @@
   text-align: right;
   margin-left: auto;
   right: 0;
+}
+
+.smallBtn {
+  padding: 1px 5px !important;
+  border-radius: 5px !important;
+  font-size: 1rem !important;
+  font-weight: bold !important;
+  margin: 2px;
+  opacity: 0.6;
+  cursor: pointer;
+  font-size: 0.5rem;
+}
+
+.smallBtn:hover {
+  opacity: 1;
 }
