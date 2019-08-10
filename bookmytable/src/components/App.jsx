@@ -12,6 +12,7 @@ import "./css/scrollbar.css";
 import SignUp from "./signup";
 import HomeBottom from "./homeBottom";
 import RestaurantRegistration from "./restaurantRegistration";
+// import MapTest from "./maptest";
 
 class App extends Component {
   handleCloseLogin = e => {
@@ -86,6 +87,7 @@ class App extends Component {
               <Route path="/not-found" render={() => <NotFound />} />
               <Route path="/home" render={() => <HomeBottom />} />
               <Route path="/restaurants" render={() => <Restaurants />} />
+              {/* <Route path="/map" render={() => <MapTest />} /> */}
               <Redirect from="/" exact to="/home" />
               <Redirect to="/not-found" />
             </Switch>

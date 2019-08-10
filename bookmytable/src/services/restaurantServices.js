@@ -82,8 +82,8 @@ function refactoringRestaurantData() {
 
 // refactoringRestaurantData();
 // console.log(jsonData);
+refactoringRestaurantData();
 
 export const getRestaurants = () => {
-    refactoringRestaurantData();
-    return jsonData;
+    return jsonData.sort(({ name: nameA }, { name: nameB }) => { if (nameA > nameB) return 1; return -1; });
 }

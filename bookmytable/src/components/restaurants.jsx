@@ -6,13 +6,19 @@ import SideAds from "./subComponents/sideAds";
 
 import "./css/restaurants.css";
 import SearchBox from "./subComponents/searchBox";
+// import MyMap from "./subComponents/myMap";
 
 class Restaurants extends Component {
   state = {
     restaurants: [],
     seachQuery: "",
     filters: [],
-    no_of_filter: "0"
+    no_of_filter: "0",
+    pagination: {
+      startingIndex: 0,
+      pageSize: 0,
+      pages: 0
+    }
   };
 
   componentDidMount() {
@@ -23,7 +29,18 @@ class Restaurants extends Component {
       restaurant.showMenu = false;
     }
     console.log(restaurants);
-    this.setState({ restaurants });
+
+    let pagination = {
+      startingIndex: 0,
+      pageSize: 10
+    };
+
+    let counting = restaurants.length;
+    pagination.pages = Math.ceil(counting / pagination.pageSize);
+
+    this.setState({ restaurants, pagination }, () => {
+      console.log(this.state);
+    });
   }
 
   handleSearchRestaurant = query => {
@@ -43,6 +60,7 @@ class Restaurants extends Component {
   };
 
   handleAddFilter = newFilter => {
+    // if (this.state.seachQuery) this.setState({ seachQuery: "" });
     let { filters } = this.state;
     for (let i = 0; i < filters.length; i++) {
       if (filters[i].id === newFilter.id) {
@@ -130,6 +148,20 @@ class Restaurants extends Component {
 
     restaurants = this.filterByNameSearch(restaurants);
 
+    const renderPagesForPagination = () => {
+      let pages = [];
+      for (let i = 0; i < this.state.pagination.pages; i++) {
+        pages[i] = (
+          <li className="page-item">
+            <a className="page-link" href="#">
+              {i + 1}
+            </a>
+          </li>
+        );
+      }
+      return pages;
+    };
+
     return (
       <div className="container">
         <h3 style={{ fontWeight: 900 }}>
@@ -189,9 +221,15 @@ class Restaurants extends Component {
               )}
             </div>
             <RestaurantCatalogue restaurants={restaurants} />
+            {/* Pagination */}
+            <nav aria-label="Page navigation example">
+              <ul className="pagination">{renderPagesForPagination()}</ul>
+            </nav>
+            {/* Pagination end */}
             {/* end of display catalogue */}
           </div>
           <div className="col-3">
+            {/* <MyMap /> */}
             <SideAds />
           </div>
         </div>
