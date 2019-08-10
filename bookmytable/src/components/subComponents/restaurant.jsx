@@ -14,22 +14,21 @@ class Restaurant extends Component {
     }
 
     function refactorCuisines(cuisines) {
-      return cuisines.split(",");
+      return typeof cuisines === "string" ? cuisines.split(",") : cuisines;
     }
 
     // console.log(restaurant.id);
     let {
       id,
       name,
-      highlights: tags,
-      average_cost_for_two: avCost,
+      features,
+      cost: avCost,
       cuisines,
-      currency,
       thumb,
       user_rating: rating,
       timings,
       location,
-      establishment: establishments,
+      establishments,
       showPhone,
       phone_numbers,
       showMenu,
@@ -38,11 +37,11 @@ class Restaurant extends Component {
 
     let { aggregate_rating: aggRating, votes } = rating;
     let { locality: highLocals, address } = location;
-    cuisines = refactorCuisines(cuisines);
-    name = refactorName(name);
+    // cuisines = refactorCuisines(cuisines);
+    // name = refactorName(name);
 
     function renderTags() {
-      let rTags = tags.slice(0, 5);
+      let rTags = features.slice(0, 5);
       return (
         <React.Fragment>
           {rTags.map(tag => (
@@ -111,9 +110,7 @@ class Restaurant extends Component {
               </tr>
               <tr>
                 <td className="header">COST FOR TWO:</td>
-                <td className="data">
-                  {currency} {avCost}
-                </td>
+                <td className="data">Rs.&nbsp;{avCost}</td>
               </tr>
               <tr>
                 <td className="header">HOURS:</td>

@@ -127,3 +127,20 @@ hr {
   color: gray;
   font-size: 0.8rem;
 }
+
+.filterDisplay {
+  padding: 5px;
+  margin-bottom: 12px;
+  box-sizing: border-box;
+  background: rgb(229, 247, 253);
+  border: 2px dashed lightseagreen;
+  border-radius: 3px;
+  /* box-shadow: 1px 1px 1px blue; */
+}
+
+.filterDisplay .deleteFBtn {
+  /* font-weight: normal !important; */
+  /* margin: 2px; */
+  border: none;
+  opacity: 0.8;
+}
