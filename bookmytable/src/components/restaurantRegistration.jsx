@@ -6,9 +6,9 @@ import RegistrationSubForm from "./subComponents/registrationSubForm";
 import SeachableList from "./subComponents/searchableList";
 import { getCities } from "../services/cityServices";
 import { getCuisines } from "../services/cuisineServices";
-import { getFeatures } from "../services/featureServices";
+import { getFeaturesByName } from "../services/featureServices";
 import RAdditionFormII from "./subComponents/rAdditionFormII";
-import { getEstablishment } from "../services/establishmentServices";
+import { getEstablishmentsByName } from "../services/establishmentServices";
 class RestaurantRegistration extends Component {
   state = {
     data: {
@@ -76,8 +76,8 @@ class RestaurantRegistration extends Component {
   componentDidMount() {
     let cities_data = getCities();
     let cuisines_data = getCuisines();
-    let features_data = getFeatures();
-    let establishment_data = getEstablishment();
+    let features_data = getFeaturesByName();
+    let establishment_data = getEstablishmentsByName();
     this.setState(
       { cities_data, establishment_data, cuisines_data, features_data },
       () => {

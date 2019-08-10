@@ -25,6 +25,8 @@
   display: block;
   font-size: 0.8rem;
   cursor: pointer;
+  width: 100%;
+  position: relative;
 }
 
 .filtersBox .filterDiv .filterOption:hover {
@@ -43,7 +45,7 @@
   top: -20px;
   left: 150px;
   height: 250px;
-  width: 150px;
+  width: 175px;
   z-index: 10;
   overflow: hidden;
 }
@@ -69,4 +71,11 @@
   cursor: pointer;
   font-size: 0.7rem;
   border: none;
+}
+
+.right {
+  position: absolute;
+  text-align: right;
+  margin-left: auto;
+  right: 0;
 }

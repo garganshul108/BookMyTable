@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { relative } from "path";
 
 class Filter extends Component {
   state = { extra: false };
@@ -14,25 +15,42 @@ class Filter extends Component {
     let extraContent = [];
 
     if (content.length > 8) {
-      extraContent = content.slice(5);
-      content = content.slice(0, 5);
+      extraContent = content.slice(8);
+      content = content.slice(0, 8);
     }
+    // console.log(targetProperty, content);
+
+    const renderItem = item => {
+      if (typeof item === "object")
+        return (
+          <div
+            className="filterOption"
+            data-name={targetProperty}
+            onMouseDown={setLocalFilter}
+            onMouseUp={sendFilter}
+            data-value={item.name}
+          >
+            {item.name}
+            <span className="right text-muted">{item.count}</span>
+          </div>
+        );
+      return (
+        <div
+          className="filterOption"
+          data-name={targetProperty}
+          onMouseDown={setLocalFilter}
+          onMouseUp={sendFilter}
+          data-value={item}
+        >
+          {item}
+        </div>
+      );
+    };
 
     return (
       <div className="filterDiv" name={targetProperty}>
         <div className="heading">{label}</div>
-        {content.map(item => {
-          return (
-            <a
-              className="filterOption"
-              name={targetProperty}
-              onMouseDown={setLocalFilter}
-              onMouseUp={sendFilter}
-            >
-              {item}
-            </a>
-          );
-        })}
+        {content.map(item => renderItem(item))}
         {extraContent.length > 0 && (
           <button
             className="btn-primary smallCross"
@@ -42,7 +60,7 @@ class Filter extends Component {
               this.setState({ extra });
             }}
           >
-            More...
+            more...
           </button>
         )}
         {this.state.extra && (
@@ -69,18 +87,7 @@ class Filter extends Component {
             </div>
 
             <div className="options">
-              {extraContent.map(item => {
-                return (
-                  <a
-                    className="filterOption"
-                    name={targetProperty}
-                    onMouseDown={setLocalFilter}
-                    onMouseUp={sendFilter}
-                  >
-                    {item}
-                  </a>
-                );
-              })}
+              {extraContent.map(item => renderItem(item))}
             </div>
           </div>
         )}

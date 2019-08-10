@@ -1,5 +1,14 @@
 import { captialize } from "../util/util";
 
+
+/****
+ * Point to Remember
+ * PTR:
+ * here the JSON data is simply the array of restaurants
+ * API may provide me a location object consisting of the array
+ * 
+ * 
+ */
 let jsonData = [
     ...require('./dump/JSON/R_data_Gurgaon0+20_filtered.json'),
     // ...require('./dump/JSON/R_data_Gurgaon21+20_filtered.json'),

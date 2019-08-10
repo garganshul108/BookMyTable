@@ -2,8 +2,8 @@ import React, { Component } from "react";
 
 import "../css/filter.css";
 import Filter from "./filter";
-import { getCuisines } from "../../services/cuisineServices";
-import { getEstablishment } from "../../services/establishmentServices";
+import { getCuisines, getCuisinesByName } from "../../services/cuisineServices";
+import { getEstablishments } from "../../services/establishmentServices";
 import { getFeatures } from "../../services/featureServices";
 import { getCitiesByNames } from "../../services/cityServices";
 import md5 from "md5/md5";
@@ -20,12 +20,12 @@ class RestaurantFilter extends Component {
 
   componentDidMount() {
     let cuisines = getCuisines();
-    let establishments = getEstablishment();
+    let establishments = getEstablishments();
     let features = getFeatures();
     let localities = getCitiesByNames();
     let colorClasses = {
-      cuisine: "info",
-      establishment: "secondary",
+      cuisines: "info",
+      establishments: "secondary",
       features: "warning",
       locality: "primary"
     };
@@ -42,9 +42,10 @@ class RestaurantFilter extends Component {
   }
 
   setLocalFilter = ({ currentTarget: target }) => {
+    console.log(target);
     let { filter } = this.state;
-    filter.expectedValue = target.innerHTML;
-    filter.targetProperty = target.name;
+    filter.expectedValue = target.dataset.value;
+    filter.targetProperty = target.dataset.name;
     filter.id = md5(filter.targetProperty + "-" + filter.expectedValue);
     filter.colorClass = this.state.colorClasses[filter.targetProperty];
     this.setState({ filter });
