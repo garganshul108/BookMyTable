@@ -59,7 +59,7 @@ class Filter extends Component {
               this.setState({ extra });
             }}
           >
-            more...
+            See all...
           </a>
         )}
         {this.state.extra && (

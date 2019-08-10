@@ -191,7 +191,7 @@ class Restaurants extends Component {
             <RestaurantCatalogue restaurants={restaurants} />
             {/* end of display catalogue */}
           </div>
-          <div className="col-2">
+          <div className="col-3">
             <SideAds />
           </div>
         </div>
