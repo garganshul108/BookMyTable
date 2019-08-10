@@ -55,6 +55,15 @@ def insert_restaurant(cursor,data,_loc_id,days_id):
     except Exception as e:
         print("resta",e,"resta")
 
+def insert_slot(cursor,data,res_id):
+    try:
+        for slot in data:
+            sql="INSERT INTO Slot(restaurant_id,start_time,end_time) VALUES(%s,%s,%s)"
+            values=(res_id,slot['start_time'],slot['end_time'])
+            cursor.execute(sql,values)
+    except Exception as e:
+        print("slot ",e," slot")
+
 @app.route('/restaurant',methods=['POST'])
 def add_restaurant():
     try:
@@ -68,7 +77,9 @@ def add_restaurant():
         days_id=get_last_id(cursor)
         insert_location(cursor,data[0]['location'])
         loc_id=get_last_id(cursor)
-        insert_restaurant(cursor,data[0],loc_id,days_id)   
+        insert_restaurant(cursor,data[0],loc_id,days_id)  
+        res_id=get_last_id(cursor)
+        insert_slot(cursor,data[0]['slots'],res_id)
         conn.commit()
         
     except Exception as e:
