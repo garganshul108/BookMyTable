@@ -7,9 +7,23 @@ from flask import flash, request
 from werkzeug import generate_password_hash, check_password_hash
 import random
 from decimal import Decimal
+from Restaurant.util.LastId import get_last_id
 
 with open('all_data.json') as json_file:
     data = json.load(json_file)
+with open('Cities.json') as json_file:
+    cities_data=json.load(json_file)
+
+def update_availablity(loc_id,cursor):
+    try:
+        index1=random.randrange(0,6)
+        arr=[1,1,1,1,1,1,1]
+        arr[index1]=0
+        sql="INSERT INTO Days(id,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday) VALUES(%s,%s,%s,%s,%s,%s,%s,%s)"
+        values=(loc_id,arr[0],arr[1],arr[2],arr[3],arr[4],arr[5],arr[6])
+        cursor.execute(sql,values)
+    except Exception as e:
+        print("Error",e,"Error")
 
 
 def update_location(tt, loc_id, cursor):
@@ -31,20 +45,6 @@ def update_location(tt, loc_id, cursor):
     cursor.execute(sql, value)
 
 
-def update_Hall_Size(tt, loc_id, cursor):
-    _size_ten = random.randrange(4, 8)
-    _size_eight = random.randrange(5, 10)
-    _size_six = random.randrange(8, 15)
-    _size_four = random.randrange(10, 20)
-    _size_two = random.randrange(15, 25)
-    _size_one = random.randrange(20, 30)
-    cap_id = loc_id
-    sql = "INSERT INTO Hall_Size(id,size_ten,size_eight,size_six,size_four,size_two,size_one) VALUES(%s,%s,%s,%s,%s,%s,%s)"
-    value = (cap_id, _size_ten, _size_eight, _size_six,
-             _size_four, _size_two, _size_one)
-    cursor.execute(sql, value)
-
-
 def update_restaurant(tt, loc_id, cursor):
     _id = tt['id']
     _name = tt['name']
@@ -62,10 +62,10 @@ def update_restaurant(tt, loc_id, cursor):
 
     _thumb = tt['thumb']
     _phone_numbers = tt['phone_numbers']
-
-    sql = "INSERT INTO Restaurant(id,location_id,name,average_cost_for_two,cuisines,timings,establishment,highlights,thumb,phone_numbers,capacity_id) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
-    value = (_id, loc_id, _name, _average_cost, _cuisines, _timings, _establishment, _highlights,
-             _thumb, _phone_numbers, loc_id)
+    _capacity=random.randrange(20,50)
+    sql = "INSERT INTO Restaurant(id,location_id,availablity_id,name,average_cost_for_two,cuisines,timings,establishment,highlights,thumb,phone_numbers,capacity) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+    value = (_id, loc_id,loc_id, _name, _average_cost, _cuisines, _timings, _establishment, _highlights,
+             _thumb, _phone_numbers,_capacity)
     cursor.execute(sql, value)
 
 
@@ -75,14 +75,20 @@ def get_restaurant():
         conn = mysql.connect()
         cursor = conn.cursor()
         cursor.execute("DELETE FROM Restaurant")
-        cursor.execute("DELETE FROM Hall_Size")
+        cursor.execute("DELETE FROM Days")
         cursor.execute("DELETE FROM Location")
+        cursor.execute("DELETE FROM Cities")
+
         conn.commit()
         loc_id = 1
+        # for tt in cities_data:
+        #     sql="INSERT INTO Cities(id,name,state) VALUES(%s,%s,%s)"
+        #     values=(int(tt['id']),tt['name'],tt['state'])
+        #     cursor.execute(sql,values)
+        #     conn.commit()
         for tt in data:
-
-            update_location(tt, loc_id, cursor)
-            update_Hall_Size(tt, loc_id, cursor)
+            update_availablity(loc_id,cursor)
+            update_location(tt, loc_id,cursor)
             update_restaurant(tt, loc_id, cursor)
 
             conn.commit()

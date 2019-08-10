@@ -5,6 +5,15 @@ from flask import jsonify
 from flask import flash, request
 from Restaurant.util.LastId import get_last_id
 
+
+def insert_days(cursor,data):
+    try:
+        sql="INSERT INTO Days(Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday) VALUES(%s,%s,%s,%s,%s,%s,%s)"
+        values=(data['Monday'],data['Tuesday'],data['Wednesday'],data['Thursday'],data['Friday'],data['Saturday'],data['Sunday'])
+        cursor.execute(sql,values)
+    except Exception as e:
+        print("Days ",e)
+
 def insert_location(cursor,data):
     try:
         _address=data['address']['line_1']+data['address']['line_2']
@@ -22,23 +31,7 @@ def insert_location(cursor,data):
         print("ERROR")
 
 
-
-def insert_table(cursor,data):
-    try:
-        eight=int("0"+data['size_eight'])
-        four=int("0"+data['size_four'])
-        one=int("0"+data['size_one'])
-        six=int("0"+data['size_six'])
-        ten=int("0"+data['size_ten'])
-        two=int("0"+data['size_two'])
-        sql="INSERT INTO Hall_Size(size_ten,size_eight,size_six,size_four,size_two,size_one) VALUES(%s,%s,%s,%s,%s,%s)"
-        values=(ten,eight,six,four,two,one)
-        cursor.execute(sql,values)
-    except Exception as e:
-        print("table",e,"table")
-
-
-def insert_restaurant(cursor,data,_loc_id,_capacity_id):
+def insert_restaurant(cursor,data,_loc_id,days_id):
     try:
         _ave_cost=int("0"+data['average_cost_for_two'])
         _cuisines=data['cuisines']
@@ -53,13 +46,23 @@ def insert_restaurant(cursor,data,_loc_id,_capacity_id):
         _opening_status=data['opening_status']
         _email=data['email']
         _website=data['website']
+        _capacity=int("0"+data['capacity'])
         sql="""INSERT INTO 
-            Restaurant(location_id,name,email,average_cost_for_two,cuisines,timings,establishment,highlights,thumb,phone_numbers,capacity_id,opening_status,website)
-            VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
-        values=(_loc_id,_name,_email,_ave_cost,_cuisines,_timings,_establishment,_highlights,_thumb,_phone,_capacity_id,_opening_status,_website)
+            Restaurant(location_id,availablity_id,name,email,average_cost_for_two,cuisines,timings,establishment,highlights,thumb,phone_numbers,capacity,opening_status,website)
+            VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
+        values=(_loc_id,days_id,_name,_email,_ave_cost,_cuisines,_timings,_establishment,_highlights,_thumb,_phone,_capacity,_opening_status,_website)
         cursor.execute(sql,values)
     except Exception as e:
         print("resta",e,"resta")
+
+def insert_slot(cursor,data,res_id):
+    try:
+        for slot in data:
+            sql="INSERT INTO Slot(restaurant_id,start_time,end_time) VALUES(%s,%s,%s)"
+            values=(res_id,slot['start_time'],slot['end_time'])
+            cursor.execute(sql,values)
+    except Exception as e:
+        print("slot ",e," slot")
 
 @app.route('/restaurant',methods=['POST'])
 def add_restaurant():
@@ -70,11 +73,13 @@ def add_restaurant():
         conn=mysql.connect()
         cursor=conn.cursor()
 
+        insert_days(cursor,data[0]['days'])
+        days_id=get_last_id(cursor)
         insert_location(cursor,data[0]['location'])
         loc_id=get_last_id(cursor)
-        insert_table(cursor,data[0]['tables'])
-        capacity_id=get_last_id(cursor)
-        insert_restaurant(cursor,data[0],loc_id,capacity_id)   
+        insert_restaurant(cursor,data[0],loc_id,days_id)  
+        res_id=get_last_id(cursor)
+        insert_slot(cursor,data[0]['slots'],res_id)
         conn.commit()
         
     except Exception as e:
