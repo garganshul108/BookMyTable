@@ -19,6 +19,11 @@ def convert_time(time):
         return Double(ans)
     return (Double(ans)+(0.5))
 
+def rev_convert_time(time):
+    st= str(time/2)+":"
+    if (st%2)!=1:
+        st=st+"30"
+    return st
 def get_shifts(cursor,res_id):
     cursor.execute("SELECT * FROM Slot WHERE restaurant_id=%s" ,res_id)
     shifts=cursor.fetchall()
@@ -41,6 +46,14 @@ def get_slots(cursor,date,res_id):
         slot['end_time']=convert_time(slot['end_time'])
     return slots
 
+def insert_booking(cursor,date,res_id,size,start,end):
+    try:
+        sql="INSERT INTO Booking(restaurant_id,size,start_time,end_time,date) VALUES(%s,%s,%s,%s,%s)"
+        values=(res_id,size,start,end,date)
+        cursor.execute(sql,values)
+    except Exception as e:
+        print("Booking ",e," Booking")
+
 def book_table():
     _date=data['date']
     _time=convert_time(data['time'])
@@ -49,7 +62,7 @@ def book_table():
     _user_id=data['user_id']
 
     newSlot={
-        start:_time
+        start:_time,
         end:_time+1
     }
     if(size>8)
@@ -61,8 +74,81 @@ def book_table():
     capacity=get_capacity(cursor)
     slots=get_slots(cursor,_date,_res_id)
     
+    arr=[]
+    for i in range(48):
+        arr.append(0)
 
-    arr=
+    arr[0]=capacity
+    for shift in shifts:
+        start=int(2*shift['start_time'])
+        end=int(2*shift['end_time'])
+        arr[start]=arr[start]-capacity
+        if end>start:
+            arr[end]=arr[end]+capacity
+
+    for slot in slots:
+        start=int(2*slot['start_time'])
+        end=int(2*slot['end_time'])
+        arr[start]=arr[start]+slot['size']
+        if(end>start):
+            arr[end]=arr[end]-slot['size']
+    
+    count=0
+    for i in range(new_slot['start'],new_slot['end']):
+        if arr[i]+_size >capacity:
+            count=count+1
+    
+    if count==0:
+        insert_booking(cursor,_date,_res_id,_size,rev_convert_time(new_slot['star']),rev_convert_time(new_slot['end']))
+        return "Success"
+    
+    response_slots=[]
+
+    c1=count
+    j=new_slot['end']
+    for i in range(new_slot['start'],48):
+        if c1==0:
+            response_slots.append({
+                "start":i,
+                "end":j
+            })
+            break
+        
+        if arr[i]+_size>capacity:
+            c1=c1-1
+
+        j=j+1
+        if j<48 AND arr[j]+_size>capacity:
+            c1=c1+1
+    
+    c1=count
+    j=new_slot['end']
+    for i in range(new_slot['start'],-1,-1):
+        if c1==0:
+            response_slots.append({
+                "start":i,
+                "end":j
+            })
+        if arr[j]+_size>capacity:
+            c1=c1-1
+        j=j-1
+        
+        if i>0 AND arr[i-1]+_size>capacity:
+            c1=c1+1
+    
+    return jsonify(response_slots)
+
+
+
+
+
+    
+    
+
+
+    
+
+     
 
 
 
