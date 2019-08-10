@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Aug 09, 2019 at 11:45 PM
+-- Generation Time: Aug 10, 2019 at 12:37 PM
 -- Server version: 5.7.26-0ubuntu0.18.04.1
 -- PHP Version: 7.2.19-0ubuntu0.18.04.1
 
@@ -32,8 +32,9 @@ CREATE TABLE `Booking` (
   `restaurant_id` int(11) DEFAULT NULL,
   `reference_no` varchar(1000) DEFAULT NULL,
   `size` int(11) NOT NULL,
-  `start_time` time NOT NULL,
-  `end_time` time NOT NULL
+  `start_time` varchar(11) NOT NULL,
+  `end_time` varchar(11) NOT NULL,
+  `date` varchar(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -65,6 +66,13 @@ CREATE TABLE `Days` (
   `Sunday` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `Days`
+--
+
+INSERT INTO `Days` (`id`, `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday`, `Sunday`) VALUES
+(94, 0, 0, 0, 0, 0, 0, 0);
+
 -- --------------------------------------------------------
 
 --
@@ -81,6 +89,13 @@ CREATE TABLE `Location` (
   `latitude` double DEFAULT NULL,
   `longitude` double DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `Location`
+--
+
+INSERT INTO `Location` (`id`, `city`, `zipcode`, `locality`, `address`, `locality_verbose`, `latitude`, `longitude`) VALUES
+(187, '', NULL, '', '', '', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -117,6 +132,13 @@ CREATE TABLE `Restaurant` (
   `website` varchar(1000) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `Restaurant`
+--
+
+INSERT INTO `Restaurant` (`id`, `location_id`, `availablity_id`, `name`, `email`, `average_cost_for_two`, `cuisines`, `timings`, `establishment`, `highlights`, `thumb`, `phone_numbers`, `capacity`, `opening_status`, `website`) VALUES
+(19151019, 187, 94, '', '', 0, '', '', '', '', '', ' , ', 12, '', '');
+
 -- --------------------------------------------------------
 
 --
@@ -141,13 +163,19 @@ CREATE TABLE `Review` (
 CREATE TABLE `Slot` (
   `id` int(11) NOT NULL,
   `restaurant_id` int(11) DEFAULT NULL,
-  `start_time` time NOT NULL,
-  `end_time` time NOT NULL,
-  `date` date DEFAULT NULL,
+  `start_time` varchar(11) NOT NULL,
+  `end_time` varchar(11) NOT NULL,
   `day` varchar(20) DEFAULT NULL,
-  `curr_strength` int(11) NOT NULL DEFAULT '0',
-  `status` tinyint(1) NOT NULL DEFAULT '1'
+  `status` tinyint(1) DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `Slot`
+--
+
+INSERT INTO `Slot` (`id`, `restaurant_id`, `start_time`, `end_time`, `day`, `status`) VALUES
+(5, 19151019, '10:00', '03:00', NULL, 1),
+(6, 19151019, '06:00', '10:00', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -177,7 +205,7 @@ CREATE TABLE `User` (
 ALTER TABLE `Booking`
   ADD PRIMARY KEY (`id`),
   ADD KEY `user_id` (`user_id`),
-  ADD KEY `slot_id` (`restaurant_id`);
+  ADD KEY `restaurant_id` (`restaurant_id`);
 
 --
 -- Indexes for table `Cities`
@@ -242,22 +270,22 @@ ALTER TABLE `User`
 -- AUTO_INCREMENT for table `Booking`
 --
 ALTER TABLE `Booking`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `Days`
 --
 ALTER TABLE `Days`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
 --
 -- AUTO_INCREMENT for table `Location`
 --
 ALTER TABLE `Location`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=184;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=188;
 --
 -- AUTO_INCREMENT for table `Restaurant`
 --
 ALTER TABLE `Restaurant`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19151016;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19151020;
 --
 -- AUTO_INCREMENT for table `Review`
 --
@@ -267,7 +295,7 @@ ALTER TABLE `Review`
 -- AUTO_INCREMENT for table `Slot`
 --
 ALTER TABLE `Slot`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `User`
 --
@@ -282,7 +310,7 @@ ALTER TABLE `User`
 --
 ALTER TABLE `Booking`
   ADD CONSTRAINT `Booking_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `User` (`id`),
-  ADD CONSTRAINT `Booking_ibfk_2` FOREIGN KEY (`restaurant_id`) REFERENCES `Slot` (`id`);
+  ADD CONSTRAINT `Booking_ibfk_2` FOREIGN KEY (`restaurant_id`) REFERENCES `Restaurant` (`id`);
 
 --
 -- Constraints for table `Photos`
