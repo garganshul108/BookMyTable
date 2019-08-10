@@ -51,8 +51,8 @@ class Filter extends Component {
         <div className="heading">{label}</div>
         {content.map(item => renderItem(item))}
         {extraContent.length > 0 && (
-          <button
-            className="btn-primary smallCross"
+          <a
+            className="text-muted smallBtn"
             onClick={e => {
               let { extra } = this.state;
               extra = true;
@@ -60,7 +60,7 @@ class Filter extends Component {
             }}
           >
             more...
-          </button>
+          </a>
         )}
         {this.state.extra && (
           <div className="filtersBox extraOptions">
