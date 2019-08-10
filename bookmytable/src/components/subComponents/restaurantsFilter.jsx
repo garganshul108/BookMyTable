@@ -7,7 +7,7 @@ import { getEstablishments } from "../../services/establishmentServices";
 import { getFeatures } from "../../services/featureServices";
 import { getCitiesByNames } from "../../services/cityServices";
 import md5 from "md5/md5";
-class RestaurantFilter extends Component {
+class RestaurantsFilter extends Component {
   state = {
     cuisines: [],
     establishments: [],
@@ -138,4 +138,4 @@ class RestaurantFilter extends Component {
   }
 }
 
-export default RestaurantFilter;
+export default RestaurantsFilter;

@@ -9,8 +9,7 @@
   border-radius: 5px;
   margin-bottom: 10px;
 }
-
-.restaurantRegistrationDiv .subForm {
+.subForm {
   background: white;
   padding: 12px;
   box-shadow: 0 0 2px gray;
@@ -18,7 +17,7 @@
   margin-bottom: 10px;
 }
 
-.restaurantRegistrationDiv .subForm .title {
+.subForm .title {
   font-weight: 900;
 }
 

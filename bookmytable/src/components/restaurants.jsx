@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { getRestaurantsByCity } from "../services/restaurantServices";
-import RestaurantFilter from "./subComponents/restaurantFilter";
-import RestaurantCatalogue from "./subComponents/restaurantCatalogue";
+import RestaurantsFilter from "./subComponents/restaurantsFilter";
+import RestaurantsCatalogue from "./subComponents/restaurantsCatalogue";
 import SideAds from "./subComponents/sideAds";
 
 import "./css/restaurants.css";
@@ -29,7 +29,7 @@ class Restaurants extends Component {
       restaurant.showPhone = false;
       restaurant.showMenu = false;
     }
-    console.log(restaurants);
+    // console.log(restaurants);
 
     let pagination = {
       startingIndex: 0,
@@ -176,7 +176,7 @@ class Restaurants extends Component {
         <div className="row no-gutters" style={{ marginBottom: "150px" }}>
           <div className="col-2">
             {/* <p>{this.props.match.params.city}</p> */}
-            <RestaurantFilter
+            <RestaurantsFilter
               deleteFilter={this.handleDeleteFilter}
               addFilter={this.handleAddFilter}
             />
@@ -229,7 +229,7 @@ class Restaurants extends Component {
                 </div>
               )}
             </div>
-            <RestaurantCatalogue restaurants={restaurants} />
+            <RestaurantsCatalogue restaurants={restaurants} />
             {/* Pagination */}
             <nav aria-label="Page navigation example">
               <ul className="pagination">{renderPagesForPagination()}</ul>

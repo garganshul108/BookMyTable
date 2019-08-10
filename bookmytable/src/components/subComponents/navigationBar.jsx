@@ -20,13 +20,13 @@ class NaviagtionBar extends Component {
   }
 
   handleCityInputChange = ({ currentTarget: input }) => {
-    console.log("city", input);
+    // console.log("city", input);
     let { city } = this.state;
-    console.log("input.value", input.value);
+    // console.log("input.value", input.value);
     city = input.value;
-    console.log("cc:", city);
+    // console.log("cc:", city);
     this.setState({ city }, () => {
-      console.log(this.state);
+      // console.log(this.state);
     });
   };
 
