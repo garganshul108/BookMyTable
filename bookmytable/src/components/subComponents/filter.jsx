@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 class Filter extends Component {
   state = { extra: false };
@@ -51,7 +52,7 @@ class Filter extends Component {
         <div className="heading">{label}</div>
         {content.map(item => renderItem(item))}
         {extraContent.length > 0 && (
-          <a
+          <Link
             className="text-muted smallBtn"
             onClick={e => {
               let { extra } = this.state;
@@ -59,8 +60,8 @@ class Filter extends Component {
               this.setState({ extra });
             }}
           >
-            more...
-          </a>
+            See all...
+          </Link>
         )}
         {this.state.extra && (
           <div className="filtersBox extraOptions">

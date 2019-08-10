@@ -4,8 +4,32 @@ import { Link, NavLink } from "react-router-dom";
 import "../css/navigationBar.css";
 import auth from "../../services/authServices";
 // import Login from '../login';
+import SeachableList from "./searchableList";
+import { getCities } from "../../services/cityServices";
+import { captialize } from "../../util/util";
+
 class NaviagtionBar extends Component {
-  state = {};
+  state = {
+    city: "",
+    cities: []
+  };
+
+  componentDidMount() {
+    let cities = getCities();
+    this.setState({ cities });
+  }
+
+  handleCityInputChange = ({ currentTarget: input }) => {
+    console.log("city", input);
+    let { city } = this.state;
+    console.log("input.value", input.value);
+    city = input.value;
+    console.log("cc:", city);
+    this.setState({ city }, () => {
+      console.log(this.state);
+    });
+  };
+
   render() {
     return (
       <React.Fragment>
@@ -31,14 +55,40 @@ class NaviagtionBar extends Component {
                 className="collapse navbar-collapse"
                 id="navbarSupportedContent"
               >
-                <ul className="navbar-nav mr-auto">
+                <ul className="navbar-nav">
                   <li className="nav-item active">
-                    <NavLink className="nav-link" to="#">
-                      Home <span className="sr-only">(current)</span>
-                    </NavLink>
+                    <NavLink className="nav-link" to="#" />
                   </li>
                 </ul>
-                <form className="form-inline my-2 my-lg-0">
+                <div className="form-inline">
+                  <SeachableList
+                    // className="searchBox"
+                    placeholder="City"
+                    listName="cities"
+                    value={this.state.city}
+                    onChange={this.handleCityInputChange}
+                  >
+                    {this.state.cities.map(item => (
+                      <option value={item.name} label={item.state} />
+                    ))}
+                  </SeachableList>
+                  <div className="form-group">
+                    <Link
+                      // className=""
+                      className="btn btn-danger searchBox m-2"
+                      to={"/restaurants/dummy/" + this.state.city.toLowerCase()}
+                      // type="submit"
+                      // onClick={e => {
+                      //   e.preventDefault();
+                      //   window.location =
+                      //     "/restaurants/" + this.state.city.toLowerCase();
+                      // }}
+                    >
+                      <i className="fa fa-search" aria-hidden="true" />
+                    </Link>
+                  </div>
+                </div>
+                {/* <form className="form-inline my-2 my-lg-0">
                   <input
                     className="form-control mr-sm-2"
                     type="search"
@@ -50,7 +100,7 @@ class NaviagtionBar extends Component {
                   >
                     <i className="fa fa-search" aria-hidden="true" />
                   </button>
-                </form>
+                </form> */}
               </div>
             </nav>
           </div>

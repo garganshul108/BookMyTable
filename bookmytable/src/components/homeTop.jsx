@@ -35,39 +35,42 @@ class HomeTop extends Component {
               <div className="dummy" />
               <div className="container">
                 <div className="row">
-                  <div className="col-7">
+                  <div className="col">
                     <h3 className="title">BookMyTable.com</h3>
                   </div>
-                  <div className="col-5">
+                </div>
+                <div className="row">
+                  <div className="col">
                     <div className="userButtons">
                       <Link
-                        className="btn btn-danger buttons"
+                        className="text-danger btn-lg buttons"
                         onClick={this.props.openLogin}
                       >
-                        <small>
+                        <small className="font-weight-bold">
                           <span className="text text-default">
                             <i className="fa fa-user" aria-hidden="true" />
                           </span>
-                          &nbsp;&nbsp;Login
+                          &nbsp;Login
                         </small>
                       </Link>
+                      or
                       <Link
-                        className="btn btn-warning  buttons"
+                        className="text-warning btn-lg buttons"
                         onClick={this.props.openSignUp}
                       >
-                        <small>
-                          <span className="text text-default">
+                        <small className="font-weight-bold">
+                          <span className="text text-default ">
                             <i className="fa fa-sign-out" aria-hidden="true" />
                           </span>
-                          &nbsp;&nbsp;New ?
+                          &nbsp;Create a New Account
                         </small>
                       </Link>
                     </div>
                   </div>
                 </div>
-                <div className="row">
+                {/* <div className="row">
                   <div className="dummy" />
-                </div>
+                </div> */}
                 <div className="row">
                   <div className="col desc">
                     <big>Hungry KYA?</big>
@@ -76,27 +79,12 @@ class HomeTop extends Component {
                     </small>
                   </div>
                 </div>
-                <div className="row searchBox">
+                <div className="row">
                   <div className="col">
-                    {/* --------------------------------------------------------------------------------- */}
-                    {/* --------------------------------------------------------------------------------- */}
-                    {/* --------------------------------------------------------------------------------- */}
-                    {/* --------------------------------------------------------------------------------- */}
-                    {/* --------------------------------------------------------------------------------- */}
-                    {/* --------------------------------------------------------------------------------- */}
-                    {/* --------------------------------------------------------------------------------- */}
-                    {/* --------------------------------------------------------------------------------- */}
-                    {/* --------------------------------------------------------------------------------- */}
-                    {/* --------------------------------------------------------------------------------- */}
-                    {/* --------------------------------------------------------------------------------- */}
-                    {/* --------------------------------------------------------------------------------- */}
-                    {/* --------------------------------------------------------------------------------- */}
-                    {/* --------------------------------------------------------------------------------- */}
-                    {/* --------------------------------------------------------------------------------- */}
-                    {/* --------------------------------------------------------------------------------- */}
-                    <form className="form-inline">
+                    <div className="form-inline">
                       <SeachableList
-                        placeholder="Enter Location City"
+                        className="searchBox"
+                        placeholder="City"
                         listName="cities"
                         value={this.state.city}
                         onChange={this.handleCityInputChange}
@@ -107,46 +95,39 @@ class HomeTop extends Component {
                       </SeachableList>
                       <div className="form-group">
                         <Link
-                          className="btn btn-info my-2 my-sm-0"
-                          to="/restaurants"
-                          type="submit"
+                          // className=""
+                          className="btn btn-danger searchBox m-2"
+                          to={"/restaurants/" + this.state.city.toLowerCase()}
+                          // type="submit"
                         >
-                          FIND PLACES
+                          <i className="fa fa-search" aria-hidden="true" />
                         </Link>
                       </div>
-                    </form>
-                    {/* --------------------------------------------------------------------------------- */}
-                    {/* --------------------------------------------------------------------------------- */}
-                    {/* --------------------------------------------------------------------------------- */}
-                    {/* --------------------------------------------------------------------------------- */}
-                    {/* --------------------------------------------------------------------------------- */}
-                    {/* --------------------------------------------------------------------------------- */}
-                    {/* --------------------------------------------------------------------------------- */}
-                    {/* --------------------------------------------------------------------------------- */}
-                    {/* --------------------------------------------------------------------------------- */}
-                    {/* --------------------------------------------------------------------------------- */}
-                    {/* --------------------------------------------------------------------------------- */}
-                    {/* --------------------------------------------------------------------------------- */}
-                    {/* --------------------------------------------------------------------------------- */}
-                    {/* --------------------------------------------------------------------------------- */}
-                    {/* --------------------------------------------------------------------------------- */}
-                    {/* --------------------------------------------------------------------------------- */}
-                    {/* --------------------------------------------------------------------------------- */}
-                    {/* --------------------------------------------------------------------------------- */}
-                    {/* --------------------------------------------------------------------------------- */}
-                    {/* --------------------------------------------------------------------------------- */}
-                    {/* --------------------------------------------------------------------------------- */}
+                    </div>
                   </div>
                 </div>
                 <div className="row">
                   <div className="col desc">
                     <small className="text text-muted">
-                      <p>Popular Cities</p>
-
                       <strong>
-                        <a>Delhi</a>
-                        <a>KolKata</a>
-                        <a>Gurgaon</a>
+                        <Link
+                          className="btn btn-success buttons m-2"
+                          to="/restaurants/delhi"
+                        >
+                          Delhi
+                        </Link>
+                        <Link
+                          className="btn btn-success buttons m-2"
+                          to="/restaurants/kolkata"
+                        >
+                          KolKata
+                        </Link>
+                        <Link
+                          className="btn btn-success buttons m-2"
+                          to="/restaurants/gurgaon"
+                        >
+                          Gurgaon
+                        </Link>
                       </strong>
                     </small>
                   </div>

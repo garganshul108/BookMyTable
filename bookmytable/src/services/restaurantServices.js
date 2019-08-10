@@ -1,4 +1,5 @@
 import { captialize } from "../util/util";
+// import { getRestaurants } from './restaurantServices';
 
 
 /****
@@ -17,9 +18,18 @@ let jsonData = [
     ...require('./dump/JSON/R_data_Other_filtered.json')
 ];
 
-function addMiscPropertyToRestaurants(restaurants) {
-    return restaurants;
+let jsonDataByCity = {
+    gurgaon: [...require('./dump/JSON/R_data_Gurgaon0+20_filtered.json')],
+    delhi: [...require('./dump/JSON/R_data_Delhi_filtered.json')],
+    kolkata: [...require('./dump/JSON/R_data_Kolkata_filtered.json')],
 }
+
+let defaultDataByCity = [...require('./dump/JSON/R_data_Other_filtered.json')];
+
+
+// function addMiscPropertyToRestaurants(restaurants) {
+//     return restaurants;
+// }
 
 
 
@@ -82,8 +92,15 @@ function refactoringRestaurantData() {
 
 // refactoringRestaurantData();
 // console.log(jsonData);
+refactoringRestaurantData();
 
 export const getRestaurants = () => {
-    refactoringRestaurantData();
-    return jsonData;
+    return jsonData.sort(({ name: nameA }, { name: nameB }) => { if (nameA > nameB) return 1; return -1; });
+}
+
+
+export const getRestaurantsByCity = (city) => {
+    if (jsonDataByCity[city])
+        return jsonDataByCity[city].sort(({ name: nameA }, { name: nameB }) => { if (nameA > nameB) return 1; return -1; });
+    return defaultDataByCity.sort(({ name: nameA }, { name: nameB }) => { if (nameA > nameB) return 1; return -1; });
 }
