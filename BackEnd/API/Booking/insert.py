@@ -81,6 +81,7 @@ def book_table():
     shifts=get_shifts(cursor,_res_id)
     capacity=get_capacity(cursor,_res_id)
     slots=get_slots(cursor,_date,_res_id)
+    
     if _size>capacity:
         return "Not Possible choose a diffrent size"    
 
