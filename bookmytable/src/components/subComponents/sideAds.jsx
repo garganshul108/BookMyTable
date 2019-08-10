@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { getAds } from "../../services/dump/ads";
+import { getAds } from "../../services/adServices";
 
 class SideAds extends Component {
   state = { ads: [] };

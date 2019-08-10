@@ -1,4 +1,5 @@
-const cities = require('./dump/JSON/cities.json');
+let cities = require('./dump/JSON/cities.json');
+
 
 export const getCities = () => {
     cities.sort(({ name: A }, { name: B }) => {
@@ -7,4 +8,10 @@ export const getCities = () => {
         return 0;
     });
     return cities;
+}
+
+export const getCitiesByNames = () => {
+    let cityNames = cities.map(city => city.name);
+    cityNames.sort();
+    return cityNames;
 }
