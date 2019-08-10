@@ -91,6 +91,7 @@ class RestaurantFilter extends Component {
           content={this.state.costs}
           sendFilter={this.sendFilter}
           setLocalFilter={this.setLocalFilter}
+          unsetFilter={this.props.handleDeleteFilter}
         />
         <Filter
           targetProperty="locality"
@@ -98,12 +99,14 @@ class RestaurantFilter extends Component {
           content={this.state.localities}
           sendFilter={this.sendFilter}
           setLocalFilter={this.setLocalFilter}
+          unsetFilter={this.props.handleDeleteFilter}
         />
         <Filter
           targetProperty="cuisines"
           label="Cuisine"
           content={this.state.cuisines}
           sendFilter={this.sendFilter}
+          unsetFilter={this.props.handleDeleteFilter}
           setLocalFilter={this.setLocalFilter}
         />
         <Filter
@@ -111,6 +114,7 @@ class RestaurantFilter extends Component {
           label="Establishment Type"
           content={this.state.establishments}
           sendFilter={this.sendFilter}
+          unsetFilter={this.props.handleDeleteFilter}
           setLocalFilter={this.setLocalFilter}
         />
         <Filter
@@ -118,6 +122,7 @@ class RestaurantFilter extends Component {
           label="Features"
           content={this.state.features}
           sendFilter={this.sendFilter}
+          unsetFilter={this.props.handleDeleteFilter}
           setLocalFilter={this.setLocalFilter}
         />
       </div>

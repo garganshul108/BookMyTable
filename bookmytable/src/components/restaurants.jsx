@@ -170,7 +170,10 @@ class Restaurants extends Component {
 
         <div className="row no-gutters" style={{ marginBottom: "150px" }}>
           <div className="col-2">
-            <RestaurantFilter addFilter={this.handleAddFilter} />
+            <RestaurantFilter
+              deleteFilter={this.handleDeleteFilter}
+              addFilter={this.handleAddFilter}
+            />
           </div>
           <div className="col">
             {/* this is the Restaurant Catalog Display */}
@@ -214,7 +217,7 @@ class Restaurants extends Component {
                       onClick={e => this.handleDeleteFilter(filter)}
                     >
                       {filter.expectedValue}&nbsp;
-                      <i className="fa fa-times" aria-hidden="true" />
+                      <i className="fa fa-window-close" aria-hidden="true" />
                     </button>
                   ))}
                 </div>

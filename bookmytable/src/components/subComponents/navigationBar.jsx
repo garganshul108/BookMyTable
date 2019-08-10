@@ -4,8 +4,19 @@ import { Link, NavLink } from "react-router-dom";
 import "../css/navigationBar.css";
 import auth from "../../services/authServices";
 // import Login from '../login';
+import SeachableList from "./searchableList";
+import { getCities } from "../../services/cityServices";
+
 class NaviagtionBar extends Component {
-  state = {};
+  state = {
+    city: "",
+    cities: []
+  };
+
+  componentDidMount() {
+    let cities = getCities();
+    this.setState({ cities });
+  }
   render() {
     return (
       <React.Fragment>
@@ -31,14 +42,38 @@ class NaviagtionBar extends Component {
                 className="collapse navbar-collapse"
                 id="navbarSupportedContent"
               >
-                <ul className="navbar-nav mr-auto">
+                <ul className="navbar-nav">
                   <li className="nav-item active">
-                    <NavLink className="nav-link" to="#">
-                      Home <span className="sr-only">(current)</span>
-                    </NavLink>
+                    <NavLink className="nav-link" to="#" />
                   </li>
                 </ul>
-                <form className="form-inline my-2 my-lg-0">
+                <form className="form-inline">
+                  <SeachableList
+                    // className="searchBox"
+                    placeholder="City"
+                    listName="cities"
+                    className="form-control mr-sm-2"
+                    type="search"
+                    aria-label="Search"
+                    value={this.state.city}
+                    onChange={this.handleCityInputChange}
+                  >
+                    {this.state.cities.map(item => (
+                      <option value={item.name} label={item.state} />
+                    ))}
+                  </SeachableList>
+                  <div className="form-group">
+                    <Link
+                      // className=""
+                      className="btn btn-danger btn-outine-info my-2 my-sm-0"
+                      to="/restaurants"
+                      type="submit"
+                    >
+                      <i className="fa fa-search" aria-hidden="true" />
+                    </Link>
+                  </div>
+                </form>
+                {/* <form className="form-inline my-2 my-lg-0">
                   <input
                     className="form-control mr-sm-2"
                     type="search"
@@ -50,7 +85,7 @@ class NaviagtionBar extends Component {
                   >
                     <i className="fa fa-search" aria-hidden="true" />
                   </button>
-                </form>
+                </form> */}
               </div>
             </nav>
           </div>
