@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { relative } from "path";
 
 class Filter extends Component {
   state = { extra: false };
