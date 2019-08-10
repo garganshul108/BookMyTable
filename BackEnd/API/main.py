@@ -16,8 +16,9 @@ from Booking import getAll
 from Booking import insert
 from Booking import deleteById
 from Booking import deleteAll
-
-
+from CommentRating import insert
+from CommentRating import getAll
+from CommentRating import getByRestaurantId
 
 @app.route('/deleteALL')
 def drop_id():
