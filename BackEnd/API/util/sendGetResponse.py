@@ -7,5 +7,5 @@ def send_get_response(data,resp):
 
     res=jsonify(data)
     res.status_code = 200
-    res.headers[Access-Control-Allow-Origin]='*'
+    res.headers['Access-Control-Allow-Origin']='*'
     return res
