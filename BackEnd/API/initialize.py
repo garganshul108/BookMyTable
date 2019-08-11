@@ -19,7 +19,7 @@ def update_availablity(loc_id,cursor):
         index1=random.randrange(0,6)
         arr=[1,1,1,1,1,1,1]
         arr[index1]=0
-        sql="INSERT INTO Days(id,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday) VALUES(%s,%s,%s,%s,%s,%s,%s,%s)"
+        sql="INSERT INTO Day(id,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday) VALUES(%s,%s,%s,%s,%s,%s,%s,%s)"
         values=(loc_id,arr[0],arr[1],arr[2],arr[3],arr[4],arr[5],arr[6])
         cursor.execute(sql,values)
     except Exception as e:
@@ -68,6 +68,13 @@ def update_restaurant(tt, loc_id, cursor):
              _thumb, _phone_numbers,_capacity)
     cursor.execute(sql, value)
 
+def update_slots(res_id,cursor):
+    sql="INSERT INTO Slot(restaurant_id,start_time,end_time) VALUES(%s,%s,%s)"
+    values1=[(res_id,"09:00","15:00"),(res_id,"10:00","16:00"),(res_id,"12:00","16:00")]
+    values2=[(res_id,"17:00","23:00"),(res_id,"18:00","23:00"),(res_id,"19:00","23:30")]
+
+    cursor.execute(sql,values1[random.randrange(0,2)])
+    cursor.execute(sql,values2[random.randrange(0,2)])
 
 @app.route('/')
 def just():
@@ -78,12 +85,12 @@ def get_restaurant():
     try:
         conn = mysql.connect()
         cursor = conn.cursor()
-        cursor.execute("DELETE FROM Photos")
+        cursor.execute("DELETE FROM Photo")
         cursor.execute("DELETE FROM Review")
         cursor.execute("DELETE FROM Slot")
         cursor.execute("DELETE FROM Booking")
         cursor.execute("DELETE FROM Restaurant")
-        cursor.execute("DELETE FROM Days")
+        cursor.execute("DELETE FROM Day")
         cursor.execute("DELETE FROM Location")
         cursor.execute("DELETE FROM Cities")
 
@@ -98,7 +105,7 @@ def get_restaurant():
             update_availablity(loc_id,cursor)
             update_location(tt, loc_id,cursor)
             update_restaurant(tt, loc_id, cursor)
-
+            update_slots(tt['id'],cursor)
             conn.commit()
             loc_id = loc_id+1
             print("YESS")

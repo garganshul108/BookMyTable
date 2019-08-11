@@ -33,11 +33,14 @@ def drop_id():
     try:
         conn = mysql.connect()
         cursor = conn.cursor()
-        cursor.execute("DELETE FROM Booking")
+        cursor.execute("DELETE FROM Photo")
+        cursor.execute("DELETE FROM Review")
         cursor.execute("DELETE FROM Slot")
+        cursor.execute("DELETE FROM Booking")
         cursor.execute("DELETE FROM Restaurant")
-        cursor.execute("DELETE FROM Days")
+        cursor.execute("DELETE FROM Day")
         cursor.execute("DELETE FROM Location")
+        cursor.execute("DELETE FROM Cities")
 
         conn.commit()
     except Exception as e:

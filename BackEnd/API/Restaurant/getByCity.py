@@ -7,8 +7,9 @@ from LoginSignUp.util.required import token_required
 from util.sendGetResponse import send_get_response
 
 @app.route('/restaurants/city/<city_name>')
-@token_required
-def get_restaurants_byCity(current_user,city_name):
+# @token_required
+# def get_restaurants_byCity(current_user,city_name):
+def get_restaurants_byCity(city_name):
     
     try:
         conn = mysql.connect()

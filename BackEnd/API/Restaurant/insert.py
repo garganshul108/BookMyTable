@@ -8,7 +8,7 @@ from util.lastId import get_last_id
 
 def insert_days(cursor,data):
     try:
-        sql="INSERT INTO Days(Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday) VALUES(%s,%s,%s,%s,%s,%s,%s)"
+        sql="INSERT INTO Day(Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday) VALUES(%s,%s,%s,%s,%s,%s,%s)"
         values=(data['Monday'],data['Tuesday'],data['Wednesday'],data['Thursday'],data['Friday'],data['Saturday'],data['Sunday'])
         cursor.execute(sql,values)
     except Exception as e:

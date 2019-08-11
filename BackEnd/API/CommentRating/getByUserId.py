@@ -6,7 +6,7 @@ from flask import flash, request
 from util.sendGetResponse import send_get_response
 
 def append_photos(cursor,review):
-    cursor.execute("SELECT * from Photos where review_id=%s",review['id'])
+    cursor.execute("SELECT * from Photo where review_id=%s",review['id'])
     review['photos']=cursor.fetchall()
 
 @app.route('/users/<usr_id>/reviews')
