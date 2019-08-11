@@ -2,7 +2,7 @@
 
 #### 2019-08-11 17:12:58
 
-Backend and front end is finally to gether
+Backend and front end is finally together
 
 #### 2019-08-08 16:29:31
 
