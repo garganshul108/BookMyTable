@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 
 import NaviagtionBar from "./subComponents/navigationBar";
-import HomeTop from "./homeTop";
+import HomeTop from "./home";
 import Restaurants from "./restaurants";
 import Login from "./login";
 import NotFound from "./notFound";
@@ -10,9 +10,9 @@ import NotFound from "./notFound";
 import "./css/dummy.css";
 import "./css/scrollbar.css";
 import SignUp from "./signup";
-import HomeBottom from "./homeBottom";
+import HomeBottom from "./subComponents/homeBottom";
 import RestaurantRegistration from "./restaurantRegistration";
-// import MapTest from "./maptest";
+import Restaurant from "./restaurant";
 
 class App extends Component {
   handleCloseLogin = e => {
@@ -94,6 +94,10 @@ class App extends Component {
               <Redirect
                 from="/restaurants/dummy/:city"
                 to="/restaurants/:city"
+              />
+              <Route
+                path="/restaurant/:id"
+                render={props => <Restaurant {...props} />}
               />
               <Route
                 path="/restaurants/:city"

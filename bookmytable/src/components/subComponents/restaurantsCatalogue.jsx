@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import Restaurant from "./restaurant";
+import RestaurantDisplay from "./restaurantDisplay";
 
-class RestaurantCatalogue extends Component {
+class RestaurantsCatalogue extends Component {
   /***
    * Display Handlers : controlling events
    *
@@ -40,7 +40,7 @@ class RestaurantCatalogue extends Component {
       <div className="container-fluid restaurantCatalog">
         {restaurants.map(restaurant => {
           return (
-            <Restaurant
+            <RestaurantDisplay
               onMenu={this.handleMenu}
               onCall={this.handleCall}
               restaurant={restaurant}
@@ -53,4 +53,4 @@ class RestaurantCatalogue extends Component {
   }
 }
 
-export default RestaurantCatalogue;
+export default RestaurantsCatalogue;

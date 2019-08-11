@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-class SeachableList extends Component {
+class SearchableList extends Component {
   handleSelectOption = e => {
     console.log("option select", e.currentTarget);
   };
@@ -22,4 +22,4 @@ class SeachableList extends Component {
   }
 }
 
-export default SeachableList;
+export default SearchableList;

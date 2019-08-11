@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 // import { captialize } from "../../util/util";
+import { Link } from "react-router-dom";
 
-class Restaurant extends Component {
+class RestaurantDisplay extends Component {
   state = {};
 
   /**
@@ -153,19 +154,17 @@ class Restaurant extends Component {
             </button>
           </div>
           <div className="col-4">
-            <button
-              onClick={() => {
-                this.props.showAvailableTables(restaurant);
-              }}
+            <Link
+              to={"/restaurant/" + restaurant.id}
               id="book"
-              className="options"
+              className="btn options"
             >
               <span>
                 <i className="fa fa-calendar" aria-hidden="true" />
               </span>{" "}
               &nbsp;&nbsp;
               <span>Book a Table</span>
-            </button>
+            </Link>
           </div>
         </div>
         {showPhone && (
@@ -210,4 +209,4 @@ class Restaurant extends Component {
   }
 }
 
-export default Restaurant;
+export default RestaurantDisplay;
