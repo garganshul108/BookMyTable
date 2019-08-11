@@ -24,6 +24,10 @@ from CommentRating import getAll
 from CommentRating import getByRestaurantId
 from CommentRating import getByUserId
 
+
+@app.route('/')
+def JJ():
+    print("SERVER IS RUNNING")
 @app.route('/deleteALL')
 def drop_id():
     try:
