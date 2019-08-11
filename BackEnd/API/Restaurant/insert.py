@@ -3,7 +3,7 @@ from app import app
 from db_config import mysql
 from flask import jsonify
 from flask import flash, request
-from Restaurant.util.LastId import get_last_id
+from util.lastId import get_last_id
 
 
 def insert_days(cursor,data):
@@ -64,7 +64,7 @@ def insert_slot(cursor,data,res_id):
     except Exception as e:
         print("slot ",e," slot")
 
-@app.route('/restaurant',methods=['POST'])
+@app.route('/restaurants',methods=['POST'])
 def add_restaurant():
     try:
         data=request.json

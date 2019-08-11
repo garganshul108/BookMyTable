@@ -7,7 +7,7 @@ from flask import flash, request
 from werkzeug import generate_password_hash, check_password_hash
 import random
 from decimal import Decimal
-from Restaurant.util.LastId import get_last_id
+from util.lastId import get_last_id
 
 with open('all_data.json') as json_file:
     data = json.load(json_file)

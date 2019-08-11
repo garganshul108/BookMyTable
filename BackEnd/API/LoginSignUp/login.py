@@ -7,7 +7,7 @@ import jwt
 import uuid
 import datetime
 from functools import wraps
-from Restaurant.util.LastId import get_last_id
+from util.lastId import get_last_id
 from LoginSignUp.util.required import token_required
 
 @app.route('/login')

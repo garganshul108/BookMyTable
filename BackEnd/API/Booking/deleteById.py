@@ -14,6 +14,9 @@ def delete_booking(id):
         return "done"
     except Exception as e:
         print("Booking ",e," Booking")
+        resp=jsonify("ERROR")
+        resp.status_code=500
+        return resp
     finally:
         conn.close()
         cursor.close()

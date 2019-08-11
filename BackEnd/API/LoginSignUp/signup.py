@@ -7,7 +7,7 @@ import jwt
 import uuid
 import datetime
 from functools import wraps
-from Restaurant.util.LastId import get_last_id
+from util.lastId import get_last_id
 
 # {
     # "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwdWJsaWNfaWQiOjMsImV4cCI6MTU2NTM0Mzk3OX0.ELli-A9z9mFW-wz56ZRuQgKF2goG5alotQAAGB6YIVI"

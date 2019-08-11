@@ -1,4 +1,4 @@
-from CommentRating.getByRestaurantId import get_reviews_by_id
+from CommentRating.getByRestaurantId import get_reviews_by_restaurant_id
 def convert_restaurant(cursor, rows):
     for row in rows:
         cursor.execute("SELECT * FROM Location where id=%s",
@@ -15,7 +15,7 @@ def convert_restaurant(cursor, rows):
         slots=cursor.fetchall()
         row['slots']=slots
 
-        row['reviews']=get_reviews_by_id(row['id']).json
+        row['reviews']=get_reviews_by_restaurant_id(row['id']).json
         
         del row['availablity_id']
         del row['location_id']

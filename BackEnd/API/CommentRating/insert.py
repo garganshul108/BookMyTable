@@ -3,9 +3,9 @@ from app import app
 from db_config import mysql
 from flask import jsonify
 from flask import flash, request
-from Restaurant.util.LastId import get_last_id
+from util.lastId import get_last_id
 
-@app.route('/restaurant/review',methods=['POST'])
+@app.route('/restaurants/reviews',methods=['POST'])
 def insert_comment_rating():
     try:
         data=request.json[0]
