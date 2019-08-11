@@ -177,9 +177,9 @@ def book_table():
     
     resp=jsonify(responseSlots)
     if len(responseSlots)==0:
-        resp.status_code=204
-    else:
         resp.status_code=205
+    else:
+        resp.status_code=202
     return resp
 
 
