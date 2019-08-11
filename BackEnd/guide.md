@@ -9,15 +9,15 @@
 
 7. [http://127.0.0.1:5000/restaurants/city/<city_name>](http://127.0.0.1:5000/restaurants/city/<city_name>) gets all restaurants in the city (GET Request)
 
-8. [http://127.0.0.1:5000/restaurants/<id>](http://127.0.0.1:5000/restaurants/<id>) get restaurant by its id (GET Request)
+8. [http://127.0.0.1:5000/restaurants/<restaurant_id>](http://127.0.0.1:5000/restaurants/<restaurant_id>) get restaurant by its id (GET Request)
 
 9. [http://127.0.0.1:5000/restaurants](http://127.0.0.1:5000/restaurants) (POST Request)
 
 10. [http://127.0.0.1:5000/locations](http://127.0.0.1:5000/locations) get All locations (GET Request)
 
-11. [http://127.0.0.1:5000/locations/<id>](http://127.0.0.1:5000/locations/<id>) gets All the locations with id (GET Request)
+11. [http://127.0.0.1:5000/locations/<location_id>](http://127.0.0.1:5000/locations/<location_id>) gets the location with id (GET Request)
 
-12. [http://127.0.0.1:5000/locations/city/<city_name>/localities](http://127.0.0.1:5000/locations/city/<city_name>/localities) gets the locations of the city (GET request)
+12. [http://127.0.0.1:5000/locations/city/<city_name>/localities](http://127.0.0.1:5000/locations/city/<city_name>/localities) gets all the localities of the city (GET request)
 
 13. [http://127.0.0.1:5000/reviews](http://127.0.0.1:5000/reviews) gets all reviews (GET request)
 
@@ -30,7 +30,7 @@
 
 17. [http://127.0.0.1:5000/bookings](http://127.0.0.1:5000/bookings) deletes all the bookings (DELETE request))
 
-18. [http://127.0.0.1:5000/bookings/<id>](http://127.0.0.1:5000/bookings/<id>) deletes a booking by id (DELETE request)
+18. [http://127.0.0.1:5000/bookings/<booking_id>](http://127.0.0.1:5000/bookings/<booking_id>) deletes a booking by id (DELETE request)
 
 19. [http://127.0.0.1:5000/bookings](http://127.0.0.1:5000/bookings) gets all bookings (GET request)
 
