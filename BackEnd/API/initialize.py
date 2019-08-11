@@ -69,6 +69,10 @@ def update_restaurant(tt, loc_id, cursor):
     cursor.execute(sql, value)
 
 
+@app.route('/')
+def just():
+    return "SERVER IS RUNNING"
+
 @app.route('/init')
 def get_restaurant():
     try:
@@ -77,6 +81,7 @@ def get_restaurant():
         cursor.execute("DELETE FROM Photos")
         cursor.execute("DELETE FROM Review")
         cursor.execute("DELETE FROM Slot")
+        cursor.execute("DELETE FROM Booking")
         cursor.execute("DELETE FROM Restaurant")
         cursor.execute("DELETE FROM Days")
         cursor.execute("DELETE FROM Location")
