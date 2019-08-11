@@ -6,7 +6,7 @@ from flask import flash, request
 from decimal import Decimal
 from operator import itemgetter
 
-
+# 19151027
 # data=[
 #     date:"1999-08-23"
 #     time:"23:00"
@@ -49,10 +49,18 @@ def get_slots(cursor,date,res_id):
         slot['end_time']=convert_time(slot['end_time'])
     return slots
 
-def insert_booking(cursor,res_id,date,size,start,end):
+def insert_booking(cursor,data,start,end):
+    _date=data['date']
+    _time=convert_time(data['time'])
+    _size=data['size']
+    _res_id=int(data['restaurant_id'])
+    _f_name=data['first_name']
+    _l_name=data['last_name']
+    _email_id=data['email_id']
+    _phone_no=data['phone_no']
     try:
-        sql="INSERT INTO Booking(restaurant_id,size,start_time,end_time,date) VALUES(%s,%s,%s,%s,%s)"
-        values=(res_id,size,start,end,date)
+        sql="INSERT INTO Booking(restaurant_id,size,start_time,end_time,date,first_name,last_name,email_id,phone_no) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+        values=(_res_id,_size,start,end,_date,_f_name,_l_name,_email_id,_phone_no)
         cursor.execute(sql,values)
     except Exception as e:
         print("Booking ",e," Booking")
@@ -60,13 +68,17 @@ def insert_booking(cursor,res_id,date,size,start,end):
 def toI(value):
     return int(2*value)
 
-@app.route('/booking',methods=['POST'])
+@app.route('/restaurants/bookings',methods=['POST'])
 def book_table():
     data=request.json[0]
     _date=data['date']
     _time=convert_time(data['time'])
     _size=data['size']
-    _res_id=int(data['res_id'])
+    _res_id=int(data['restaurant_id'])
+    _f_name=data['first_name']
+    _l_name=data['last_name']
+    _email_id=data['email_id']
+    _phone_no=data['phone_no']
     # _user_id=data['user_id']
 
     newSlot={
@@ -117,11 +129,13 @@ def book_table():
     
     
     if count==0:
-        insert_booking(cursor,_res_id,_date,_size,rev_convert_time(newSlot['start']),rev_convert_time(newSlot['end']))
+        insert_booking(cursor,data,rev_convert_time(newSlot['start']),rev_convert_time(newSlot['end']))
         conn.commit()
         conn.close()
         cursor.close()
-        return "Success"
+        resp=jsonify("Success")
+        resp.status_code=200
+        return resp
     
     
     
@@ -161,7 +175,12 @@ def book_table():
         if i>0 and arr[i-1]+_size>capacity:
             c1=c1+1
     
-    return jsonify(responseSlots)
+    resp=jsonify(responseSlots)
+    if len(responseSlots)==0:
+        resp.status_code=204
+    else:
+        resp.status_code=205
+    return resp
 
 
 

@@ -1,0 +1,51 @@
+[
+	{
+      "average_cost_for_two": "",
+      "cuisines": "",
+      "establishment": [],
+      "highlights": "",
+      "location": {
+        "address": {
+          "line_1": "",
+          "line_2": ""
+        },
+        "locality": "",
+        "city": "",
+        "locality_verbose": "",
+        "zipcode": ""
+      },
+      "name": "",
+      "phone": {
+        "std": "",
+        "number": ""
+      },
+      "capacity":"12",
+
+      "thumb": "",
+      "timings": "",
+      "opening_status": "",
+      "email": "",
+      "website": "",
+      "days": {
+        "Monday": false,
+        "Tuesday": false,
+        "Wednesday": false,
+        "Thursday": false,
+        "Friday": false,
+        "Saturday": false,
+        "Sunday": false
+      },
+      "slots":[
+      	{
+      		"start_time":"10:00",
+      		"end_time":"03:00"
+      	},
+      	{
+      		"start_time":"06:00",
+      		"end_time":"10:00"
+      	}
+      	],
+    "errors": {}
+    
+    }
+  ]

@@ -8,16 +8,21 @@ from werkzeug import generate_password_hash, check_password_hash
 from Restaurant import getAll
 from Restaurant import insert
 from Restaurant import getByCity
-from Restaurant.Location import getAll
-from Restaurant.Location import getLocalityByCityName
+from Restaurant import getById
+from Location import getAll
+from Location import getLocalityByCityName
+from Location import getById
 from LoginSignUp import signup
 from LoginSignUp import login
 from Booking import getAll
 from Booking import insert
 from Booking import deleteById
 from Booking import deleteAll
-
-
+from Booking import getByRestaurantId
+from CommentRating import insert
+from CommentRating import getAll
+from CommentRating import getByRestaurantId
+from CommentRating import getByUserId
 
 @app.route('/deleteALL')
 def drop_id():
