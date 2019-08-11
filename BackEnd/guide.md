@@ -1,5 +1,5 @@
-1. First start the Apache web server and open localhost/phpmyadmin then import BookMyTable_schema.sql
-2. Give the execute permissions to run.sh and install.sh (int API folder also change the db_config.py file as per your username password)
+1. First start the Apache web server and open localhost/phpmyadmin then create database BookMyTable and import BookMyTable_schema.sql
+2. Give the execute permissions to run.sh and install.sh (in API folder also change the db_config.py file as per your username password)
 3. Execute install.sh
 4. Then execute run.sh
 
