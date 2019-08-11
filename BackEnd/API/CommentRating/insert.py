@@ -22,7 +22,7 @@ def insert_comment_rating():
         cursor.execute(sql,values)
         review_id=get_last_id(cursor)
         for url in data['photos']:
-            sql="INSERT INTO Photos(review_id,url) values(%s,%s)"
+            sql="INSERT INTO Photo(review_id,url) values(%s,%s)"
             values=(review_id,url)
             cursor.execute(sql,values)
         conn.commit()

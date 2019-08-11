@@ -6,7 +6,7 @@ def convert_restaurant(cursor, rows):
         loc = cursor.fetchall()
         row['location'] = loc[0]
 
-        cursor.execute("SELECT * FROM Days where id=%s",
+        cursor.execute("SELECT * FROM Day where id=%s",
                        row['availablity_id'])
         days=cursor.fetchall()
         row['days']=days[0]
