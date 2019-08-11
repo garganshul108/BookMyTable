@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { captialize } from "../../util/util";
+// import { captialize } from "../../util/util";
 
 class Restaurant extends Component {
   state = {};
@@ -9,13 +9,13 @@ class Restaurant extends Component {
    * @param object restaurant
    */
   renderRestaurant(restaurant) {
-    function refactorName(name) {
-      return captialize(name);
-    }
+    // function refactorName(name) {
+    //   return captialize(name);
+    // }
 
-    function refactorCuisines(cuisines) {
-      return typeof cuisines === "string" ? cuisines.split(",") : cuisines;
-    }
+    // function refactorCuisines(cuisines) {
+    //   return typeof cuisines === "string" ? cuisines.split(",") : cuisines;
+    // }
 
     // console.log(restaurant.id);
     let {

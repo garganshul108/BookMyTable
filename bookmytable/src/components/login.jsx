@@ -96,7 +96,7 @@ class Login extends Component {
                 </button>
               </form>
             </div>
-            <img src={welcomeback} alt="happy image" />
+            <img src={welcomeback} alt="happy" />
           </div>
         </div>
       </div>

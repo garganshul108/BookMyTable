@@ -12,6 +12,7 @@ import "./css/scrollbar.css";
 import SignUp from "./signup";
 import HomeBottom from "./homeBottom";
 import RestaurantRegistration from "./restaurantRegistration";
+// import MapTest from "./maptest";
 
 class App extends Component {
   handleCloseLogin = e => {
@@ -61,6 +62,16 @@ class App extends Component {
                 )}
               />
               <Route
+                path="/restaurants/:city"
+                render={props => (
+                  <NaviagtionBar
+                    openLogin={this.handleOpenLogin}
+                    openSignUp={this.handleOpenSignUp}
+                    {...props}
+                  />
+                )}
+              />
+              <Route
                 path="/"
                 render={props => (
                   <NaviagtionBar
@@ -75,17 +86,22 @@ class App extends Component {
         </div>
         <div className="container-fluid">
           <div className="row">
-            <div className="dummy" />
-          </div>
-          <div className="row">
             <Switch>
               <Route
                 path="/restaurant/registration"
                 render={() => <RestaurantRegistration />}
               />
+              <Redirect
+                from="/restaurants/dummy/:city"
+                to="/restaurants/:city"
+              />
+              <Route
+                path="/restaurants/:city"
+                render={props => <Restaurants {...props} />}
+              />
               <Route path="/not-found" render={() => <NotFound />} />
               <Route path="/home" render={() => <HomeBottom />} />
-              <Route path="/restaurants" render={() => <Restaurants />} />
+              <Redirect from="/restaurants" to="/restaurants/delhi" />
               <Redirect from="/" exact to="/home" />
               <Redirect to="/not-found" />
             </Switch>

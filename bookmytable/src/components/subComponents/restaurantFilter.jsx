@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import "../css/filter.css";
 import Filter from "./filter";
-import { getCuisines, getCuisinesByName } from "../../services/cuisineServices";
+import { getCuisines } from "../../services/cuisineServices";
 import { getEstablishments } from "../../services/establishmentServices";
 import { getFeatures } from "../../services/featureServices";
 import { getCitiesByNames } from "../../services/cityServices";
@@ -66,7 +66,15 @@ class RestaurantFilter extends Component {
     return (
       <div className="filtersBox">
         <hr />
-        <h6 style={{ fontWeight: "900" }}>Filters</h6>
+        <h6
+          style={{
+            fontWeight: "900",
+            letterSpacing: "1px",
+            fontSize: "1.25rem"
+          }}
+        >
+          Filters
+        </h6>
         <hr />
         {/* City
         <hr />
@@ -91,6 +99,7 @@ class RestaurantFilter extends Component {
           content={this.state.costs}
           sendFilter={this.sendFilter}
           setLocalFilter={this.setLocalFilter}
+          unsetFilter={this.props.handleDeleteFilter}
         />
         <Filter
           targetProperty="locality"
@@ -98,12 +107,14 @@ class RestaurantFilter extends Component {
           content={this.state.localities}
           sendFilter={this.sendFilter}
           setLocalFilter={this.setLocalFilter}
+          unsetFilter={this.props.handleDeleteFilter}
         />
         <Filter
           targetProperty="cuisines"
           label="Cuisine"
           content={this.state.cuisines}
           sendFilter={this.sendFilter}
+          unsetFilter={this.props.handleDeleteFilter}
           setLocalFilter={this.setLocalFilter}
         />
         <Filter
@@ -111,6 +122,7 @@ class RestaurantFilter extends Component {
           label="Establishment Type"
           content={this.state.establishments}
           sendFilter={this.sendFilter}
+          unsetFilter={this.props.handleDeleteFilter}
           setLocalFilter={this.setLocalFilter}
         />
         <Filter
@@ -118,6 +130,7 @@ class RestaurantFilter extends Component {
           label="Features"
           content={this.state.features}
           sendFilter={this.sendFilter}
+          unsetFilter={this.props.handleDeleteFilter}
           setLocalFilter={this.setLocalFilter}
         />
       </div>

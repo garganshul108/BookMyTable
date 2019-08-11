@@ -95,6 +95,12 @@ hr {
   color: black;
 }
 
+.restaurantDisplay .restaurantContacts #book {
+  color: green;
+  border-radius: 5px;
+  /* color: white; */
+}
+
 .restaurantDisplay .restaurantContacts #book:hover {
   background: green;
   border-radius: 5px;
@@ -132,7 +138,7 @@ hr {
   padding: 5px;
   margin-bottom: 12px;
   box-sizing: border-box;
-  background: rgb(229, 247, 253);
+  background: rgb(238, 247, 250);
   border: 2px dashed lightseagreen;
   border-radius: 3px;
   /* box-shadow: 1px 1px 1px blue; */

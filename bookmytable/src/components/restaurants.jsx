@@ -1,29 +1,47 @@
 import React, { Component } from "react";
-import { getRestaurants } from "../services/restaurantServices";
+import { getRestaurantsByCity } from "../services/restaurantServices";
 import RestaurantFilter from "./subComponents/restaurantFilter";
 import RestaurantCatalogue from "./subComponents/restaurantCatalogue";
 import SideAds from "./subComponents/sideAds";
 
 import "./css/restaurants.css";
 import SearchBox from "./subComponents/searchBox";
+// import MyMap from "./subComponents/myMap";
+import { captialize } from "../util/util";
 
 class Restaurants extends Component {
   state = {
     restaurants: [],
     seachQuery: "",
     filters: [],
-    no_of_filter: "0"
+    no_of_filter: "0",
+    pagination: {
+      startingIndex: 0,
+      pageSize: 0,
+      pages: 0
+    }
   };
 
   componentDidMount() {
-    let restaurants = getRestaurants();
+    let restaurants = getRestaurantsByCity(this.props.match.params.city);
 
     for (let restaurant of restaurants) {
       restaurant.showPhone = false;
       restaurant.showMenu = false;
     }
     console.log(restaurants);
-    this.setState({ restaurants });
+
+    let pagination = {
+      startingIndex: 0,
+      pageSize: 10
+    };
+
+    let counting = restaurants.length;
+    pagination.pages = Math.ceil(counting / pagination.pageSize);
+
+    this.setState({ restaurants, pagination }, () => {
+      console.log(this.state);
+    });
   }
 
   handleSearchRestaurant = query => {
@@ -43,6 +61,7 @@ class Restaurants extends Component {
   };
 
   handleAddFilter = newFilter => {
+    // if (this.state.seachQuery) this.setState({ seachQuery: "" });
     let { filters } = this.state;
     for (let i = 0; i < filters.length; i++) {
       if (filters[i].id === newFilter.id) {
@@ -130,15 +149,37 @@ class Restaurants extends Component {
 
     restaurants = this.filterByNameSearch(restaurants);
 
+    const renderPagesForPagination = () => {
+      let pages = [];
+      for (let i = 0; i < this.state.pagination.pages; i++) {
+        pages[i] = (
+          <li className="page-item">
+            <a className="page-link" href="/restaurants">
+              {i + 1}
+            </a>
+          </li>
+        );
+      }
+      return pages;
+    };
+
     return (
       <div className="container">
+        <div className="row">
+          <div className="dummy" />
+        </div>
         <h3 style={{ fontWeight: 900 }}>
-          Places available in this Region : {restaurants.length}
+          Places available in {captialize(this.props.match.params.city)} :{" "}
+          {restaurants.length}
         </h3>
 
         <div className="row no-gutters" style={{ marginBottom: "150px" }}>
           <div className="col-2">
-            <RestaurantFilter addFilter={this.handleAddFilter} />
+            {/* <p>{this.props.match.params.city}</p> */}
+            <RestaurantFilter
+              deleteFilter={this.handleDeleteFilter}
+              addFilter={this.handleAddFilter}
+            />
           </div>
           <div className="col">
             {/* this is the Restaurant Catalog Display */}
@@ -182,16 +223,22 @@ class Restaurants extends Component {
                       onClick={e => this.handleDeleteFilter(filter)}
                     >
                       {filter.expectedValue}&nbsp;
-                      <i className="fa fa-times" aria-hidden="true" />
+                      <i className="fa fa-window-close" aria-hidden="true" />
                     </button>
                   ))}
                 </div>
               )}
             </div>
             <RestaurantCatalogue restaurants={restaurants} />
+            {/* Pagination */}
+            <nav aria-label="Page navigation example">
+              <ul className="pagination">{renderPagesForPagination()}</ul>
+            </nav>
+            {/* Pagination end */}
             {/* end of display catalogue */}
           </div>
-          <div className="col-2">
+          <div className="col-3">
+            {/* <MyMap /> */}
             <SideAds />
           </div>
         </div>
