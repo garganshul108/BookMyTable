@@ -1,5 +1,9 @@
 # MYLOG
 
+#### 2019-08-11 17:12:58
+
+Backend and front end is finally to gether
+
 #### 2019-08-08 16:29:31
 
 - Registration form done with everything except Radio buttons
