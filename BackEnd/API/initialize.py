@@ -68,6 +68,10 @@ def update_restaurant(tt, loc_id, cursor):
              _thumb, _phone_numbers,_capacity)
     cursor.execute(sql, value)
 
+def update_slots(res_id,cursor):
+    sql="INSERT INTO Slots(restaurant_id,start_time,end_time) VALUES(%s,%s,%s)"
+    values=[(res_id,"09:00","15:00"),(res_id,"05:")]
+    print(type(values))
 
 @app.route('/')
 def just():
@@ -98,7 +102,7 @@ def get_restaurant():
             update_availablity(loc_id,cursor)
             update_location(tt, loc_id,cursor)
             update_restaurant(tt, loc_id, cursor)
-
+            update_slots(tt['id'],cursor)
             conn.commit()
             loc_id = loc_id+1
             print("YESS")
