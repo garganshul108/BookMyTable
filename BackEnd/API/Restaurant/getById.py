@@ -14,7 +14,7 @@ def get_restaurants_by_id(id):
         sql = "SELECT * from Restaurant WHERE id=%s"
         cursor.execute(sql, (id))
         rows = cursor.fetchall()
-        convert_restaurant(cursor, rows)
+        convert_restaurant(cursor, rows,reviews=True)
         return send_get_response(rows,"No Restaurant found for given criteria")
     except Exception as e:
         print(e)

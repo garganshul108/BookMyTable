@@ -5,15 +5,13 @@ from flask import jsonify
 from flask import flash, request
 from werkzeug import generate_password_hash, check_password_hash
 
-from Restaurant import get
+from Restaurant import getAll
 from Restaurant import insert
-from Restaurant import delete
-from Restaurant import update
+from Restaurant import getByCity
 from Restaurant import getById
-
 from Location import getAll
 from Location import getLocalityByCityName
-from Location import getAllCities
+from Location import getById
 from LoginSignUp import signup
 from LoginSignUp import login
 from Booking import getAll

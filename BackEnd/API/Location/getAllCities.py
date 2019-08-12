@@ -5,14 +5,14 @@ from flask import jsonify
 from flask import flash, request
 from util.sendGetResponse import send_get_response
 
-@app.route('/locations/<id>')
-def get_location_by_id(id):
+@app.route('/cities')
+def get_cities():
     try:
         conn = mysql.connect()
         cursor = conn.cursor(pymysql.cursors.DictCursor)
-        cursor.execute("SELECT * FROM Location WHERE id=%s",id)
+        cursor.execute("SELECT DISTINCT city FROM Location")
         rows = cursor.fetchall()
-        return send_get_response(rows,"No location found for selected id")
+        return send_get_response(rows,"No city found")
     except Exception as e:
         print(e)
         resp=jsonify("ERROR")
