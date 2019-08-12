@@ -64,7 +64,7 @@ def insert_slot(cursor,data,res_id):
     except Exception as e:
         print("slot ",e," slot")
 
-@app.route('/restaurants',methods=['POST'])
+@app.route('/api/restaurants',methods=['POST'])
 def add_restaurant():
     try:
         data=request.json

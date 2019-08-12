@@ -5,7 +5,7 @@ from flask import jsonify
 from Restaurant.util.convertRestaurant import convert_restaurant
 from util.sendGetResponse import send_get_response
 
-@app.route('/restaurants/<id>')
+@app.route('/api/restaurants/<id>')
 def get_restaurants_by_id(id):
     
     try:

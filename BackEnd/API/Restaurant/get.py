@@ -5,7 +5,7 @@ from flask import jsonify,flash,request
 from Restaurant.util.convertRestaurant import convert_restaurant
 from util.sendGetResponse import send_get_response
 
-@app.route('/restaurants')
+@app.route('/api/restaurants')
 def get_restaurants():
     try:
         _city=request.args.get('city',default='%',type=str)

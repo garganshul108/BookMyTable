@@ -64,7 +64,7 @@ def update_slot(cursor,data,res_id):
     except Exception as e:
         print("slot ",e," slot")
 
-@app.route('/restaurants/<id>',methods=['PUT'])
+@app.route('/api/restaurants/<id>',methods=['PUT'])
 def update_restaurant(id):
     try:
         data=request.json

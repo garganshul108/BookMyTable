@@ -4,7 +4,7 @@ from db_config import mysql
 from flask import jsonify
 from flask import flash, request
 
-@app.route('/restaurants/<id>',methods=['DELETE'])
+@app.route('/api/restaurants/<id>',methods=['DELETE'])
 def delete_restaurant(id):
     try:
         conn=mysql.connect()

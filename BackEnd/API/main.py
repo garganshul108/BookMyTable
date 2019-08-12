@@ -12,7 +12,7 @@ from Restaurant import update
 from Restaurant import getById
 
 from Location import getAll
-from Location import getLocalityByCityName
+from Location import getLocalitiesByCity
 from Location import getAllCities
 from LoginSignUp import signup
 from LoginSignUp import login
