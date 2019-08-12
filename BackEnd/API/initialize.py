@@ -96,11 +96,11 @@ def get_restaurant():
 
         conn.commit()
         loc_id = 1
-        # for tt in cities_data:
-        #     sql="INSERT INTO Cities(id,name,state) VALUES(%s,%s,%s)"
-        #     values=(int(tt['id']),tt['name'],tt['state'])
-        #     cursor.execute(sql,values)
-        #     conn.commit()
+        for tt in cities_data:
+            sql="INSERT INTO Cities(id,name,state) VALUES(%s,%s,%s)"
+            values=(int(tt['id']),tt['name'],tt['state'])
+            cursor.execute(sql,values)
+            conn.commit()
         for tt in data:
             update_location(tt, loc_id,cursor)
             update_restaurant(tt, loc_id, cursor)
