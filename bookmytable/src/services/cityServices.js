@@ -5,8 +5,6 @@ import apiConfig from './config/apiConfig.json';
 const apiBaseURL = apiConfig.baseURL;
 const GETallCities = apiConfig.get.allCities;
 
-
-
 export const getCities = async () => {
     let { data: cities } = await http.get(apiBaseURL + GETallCities);
     cities.sort(({ name: A }, { name: B }) => {

@@ -14,7 +14,7 @@ class HomeTop extends Component {
 
   async componentDidMount() {
     const cities = await getCities();
-    console.log(cities);
+    // console.log(cities);
     this.setState({ cities });
   }
 
