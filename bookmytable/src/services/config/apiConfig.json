@@ -1,15 +1,21 @@
 {
   "api": {
-    "baseURL": "http://127.0.0.1:5000/",
+    "baseURL": "http://127.0.0.1:5000/api",
     "get": {
-      "allRestaurants": "restaurants/",
-      "allRestaurantsByCityName": "restaurants/city/",
-      "restaurantById": "restaurants/",
-      "allLocation": "locations/",
-      "locationById": "locations/"
+      "allRestaurants": "/restaurants",
+      "allRestaurantsByCityName": "/restaurants?city=",
+      "restaurantById": "/restaurants/",
+      "allCities": "/cities",
+      "allLocalitiesByCityName": "/localities?city="
     },
     "post": {
-      "newRestaurant": "/restaurants/"
+      "newRestaurant": "restaurants/"
+    },
+    "delete": {
+      "restaurantById": "restaurants/"
+    },
+    "put": {
+      "restaurantById": "restaurants/"
     }
   }
 }
