@@ -4,6 +4,7 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import RestaurantBookingWindow from "./subComponents/restaurantBookingWindow";
 import NotFound from "./notFound";
 import { Link } from "react-router-dom";
+import ReviewInputForm from "./subComponents/reviewInputForm";
 
 class Restaurant extends Component {
   state = {};
@@ -62,29 +63,26 @@ class Restaurant extends Component {
               </div>
               <div className="row">
                 <div className="col">
-                  <Switch>
-                    <Route
-                      path="/restaurant/:id/booking"
-                      render={props => <RestaurantBookingWindow {...props} />}
-                    />
-                    <Route
-                      path="/restaurant/:id/reviews"
-                      render={props => <NotFound {...props} />}
-                    />
-                    <Route
-                      path="/restaurant/:id/photos"
-                      render={props => <NotFound {...props} />}
-                    />
-                    <Redirect
-                      from="/restaurant/:id/"
-                      to="/restaurant/:id/booking"
-                    />
-                  </Switch>
+                  {/* <Switch> */}
+                  <Route
+                    path="/restaurant/:id"
+                    render={props => <RestaurantBookingWindow {...props} />}
+                  />
+
+                  <Route
+                    path="/restaurant/:id"
+                    render={props => <NotFound {...props} />}
+                  />
+                  <Route
+                    path="/restaurant/:id"
+                    render={props => <ReviewInputForm {...props} />}
+                  />
+                  {/* </Switch> */}
                 </div>
               </div>
             </div>
           </div>
-          <div className="col-4">options</div>
+          <div className="col-3">options</div>
         </div>
         <div className="row">
           <div className="col dummy" />

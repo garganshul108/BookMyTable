@@ -1,0 +1,15 @@
+{
+  "api": {
+    "baseURL": "http://127.0.0.1:5000/",
+    "get": {
+      "allRestaurants": "restaurants/",
+      "allRestaurantsByCityName": "restaurants/city/",
+      "restaurantById": "restaurants/",
+      "allLocation": "locations/",
+      "locationById": "locations/"
+    },
+    "post": {
+      "newRestaurant": "/restaurants/"
+    }
+  }
+}

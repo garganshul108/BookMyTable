@@ -4,6 +4,8 @@ import img from "./images/HomeTab.jpg";
 import { Link } from "react-router-dom";
 import SeachableList from "./subComponents/searchableList";
 import { getCities } from "../services/cityServices";
+import backend from "../services/backendServices";
+
 class HomeTop extends Component {
   state = {
     cities: [],
@@ -13,6 +15,12 @@ class HomeTop extends Component {
   componentDidMount() {
     const cities = getCities();
     this.setState({ cities });
+
+    console.log(
+      "backend",
+      backend.get("http://localhost:5000/restaurants")
+      // backend.get("https://jsonplaceholder.typicode.com/posts")
+    );
   }
 
   handleCityInputChange = ({ currentTarget: input }) => {
