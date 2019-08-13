@@ -8,6 +8,10 @@ from util.sendGetResponse import send_get_response
 def get_bookings():
     _user_id=request.args.get('userId',default="%",type=int)
     _restaurant_id=request.args.get('restaurantId',default="%",type=int)
+
+    if _user_id=="%" AND _restaurant_id=="%":
+        print("Unauthorized")
+
     try:
         conn = mysql.connect()
         cursor = conn.cursor(pymysql.cursors.DictCursor)
