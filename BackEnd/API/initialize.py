@@ -51,14 +51,10 @@ def update_restaurant(tt, loc_id, cursor):
     _average_cost = tt['average_cost_for_two']
     _cuisines = tt['cuisines']
     _timings = tt['timings']
-    _establishment = ""
+    _establishment = ", ".join(tt['establishment'])
 
-    for estb in tt['establishment']:
-        _establishment = _establishment+estb
 
-    _highlights = ""
-    for hlt in tt['highlights']:
-        _highlights = _highlights+","+hlt
+    _highlights = ", ".join(tt['highlights'])
 
     _thumb = tt['thumb']
     _phone_numbers = tt['phone_numbers']

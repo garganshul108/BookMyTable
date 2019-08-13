@@ -14,15 +14,18 @@ from Restaurant import getById
 from Location import getAll
 from Location import getLocalitiesByCity
 from Location import getAllCities
+
 from LoginSignUp import signup
 from LoginSignUp import login
+
+from Booking import get
 from Booking import insert
-from Booking import deleteById
+from Booking import delete
 from Booking import deleteAll
 from CommentRating import insert
-from CommentRating import getAll
-from CommentRating import getByRestaurantId
-from CommentRating import getByUserId
+from CommentRating import delete
+from CommentRating import update
+from CommentRating import get
 
 
 @app.route('/')
