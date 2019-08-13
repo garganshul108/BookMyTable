@@ -10,14 +10,15 @@ def get_restaurants():
     try:
         _city=request.args.get('city',default='%',type=str)
         _restaurant_id=request.args.get('restaurantId',default="%",type=int)
+        _meta=request.args.get('meta',default="NO",type=str)
         conn = mysql.connect()
         cursor = conn.cursor(pymysql.cursors.DictCursor)
         cursor.execute(
             "SELECT * FROM Restaurant where (SELECT city from Location WHERE Location.id=Restaurant.location_id) LIKE %s AND id LIKE %s ",(_city,_restaurant_id))
         rows = cursor.fetchall()
-        if _restaurant_id=="%":
-            rows=convert_restaurant(cursor, rows)
-        else :
+        if _restaurant_id=="%" :
+            rows=convert_restaurant(cursor, rows,meta=_meta)
+        else:
             rows=convert_restaurant(cursor,rows,reviews=True)
         print(type(rows))
 

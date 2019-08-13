@@ -72,6 +72,24 @@ def update_slots(res_id,cursor):
     cursor.execute(sql,values1[random.randrange(0,2)])
     cursor.execute(sql,values2[random.randrange(0,2)])
 
+def fill_establishments(tt,establishments):
+    for est in tt['establishment']:
+        establishments.append(est)
+def fill_highlights(tt,highlights):
+    for hlt in tt['highlights']:
+        highlights.append(hlt)
+def fill_cuisines(tt,cuisines):
+    ccs=tt['cuisines'].split(", ")
+    for cc in ccs:
+        cuisines.append(cc)
+def fill_common_tables(cursor,cuisines,establishments,highlights):
+    for cc in cuisines:
+        cursor.execute("INSERT INTO Cuisines(name) values(%s)",cc)
+    for est in establishments:
+        cursor.execute("INSERT INTO Establishments(name) values(%s)",est)
+    for hlt in highlights:
+        cursor.execute("INSERT INTO Highlights(name) values(%s)",hlt)
+
 @app.route('/')
 def just():
     return "SERVER IS RUNNING"
@@ -88,20 +106,30 @@ def get_restaurant():
         cursor.execute("DELETE FROM Day")
         cursor.execute("DELETE FROM Restaurant")
         cursor.execute("DELETE FROM Location")
-        cursor.execute("DELETE FROM Cities")
+        # cursor.execute("DELETE FROM Cities")
+        cursor.execute("DELETE FROM Cuisines")
+        cursor.execute("DELETE FROM Establishments")
+        cursor.execute("DELETE FROM Highlights")
 
         conn.commit()
         loc_id = 1
-        for tt in cities_data:
-            sql="INSERT INTO Cities(id,name,state) VALUES(%s,%s,%s)"
-            values=(int(tt['id']),tt['name'],tt['state'])
-            cursor.execute(sql,values)
-            conn.commit()
+        # for tt in cities_data:
+        #     sql="INSERT INTO Cities(id,name,state) VALUES(%s,%s,%s)"
+        #     values=(int(tt['id']),tt['name'],tt['state'])
+        #     cursor.execute(sql,values)
+        #     conn.commit()
+        establishments=[]
+        cuisines=[]
+        highlights=[]
         for tt in data:
+            fill_establishments(tt,establishments)
+            fill_highlights(tt,highlights)
+            fill_cuisines(tt,cuisines)
             update_location(tt, loc_id,cursor)
             update_restaurant(tt, loc_id, cursor)
             update_slots(tt['id'],cursor)
             update_availablity(tt['id'],cursor)
+            fill_common_tables(cursor,set(cuisines),set(establishments),set(highlights))
             conn.commit()
             loc_id = loc_id+1
             print("YESS")
