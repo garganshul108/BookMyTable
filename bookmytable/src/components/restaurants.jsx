@@ -23,8 +23,9 @@ class Restaurants extends Component {
   };
 
   componentDidMount() {
-    let restaurants = getRestaurantsByCity(this.props.match.params.city);
-
+    let data = getRestaurantsByCity(this.props.match.params.city);
+    let metadata = data[1];
+    let restaurants = data.slice(1);
     for (let restaurant of restaurants) {
       restaurant.showPhone = false;
       restaurant.showMenu = false;
