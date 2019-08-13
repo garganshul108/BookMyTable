@@ -175,8 +175,8 @@ class Restaurants extends Component {
 
         <div className="row no-gutters" style={{ marginBottom: "150px" }}>
           <div className="col-2">
-            {/* <p>{this.props.match.params.city}</p> */}
             <RestaurantsFilter
+              city={this.props.match.params.city}
               deleteFilter={this.handleDeleteFilter}
               addFilter={this.handleAddFilter}
             />

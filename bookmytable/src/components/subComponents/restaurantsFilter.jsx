@@ -22,7 +22,7 @@ class RestaurantsFilter extends Component {
     let cuisines = getCuisines();
     let establishments = getEstablishments();
     let features = getFeatures();
-    let localities = await getLocalitiesByCityName("gurgaon");
+    let localities = await getLocalitiesByCityName(this.props.city);
     console.log("filter", localities);
     let colorClasses = {
       cuisines: "info",
