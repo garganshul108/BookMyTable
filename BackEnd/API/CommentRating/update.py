@@ -5,8 +5,8 @@ from flask import jsonify
 from flask import flash, request
 from util.lastId import get_last_id
 
-@app.route('/api/reviews',methods=['POST'])
-def insert_review():
+@app.route('/api/reviews/<id>',methods=['PUT'])
+def update_review(id):
     try:
         data=request.json[0]
         _comment=data['comment']
@@ -17,13 +17,13 @@ def insert_review():
 
         conn=mysql.connect()
         cursor=conn.cursor()
-        sql="INSERT INTO Review(restaurant_id,comment,rating,rating_text) values(%s,%s,%s,%s)"
-        values=(_res_id,_comment,_rating,_rating_text)
+        sql="UPDATE Review SET restaurant_id=%s,comment=%s,rating=%s,rating_text=%s WHERE id=%s"
+        values=(_res_id,_comment,_rating,_rating_text,id)
         cursor.execute(sql,values)
-        review_id=get_last_id(cursor)
+        cursor.execute("DELETE FROM Photo where review_id=%s",id)
         for url in data['photos']:
             sql="INSERT INTO Photo(review_id,url) values(%s,%s)"
-            values=(review_id,url)
+            values=(id,url)
             cursor.execute(sql,values)
         conn.commit()
         return "Comment Insertion Successfull"
