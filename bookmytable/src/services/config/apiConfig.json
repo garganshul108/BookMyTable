@@ -1,21 +1,19 @@
 {
-  "api": {
-    "baseURL": "http://127.0.0.1:5000/api",
-    "get": {
-      "allRestaurants": "/restaurants",
-      "allRestaurantsByCityName": "/restaurants?city=",
-      "restaurantById": "/restaurants/",
-      "allCities": "/cities",
-      "allLocalitiesByCityName": "/localities?city="
-    },
-    "post": {
-      "newRestaurant": "restaurants/"
-    },
-    "delete": {
-      "restaurantById": "restaurants/"
-    },
-    "put": {
-      "restaurantById": "restaurants/"
-    }
+  "baseURL": "http://127.0.0.1:5000/api",
+  "get": {
+    "allRestaurants": "/restaurants",
+    "allRestaurantsByCityName": "/restaurants?city=",
+    "restaurantById": "/restaurants/",
+    "allCities": "/cities",
+    "allLocalitiesByCityName": "/localities?city="
+  },
+  "post": {
+    "newRestaurant": "restaurants/"
+  },
+  "delete": {
+    "restaurantById": "restaurants/"
+  },
+  "put": {
+    "restaurantById": "restaurants/"
   }
 }

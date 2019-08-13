@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import "./css/home.css";
 import img from "./images/HomeTab.jpg";
 import { Link } from "react-router-dom";
-import SeachableList from "./subComponents/searchableList";
+import SearchableList from "./subComponents/searchableList";
 import { getCities } from "../services/cityServices";
-import backend from "../services/backendServices";
+// import backend from "../services/backendServices";
 
 class HomeTop extends Component {
   state = {
@@ -12,15 +12,10 @@ class HomeTop extends Component {
     city: ""
   };
 
-  componentDidMount() {
-    const cities = getCities();
+  async componentDidMount() {
+    const cities = await getCities();
+    console.log(cities);
     this.setState({ cities });
-
-    console.log(
-      "backend",
-      backend.get("http://localhost:5000/restaurants")
-      // backend.get("https://jsonplaceholder.typicode.com/posts")
-    );
   }
 
   handleCityInputChange = ({ currentTarget: input }) => {
@@ -90,7 +85,7 @@ class HomeTop extends Component {
                 <div className="row">
                   <div className="col">
                     <div className="form-inline">
-                      <SeachableList
+                      <SearchableList
                         className="searchBox"
                         placeholder="City"
                         listName="cities"
@@ -100,7 +95,7 @@ class HomeTop extends Component {
                         {this.state.cities.map(item => (
                           <option value={item.name} label={item.state} />
                         ))}
-                      </SeachableList>
+                      </SearchableList>
                       <div className="form-group">
                         <Link
                           // className=""
