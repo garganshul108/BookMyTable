@@ -5,7 +5,7 @@ import Filter from "./filter";
 import { getCuisines } from "../../services/cuisineServices";
 import { getEstablishments } from "../../services/establishmentServices";
 import { getFeatures } from "../../services/featureServices";
-import { getCitiesByNames } from "../../services/cityServices";
+import { getLocalitiesByCityName } from "../../services/localityServices";
 import md5 from "md5/md5";
 class RestaurantsFilter extends Component {
   state = {
@@ -18,11 +18,12 @@ class RestaurantsFilter extends Component {
     filter: { targetProperty: "", expectedValue: "", id: "", colorClass: "" }
   };
 
-  componentDidMount() {
+  async componentDidMount() {
     let cuisines = getCuisines();
     let establishments = getEstablishments();
     let features = getFeatures();
-    let localities = getCitiesByNames();
+    let localities = await getLocalitiesByCityName(this.props.city);
+    console.log("filter", localities);
     let colorClasses = {
       cuisines: "info",
       establishments: "secondary",

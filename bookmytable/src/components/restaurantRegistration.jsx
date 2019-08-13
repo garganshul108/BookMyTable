@@ -3,7 +3,7 @@ import FormInput from "./subComponents/formInput";
 import "../components/css/restaurantRegistration.css";
 import FormCheckbox from "./subComponents/formCheckbox";
 import RegistrationSubForm from "./subComponents/registrationSubForm";
-import SeachableList from "./subComponents/searchableList";
+import SearchableList from "./subComponents/searchableList";
 import { getCities } from "../services/cityServices";
 import { getCuisines } from "../services/cuisineServices";
 import { getFeaturesByName } from "../services/featureServices";
@@ -73,8 +73,8 @@ class RestaurantRegistration extends Component {
     establishment_data: []
   };
 
-  componentDidMount() {
-    let cities_data = getCities();
+  async componentDidMount() {
+    let cities_data = await getCities();
     let cuisines_data = getCuisines();
     let features_data = getFeaturesByName();
     let establishment_data = getEstablishmentsByName();
@@ -241,7 +241,7 @@ class RestaurantRegistration extends Component {
             name="name"
             placeholder="Enter Restaurant's Name"
           />
-          <SeachableList
+          <SearchableList
             placeholder="Enter Location City"
             listName="cities"
             value={this.state.data.location.city}
@@ -250,7 +250,7 @@ class RestaurantRegistration extends Component {
             {this.state.cities_data.map(item => (
               <option value={cityValue(item)} label={item.state} />
             ))}
-          </SeachableList>
+          </SearchableList>
           <div className="row">
             <div className="col-3">
               <FormInput
@@ -344,7 +344,7 @@ class RestaurantRegistration extends Component {
             onSubmit={this.handleAdditionFormSubmit}
             onDelete={this.handleDeleteOption}
           >
-            <SeachableList
+            <SearchableList
               placeholder="Bar / Pub / Family Restaurant"
               label="ESTABLISHMENT TYPE"
               name="establishmentForm"
@@ -355,7 +355,7 @@ class RestaurantRegistration extends Component {
               {this.state.establishment_data.map(item => (
                 <option value={item} />
               ))}
-            </SeachableList>
+            </SearchableList>
           </RAdditionFormII>
         </RegistrationSubForm>
       );
@@ -384,7 +384,7 @@ class RestaurantRegistration extends Component {
             onSubmit={this.handleAdditionFormSubmit}
             onDelete={this.handleDeleteOption}
           >
-            <SeachableList
+            <SearchableList
               placeholder="Type and Select"
               label="Cuisines"
               name="cuisineForm"
@@ -395,7 +395,7 @@ class RestaurantRegistration extends Component {
               {this.state.cuisines_data.map(item => (
                 <option value={item} />
               ))}
-            </SeachableList>
+            </SearchableList>
           </RAdditionFormII>
 
           <RAdditionFormII
@@ -405,7 +405,7 @@ class RestaurantRegistration extends Component {
             onSubmit={this.handleAdditionFormSubmit}
             onDelete={this.handleDeleteOption}
           >
-            <SeachableList
+            <SearchableList
               placeholder="Features"
               label="FEATURES"
               name="featureForm"
@@ -416,7 +416,7 @@ class RestaurantRegistration extends Component {
               {this.state.features_data.map(item => (
                 <option value={item} />
               ))}
-            </SeachableList>
+            </SearchableList>
           </RAdditionFormII>
         </RegistrationSubForm>
       );

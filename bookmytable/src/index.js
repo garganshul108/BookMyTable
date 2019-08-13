@@ -10,6 +10,7 @@ import 'font-awesome/css/font-awesome.css';
 import 'jquery/dist/jquery.min.js'
 import 'bootstrap/dist/js/bootstrap.min.js'
 
+
 ReactDOM.render(<BrowserRouter> <App /> </BrowserRouter>, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change

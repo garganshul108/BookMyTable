@@ -4,9 +4,8 @@ import { Link, NavLink } from "react-router-dom";
 import "../css/navigationBar.css";
 import auth from "../../services/authServices";
 // import Login from '../login';
-import SeachableList from "./searchableList";
+import SearchableList from "./searchableList";
 import { getCities } from "../../services/cityServices";
-import { captialize } from "../../util/util";
 
 class NaviagtionBar extends Component {
   state = {
@@ -14,9 +13,15 @@ class NaviagtionBar extends Component {
     cities: []
   };
 
-  componentDidMount() {
-    let cities = getCities();
+  async componentDidMount() {
+    let cities = await getCities();
+    // console.log("nav cdm", data);
     this.setState({ cities });
+    // getCities()
+    //   .then(data => {
+    //     console.log("naigation bar", data);
+    //   })
+    //   .catch(e => console.log("navigationbar error city", e));
   }
 
   handleCityInputChange = ({ currentTarget: input }) => {
@@ -61,7 +66,7 @@ class NaviagtionBar extends Component {
                   </li>
                 </ul>
                 <div className="form-inline">
-                  <SeachableList
+                  <SearchableList
                     // className="searchBox"
                     placeholder="City"
                     listName="cities"
@@ -71,7 +76,7 @@ class NaviagtionBar extends Component {
                     {this.state.cities.map(item => (
                       <option value={item.name} label={item.state} />
                     ))}
-                  </SeachableList>
+                  </SearchableList>
                   <div className="form-group">
                     <Link
                       // className=""
