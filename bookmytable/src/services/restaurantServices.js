@@ -22,7 +22,8 @@ function renamingProperties(restaurants) {
 }
 
 function refactorName(name) {
-    return captialize(name);
+    // return captialize(name);
+    return name;
 }
 
 function adjustingProperties(restaurants) {
@@ -51,8 +52,8 @@ export const getRestaurantsByCity = async (city) => {
     let { data } = await http.get(apiBaseURL + '/restaurants?city=' + city);
     data = renamingProperties(data);
     data = adjustingProperties(data);
-    return data;
-    // return data.sort(({ name: nameA }, { name: nameB }) => { if (nameA > nameB) return 1; return -1; });
+    // return data;
+    return data.sort(({ name: nameA }, { name: nameB }) => { if (nameA >= nameB) return 1; return -1; });
 }
 
 

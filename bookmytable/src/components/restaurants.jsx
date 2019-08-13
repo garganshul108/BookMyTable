@@ -14,18 +14,11 @@ class Restaurants extends Component {
     restaurants: [],
     seachQuery: "",
     filters: [],
-    no_of_filter: "0",
-    pagination: {
-      startingIndex: 0,
-      pageSize: 0,
-      pages: 0
-    }
+    no_of_filter: "0"
   };
 
   async componentDidMount() {
-    let data = await getRestaurantsByCity(this.props.match.params.city);
-    // let metadata = data[1];
-    let restaurants = data.slice(1);
+    let restaurants = await getRestaurantsByCity(this.props.match.params.city);
     for (let restaurant of restaurants) {
       restaurant.showPhone = false;
       restaurant.showMenu = false;
@@ -150,20 +143,6 @@ class Restaurants extends Component {
 
     restaurants = this.filterByNameSearch(restaurants);
 
-    const renderPagesForPagination = () => {
-      let pages = [];
-      for (let i = 0; i < this.state.pagination.pages; i++) {
-        pages[i] = (
-          <li className="page-item">
-            <a className="page-link" href="/restaurants">
-              {i + 1}
-            </a>
-          </li>
-        );
-      }
-      return pages;
-    };
-
     return (
       <div className="container">
         <div className="row">
@@ -232,9 +211,7 @@ class Restaurants extends Component {
             </div>
             <RestaurantsCatalogue restaurants={restaurants} />
             {/* Pagination */}
-            <nav aria-label="Page navigation example">
-              <ul className="pagination">{renderPagesForPagination()}</ul>
-            </nav>
+
             {/* Pagination end */}
             {/* end of display catalogue */}
           </div>
