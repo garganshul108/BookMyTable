@@ -5,7 +5,7 @@ import FormCheckbox from "./subComponents/formCheckbox";
 import RegistrationSubForm from "./subComponents/registrationSubForm";
 import SearchableList from "./subComponents/searchableList";
 import { getCities } from "../services/cityServices";
-import { getCuisines } from "../services/cuisineServices";
+import { getCuisinesByName } from "../services/cuisineServices";
 import { getFeaturesByName } from "../services/featureServices";
 import RAdditionFormII from "./subComponents/rAdditionFormII";
 import { getEstablishmentsByName } from "../services/establishmentServices";
@@ -75,7 +75,7 @@ class RestaurantRegistration extends Component {
 
   async componentDidMount() {
     let cities_data = await getCities();
-    let cuisines_data = getCuisines();
+    let cuisines_data = getCuisinesByName();
     let features_data = getFeaturesByName();
     let establishment_data = getEstablishmentsByName();
     this.setState(

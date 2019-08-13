@@ -55,48 +55,4 @@ export const getRestaurantsByCity = async (city) => {
     // return data.sort(({ name: nameA }, { name: nameB }) => { if (nameA > nameB) return 1; return -1; });
 }
 
-// getRestaurantsByCity();
 
-
-
-// /****
-//  * Point to Remember
-//  * PTR:
-//  * here the JSON data is simply the array of restaurants
-//  * API may provide me a location object consisting of the array
-//  * 
-//  * 
-//  */
-
-// 
-
-// function filterOutProperties(restaurants) {
-//     for (let restaurant of restaurants) {
-//         delete restaurant.currency;
-//         delete restaurant.deeplink;
-//         delete restaurant.events_url;
-//         delete restaurant.featured_image;
-//         delete restaurant.has_online_delivery;
-//         delete restaurant.is_delivering_now;
-//         delete restaurant.photo_count;
-//         delete restaurant.photos_url;
-//         delete restaurant.price_range;
-//         delete restaurant.url;
-//         delete restaurant.menu_url;
-//         delete restaurant.user_rating.rating_color;
-//         delete restaurant.user_rating.rating_text;
-//         delete restaurant.all_reviews_count;
-//     }
-// }
-
-
-// function refactoringRestaurantData() {
-//     filterOutProperties(jsonData);
-//     renamingProperties(jsonData);
-//     adjustingProperties(jsonData);
-//     // addMiscPropertyToRestaurants(jsonData);
-// }
-
-// // refactoringRestaurantData();
-// // console.log(jsonData);
-// refactoringRestaurantData();
