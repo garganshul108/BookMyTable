@@ -56,4 +56,12 @@ export const getRestaurantsByCity = async (city) => {
     return data.sort(({ name: nameA }, { name: nameB }) => { if (nameA >= nameB) return 1; return -1; });
 }
 
+export const getRestaurantById = async (id) => {
+    let { data } = await http.get(apiBaseURL + '/restaurants/' + id);
+    data = renamingProperties(data);
+    data = adjustingProperties(data);
+    // console.log("id", id, "iredd", data);
+    return data;
+}
+
 
