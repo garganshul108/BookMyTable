@@ -2,17 +2,19 @@ import pymysql
 from app import app
 from db_config import mysql
 from flask import jsonify
-from flask import flash, request
 from util.sendGetResponse import send_get_response
 
-@app.route('/locations/<id>')
-def get_location_by_id(id):
+@app.route('api/bookings')
+def get_bookings():
+    _user_id=request.args.get('userId',default="%",type=int)
+    _restaurant_id=request.args.get('restaurantId',default="%",type=int)
     try:
         conn = mysql.connect()
         cursor = conn.cursor(pymysql.cursors.DictCursor)
-        cursor.execute("SELECT * FROM Location WHERE id=%s",id)
+        cursor.execute(
+            "SELECT * FROM Booking where user_id LIKE %s AND restaurant_id LIKE %s",_user_id,_restaurant_id)
         rows = cursor.fetchall()
-        return send_get_response(rows,"No location found for selected id")
+        return send_get_response(reviews,"No Booking Found")
     except Exception as e:
         print(e)
         resp=jsonify("ERROR")

@@ -1,20 +1,25 @@
 import pymysql
 from app import app
 from db_config import mysql
-from flask import jsonify
+from flask import jsonify,flash,request
 from Restaurant.util.convertRestaurant import convert_restaurant
 from util.sendGetResponse import send_get_response
 
-@app.route('/restaurants')
+@app.route('/api/restaurants')
 def get_restaurants():
     try:
+        _city=request.args.get('city',default='%',type=str)
+        _restaurant_id=request.args.get('restaurantId',default="%",type=int)
         conn = mysql.connect()
         cursor = conn.cursor(pymysql.cursors.DictCursor)
         cursor.execute(
-            "SELECT * FROM Restaurant ")
+            "SELECT * FROM Restaurant where (SELECT city from Location WHERE Location.id=Restaurant.location_id) LIKE %s AND id LIKE %s ",(_city,_restaurant_id))
         rows = cursor.fetchall()
 
-        convert_restaurant(cursor, rows)
+        if _restaurant_id=="%":
+            convert_restaurant(cursor, rows)
+        else :
+            convert_restaurant(cursor,rows,reviews=True)
         return send_get_response(rows,"No Restaurant Found")
     except Exception as e:
         print(e)

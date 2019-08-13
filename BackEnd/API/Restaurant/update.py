@@ -4,17 +4,18 @@ from db_config import mysql
 from flask import jsonify
 from flask import flash, request
 from util.lastId import get_last_id
+from util.sendGetResponse import send_get_response
 
 
-def insert_days(cursor,data,res_id):
+def update_days(cursor,data,res_id):
     try:
-        sql="INSERT INTO Day(restaurant_id,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday) VALUES(%s,%s,%s,%s,%s,%s,%s,%s)"
-        values=(res_id,data['Monday'],data['Tuesday'],data['Wednesday'],data['Thursday'],data['Friday'],data['Saturday'],data['Sunday'])
+        sql="UPDATE Day SET Monday=%s,Tuesday=%s,Wednesday=%s,Thursday=%s,Friday=%s,Saturday=%s,Sunday=%s WHERE restaurant_id=%s"
+        values=(data['Monday'],data['Tuesday'],data['Wednesday'],data['Thursday'],data['Friday'],data['Saturday'],data['Sunday'],res_id)
         cursor.execute(sql,values)
     except Exception as e:
         print("Days ",e)
 
-def insert_location(cursor,data):
+def update_location(cursor,data,loc_id):
     try:
         _address=data['address']['line_1']+data['address']['line_2']
         _city=data['city']
@@ -24,14 +25,14 @@ def insert_location(cursor,data):
 
         _locality=data['locality']
         _loc_verb=data['locality_verbose']
-        sql="INSERT INTO Location(city,zipcode,locality,address,locality_verbose) values(%s,%s,%s,%s,%s)"
-        values=(_city,_zipcode,_locality,_address,_loc_verb)
+        sql="UPDATE Location SET city=%s,zipcode=%s,locality=%s,address=%s,locality_verbose=%s WHERE id=%s"
+        values=(_city,_zipcode,_locality,_address,_loc_verb,loc_id)
         cursor.execute(sql,values)
     except Exception as e:
-        print("ERROR")
+        print("LOCATION ",e," LOCATION")
 
 
-def insert_restaurant(cursor,data,_loc_id):
+def update_restaurant_table(cursor,data,res_id):
     try:
         _ave_cost=int("0"+data['average_cost_for_two'])
         _cuisines=data['cuisines']
@@ -47,39 +48,36 @@ def insert_restaurant(cursor,data,_loc_id):
         _email=data['email']
         _website=data['website']
         _capacity=int("0"+data['capacity'])
-        sql="""INSERT INTO 
-            Restaurant(location_id,name,email,average_cost_for_two,cuisines,timings,establishment,highlights,thumb,phone_numbers,capacity,opening_status,website)
-            VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
-        values=(_loc_id,_name,_email,_ave_cost,_cuisines,_timings,_establishment,_highlights,_thumb,_phone,_capacity,_opening_status,_website)
+        sql="""UPDATE Restaurant SET
+                name=%s,email=%s,average_cost_for_two=%s,cuisines=%s,timings=%s,establishment=%s,highlights=%s,thumb=%s,phone_numbers=%s,capacity=%s,opening_status=%s,website=%s
+                WHERE id=%s"""
+        values=(_name,_email,_ave_cost,_cuisines,_timings,_establishment,_highlights,_thumb,_phone,_capacity,_opening_status,_website,res_id)
         cursor.execute(sql,values)
     except Exception as e:
         print("resta",e,"resta")
 
-def insert_slot(cursor,data,res_id):
+def update_slot(cursor,data,res_id):
     try:
         for slot in data:
-            sql="INSERT INTO Slot(restaurant_id,start_time,end_time) VALUES(%s,%s,%s)"
-            values=(res_id,slot['start_time'],slot['end_time'])
+            sql="UPDATE Slot SET start_time=%s,end_time=%s WHERE restaurant_id=%s"
+            values=(slot['start_time'],slot['end_time'],res_id)
             cursor.execute(sql,values)
     except Exception as e:
         print("slot ",e," slot")
 
-@app.route('/api/restaurants',methods=['POST'])
-def add_restaurant():
+@app.route('/api/restaurants/<id>',methods=['PUT'])
+def update_restaurant(id):
     try:
         data=request.json
         print(type(data))
         resp={"status":"correct"}
         conn=mysql.connect()
         cursor=conn.cursor()
-
-        
-        insert_location(cursor,data[0]['location'])
-        loc_id=get_last_id(cursor)
-        insert_restaurant(cursor,data[0],loc_id)  
-        res_id=get_last_id(cursor)
-        insert_days(cursor,data[0]['days'],res_id)
-        insert_slot(cursor,data[0]['slots'],res_id)
+        loc_id=cursor.execute("SELECT location_id FROM Restaurant WHERE id=%s",id)
+        update_location(cursor,data[0]['location'],loc_id)
+        update_restaurant_table(cursor,data[0],id)  
+        update_days(cursor,data[0]['days'],id)
+        update_slot(cursor,data[0]['slots'],id)
         conn.commit()
         
     except Exception as e:

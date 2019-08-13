@@ -5,7 +5,7 @@ from flask import jsonify
 from flask import flash, request
 from util.sendGetResponse import send_get_response
 
-@app.route('/locations')
+@app.route('/api/locations')
 def get_location():
     try:
         conn = mysql.connect()

@@ -68,7 +68,7 @@ def insert_booking(cursor,data,start,end):
 def toI(value):
     return int(2*value)
 
-@app.route('/restaurants/bookings',methods=['POST'])
+@app.route('/api/bookings',methods=['POST'])
 def book_table():
     data=request.json[0]
     _date=data['date']

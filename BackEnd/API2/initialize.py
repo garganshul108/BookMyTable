@@ -14,13 +14,13 @@ with open('all_data.json') as json_file:
 with open('Cities.json') as json_file:
     cities_data=json.load(json_file)
 
-def update_availablity(id,cursor):
+def update_availablity(loc_id,cursor):
     try:
         index1=random.randrange(0,6)
         arr=[1,1,1,1,1,1,1]
         arr[index1]=0
-        sql="INSERT INTO Day(restaurant_id,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday) VALUES(%s,%s,%s,%s,%s,%s,%s,%s)"
-        values=(id,arr[0],arr[1],arr[2],arr[3],arr[4],arr[5],arr[6])
+        sql="INSERT INTO Day(id,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday) VALUES(%s,%s,%s,%s,%s,%s,%s,%s)"
+        values=(loc_id,arr[0],arr[1],arr[2],arr[3],arr[4],arr[5],arr[6])
         cursor.execute(sql,values)
     except Exception as e:
         print("Error",e,"Error")
@@ -63,8 +63,8 @@ def update_restaurant(tt, loc_id, cursor):
     _thumb = tt['thumb']
     _phone_numbers = tt['phone_numbers']
     _capacity=random.randrange(20,50)
-    sql = "INSERT INTO Restaurant(id,location_id,name,average_cost_for_two,cuisines,timings,establishment,highlights,thumb,phone_numbers,capacity) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
-    value = (_id,loc_id, _name, _average_cost, _cuisines, _timings, _establishment, _highlights,
+    sql = "INSERT INTO Restaurant(id,location_id,availablity_id,name,average_cost_for_two,cuisines,timings,establishment,highlights,thumb,phone_numbers,capacity) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+    value = (_id, loc_id,loc_id, _name, _average_cost, _cuisines, _timings, _establishment, _highlights,
              _thumb, _phone_numbers,_capacity)
     cursor.execute(sql, value)
 
@@ -89,23 +89,23 @@ def get_restaurant():
         cursor.execute("DELETE FROM Review")
         cursor.execute("DELETE FROM Slot")
         cursor.execute("DELETE FROM Booking")
-        cursor.execute("DELETE FROM Day")
         cursor.execute("DELETE FROM Restaurant")
+        cursor.execute("DELETE FROM Day")
         cursor.execute("DELETE FROM Location")
         cursor.execute("DELETE FROM Cities")
 
         conn.commit()
         loc_id = 1
-        for tt in cities_data:
-            sql="INSERT INTO Cities(id,name,state) VALUES(%s,%s,%s)"
-            values=(int(tt['id']),tt['name'],tt['state'])
-            cursor.execute(sql,values)
-            conn.commit()
+        # for tt in cities_data:
+        #     sql="INSERT INTO Cities(id,name,state) VALUES(%s,%s,%s)"
+        #     values=(int(tt['id']),tt['name'],tt['state'])
+        #     cursor.execute(sql,values)
+        #     conn.commit()
         for tt in data:
+            update_availablity(loc_id,cursor)
             update_location(tt, loc_id,cursor)
             update_restaurant(tt, loc_id, cursor)
             update_slots(tt['id'],cursor)
-            update_availablity(tt['id'],cursor)
             conn.commit()
             loc_id = loc_id+1
             print("YESS")

@@ -2,17 +2,23 @@ import pymysql
 from app import app
 from db_config import mysql
 from flask import jsonify
+from flask import flash, request
 from util.sendGetResponse import send_get_response
 
-@app.route('/restaurants/<res_id>/bookings')
-def get_bookings_by_restaurant_id(res_id):
+@app.route('/api/localities')
+def get_localities():
+    city=request.args.get('city')
+    if city==None:
+        resp=jsonify("City Required")
+        resp.status_code=400
+        return resp
     try:
         conn = mysql.connect()
         cursor = conn.cursor(pymysql.cursors.DictCursor)
-        cursor.execute(
-            "SELECT * FROM Booking where restaurant_id=%s",res_id)
+        # cursor = conn.cursor()
+        cursor.execute("SELECT DISTINCT locality FROM Location WHERE city=%s",city)
         rows = cursor.fetchall()
-        return send_get_response(rows,"No booking found for the restaurant")
+        return send_get_response(rows,"No city found")
     except Exception as e:
         print(e)
         resp=jsonify("ERROR")
