@@ -26,7 +26,6 @@ class RestaurantDisplay extends Component {
       cost: avCost,
       cuisines,
       thumb,
-      user_rating: rating,
       timings,
       location,
       establishments,
@@ -36,7 +35,7 @@ class RestaurantDisplay extends Component {
       showTables
     } = restaurant;
 
-    let { aggregate_rating: aggRating, votes } = rating;
+    // let { aggregate_rating: aggRating, votes } = rating;
     let { locality: highLocals, address } = location;
     // cuisines = refactorCuisines(cuisines);
     // name = refactorName(name);
@@ -94,10 +93,10 @@ class RestaurantDisplay extends Component {
           </div>
 
           <div className="col-2 reviewDiv" style={{ textAlign: "right" }}>
-            <h4 style={{ marginTop: "50%" }}>
+            {/* <h4 style={{ marginTop: "50%" }}>
               <span className="badge badge-success">{aggRating}</span>
-            </h4>
-            <span className="voteCount">{votes} votes</span>
+            </h4> */}
+            {/* <span className="voteCount">{votes} votes</span> */}
           </div>
         </div>
         <hr />
