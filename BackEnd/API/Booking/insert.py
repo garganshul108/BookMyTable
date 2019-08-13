@@ -134,7 +134,7 @@ def book_table():
         conn.close()
         cursor.close()
         resp=jsonify("Success")
-        resp.status_code=200
+        resp.status_code=201
         return resp
     
     

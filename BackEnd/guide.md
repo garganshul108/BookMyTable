@@ -14,7 +14,7 @@
 
 11. [http://127.0.0.1:5000/api/restaurants](http://127.0.0.1:5000/restaurants) accepts city as query parameter to filter by city if not given any query string it will return a list of all restaurants (GET Request)
 
-12. [http://127.0.0.1:5000/restaurants](http://127.0.0.1:5000/restaurants) insert a restaurant (POST Request)
+12. [http://127.0.0.1:5000/api/restaurants](http://127.0.0.1:5000/restaurants) insert a restaurant (POST Request)
 
 13. [http://127.0.0.1:5000/api/restaurants/<restaurant_id>](http://127.0.0.1:5000/api/restaurants/<restaurant_id>) get restaurant by its id (GET Request)
 
@@ -22,8 +22,22 @@
 
 15. [http://127.0.0.1:5000/api/restaurants/<restaurant_id>](http://127.0.0.1:5000/api/restaurants/<restaurant_id>) updates restaurant of given id (PUT Request) (will try patch later)
 
-13) [http://127.0.0.1:5000/api/locations](http://127.0.0.1:5000/locations) get All locations (GET Request) (testing purpose)
+16. [http://127.0.0.1:5000/api/locations](http://127.0.0.1:5000/locations) get All locations (GET Request) (testing purpose)
 
-14) [http://127.0.0.1:5000/api/cities](http://127.0.0.1:5000/api/cities) gets all the cities of india (GET Request)
+17. [http://127.0.0.1:5000/api/cities](http://127.0.0.1:5000/api/cities) gets all the cities of india (GET Request)
 
-15) [http://127.0.0.1:5000/api/localities](http://127.0.0.1:5000/api/localities) A query string for city name must be provided if not then error code 400 is thrown. gets all the localities of the city (GET Request)
+18. [http://127.0.0.1:5000/api/localities](http://127.0.0.1:5000/api/localities) A query string for city name must be provided if not then error code 400 is thrown. gets all the localities of the city (GET Request)
+
+19. [http://127.0.0.1:5000/api/bookings](http://127.0.0.1:5000/api/bookings) userId , restaurantId as query string (GET request)
+
+20. [http://127.0.0.1:5000/api/bookings](http://127.0.0.1:5000/api/bookings) (POST request)
+
+21. [http://127.0.0.1:5000/api/bookings/<id>](http://127.0.0.1:5000/api/bookings/<id>) (DELETE request)
+
+22. [http://127.0.0.1:5000/api/reviews](http://127.0.0.1:5000/api/reviews) userId , restaurantId as query string (GET request)
+
+23. [http://127.0.0.1:5000/api/bookings](http://127.0.0.1:5000/api/bookings) (POST request))
+
+24. [http://127.0.0.1:5000/api/bookings/<id>](http://127.0.0.1:5000/api/bookings/<id>) (PUT request)
+
+25. [http://127.0.0.1:5000/api/bookings/<id>](http://127.0.0.1:5000/api/bookings/<id>) (DELETE request)
