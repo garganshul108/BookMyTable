@@ -27,6 +27,10 @@ from CommentRating import delete
 from CommentRating import update
 from CommentRating import get
 
+from Common import getAllCuisines
+from Common import getAllHighlights
+from Common import getAllEstablishments
+
 
 @app.route('/')
 def JJ():
