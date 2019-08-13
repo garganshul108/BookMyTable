@@ -1,7 +1,7 @@
 from CommentRating.get import get_reviews
 from collections import defaultdict
 import operator
-def convert_restaurant(cursor, rows,reviews=False):
+def convert_restaurant(cursor, rows,reviews=False,meta="NO"):
         for row in rows:
                 cursor.execute("SELECT * FROM Location where id=%s",
                         row['location_id'])
@@ -13,6 +13,7 @@ def convert_restaurant(cursor, rows,reviews=False):
                 row['days']=days[0]
                 del row['days']['restaurant_id']
                 
+                
                 if reviews:
                         cursor.execute("SELECT * FROM Slot where restaurant_id=%s",row['id'])
                         slots=cursor.fetchall()
@@ -23,7 +24,7 @@ def convert_restaurant(cursor, rows,reviews=False):
                 
                 del row['location_id']
 
-        if not reviews:
+        if meta!="NO" and not reviews and len(rows)!=0:
                 dic={}
                 dic['highlights']={}
                 dic['establishments']={}
@@ -47,13 +48,16 @@ def convert_restaurant(cursor, rows,reviews=False):
                                         dic['cuisines'][cc]=0
                                 if cc:
                                         dic['cuisines'][cc]=dic['cuisines'][cc]+1
+                
 
-                # sor_est=sorted(dic['establishments'].items(),key=lambda x:x[1])
-                # print("here",type(dic['establishments']))
-                info_list=[]
-                info_list.append(dic)
-                # print ("yesss")
-                rows=info_list+rows
+                print("meta is ",meta)
+                if meta=='highlights':
+                        return dic['highlights']
+                if meta=='establishments':
+                        return dic['establishments']
+                if meta=='cuisines':
+                        return dic['cuisines']
+                return rows
         return rows
 
         
