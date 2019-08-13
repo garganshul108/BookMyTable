@@ -83,9 +83,11 @@ def add_restaurant():
         conn.commit()
         
     except Exception as e:
-        print("ERROR",e,"ERROR")
-        return "error"
+        print(e)
+        resp=jsonify("ERROR")
+        resp.status_code=500
+        return resp
     finally:
         conn.close()
         cursor.close()
-        return jsonify(resp)
+        return send_get_response(data,"No header")

@@ -4,6 +4,7 @@ from db_config import mysql
 from flask import jsonify
 from flask import flash, request
 from util.lastId import get_last_id
+from util.sendGetResponse import send_get_response
 
 
 def update_days(cursor,data,res_id):
@@ -80,9 +81,11 @@ def update_restaurant(id):
         conn.commit()
         
     except Exception as e:
-        print("ERROR",e,"ERROR")
-        return "error"
+        print(e)
+        resp=jsonify("ERROR")
+        resp.status_code=500
+        return resp
     finally:
         conn.close()
         cursor.close()
-        return jsonify(resp)
+        return send_get_response(data,"No header")

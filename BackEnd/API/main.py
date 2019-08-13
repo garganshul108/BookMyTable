@@ -16,11 +16,9 @@ from Location import getLocalitiesByCity
 from Location import getAllCities
 from LoginSignUp import signup
 from LoginSignUp import login
-from Booking import getAll
 from Booking import insert
 from Booking import deleteById
 from Booking import deleteAll
-from Booking import getByRestaurantId
 from CommentRating import insert
 from CommentRating import getAll
 from CommentRating import getByRestaurantId

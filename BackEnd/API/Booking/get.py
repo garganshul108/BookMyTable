@@ -4,15 +4,17 @@ from db_config import mysql
 from flask import jsonify
 from util.sendGetResponse import send_get_response
 
-@app.route('/restaurants/<res_id>/bookings')
-def get_bookings_by_restaurant_id(res_id):
+@app.route('api/bookings')
+def get_bookings():
+    _user_id=request.args.get('userId',default="%",type=int)
+    _restaurant_id=request.args.get('restaurantId',default="%",type=int)
     try:
         conn = mysql.connect()
         cursor = conn.cursor(pymysql.cursors.DictCursor)
         cursor.execute(
-            "SELECT * FROM Booking where restaurant_id=%s",res_id)
+            "SELECT * FROM Booking where user_id LIKE %s AND restaurant_id LIKE %s",_user_id,_restaurant_id)
         rows = cursor.fetchall()
-        return send_get_response(rows,"No booking found for the restaurant")
+        return send_get_response(reviews,"No Booking Found")
     except Exception as e:
         print(e)
         resp=jsonify("ERROR")
