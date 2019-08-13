@@ -10,9 +10,11 @@ def append_photos(cursor,review):
     review['photos']=cursor.fetchall()
 
 @app.route('/api/reviews')
-def get_reviews():
+def get_reviews(resId=None):
     _restaurant_id=request.args.get('restaurantId',default="%",type=int)
     _user_id=request.args.get('userId',default="%",type=int)
+    if resId != None:
+        _restaurant_id=resId
     try:
         conn=mysql.connect()
         cursor=conn.cursor(pymysql.cursors.DictCursor)

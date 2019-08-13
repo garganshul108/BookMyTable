@@ -1,23 +1,60 @@
-from CommentRating.getByRestaurantId import get_reviews_by_restaurant_id
+from CommentRating.get import get_reviews
+from collections import defaultdict
+import operator
 def convert_restaurant(cursor, rows,reviews=False):
-    for row in rows:
-        cursor.execute("SELECT * FROM Location where id=%s",
-                       row['location_id'])
-        loc = cursor.fetchall()
-        row['location'] = loc[0]
+        for row in rows:
+                cursor.execute("SELECT * FROM Location where id=%s",
+                        row['location_id'])
+                loc = cursor.fetchall()
+                row['location'] = loc[0]
 
-        cursor.execute("SELECT * FROM Day where restaurant_id=%s",row['id'])
-        days=cursor.fetchall()
-        row['days']=days[0]
-        del row['days']['restaurant_id']
-        
-        if reviews:
-                cursor.execute("SELECT * FROM Slot where restaurant_id=%s",row['id'])
-                slots=cursor.fetchall()
-                row['slots']=slots
+                cursor.execute("SELECT * FROM Day where restaurant_id=%s",row['id'])
+                days=cursor.fetchall()
+                row['days']=days[0]
+                del row['days']['restaurant_id']
+                
+                if reviews:
+                        cursor.execute("SELECT * FROM Slot where restaurant_id=%s",row['id'])
+                        slots=cursor.fetchall()
+                        row['slots']=slots
 
-        if reviews:
-                row['reviews']=get_reviews_by_restaurant_id(row['id']).json
+                if reviews:
+                        row['reviews']=get_reviews(resId=row['id']).json
+                
+                del row['location_id']
+
+        if not reviews:
+                dic={}
+                dic['highlights']={}
+                dic['establishments']={}
+                dic['cuisines']={}
+                for row in rows:
+                        est=row['establishment'].split(", ")
+                        cui=row['cuisines'].split(", ")
+                        hlt=row['highlights'].split(", ")
+                        for ee in est:
+                                if ee and (not ee in dic['establishments']):
+                                        dic['establishments'][ee]=0
+                                if ee:
+                                        dic['establishments'][ee]=dic['establishments'][ee]+1
+                        for hh in hlt:
+                                if hh and (not hh in dic['highlights']):
+                                        dic['highlights'][hh]=0
+                                if hh:
+                                        dic['highlights'][hh]=dic['highlights'][hh]+1
+                        for  cc in cui:
+                                if cc and (not cc in dic['cuisines']):
+                                        dic['cuisines'][cc]=0
+                                if cc:
+                                        dic['cuisines'][cc]=dic['cuisines'][cc]+1
+
+                # sor_est=sorted(dic['establishments'].items(),key=lambda x:x[1])
+                # print("here",type(dic['establishments']))
+                info_list=[]
+                info_list.append(dic)
+                # print ("yesss")
+                rows=info_list+rows
+        return rows
+
         
-        del row['location_id']
         

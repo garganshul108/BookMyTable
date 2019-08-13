@@ -15,11 +15,13 @@ def get_restaurants():
         cursor.execute(
             "SELECT * FROM Restaurant where (SELECT city from Location WHERE Location.id=Restaurant.location_id) LIKE %s AND id LIKE %s ",(_city,_restaurant_id))
         rows = cursor.fetchall()
-
         if _restaurant_id=="%":
-            convert_restaurant(cursor, rows)
+            rows=convert_restaurant(cursor, rows)
         else :
-            convert_restaurant(cursor,rows,reviews=True)
+            rows=convert_restaurant(cursor,rows,reviews=True)
+        print(type(rows))
+
+        
         return send_get_response(rows,"No Restaurant Found")
     except Exception as e:
         print(e)

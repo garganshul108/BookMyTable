@@ -4,12 +4,12 @@ from db_config import mysql
 from flask import jsonify
 from util.sendGetResponse import send_get_response
 
-@app.route('api/bookings')
+@app.route('/api/bookings')
 def get_bookings():
     _user_id=request.args.get('userId',default="%",type=int)
     _restaurant_id=request.args.get('restaurantId',default="%",type=int)
 
-    if _user_id=="%" AND _restaurant_id=="%":
+    if _user_id=="%" and _restaurant_id=="%":
         print("Unauthorized")
 
     try:
