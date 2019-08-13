@@ -5,7 +5,6 @@ import apiConfig from './config/apiConfig.json';
 import { captialize } from '../util/util';
 
 const apiBaseURL = apiConfig.baseURL;
-const getRestaurantsByCityName = apiConfig.get.allRestaurantsByCityName;
 
 let jsonData = [...require('./dump/JSON/R_data_Gurgaon0+20_filtered.json')];
 
@@ -23,7 +22,7 @@ function renamingProperties(restaurants) {
 }
 
 function refactorName(name) {
-    return (name);
+    return captialize(name);
 }
 
 function adjustingProperties(restaurants) {
@@ -49,11 +48,11 @@ export const getRestaurants = () => {
 
 
 export const getRestaurantsByCity = async (city) => {
-    let { data } = await http.get(apiBaseURL + getRestaurantsByCityName + "gurgaon");
-    data = data.slice(1);
+    let { data } = await http.get(apiBaseURL + '/restaurants?city=' + city);
     data = renamingProperties(data);
     data = adjustingProperties(data);
     return data;
+    // return data.sort(({ name: nameA }, { name: nameB }) => { if (nameA > nameB) return 1; return -1; });
 }
 
 // getRestaurantsByCity();

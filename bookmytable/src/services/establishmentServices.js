@@ -1,5 +1,12 @@
-// import { getRestaurants } from './restaurantServices';
+import http from './httpServices';
+// const http = require('axios');
+import apiConfig from './config/apiConfig.json';
+// const apiConfig = require('./config/apiConfig.json');
+import { captialize } from '../util/util';
 
+// const apiBaseURL = apiConfig.baseURL;
+
+// import { getRestaurants } from './restaurantServices';
 // let establishments = [];
 
 // // function setEstablishmentCount() {
@@ -12,7 +19,7 @@
 //         }
 //         else {
 //             hashEstablishments[c] = 1;
-//         }
+//         y
 //     }
 // }
 
@@ -28,6 +35,15 @@ export const getEstablishments = () => {
     return require('./dump/JSON/cuisines.json').sort();
 }
 
+export const getEstablishmentsByCity = async (city) => {
+    let { data } = await http.get(apiConfig.baseURL + '/restaurants?city=' + city + "&meta=establishments");
+    let establishments = [];
+    for (let key in data) {
+        establishments.push({ "name": key, "count": data[key] });
+    }
+    return establishments.sort(({ count: countA }, { count: countB }) => countB - countA);
+    // return data;
+}
 
 export const getEstablishmentsByName = () => {
     // setEstablishmentCount();
