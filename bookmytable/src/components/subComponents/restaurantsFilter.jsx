@@ -2,12 +2,9 @@ import React, { Component } from "react";
 
 import "../css/filter.css";
 import Filter from "./filter";
-import { getCuisines, getCuisinesByCity } from "../../services/cuisineServices";
-import {
-  getEstablishments,
-  getEstablishmentsByCity
-} from "../../services/establishmentServices";
-import { getFeatures, getFeaturesByCity } from "../../services/featureServices";
+import { getCuisinesByCity } from "../../services/cuisineServices";
+import { getEstablishmentsByCity } from "../../services/establishmentServices";
+import { getFeaturesByCity } from "../../services/featureServices";
 import { getLocalitiesByCityName } from "../../services/localityServices";
 import md5 from "md5/md5";
 class RestaurantsFilter extends Component {

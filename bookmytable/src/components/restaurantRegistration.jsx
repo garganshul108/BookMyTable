@@ -1,23 +1,17 @@
 import React, { Component } from "react";
 import FormInput from "./subComponents/formInput";
-import "../components/css/restaurantRegistration.css";
 import FormCheckbox from "./subComponents/formCheckbox";
 import RegistrationSubForm from "./subComponents/registrationSubForm";
 import SearchableList from "./subComponents/searchableList";
-import { getCities } from "../services/cityServices";
-import {
-  getCuisinesByName,
-  getNamesOfAllCuisines
-} from "../services/cuisineServices";
-import {
-  getFeaturesByName,
-  getNamesOfAllFeatures
-} from "../services/featureServices";
 import RAdditionFormII from "./subComponents/rAdditionFormII";
-import {
-  getEstablishmentsByName,
-  getNamesOfAllEstablishments
-} from "../services/establishmentServices";
+
+import { getCities } from "../services/cityServices";
+import { getNamesOfAllCuisines } from "../services/cuisineServices";
+import { getNamesOfAllFeatures } from "../services/featureServices";
+import { getNamesOfAllEstablishments } from "../services/establishmentServices";
+
+import "../components/css/restaurantRegistration.css";
+
 class RestaurantRegistration extends Component {
   state = {
     data: {

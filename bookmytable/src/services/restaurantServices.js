@@ -22,8 +22,8 @@ function renamingProperties(restaurants) {
 }
 
 function refactorName(name) {
-    // return captialize(name);
-    return name;
+    return captialize(name);
+    // return name;
 }
 
 function adjustingProperties(restaurants) {

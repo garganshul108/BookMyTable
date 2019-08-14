@@ -1,0 +1,37 @@
+.restaurantInfoBanner {
+  padding: 30px;
+  background: white;
+}
+
+.middot {
+  font-size: 0.1rem;
+}
+
+.restaurantInfoBanner .title {
+  font-weight: 900;
+}
+
+.restaurantInfoBanner .rating-large {
+  font-size: 2rem;
+  font-weight: 900;
+}
+
+.restaurantInfoBanner .topButtons > button {
+  margin: 10px;
+  background: inherit;
+  color: gray;
+  box-shadow: 0px 0px 3px gray;
+  font-size: 0.9rem;
+}
+
+.restaurantInfoBanner .topButtons > button:hover {
+  background: rgba(133, 143, 148, 0.479);
+  color: rgba(65, 63, 63, 0.959);
+}
+
+.restaurantInfoBanner .subInfo {
+  margin-bottom: 30px;
+}
+.restaurantInfoBanner .subInfo .subTitle {
+  font-weight: 900;
+}
