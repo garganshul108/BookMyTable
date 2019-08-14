@@ -9,6 +9,7 @@ from util.lastId import get_last_id
 def insert_review():
     try:
         data=request.json[0]
+        # print(data)
         _comment=data['comment']
         _rating=data['rating']
         _rating_text=data['rating_text']
@@ -17,6 +18,13 @@ def insert_review():
 
         conn=mysql.connect()
         cursor=conn.cursor()
+        cursor.execute("SELECT rating,votes FROM Restaurant where id=%s",_res_id)
+        
+        (rating,votes)=cursor.fetchall()[0]
+        
+        cursor.execute("UPDATE Restaurant SET rating=%s,votes=%s where id=%s",
+                    ((rating*votes+_rating)/(votes+1),votes+1,_res_id))
+        print("working")
         sql="INSERT INTO Review(restaurant_id,comment,rating,rating_text) values(%s,%s,%s,%s)"
         values=(_res_id,_comment,_rating,_rating_text)
         cursor.execute(sql,values)
@@ -26,9 +34,10 @@ def insert_review():
             values=(review_id,url)
             cursor.execute(sql,values)
         conn.commit()
+        print("sucess")
         return "Comment Insertion Successfull"
     except Exception as e:
-        print("comment ",e," comment")
+        print("commmment ",e," comment")
     finally:
         conn.close()
         cursor.close()
