@@ -129,7 +129,12 @@ def book_table():
     
     
     if count==0:
-        insert_booking(cursor,data,rev_convert_time(newSlot['start']),rev_convert_time(newSlot['end']))
+        try:
+            insert_booking(cursor,data,rev_convert_time(newSlot['start']),rev_convert_time(newSlot['end']))
+        except Exception as e:
+            resp=jsonify("ERROR")
+            resp.status_code=500
+            return resp
         conn.commit()
         conn.close()
         cursor.close()
