@@ -44,10 +44,13 @@ def drop_id():
         cursor.execute("DELETE FROM Review")
         cursor.execute("DELETE FROM Slot")
         cursor.execute("DELETE FROM Booking")
-        cursor.execute("DELETE FROM Restaurant")
         cursor.execute("DELETE FROM Day")
+        cursor.execute("DELETE FROM Restaurant")
         cursor.execute("DELETE FROM Location")
-        cursor.execute("DELETE FROM Cities")
+        # cursor.execute("DELETE FROM Cities")
+        cursor.execute("DELETE FROM Cuisines")
+        cursor.execute("DELETE FROM Establishments")
+        cursor.execute("DELETE FROM Highlights")
 
         conn.commit()
     except Exception as e:

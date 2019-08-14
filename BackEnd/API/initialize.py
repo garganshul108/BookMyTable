@@ -129,10 +129,11 @@ def get_restaurant():
             update_restaurant(tt, loc_id, cursor)
             update_slots(tt['id'],cursor)
             update_availablity(tt['id'],cursor)
-            fill_common_tables(cursor,set(cuisines),set(establishments),set(highlights))
-            conn.commit()
             loc_id = loc_id+1
             print("YESS")
+        fill_common_tables(cursor,set(cuisines),set(establishments),set(highlights))
+        conn.commit()
+            
 
     except Exception as e:
         print(e)
