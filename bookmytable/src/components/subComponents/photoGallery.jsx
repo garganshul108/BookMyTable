@@ -5,6 +5,10 @@ class PhotoGallery extends Component {
     return (
       <div className="photoDiv">
         <h4 style={{ fontWeight: "900" }}>Gallery</h4>
+        <small className="text-muted">
+          NOTE: All the photos in the gallery below are added by the reviewer
+          only
+        </small>
         <div className="container">
           <div className="row">
             <div className="col">
