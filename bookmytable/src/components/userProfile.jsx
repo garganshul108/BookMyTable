@@ -66,12 +66,36 @@ class UserProfile extends Component {
         </div>
       );
     };
+
+    const renderUserHistory = () => {
+      return (
+        <div className="userHistory">
+          <div className="row">
+            <div className="col-4">
+              <ul class="list-group">
+                <li class="list-group-item options">Dineline</li>
+                <li class="list-group-item options">Reviews</li>
+                <li class="list-group-item options">Bookmarks</li>
+                <li class="list-group-item options">Been There</li>
+                <li class="list-group-item options">Recently Visited</li>
+                <li class="list-group-item options">Bills</li>
+              </ul>
+            </div>
+            <div className="col" />
+          </div>
+        </div>
+      );
+    };
+
     return (
       <div className="container">
         <div className="dummy" />
         <div className="row">
-          <div className="col">{renderUserInfo()}</div>
-          <div className="col-2">OPtions</div>
+          <div className="col">
+            {renderUserInfo()}
+            {renderUserHistory()}
+          </div>
+          <div className="col-2">.</div>
         </div>
       </div>
     );
