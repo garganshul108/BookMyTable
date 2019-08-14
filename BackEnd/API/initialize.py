@@ -52,16 +52,16 @@ def update_restaurant(tt, loc_id, cursor):
     _cuisines = tt['cuisines']
     _timings = tt['timings']
     _establishment = ", ".join(tt['establishment'])
-
-
     _highlights = ", ".join(tt['highlights'])
+    _rating=Decimal(tt['user_rating']['aggregate_rating'])
+    _votes=tt['user_rating']['votes']
 
     _thumb = tt['thumb']
     _phone_numbers = tt['phone_numbers']
     _capacity=random.randrange(20,50)
-    sql = "INSERT INTO Restaurant(id,location_id,name,average_cost_for_two,cuisines,timings,establishment,highlights,thumb,phone_numbers,capacity) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+    sql = "INSERT INTO Restaurant(id,location_id,name,average_cost_for_two,cuisines,timings,establishment,highlights,thumb,phone_numbers,capacity,rating,votes) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
     value = (_id,loc_id, _name, _average_cost, _cuisines, _timings, _establishment, _highlights,
-             _thumb, _phone_numbers,_capacity)
+             _thumb, _phone_numbers,_capacity,_rating,_votes)
     cursor.execute(sql, value)
 
 def update_slots(res_id,cursor):
