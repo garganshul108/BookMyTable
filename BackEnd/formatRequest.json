@@ -1,9 +1,9 @@
 [
   {
     "average_cost_for_two": "",
-    "cuisines": "",
-    "establishment": [],
-    "highlights": "",
+    "cuisines": ["qwer", "uoip"],
+    "establishment": ["aasfsa", "zcvxz"],
+    "highlights": ["adfsaf", "adflkjiojoij"],
     "location": {
       "address": {
         "line_1": "",
@@ -29,7 +29,7 @@
     "days": {
       "Monday": false,
       "Tuesday": false,
-      "Wednesday": false,
+      "Wednesday": true,
       "Thursday": false,
       "Friday": false,
       "Saturday": false,

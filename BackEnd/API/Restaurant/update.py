@@ -32,14 +32,42 @@ def update_location(cursor,data,loc_id):
         print("LOCATION ",e," LOCATION")
 
 
+def update_highlights(data,cursor):
+    cursor.execute("SELECT name FROM Highlights")
+    l1=cursor.fetchall()
+    l1=[i for sub in l1 for i in sub]
+    new_list=list(set(data)-set(l1))
+    for dd in new_list:
+        cursor.execute("INSERT INTO Highlights(name) values(%s)",dd)
+
+    return ", ".join(data)
+
+def update_establishments(data,cursor):
+    cursor.execute("SELECT name FROM Establishments")
+    l1=cursor.fetchall()
+    l1=[i for sub in l1 for i in sub]
+    new_list=list(set(data)-set(l1))
+    for dd in new_list:
+        cursor.execute("INSERT INTO Establishments(name) values(%s)",dd)
+
+    return ", ".join(data)
+
+def update_cuisines(data,cursor):
+    cursor.execute("SELECT name FROM Cuisines")
+    l1=cursor.fetchall()
+    l1=[i for sub in l1 for i in sub]
+    new_list=list(set(data)-set(l1))
+    for dd in new_list:
+        cursor.execute("INSERT INTO Cuisines(name) values(%s)",dd)
+
+    return ", ".join(data)
+
 def update_restaurant_table(cursor,data,res_id):
     try:
         _ave_cost=int("0"+data['average_cost_for_two'])
-        _cuisines=data['cuisines']
-        _establishment=""
-        for est in data['establishment']:
-            _establishment=_establishment+est
-        _highlights=data['highlights']
+        _cuisines=update_cuisines(data['cuisines'],cursor)
+        _establishment=update_establishments(data['establishment'],cursor)
+        _highlights=update_highlights(data['highlights'],cursor)
         _name=data['name']
         _phone=data['phone']['std']+" , "+data['phone']['number']
         _thumb=data['thumb']

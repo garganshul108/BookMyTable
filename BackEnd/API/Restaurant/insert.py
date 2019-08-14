@@ -4,7 +4,7 @@ from db_config import mysql
 from flask import jsonify
 from flask import flash, request
 from util.lastId import get_last_id
-
+from util.sendGetResponse import send_get_response
 
 def insert_days(cursor,data,res_id):
     try:
@@ -21,24 +21,57 @@ def insert_location(cursor,data):
         _zipcode=None
         if data['zipcode'].isdigit():
             _zipcode=int(data['zipcode'])
-
         _locality=data['locality']
         _loc_verb=data['locality_verbose']
+        cursor.execute("SELECT * from Cities where name=%s",_city)
+        if cursor.rowcount==0:
+            cursor.execute("INSERT into Cities(name) values(%s)",_city)
+        
         sql="INSERT INTO Location(city,zipcode,locality,address,locality_verbose) values(%s,%s,%s,%s,%s)"
         values=(_city,_zipcode,_locality,_address,_loc_verb)
         cursor.execute(sql,values)
     except Exception as e:
         print("ERROR")
 
+def insert_highlights(data,cursor):
+    cursor.execute("SELECT name FROM Highlights")
+    l1=cursor.fetchall()
+    l1=[i for sub in l1 for i in sub]
+    new_list=list(set(data)-set(l1))
+    for dd in new_list:
+        cursor.execute("INSERT INTO Highlights(name) values(%s)",dd)
+
+    return ", ".join(data)
+
+def insert_establishments(data,cursor):
+    cursor.execute("SELECT name FROM Establishments")
+    l1=cursor.fetchall()
+    l1=[i for sub in l1 for i in sub]
+    new_list=list(set(data)-set(l1))
+    for dd in new_list:
+        cursor.execute("INSERT INTO Establishments(name) values(%s)",dd)
+
+    return ", ".join(data)
+
+def insert_cuisines(data,cursor):
+    cursor.execute("SELECT name FROM Cuisines")
+    l1=cursor.fetchall()
+    l1=[i for sub in l1 for i in sub]
+    new_list=list(set(data)-set(l1))
+    for dd in new_list:
+        cursor.execute("INSERT INTO Cuisines(name) values(%s)",dd)
+
+    return ", ".join(data)
+
+    
 
 def insert_restaurant(cursor,data,_loc_id):
     try:
         _ave_cost=int("0"+data['average_cost_for_two'])
-        _cuisines=data['cuisines']
-        _establishment=""
-        for est in data['establishment']:
-            _establishment=_establishment+est
-        _highlights=data['highlights']
+        _cuisines=insert_cuisines(data['cuisines'],cursor)
+        _establishment=insert_establishments(data['establishment'],cursor)
+        _highlights=insert_highlights(data['highlights'],cursor)
+
         _name=data['name']
         _phone=data['phone']['std']+" , "+data['phone']['number']
         _thumb=data['thumb']

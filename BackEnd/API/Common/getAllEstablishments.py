@@ -11,6 +11,7 @@ def get_establishments():
         cursor = conn.cursor(pymysql.cursors.DictCursor)
         cursor.execute(
             "SELECT * FROM Establishments")
+        rows=cursor.fetchall()
         ans=[]
         for row in rows:
             ans.append(row['name'])

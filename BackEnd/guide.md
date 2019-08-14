@@ -41,3 +41,9 @@
 24. [http://127.0.0.1:5000/api/bookings/<id>](http://127.0.0.1:5000/api/bookings/<id>) (PUT request)
 
 25. [http://127.0.0.1:5000/api/bookings/<id>](http://127.0.0.1:5000/api/bookings/<id>) (DELETE request)
+
+26. [http://127.0.0.1:5000/api/cuisines](http://127.0.0.1:5000/api/cuisines) (GET request)
+
+27. [http://127.0.0.1:5000/api/establishments](http://127.0.0.1:5000/api/establishments) (GET request)
+
+28. [http://127.0.0.1:5000/api/highlights](http://127.0.0.1:5000/api/highlights) (GET request)

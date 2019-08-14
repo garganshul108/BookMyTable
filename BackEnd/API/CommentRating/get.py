@@ -18,9 +18,12 @@ def get_reviews(resId=None):
     try:
         conn=mysql.connect()
         cursor=conn.cursor(pymysql.cursors.DictCursor)
-        
-        cursor.execute("SELECT * from Review where restaurant_id LIKE %s AND user_id",_restaurant_id,_user_id)
+        print(_user_id)
+        # cursor.execute("SELECT * from Review where restaurant_id LIKE %s AND user_id LIKE %s ",(_restaurant_id,_user_id))
+        cursor.execute("SELECT * from Review where restaurant_id LIKE %s",(_restaurant_id))
+
         reviews=cursor.fetchall()
+        print(reviews)
         for review in reviews:
             append_photos(cursor,review)
         
