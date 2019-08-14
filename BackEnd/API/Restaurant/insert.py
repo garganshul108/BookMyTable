@@ -8,15 +8,11 @@ from util.sendGetResponse import send_get_response
 from Restaurant.util.convertRestaurant import convert_restaurant
 
 def insert_days(cursor,data,res_id):
-    try:
         sql="INSERT INTO Day(restaurant_id,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday) VALUES(%s,%s,%s,%s,%s,%s,%s,%s)"
         values=(res_id,data['Monday'],data['Tuesday'],data['Wednesday'],data['Thursday'],data['Friday'],data['Saturday'],data['Sunday'])
         cursor.execute(sql,values)
-    except Exception as e:
-        print("Days ",e)
 
 def insert_location(cursor,data):
-    try:
         _address=data['address']['line_1']+data['address']['line_2']
         _city=data['city']
         _zipcode=None
@@ -31,8 +27,6 @@ def insert_location(cursor,data):
         sql="INSERT INTO Location(city,zipcode,locality,address,locality_verbose) values(%s,%s,%s,%s,%s)"
         values=(_city,_zipcode,_locality,_address,_loc_verb)
         cursor.execute(sql,values)
-    except Exception as e:
-        print("ERROR")
 
 def insert_highlights(data,cursor):
     cursor.execute("SELECT name FROM Highlights")
@@ -67,7 +61,6 @@ def insert_cuisines(data,cursor):
     
 
 def insert_restaurant(cursor,data,_loc_id):
-    try:
         _ave_cost=int("0"+data['average_cost_for_two'])
         _cuisines=insert_cuisines(data['cuisines'],cursor)
         _establishment=insert_establishments(data['establishment'],cursor)
@@ -86,17 +79,13 @@ def insert_restaurant(cursor,data,_loc_id):
             VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
         values=(_loc_id,_name,_email,_ave_cost,_cuisines,_timings,_establishment,_highlights,_thumb,_phone,_capacity,_opening_status,_website)
         cursor.execute(sql,values)
-    except Exception as e:
-        print("resta",e,"resta")
 
 def insert_slot(cursor,data,res_id):
-    try:
-        for slot in data:
-            sql="INSERT INTO Slot(restaurant_id,start_time,end_time) VALUES(%s,%s,%s)"
-            values=(res_id,slot['start_time'],slot['end_time'])
-            cursor.execute(sql,values)
-    except Exception as e:
-        print("slot ",e," slot")
+    for slot in data:
+        sql="INSERT INTO Slot(restaurant_id,start_time,end_time) VALUES(%s,%s,%s)"
+        values=(res_id,slot['start_time'],slot['end_time'])
+        cursor.execute(sql,values)
+    print("slot ",e," slot")
 
 @app.route('/api/restaurants',methods=['POST'])
 def add_restaurant():
@@ -105,7 +94,7 @@ def add_restaurant():
         resp={"status":"correct"}
         conn=mysql.connect()
         cursor=conn.cursor()
-
+        cursor2=conn.cursor(pymysql.cursors.DictCursor)
         
         insert_location(cursor,data[0]['location'])
         loc_id=get_last_id(cursor)
@@ -115,7 +104,7 @@ def add_restaurant():
         insert_slot(cursor,data[0]['slots'],res_id)
         conn.commit()
         print(res_id)
-        cursor2=conn.cursor(pymysql.cursors.DictCursor)
+        
         cursor2.execute("SELECT * FROM Restaurant where id=%s",res_id)
         rows=cursor2.fetchall()
         print(type(rows))
