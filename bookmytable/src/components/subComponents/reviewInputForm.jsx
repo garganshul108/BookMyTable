@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import "../css/restaurant.css";
 import RegistrationSubForm from "./registrationSubForm";
 
+const placeholderContent =
+  "Tip: A great review covers food, service, and ambience. Got recommendations for your favourite dishes and drinks, or something everyone should try here? Include that too! And remember, your review needs to be at least 140 characters long :)";
 class ReviewInputForm extends Component {
   state = { rating: "", user: {}, desc: "", photos: [], photopath: "" };
   render() {
@@ -36,7 +38,7 @@ class ReviewInputForm extends Component {
                       class="form-control"
                       rows="3"
                       style={{ padding: "15px" }}
-                      placeholder="Tip: A great review covers food, service, and ambiance. Got recommendations for your favourite dishes and drinks, or something everyone should try here? Include that too! And remember, your review needs to be at least 140 characters long :)"
+                      placeholder={placeholderContent}
                     />
                   </div>
                 </div>

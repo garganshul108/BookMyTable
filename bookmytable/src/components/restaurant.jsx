@@ -124,7 +124,7 @@ class Restaurant extends Component {
               </button>
               <button type="button" class="btn ">
                 <i class="fa fa-picture-o" aria-hidden="true" />
-                &nbsp;&nbsp;Photos/ Gallery
+                &nbsp;&nbsp;Photos/Gallery
               </button>
             </div>
           </div>
@@ -219,7 +219,7 @@ class Restaurant extends Component {
                 style={{ fontSize: "0.8rem", display: "block" }}
               >
                 {this.state.restaurant.location.address} <br />
-                {this.state.restaurant.location.zipcode}
+                {/* {this.state.restaurant.location.zipcode} */}
               </span>
             </div>
             <div className="subInfo">
