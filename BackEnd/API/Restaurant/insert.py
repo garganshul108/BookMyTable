@@ -21,9 +21,12 @@ def insert_location(cursor,data):
         _zipcode=None
         if data['zipcode'].isdigit():
             _zipcode=int(data['zipcode'])
-
         _locality=data['locality']
         _loc_verb=data['locality_verbose']
+        cursor.execute("SELECT * from Cities where name=%s",_city)
+        if cursor.rowcount==0:
+            cursor.execute("INSERT into Cities(name) values(%s)",_city)
+        
         sql="INSERT INTO Location(city,zipcode,locality,address,locality_verbose) values(%s,%s,%s,%s,%s)"
         values=(_city,_zipcode,_locality,_address,_loc_verb)
         cursor.execute(sql,values)
