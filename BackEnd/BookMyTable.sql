@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Aug 14, 2019 at 07:39 AM
+-- Generation Time: Aug 14, 2019 at 07:49 AM
 -- Server version: 5.7.26-0ubuntu0.18.04.1
 -- PHP Version: 7.2.19-0ubuntu0.18.04.1
 
@@ -1743,8 +1743,8 @@ CREATE TABLE `Restaurant` (
   `capacity` int(11) NOT NULL,
   `opening_status` varchar(255) DEFAULT NULL,
   `website` varchar(1000) DEFAULT NULL,
-  `rating` float(10,1) DEFAULT NULL,
-  `votes` int(11) DEFAULT NULL
+  `rating` float(10,1) DEFAULT '0.0',
+  `votes` int(11) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
