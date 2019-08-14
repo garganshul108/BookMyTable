@@ -14,8 +14,7 @@ export const getCuisinesByCity = async (city) => {
     return cuisines.sort(({ count: countA }, { count: countB }) => countB - countA);
 }
 
-export const getCuisinesByName = () => {
-    // setCuisineCount();
-    // return cuisines.sort(({ count: countA }, { count: countB }) => countB - countA).map(object => object.name);
-    return require('./dump/JSON/cuisines.json').map(object => object.name);
+export const getNamesOfAllCuisines = async () => {
+    const { data: cuisines } = await http.get(apiConfig.baseURL + "/cuisines");
+    return cuisines.sort();
 }

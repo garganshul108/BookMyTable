@@ -15,8 +15,8 @@ export const getFeaturesByCity = async (city) => {
 }
 
 
-export const getFeaturesByName = () => {
-    return require('./dump/JSON/features.json').sort().map(object => object.name);
-    // return require('./dump/JSON/cuisines.json').sort();
+export const getNamesOfAllFeatures = async () => {
+    const { data: features } = await http.get(apiConfig.baseURL + "/highlights");
+    return features.sort();
 }
 
