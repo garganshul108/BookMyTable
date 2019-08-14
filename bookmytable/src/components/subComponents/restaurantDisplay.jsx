@@ -32,7 +32,9 @@ class RestaurantDisplay extends Component {
       showPhone,
       phone_numbers,
       showMenu,
-      showTables
+      showTables,
+      rating,
+      votes
     } = restaurant;
 
     // let { aggregate_rating: aggRating, votes } = rating;
@@ -93,10 +95,10 @@ class RestaurantDisplay extends Component {
           </div>
 
           <div className="col-2 reviewDiv" style={{ textAlign: "right" }}>
-            {/* <h4 style={{ marginTop: "50%" }}>
-              <span className="badge badge-success">{aggRating}</span>
-            </h4> */}
-            {/* <span className="voteCount">{votes} votes</span> */}
+            <h4 style={{ marginTop: "50%" }}>
+              <span className="badge badge-success">{rating}</span>
+            </h4>
+            <span className="voteCount">{votes} votes</span>
           </div>
         </div>
         <hr />

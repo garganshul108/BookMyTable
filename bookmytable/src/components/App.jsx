@@ -13,6 +13,7 @@ import SignUp from "./signup";
 import HomeBottom from "./subComponents/homeBottom";
 import RestaurantRegistration from "./restaurantRegistration";
 import Restaurant from "./restaurant";
+import UserProfile from "./userProfile";
 
 class App extends Component {
   handleCloseLogin = e => {
@@ -87,6 +88,10 @@ class App extends Component {
         <div className="container-fluid">
           <div className="row">
             <Switch>
+              <Route
+                path="/user/:id"
+                render={props => <UserProfile {...props} />}
+              />
               <Route
                 path="/restaurant/registration"
                 render={() => <RestaurantRegistration />}

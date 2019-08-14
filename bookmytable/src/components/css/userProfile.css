@@ -1,0 +1,8 @@
+.userInfo {
+  background: white;
+  padding: 30px;
+}
+.userInfo .userThumbnail {
+  width: 100%;
+  border-radius: 5px;
+}
