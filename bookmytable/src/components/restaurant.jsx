@@ -212,6 +212,32 @@ class Restaurant extends Component {
                 {this.state.restaurant.location.zipcode}
               </span>
             </div>
+            <div className="subInfo">
+              <h5 className="subTitle">Days</h5>
+              <div className="row">
+                {Object.keys(this.state.restaurant.days).map(day => (
+                  <React.Fragment>
+                    <div className="col-6">
+                      <span style={{ fontSize: "0.85rem", display: "block" }}>
+                        {this.state.restaurant.days[day] ? (
+                          <i
+                            className="fa fa-check text-success"
+                            aria-hidden="true"
+                          />
+                        ) : (
+                          <i
+                            className="fa fa-times text-danger"
+                            aria-hidden="true"
+                          />
+                        )}
+                        &nbsp;
+                        {day}
+                      </span>
+                    </div>
+                  </React.Fragment>
+                ))}
+              </div>
+            </div>
           </div>
           <div className="col-4">
             <div className="subInfo">
