@@ -48,7 +48,7 @@ class Restaurant extends Component {
     }
   };
 
-  async componentWillMount() {
+  async componentDidMount() {
     let restaurant = await getRestaurantById(this.props.match.params.id);
     restaurant = restaurant[0];
     restaurant.wideDisplay = restaurant.thumb.split("?")[0] + wideDisplayString;
