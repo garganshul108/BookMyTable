@@ -19,8 +19,7 @@ export const getEstablishmentsByCity = async (city) => {
 
 
 
-export const getEstablishmentsByName = () => {
-    // setEstablishmentCount();
-    return require('./dump/JSON/cuisines.json').map(object => object.name);
-    // return require('./dump/JSON/cuisines.json').sort();
+export const getNamesOfAllEstablishments = async () => {
+    const { data: establishments } = await http.get(apiConfig.baseURL + "/establishments");
+    return establishments.sort();
 }

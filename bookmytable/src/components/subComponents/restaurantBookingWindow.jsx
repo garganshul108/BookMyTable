@@ -1,15 +1,14 @@
 import React, { Component } from "react";
 import RegistrationSubForm from "./registrationSubForm";
 import FormInput from "./formInput";
+import "../css/restaurant.css";
 
 class RestaurantBookingWindow extends Component {
   state = {};
   render() {
     return (
-      <div
-        className="bookingDiv"
-        style={{ marginBottom: "100px", background: "white", padding: "10px" }}
-      >
+      <div className="bookingDiv">
+        <h4 style={{ fontWeight: "900" }}>Booking Window</h4>
         <RegistrationSubForm title="1. Booking Details">
           <div className="row">
             <div className="col-4">

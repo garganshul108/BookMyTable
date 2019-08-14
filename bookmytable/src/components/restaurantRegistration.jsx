@@ -1,14 +1,17 @@
 import React, { Component } from "react";
 import FormInput from "./subComponents/formInput";
-import "../components/css/restaurantRegistration.css";
 import FormCheckbox from "./subComponents/formCheckbox";
 import RegistrationSubForm from "./subComponents/registrationSubForm";
 import SearchableList from "./subComponents/searchableList";
-import { getCities } from "../services/cityServices";
-import { getCuisinesByName } from "../services/cuisineServices";
-import { getFeaturesByName } from "../services/featureServices";
 import RAdditionFormII from "./subComponents/rAdditionFormII";
-import { getEstablishmentsByName } from "../services/establishmentServices";
+
+import { getCities } from "../services/cityServices";
+import { getNamesOfAllCuisines } from "../services/cuisineServices";
+import { getNamesOfAllFeatures } from "../services/featureServices";
+import { getNamesOfAllEstablishments } from "../services/establishmentServices";
+
+import "../components/css/restaurantRegistration.css";
+
 class RestaurantRegistration extends Component {
   state = {
     data: {
@@ -75,9 +78,9 @@ class RestaurantRegistration extends Component {
 
   async componentDidMount() {
     let cities_data = await getCities();
-    let cuisines_data = getCuisinesByName();
-    let features_data = getFeaturesByName();
-    let establishment_data = getEstablishmentsByName();
+    let cuisines_data = await getNamesOfAllCuisines();
+    let features_data = await getNamesOfAllFeatures();
+    let establishment_data = await getNamesOfAllEstablishments();
     this.setState(
       { cities_data, establishment_data, cuisines_data, features_data },
       () => {
