@@ -37,7 +37,8 @@
 }
 
 .bookingDiv,
-.reviewDiv {
+.reviewDiv,
+.photoDiv {
   padding: 15px;
   background: white;
 }
@@ -47,4 +48,23 @@
   margin-bottom: 20px;
   border-radius: 2px;
   padding: 10px 20px;
+}
+
+.photoDiv .gallery {
+  overflow: hidden;
+  overflow-x: scroll;
+  position: relative;
+  height: 250px;
+}
+.photoDiv .gallery > div {
+  width: max-content;
+  position: absolute;
+  margin-bottom: 5px;
+  padding: 5px;
+  border-radius: 1px;
+}
+
+.photoDiv .gallery > div > img {
+  margin: 5px;
+  border-radius: 10px;
 }
