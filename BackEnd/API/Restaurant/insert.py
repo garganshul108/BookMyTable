@@ -5,6 +5,7 @@ from flask import jsonify
 from flask import flash, request
 from util.lastId import get_last_id
 from util.sendGetResponse import send_get_response
+from Restaurant.util.convertRestaurant import convert_restaurant
 
 def insert_days(cursor,data,res_id):
     try:
@@ -101,7 +102,6 @@ def insert_slot(cursor,data,res_id):
 def add_restaurant():
     try:
         data=request.json
-        print(type(data))
         resp={"status":"correct"}
         conn=mysql.connect()
         cursor=conn.cursor()
@@ -114,7 +114,13 @@ def add_restaurant():
         insert_days(cursor,data[0]['days'],res_id)
         insert_slot(cursor,data[0]['slots'],res_id)
         conn.commit()
-        
+        print(res_id)
+        cursor2=conn.cursor(pymysql.cursors.DictCursor)
+        cursor2.execute("SELECT * FROM Restaurant where id=%s",res_id)
+        rows=cursor2.fetchall()
+        print(type(rows))
+        convert_restaurant(cursor2, rows)
+        return send_get_response(rows,"No header",code=201)
     except Exception as e:
         print(e)
         resp=jsonify("ERROR")
@@ -123,4 +129,5 @@ def add_restaurant():
     finally:
         conn.close()
         cursor.close()
-        return send_get_response(data,"No header")
+        cursor2.close()
+        
