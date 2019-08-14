@@ -1,74 +1,12 @@
-import { captialize } from "../util/util";
-// import { getRestaurants } from './restaurantServices';
+import http from './httpServices';
+// const http = require('axios');
+import apiConfig from './config/apiConfig.json';
+// const apiConfig = require('./config/apiConfig.json');
+import { captialize } from '../util/util';
 
+const apiBaseURL = apiConfig.baseURL;
 
-/****
- * Point to Remember
- * PTR:
- * here the JSON data is simply the array of restaurants
- * API may provide me a location object consisting of the array
- * 
- * 
- */
-let jsonData = [
-    ...require('./dump/JSON/R_data_Gurgaon0+20_filtered.json'),
-    // ...require('./dump/JSON/R_data_Gurgaon21+20_filtered.json'),
-    ...require('./dump/JSON/R_data_Delhi_filtered.json'),
-    ...require('./dump/JSON/R_data_Kolkata_filtered.json'),
-    ...require('./dump/JSON/R_data_Other_filtered.json')
-];
-
-let jsonDataByCity = {
-    gurgaon: [...require('./dump/JSON/R_data_Gurgaon0+20_filtered.json')],
-    delhi: [...require('./dump/JSON/R_data_Delhi_filtered.json')],
-    kolkata: [...require('./dump/JSON/R_data_Kolkata_filtered.json')],
-}
-
-let defaultDataByCity = [...require('./dump/JSON/R_data_Other_filtered.json')];
-
-
-// function addMiscPropertyToRestaurants(restaurants) {
-//     return restaurants;
-// }
-
-
-
-
-function refactorName(name) {
-    return captialize(name);
-}
-
-function filterOutProperties(restaurants) {
-    for (let restaurant of restaurants) {
-        delete restaurant.currency;
-        delete restaurant.deeplink;
-        delete restaurant.events_url;
-        delete restaurant.featured_image;
-        delete restaurant.has_online_delivery;
-        delete restaurant.is_delivering_now;
-        delete restaurant.photo_count;
-        delete restaurant.photos_url;
-        delete restaurant.price_range;
-        delete restaurant.url;
-        delete restaurant.menu_url;
-        delete restaurant.user_rating.rating_color;
-        delete restaurant.user_rating.rating_text;
-        delete restaurant.all_reviews_count;
-    }
-}
-
-function adjustingProperties(restaurants) {
-    for (let restaurant of restaurants) {
-        if (!Array.isArray(restaurant.cuisines))
-            restaurant.cuisines = restaurant.cuisines.split(",").map(item => item.trim());
-        if (!Array.isArray(restaurant.establishments))
-            restaurant.cuisines = restaurant.cuisines.split(",").map(item => item.trim());
-        if (!Array.isArray(restaurant.features))
-            restaurant.cuisines = restaurant.cuisines.split(",").map(item => item.trim());
-        restaurant.name = refactorName(restaurant.name);
-    }
-}
-
+let jsonData = [...require('./dump/JSON/R_data_Gurgaon0+20_filtered.json')];
 
 function renamingProperties(restaurants) {
     const config = require('./config/RestaurantDataConfig.json');
@@ -80,27 +18,50 @@ function renamingProperties(restaurants) {
             }
         }
     }
+    return restaurants;
 }
 
-
-function refactoringRestaurantData() {
-    filterOutProperties(jsonData);
-    renamingProperties(jsonData);
-    adjustingProperties(jsonData);
-    // addMiscPropertyToRestaurants(jsonData);
+function refactorName(name) {
+    // return captialize(name);
+    return name;
 }
 
-// refactoringRestaurantData();
-// console.log(jsonData);
-refactoringRestaurantData();
+function adjustingProperties(restaurants) {
+    for (let restaurant of restaurants) {
+        if (!Array.isArray(restaurant.cuisines)) {
+            restaurant.cuisines = restaurant.cuisines.split(",").map(item => item.trim());
+        }
+        if (!Array.isArray(restaurant.establishments)) {
+            restaurant.establishments = restaurant.establishments.split(",").map(item => item.trim());
+        }
+        if (!Array.isArray(restaurant.features)) {
+            restaurant.features = restaurant.features.split(",").map(item => item.trim());
+        }
+        restaurant.name = refactorName(restaurant.name);
+    }
+    return restaurants;
+}
+
 
 export const getRestaurants = () => {
     return jsonData.sort(({ name: nameA }, { name: nameB }) => { if (nameA > nameB) return 1; return -1; });
 }
 
 
-export const getRestaurantsByCity = (city) => {
-    if (jsonDataByCity[city])
-        return jsonDataByCity[city].sort(({ name: nameA }, { name: nameB }) => { if (nameA > nameB) return 1; return -1; });
-    return defaultDataByCity.sort(({ name: nameA }, { name: nameB }) => { if (nameA > nameB) return 1; return -1; });
+export const getRestaurantsByCity = async (city) => {
+    let { data } = await http.get(apiBaseURL + '/restaurants?city=' + city);
+    data = renamingProperties(data);
+    data = adjustingProperties(data);
+    // return data;
+    return data.sort(({ name: nameA }, { name: nameB }) => { if (nameA >= nameB) return 1; return -1; });
 }
+
+export const getRestaurantById = async (id) => {
+    let { data } = await http.get(apiBaseURL + '/restaurants/' + id);
+    data = renamingProperties(data);
+    data = adjustingProperties(data);
+    // console.log("id", id, "iredd", data);
+    return data;
+}
+
+
