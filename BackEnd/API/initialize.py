@@ -74,7 +74,10 @@ def update_slots(res_id,cursor):
 
 def fill_establishments(tt,establishments):
     for est in tt['establishment']:
-        establishments.append(est)
+        if est=="Caf\u00e9":
+            establishments.append("Cafe")
+        else:
+            establishments.append(est)
 def fill_highlights(tt,highlights):
     for hlt in tt['highlights']:
         highlights.append(hlt)
@@ -106,18 +109,18 @@ def get_restaurant():
         cursor.execute("DELETE FROM Day")
         cursor.execute("DELETE FROM Restaurant")
         cursor.execute("DELETE FROM Location")
-        cursor.execute("DELETE FROM Cities")
+        # cursor.execute("DELETE FROM Cities")
         cursor.execute("DELETE FROM Cuisines")
         cursor.execute("DELETE FROM Establishments")
         cursor.execute("DELETE FROM Highlights")
 
         conn.commit()
         loc_id = 1
-        for tt in cities_data:
-            sql="INSERT INTO Cities(id,name,state) VALUES(%s,%s,%s)"
-            values=(int(tt['id']),tt['name'],tt['state'])
-            cursor.execute(sql,values)
-            conn.commit()
+        # for tt in cities_data:
+        #     sql="INSERT INTO Cities(id,name,state) VALUES(%s,%s,%s)"
+        #     values=(int(tt['id']),tt['name'],tt['state'])
+        #     cursor.execute(sql,values)
+        #     conn.commit()
         establishments=[]
         cuisines=[]
         highlights=[]

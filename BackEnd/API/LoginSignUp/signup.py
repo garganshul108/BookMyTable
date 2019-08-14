@@ -36,13 +36,15 @@ def addUser():
         cursor.execute(sql,values)
         conn.commit()
         id=get_last_id(cursor)
-        
+        print
         token=jwt.encode({
             'public_id':id,
             'exp':datetime.datetime.utcnow()+datetime.timedelta(minutes=2)
             }, app.config['SECRET_KEY'])
         
-        return jsonify({'token':token.decode('UTF-8')})
+        resp=jsonify({username})
+        resp.headers.add('token',token.decode("UTF-8"))
+        return jsonify(resp)
     except Exception as e:
         print("ERROR ",e," ERROR")
         return "error"
