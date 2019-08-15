@@ -4,60 +4,64 @@ import FormCheckbox from "./subComponents/formCheckbox";
 import RegistrationSubForm from "./subComponents/registrationSubForm";
 import SearchableList from "./subComponents/searchableList";
 import RAdditionFormII from "./subComponents/rAdditionFormII";
-
+// import default from '../services/authServices';
 import { getCities } from "../services/cityServices";
 import { getNamesOfAllCuisines } from "../services/cuisineServices";
 import { getNamesOfAllFeatures } from "../services/featureServices";
 import { getNamesOfAllEstablishments } from "../services/establishmentServices";
 
 import "../components/css/restaurantRegistration.css";
+import { postNewRestaurant } from "../services/restaurantServices";
 
 class RestaurantRegistration extends Component {
   state = {
     data: {
-      no_of_slots: "0",
-      slots: [],
-      average_cost_for_two: "",
-      cuisines: [],
-      establishment: [],
-      features: [],
+      no_of_slots: "2",
+      slots: [
+        { id: 1, start: "13:01", end: "23:00" },
+        { id: 2, start: "11:01", end: "13:00" }
+      ],
+      average_cost_for_two: "100",
+      cuisines: ["South Indian"],
+      establishment: ["Pub"],
+      features: ["Cash"],
       location: {
         address: {
-          line_1: "",
-          line_2: ""
+          line_1: "A34 A,  A Block",
+          line_2: "South City 2"
         },
-        locality: "",
-        city: "",
-        locality_verbose: "",
-        zipcode: ""
+        locality: "Sohna Road",
+        city: "Gurgaon",
+        locality_verbose: "Park hospital, Sohna Road",
+        zipcode: "122018"
       },
-      name: "",
+      name: "Anshul P",
       phone: {
-        std: "",
-        number: ""
+        std: "0124",
+        number: "4226873"
       },
       tables: {
-        size_eight: "",
-        size_four: "",
-        size_one: "",
-        size_six: "",
-        size_ten: "",
-        size_two: ""
+        size_eight: "1",
+        size_four: "2",
+        size_one: "3",
+        size_six: "4",
+        size_ten: "5",
+        size_two: "6"
       },
 
-      thumb: "",
-      timings: "",
-      opening_status: "",
-      email: "",
-      website: "",
+      thumb: "www.html.com",
+      timings: "12 323- 6",
+      opening_status: 1,
+      email: "anshul@gmail.com",
+      website: "www.ansuhl.com",
       days: {
         Monday: false,
-        Tuesday: false,
+        Tuesday: true,
         Wednesday: false,
-        Thursday: false,
+        Thursday: true,
         Friday: false,
         Saturday: false,
-        Sunday: false
+        Sunday: true
       }
     },
     errors: {},
@@ -84,7 +88,7 @@ class RestaurantRegistration extends Component {
     this.setState(
       { cities_data, establishment_data, cuisines_data, features_data },
       () => {
-        console.log(this.state);
+        console.log("registratin form initial state: \n", this.state);
       }
     );
   }
@@ -144,8 +148,8 @@ class RestaurantRegistration extends Component {
     slotForm.start = "";
     slotForm.end = "";
     this.setState({ slotForm });
-    console.log(this.state);
-    console.log("Slots Form submit");
+    // console.log(this.state);
+    // console.log("Slots Form submit");
   };
 
   handleSlotFormInputChange = ({ currentTarget: input }) => {
@@ -188,12 +192,12 @@ class RestaurantRegistration extends Component {
   };
 
   handleInputChange = ({ currentTarget: input }) => {
-    console.log(
-      input.name,
-      input.value,
-      input.dataset.parent,
-      input.dataset.gparent
-    );
+    // console.log(
+    //   input.name,
+    //   input.value,
+    //   input.dataset.parent,
+    //   input.dataset.gparent
+    // );
     let data = { ...this.state.data };
     if (input.dataset.gparent) {
       data[input.dataset.gparent][input.dataset.parent][input.name] =
@@ -225,9 +229,52 @@ class RestaurantRegistration extends Component {
     this.setState({ data });
   };
 
-  handleSubmit = e => {
+  //SUBMISSOIN DATA ATTRS
+  changingNames = data => {
+    let nameList = [];
+    nameList["features"] = "highlights";
+
+    for (let slot of data.slots) {
+      slot["start_time"] = slot.start;
+      slot["end_time"] = slot.end;
+      delete slot.start;
+      delete slot.end;
+      delete slot.id;
+    }
+    for (let key in nameList) {
+      console.log(key);
+      if (data[key]) {
+        data[nameList[key]] = data[key];
+        delete data[key];
+      }
+    }
+  };
+
+  deletingFields = data => {
+    let deleteKeys = ["no_of_slots"];
+    for (let key of deleteKeys) {
+      delete data[key];
+    }
+  };
+
+  addCapacity = data => {
+    let sum = 0;
+    for (let table of Object.keys(data.tables)) {
+      // console.log(data.tables[table]);
+      sum += parseInt(data.tables[table]);
+    }
+    data["capacity"] = sum.toString();
+    delete data.tables;
+  };
+
+  handleSubmit = async e => {
     e.preventDefault();
-    console.log("submit form for registration", this.state.data);
+    let submissionData = { ...this.state.data };
+    this.changingNames(submissionData);
+    this.deletingFields(submissionData);
+    this.addCapacity(submissionData);
+    console.log("state at registration submisson: \n", submissionData);
+    await postNewRestaurant(submissionData);
   };
 
   render() {
@@ -336,6 +383,7 @@ class RestaurantRegistration extends Component {
                 name="zipcode"
                 data-parent="location"
                 type="number"
+                min="0"
               />
             </div>
           </div>
