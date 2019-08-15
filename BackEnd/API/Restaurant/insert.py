@@ -93,22 +93,20 @@ def insert_restaurant(cursor,data,_loc_id):
         # print("res "+e+" res")
 
 def insert_slot(cursor,data,res_id):
-    
-    # try:
+    print(data)
+    try:
         for slot in data:
             sql="INSERT INTO Slot(restaurant_id,start_time,end_time) VALUES(%s,%s,%s)"
             values=(res_id,slot['start_time'],slot['end_time'])
             cursor.execute(sql,values)   
-        
-    # except Exception as e:
-        # print("slot "+e+" slot")
+
+    except Exception as e:
+        print("slot "+e+" slot")
 
 @app.route('/api/restaurants',methods=['POST'])
 def add_restaurant():
     try:
-        data=request.json
-        print(request.files)
-        resp={"status":"correct"}
+        data=request.json 
         conn=mysql.connect()
         cursor=conn.cursor()
         cursor2=conn.cursor(pymysql.cursors.DictCursor)
@@ -116,8 +114,11 @@ def add_restaurant():
         loc_id=get_last_id(cursor)
         insert_restaurant(cursor,data[0],loc_id)  
         res_id=get_last_id(cursor)
+        
         insert_days(cursor,data[0]['days'],res_id)
+        
         insert_slot(cursor,data[0]['slots'],res_id)
+        print("sss")
         conn.commit()
         print(res_id)
         cursor2.execute("SELECT * FROM Restaurant where id=%s",res_id)
