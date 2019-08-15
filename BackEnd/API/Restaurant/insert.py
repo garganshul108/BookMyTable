@@ -91,6 +91,7 @@ def insert_slot(cursor,data,res_id):
 def add_restaurant():
     try:
         data=request.json
+        print(request.files)
         resp={"status":"correct"}
         conn=mysql.connect()
         cursor=conn.cursor()

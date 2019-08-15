@@ -1,8 +1,7 @@
 import pymysql
 from app import app
 from db_config import mysql
-from flask import jsonify
-from flask import flash, request
+from flask import flash,jsonify,request,send_from_directory
 from werkzeug import generate_password_hash, check_password_hash
 
 from Restaurant import get
@@ -35,6 +34,12 @@ from Common import getAllEstablishments
 @app.route('/')
 def JJ():
     print("SERVER IS RUNNING")
+    return "SERVER IS RUNNING"
+
+@app.route('/html/<path:path>')
+def send_html(path):
+    return send_from_directory('static',path)
+
 @app.route('/deleteALL')
 def drop_id():
     try:
