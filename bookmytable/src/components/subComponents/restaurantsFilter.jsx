@@ -20,11 +20,11 @@ class RestaurantsFilter extends Component {
 
   async componentDidMount() {
     let cuisines = await getCuisinesByCity(this.props.city);
-    console.log("cuisines", cuisines);
+    // console.log("cuisines", cuisines);
     let establishments = await getEstablishmentsByCity(this.props.city);
     let features = await getFeaturesByCity(this.props.city);
     let localities = await getLocalitiesByCityName(this.props.city);
-    console.log("filter", localities);
+    // console.log("filter", localities);
     let colorClasses = {
       cuisines: "info",
       establishments: "secondary",

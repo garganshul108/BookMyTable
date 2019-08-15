@@ -65,3 +65,13 @@ export const getRestaurantById = async (id) => {
 }
 
 
+export const postNewRestaurant = (data) => {
+    return http.post(apiBaseURL + '/restaurants', [{ ...data, errors: {} }], {
+        headers: {
+            'Content-Type': 'application/json',
+            "Access-Control-Allow-Origin": "*",
+        }
+    });
+}
+
+
