@@ -13,6 +13,7 @@ def insert_days(cursor,data,res_id):
         cursor.execute(sql,values)
 
 def insert_location(cursor,data):
+    # try:
         _address=data['address']['line_1']+data['address']['line_2']
         _city=data['city']
         _zipcode=None
@@ -27,26 +28,34 @@ def insert_location(cursor,data):
         sql="INSERT INTO Location(city,zipcode,locality,address,locality_verbose) values(%s,%s,%s,%s,%s)"
         values=(_city,_zipcode,_locality,_address,_loc_verb)
         cursor.execute(sql,values)
+    # except Exception as e:
+        # print("lo "+e+" lo")
 
 def insert_highlights(data,cursor):
-    cursor.execute("SELECT name FROM Highlights")
-    l1=cursor.fetchall()
-    l1=[i for sub in l1 for i in sub]
-    new_list=list(set(data)-set(l1))
-    for dd in new_list:
-        cursor.execute("INSERT INTO Highlights(name) values(%s)",dd)
+    # try:
+        cursor.execute("SELECT name FROM Highlights")
+        l1=cursor.fetchall()
+        l1=[i for sub in l1 for i in sub]
+        new_list=list(set(data)-set(l1))
+        for dd in new_list:
+            cursor.execute("INSERT INTO Highlights(name) values(%s)",dd)
 
-    return ", ".join(data)
+        return ", ".join(data)
+    # except Exception as e:
+        # print("high "+e+" high")
 
 def insert_establishments(data,cursor):
-    cursor.execute("SELECT name FROM Establishments")
-    l1=cursor.fetchall()
-    l1=[i for sub in l1 for i in sub]
-    new_list=list(set(data)-set(l1))
-    for dd in new_list:
-        cursor.execute("INSERT INTO Establishments(name) values(%s)",dd)
+    # try:
+        cursor.execute("SELECT name FROM Establishments")
+        l1=cursor.fetchall()
+        l1=[i for sub in l1 for i in sub]
+        new_list=list(set(data)-set(l1))
+        for dd in new_list:
+            cursor.execute("INSERT INTO Establishments(name) values(%s)",dd)
 
-    return ", ".join(data)
+        return ", ".join(data)
+    # except Exception as e:
+        # print("est "+e+" est")
 
 def insert_cuisines(data,cursor):
     cursor.execute("SELECT name FROM Cuisines")
@@ -61,6 +70,7 @@ def insert_cuisines(data,cursor):
     
 
 def insert_restaurant(cursor,data,_loc_id):
+    # try:
         _ave_cost=int("0"+data['average_cost_for_two'])
         _cuisines=insert_cuisines(data['cuisines'],cursor)
         _establishment=insert_establishments(data['establishment'],cursor)
@@ -70,7 +80,7 @@ def insert_restaurant(cursor,data,_loc_id):
         _phone=data['phone']['std']+" , "+data['phone']['number']
         _thumb=data['thumb']
         _timings=data['timings']
-        _opening_status=data['opening_status']
+        _opening_status=int(data['opening_status'])
         _email=data['email']
         _website=data['website']
         _capacity=int("0"+data['capacity'])
@@ -79,13 +89,19 @@ def insert_restaurant(cursor,data,_loc_id):
             VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
         values=(_loc_id,_name,_email,_ave_cost,_cuisines,_timings,_establishment,_highlights,_thumb,_phone,_capacity,_opening_status,_website)
         cursor.execute(sql,values)
+    # except Exception as e:
+        # print("res "+e+" res")
 
 def insert_slot(cursor,data,res_id):
-    for slot in data:
-        sql="INSERT INTO Slot(restaurant_id,start_time,end_time) VALUES(%s,%s,%s)"
-        values=(res_id,slot['start_time'],slot['end_time'])
-        cursor.execute(sql,values)
-    print("slot ",e," slot")
+    
+    # try:
+        for slot in data:
+            sql="INSERT INTO Slot(restaurant_id,start_time,end_time) VALUES(%s,%s,%s)"
+            values=(res_id,slot['start_time'],slot['end_time'])
+            cursor.execute(sql,values)   
+        
+    # except Exception as e:
+        # print("slot "+e+" slot")
 
 @app.route('/api/restaurants',methods=['POST'])
 def add_restaurant():
@@ -95,7 +111,6 @@ def add_restaurant():
         conn=mysql.connect()
         cursor=conn.cursor()
         cursor2=conn.cursor(pymysql.cursors.DictCursor)
-        
         insert_location(cursor,data[0]['location'])
         loc_id=get_last_id(cursor)
         insert_restaurant(cursor,data[0],loc_id)  
@@ -104,7 +119,6 @@ def add_restaurant():
         insert_slot(cursor,data[0]['slots'],res_id)
         conn.commit()
         print(res_id)
-        
         cursor2.execute("SELECT * FROM Restaurant where id=%s",res_id)
         rows=cursor2.fetchall()
         print(type(rows))
