@@ -10,7 +10,7 @@ from functools import wraps
 from util.lastId import get_last_id
 from LoginSignUp.util.required import token_required
 
-@app.route('/login')
+@app.route('/api/login')
 def login():
     auth=request.authorization
 
@@ -32,8 +32,9 @@ def login():
 
     if check_password_hash(User['password'],auth.password):
         token = jwt.encode({'public_id' : User['id'], 'exp' : datetime.datetime.utcnow() + datetime.timedelta(minutes=3)}, app.config['SECRET_KEY'])
-    
-    return jsonify({'token':token.decode('UTF-8')})
+        resp=jsonify("Successful")
+        resp.headers.add("token",token.decode('UTF-8'))
+        return resp
 
     return make_response('Could not verify 3', 401, {'WWW-Authenticate' : 'Basic realm="Login required!"'})
 

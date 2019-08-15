@@ -13,17 +13,9 @@ from util.lastId import get_last_id
     # "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwdWJsaWNfaWQiOjMsImV4cCI6MTU2NTM0Mzk3OX0.ELli-A9z9mFW-wz56ZRuQgKF2goG5alotQAAGB6YIVI"
 # }
 
-@app.route('/deleteUser')
-def delete():
-    conn=mysql.connect()
-    cursor=conn.cursor()
-    cursor.execute("DELETE FROM User")
-    conn.commit()
-    conn.close()
-    cursor.close()
-    return "Done"
+
 @app.route('/api/signup',methods=['POST'])
-def addUser():
+def addsUser():
     try:
         data=request.json
         hashed_password=generate_password_hash(data[0]['password'],method='sha256')

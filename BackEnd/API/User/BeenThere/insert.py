@@ -10,32 +10,27 @@ from functools import wraps
 from util.lastId import get_last_id
 
 #eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwdWJsaWNfaWQiOjIyLCJleHAiOjE1NjU4NjM5MTF9.FfRsXG_7hCLGL4UJz4Ht8-_SFS3xQm623WNng_7SS3w
-@app.route('/api/users',methods=['POST'])
-def addUser():
+@app.route('/api/beenthere',methods=['POST'])
+def addBeenThere():
     try:
-        data=request.json
-        hashed_password=generate_password_hash(data[0]['password'],method='sha256')
         conn=mysql.connect()
         cursor=conn.cursor()
-        # username=str(uuid.uuid4())
-        
-        sql="Insert into User(name,email_id,city,password) VALUES(%s,%s,%s,%s)"
-        values=(data[0]['name'],data[0]['email_id'],data[0]['city'],hashed_password) 
+        data=request.json[0]
+        date=data['date']
+        time=data['time']
+        res_id=data['restaurant_id']
+        usr_id=data['user_id']
+        sql="Insert into BeenThere(usr_id,restaurant_id,date,time) VALUES(%s,%s,%s,%s)"
+        values=(usr_id,res_id,date,time) 
         cursor.execute(sql,values)
-        conn.commit()
         id=get_last_id(cursor)
-        token=jwt.encode({
-            'public_id':id,
-            'exp':datetime.datetime.utcnow()+datetime.timedelta(minutes=2)
-            }, app.config['SECRET_KEY'])
-        
-        resp=jsonify([{"name":data[0]['name'],"city":data[0]['city']}])
+        conn.commit()
+        resp=jsonify({"id":id,"restaurant_id":res_id,"date":date,"time":time})
         resp.status_code=201
-        resp.headers.add('token',token.decode("UTF-8"))
         return resp
     except Exception as e:
         print("ERROR ",e," ERROR")
-        resp=jsonify("Duplicate Email")
+        resp=jsonify("ERROR")
         resp.status_code=400
         return resp
     finally:

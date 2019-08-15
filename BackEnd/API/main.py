@@ -16,7 +16,8 @@ from Location import getAllCities
 
 from LoginSignUp import signup
 from LoginSignUp import login
-
+from User import insert
+from User import deleteALL
 from Booking import get
 from Booking import insert
 from Booking import delete
