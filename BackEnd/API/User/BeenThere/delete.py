@@ -8,10 +8,12 @@ import uuid
 import datetime
 from functools import wraps
 from util.lastId import get_last_id
+from LoginSignUp.util.required import token_required
 
 #eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwdWJsaWNfaWQiOjIyLCJleHAiOjE1NjU4NjM5MTF9.FfRsXG_7hCLGL4UJz4Ht8-_SFS3xQm623WNng_7SS3w
 @app.route('/api/beenthere/<id>',methods=['DELETE'])
-def DeleteBeenThere(id):
+@token_required
+def DeleteBeenThere(current_user,id):
     try:
         conn=mysql.connect()
         cursor=conn.cursor()

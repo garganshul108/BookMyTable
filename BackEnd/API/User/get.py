@@ -8,15 +8,18 @@ from LoginSignUp.util.required import token_required
 from User.util.convertUser import convert_user
 
 @app.route('/api/users')
-# @token_required
-def get_users():
+@token_required
+def get_users(current_user):
     try:
         conn=mysql.connect()
-        cursor=conn.cursor()
-        cursor.execute("SELECT * FROM User")
+        cursor=conn.cursor(pymysql.cursors.DictCursor)
+        cursor.execute("SELECT id,name,email_id,city,admin FROM User where id=%s",current_user['id'])
         rows=cursor.fetchall()
+        print("sdfsdssssssssss")
         convert_user(cursor,rows)
-        send_get_response(rows,"Success")
+        # return jsonify(rows)
+        
+        return send_get_response(rows,"Success")
     except Exception as e:
         print(e)
         resp=jsonify("ERROR")

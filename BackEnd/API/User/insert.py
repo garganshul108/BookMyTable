@@ -26,7 +26,7 @@ def addUser():
         id=get_last_id(cursor)
         token=jwt.encode({
             'public_id':id,
-            'exp':datetime.datetime.utcnow()+datetime.timedelta(minutes=2)
+            'exp':datetime.datetime.utcnow()+datetime.timedelta(minutes=60)
             }, app.config['SECRET_KEY'])
         
         resp=jsonify([{"name":data[0]['name'],"city":data[0]['city']}])

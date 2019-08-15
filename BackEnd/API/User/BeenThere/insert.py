@@ -8,10 +8,11 @@ import uuid
 import datetime
 from functools import wraps
 from util.lastId import get_last_id
-
+from LoginSignUp.util.required import token_required
 #eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwdWJsaWNfaWQiOjIyLCJleHAiOjE1NjU4NjM5MTF9.FfRsXG_7hCLGL4UJz4Ht8-_SFS3xQm623WNng_7SS3w
 @app.route('/api/beenthere',methods=['POST'])
-def addBeenThere():
+@token_required
+def addBeenThere(current_user):
     try:
         conn=mysql.connect()
         cursor=conn.cursor()
@@ -19,8 +20,8 @@ def addBeenThere():
         date=data['date']
         time=data['time']
         res_id=data['restaurant_id']
-        usr_id=data['user_id']
-        sql="Insert into BeenThere(usr_id,restaurant_id,date,time) VALUES(%s,%s,%s,%s)"
+        usr_id=current_user['id']
+        sql="Insert into BeenThere(user_id,restaurant_id,date,time) VALUES(%s,%s,%s,%s)"
         values=(usr_id,res_id,date,time) 
         cursor.execute(sql,values)
         id=get_last_id(cursor)

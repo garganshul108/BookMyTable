@@ -18,6 +18,16 @@ from LoginSignUp import signup
 from LoginSignUp import login
 from User import insert
 from User import deleteALL
+from User import get
+from User import getById
+from User import delete
+from User.BeenThere import insert
+from User.BeenThere import delete
+from User.BeenThere import get
+from User.Bookmark import insert
+from User.Bookmark import delete
+from User.Bookmark import get
+
 from Booking import get
 from Booking import insert
 from Booking import delete

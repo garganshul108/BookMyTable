@@ -12,11 +12,11 @@ from User.util.convertUser import convert_user
 def get_user(id):
     try:
         conn=mysql.connect()
-        cursor=conn.cursor()
+        cursor=conn.cursor(pymysql.cursors.DictCursor)
         cursor.execute("SELECT * FROM User where id=%s",id)
         rows=cursor.fetchall()
         convert_user(cursor,rows)
-        send_get_response(rows,"Success")
+        return send_get_response(rows,"Success")
     except Exception as e:
         print(e)
         resp=jsonify("ERROR")

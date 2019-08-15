@@ -12,7 +12,6 @@ from LoginSignUp.util.required import token_required
 @app.route('/api/restaurants')
 # @token_required
 def get_restaurants():
-    print(current_user)
     try:
         _city=request.args.get('city',default='%',type=str)
         _restaurant_id=request.args.get('restaurantId',default="%",type=int)

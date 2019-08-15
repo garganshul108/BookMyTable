@@ -8,9 +8,12 @@ import uuid
 import datetime
 from functools import wraps
 from util.lastId import get_last_id
+from LoginSignUp.util.required import token_required
 
-@app.route('/api/bookmark/<id>',methods=['DELETE'])
-def DeleteBookmark(id):
+#eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwdWJsaWNfaWQiOjIyLCJleHAiOjE1NjU4NjM5MTF9.FfRsXG_7hCLGL4UJz4Ht8-_SFS3xQm623WNng_7SS3w
+@app.route('/api/bookmark',methods=['DELETE'])
+@token_required
+def DeleteBookmark(current_user,id):
     try:
         conn=mysql.connect()
         cursor=conn.cursor()
