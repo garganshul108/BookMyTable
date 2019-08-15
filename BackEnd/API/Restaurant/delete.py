@@ -3,9 +3,15 @@ from app import app
 from db_config import mysql
 from flask import jsonify
 from flask import flash, request
+from LoginSignUp.util.required2 import token_required
 
 @app.route('/api/restaurants/<id>',methods=['DELETE'])
-def delete_restaurant(id):
+@token_required
+def delete_restaurant(current_user,id):
+    if(current_user['id']!=int(id)):
+        resp=jsonify("Unauthorizedd")
+        resp.status_code=401
+        return resp
     try:
         conn=mysql.connect()
         cursor=conn.cursor()
@@ -13,7 +19,9 @@ def delete_restaurant(id):
         cursor.execute("DELETE FROM Review where restaurant_id=%s",id)
         cursor.execute("DELETE FROM Slot where restaurant_id=%s",id)
         cursor.execute("DELETE FROM Booking where restaurant_id=%s",id)
-        cursor.execute("DELETE FROM Day restaurant_id=%s)",id)
+        cursor.execute("DELETE FROM Bookmark where restaurant_id=%s",id)
+        cursor.execute("DELETE FROM BeenThere where restaurant_id=%s",id)
+        cursor.execute("DELETE FROM Day where restaurant_id=%s",id)
         cursor.execute("DELETE FROM Restaurant where id=%s",id)
         # cursor.execute("DELETE FROM Location where id=(SELECT location_id from Restaurant where id=%s)",id)
         conn.commit()

@@ -5,7 +5,7 @@ from flask import jsonify
 from flask import flash, request
 from util.lastId import get_last_id
 from util.sendGetResponse import send_get_response
-
+from LoginSignUp.util.required2 import token_required
 
 def update_days(cursor,data,res_id):
     try:
@@ -94,7 +94,12 @@ def update_slot(cursor,data,res_id):
         print("slot ",e," slot")
 
 @app.route('/api/restaurants/<id>',methods=['PUT'])
-def update_restaurant(id):
+@token_required
+def update_restaurant(current_user,id):
+    if(current_user['id']!=int(id)):
+        resp=jsonify("Unauthorizedd")
+        resp.status_code=401
+        return resp
     try:
         data=request.json
         print(type(data))
@@ -107,7 +112,7 @@ def update_restaurant(id):
         update_days(cursor,data[0]['days'],id)
         update_slot(cursor,data[0]['slots'],id)
         conn.commit()
-        
+        return send_get_response(data,"No header")
     except Exception as e:
         print(e)
         resp=jsonify("ERROR")
@@ -116,4 +121,4 @@ def update_restaurant(id):
     finally:
         conn.close()
         cursor.close()
-        return send_get_response(data,"No header")
+        

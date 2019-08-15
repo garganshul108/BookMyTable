@@ -1,7 +1,11 @@
 import pymysql
 from app import app
 from db_config import mysql
+from werkzeug.security import generate_password_hash, check_password_hash
 from flask import jsonify
+import jwt
+import datetime
+from functools import wraps
 from flask import flash, request
 from util.lastId import get_last_id
 from util.sendGetResponse import send_get_response
@@ -84,10 +88,11 @@ def insert_restaurant(cursor,data,_loc_id):
         _email=data['email']
         _website=data['website']
         _capacity=int("0"+data['capacity'])
+        hashed_password=generate_password_hash(data['password'],method='sha256')
         sql="""INSERT INTO 
-            Restaurant(location_id,name,email,average_cost_for_two,cuisines,timings,establishment,highlights,thumb,phone_numbers,capacity,opening_status,website)
-            VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
-        values=(_loc_id,_name,_email,_ave_cost,_cuisines,_timings,_establishment,_highlights,_thumb,_phone,_capacity,_opening_status,_website)
+            Restaurant(location_id,name,email,average_cost_for_two,cuisines,timings,establishment,highlights,thumb,phone_numbers,capacity,opening_status,website,password)
+            VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
+        values=(_loc_id,_name,_email,_ave_cost,_cuisines,_timings,_establishment,_highlights,_thumb,_phone,_capacity,_opening_status,_website,hashed_password)
         cursor.execute(sql,values)
     # except Exception as e:
         # print("res "+e+" res")
@@ -107,24 +112,33 @@ def insert_slot(cursor,data,res_id):
 def add_restaurant():
     try:
         data=request.json
-        print(request.files)
-        resp={"status":"correct"}
         conn=mysql.connect()
         cursor=conn.cursor()
         cursor2=conn.cursor(pymysql.cursors.DictCursor)
+
         insert_location(cursor,data[0]['location'])
         loc_id=get_last_id(cursor)
+
         insert_restaurant(cursor,data[0],loc_id)  
         res_id=get_last_id(cursor)
+
         insert_days(cursor,data[0]['days'],res_id)
         insert_slot(cursor,data[0]['slots'],res_id)
+
         conn.commit()
-        print(res_id)
         cursor2.execute("SELECT * FROM Restaurant where id=%s",res_id)
         rows=cursor2.fetchall()
-        print(type(rows))
         convert_restaurant(cursor2, rows)
-        return send_get_response(rows,"No header",code=201)
+        token=jwt.encode({
+            'public_id':res_id,
+            'exp':datetime.datetime.utcnow()+datetime.timedelta(minutes=120)
+            }, app.config['SECRET_KEY'])
+        resp=jsonify(rows)
+        resp.status_code=201
+        resp.headers.add('token',token.decode("UTF-8"))
+        return resp
+
+
     except Exception as e:
         print(e)
         resp=jsonify("ERROR")
