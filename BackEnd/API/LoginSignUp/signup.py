@@ -22,29 +22,29 @@ def delete():
     conn.close()
     cursor.close()
     return "Done"
-@app.route('/signup',methods=['POST'])
+@app.route('/api/signup',methods=['POST'])
 def addUser():
     try:
         data=request.json
         hashed_password=generate_password_hash(data[0]['password'],method='sha256')
         conn=mysql.connect()
         cursor=conn.cursor()
-        username=str(uuid.uuid4())
-        username="sss"
-        sql="Insert into User(username,firstname,lastname,email_id,password) VALUES(%s,%s,%s,%s,%s)"
-        values=(username,data[0]['firstname'],data[0]['lastname'],data[0]['emailid'],hashed_password) 
+        # username=str(uuid.uuid4())
+        
+        sql="Insert into User(name,email_id,city,password) VALUES(%s,%s,%s,%s)"
+        values=(data[0]['name'],data[0]['email_id'],data[0]['city'],hashed_password) 
         cursor.execute(sql,values)
         conn.commit()
         id=get_last_id(cursor)
-        print
         token=jwt.encode({
             'public_id':id,
             'exp':datetime.datetime.utcnow()+datetime.timedelta(minutes=2)
             }, app.config['SECRET_KEY'])
         
-        resp=jsonify({username})
+        resp=jsonify([{"name":data[0]['name']}])
+        # resp=jsonify("success")
         resp.headers.add('token',token.decode("UTF-8"))
-        return jsonify(resp)
+        return resp
     except Exception as e:
         print("ERROR ",e," ERROR")
         return "error"
