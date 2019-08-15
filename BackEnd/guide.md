@@ -47,3 +47,17 @@
 27. [http://127.0.0.1:5000/api/establishments](http://127.0.0.1:5000/api/establishments) (GET request)
 
 28. [http://127.0.0.1:5000/api/highlights](http://127.0.0.1:5000/api/highlights) (GET request)
+
+29. [http://127.0.0.1:5000/api/users](http://127.0.0.1:5000/api/users) get the profile details of the user (GET request ) token required to be sent
+
+30. [http://127.0.0.1:5000/api/users](http://127.0.0.1:5000/api/users) signup (POST request )
+
+31. [http://127.0.0.1:5000/api/beentheres](http://127.0.0.1:5000/api/beentheres) (POST GET request )
+
+32. [http://127.0.0.1:5000/api/bookmarks](http://127.0.0.1:5000/api/bookmarks) (POST GET request )
+
+33. [http://127.0.0.1:5000/api/beentheres/<id>](http://127.0.0.1:5000/api/beentheres/<id>) (DELETE request )I have to check it
+
+34. [http://127.0.0.1:5000/api/bookmarks/<id>](http://127.0.0.1:5000/api/bookmarks/<id>) (DELETE request )I have to check it
+
+35. [http://127.0.0.1:5000/api/login](http://127.0.0.1:5000/api/login) (GET Request) SEND credentials in authorisation not json

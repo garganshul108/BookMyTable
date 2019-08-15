@@ -10,7 +10,7 @@ from functools import wraps
 from util.lastId import get_last_id
 from LoginSignUp.util.required import token_required
 
-@app.route('/api/bookmark',methods=['GET'])
+@app.route('/api/bookmarks',methods=['GET'])
 @token_required
 def get_bookmark(current_user,row=None):
     try:
