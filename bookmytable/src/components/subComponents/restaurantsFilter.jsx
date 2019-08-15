@@ -2,9 +2,9 @@ import React, { Component } from "react";
 
 import "../css/filter.css";
 import Filter from "./filter";
-import { getCuisines } from "../../services/cuisineServices";
-import { getEstablishments } from "../../services/establishmentServices";
-import { getFeatures } from "../../services/featureServices";
+import { getCuisinesByCity } from "../../services/cuisineServices";
+import { getEstablishmentsByCity } from "../../services/establishmentServices";
+import { getFeaturesByCity } from "../../services/featureServices";
 import { getLocalitiesByCityName } from "../../services/localityServices";
 import md5 from "md5/md5";
 class RestaurantsFilter extends Component {
@@ -19,9 +19,10 @@ class RestaurantsFilter extends Component {
   };
 
   async componentDidMount() {
-    let cuisines = getCuisines();
-    let establishments = getEstablishments();
-    let features = getFeatures();
+    let cuisines = await getCuisinesByCity(this.props.city);
+    console.log("cuisines", cuisines);
+    let establishments = await getEstablishmentsByCity(this.props.city);
+    let features = await getFeaturesByCity(this.props.city);
     let localities = await getLocalitiesByCityName(this.props.city);
     console.log("filter", localities);
     let colorClasses = {

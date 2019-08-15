@@ -74,10 +74,7 @@ def update_slots(res_id,cursor):
 
 def fill_establishments(tt,establishments):
     for est in tt['establishment']:
-        if est=="Caf\u00e9":
-            establishments.append("Cafe")
-        else:
-            establishments.append(est)
+        establishments.append(est)
 def fill_highlights(tt,highlights):
     for hlt in tt['highlights']:
         highlights.append(hlt)
@@ -124,8 +121,10 @@ def get_restaurant():
         establishments=[]
         cuisines=[]
         highlights=[]
+        
         for tt in data:
-            fill_establishments(tt,establishments)
+            tt['establishment']=["Cafe" if x=="Caf\u00e9" else x for x in tt['establishment']]
+            estb=fill_establishments(tt,establishments)
             fill_highlights(tt,highlights)
             fill_cuisines(tt,cuisines)
             update_location(tt, loc_id,cursor)

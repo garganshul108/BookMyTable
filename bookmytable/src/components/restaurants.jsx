@@ -8,6 +8,7 @@ import "./css/restaurants.css";
 import SearchBox from "./subComponents/searchBox";
 // import MyMap from "./subComponents/myMap";
 import { captialize } from "../util/util";
+import { Link } from "react-router-dom";
 
 class Restaurants extends Component {
   state = {
@@ -16,15 +17,14 @@ class Restaurants extends Component {
     filters: [],
     no_of_filter: "0",
     pagination: {
-      startingIndex: 0,
       pageSize: 0,
-      pages: 0
+      currentPage: 1,
+      pageCount: 1
     }
   };
 
-  componentDidMount() {
-    let restaurants = getRestaurantsByCity(this.props.match.params.city);
-
+  async componentDidMount() {
+    let restaurants = await getRestaurantsByCity(this.props.match.params.city);
     for (let restaurant of restaurants) {
       restaurant.showPhone = false;
       restaurant.showMenu = false;
@@ -32,12 +32,12 @@ class Restaurants extends Component {
     // console.log(restaurants);
 
     let pagination = {
-      startingIndex: 0,
-      pageSize: 10
+      pageSize: 6,
+      currentPage: 1
     };
 
     let counting = restaurants.length;
-    pagination.pages = Math.ceil(counting / pagination.pageSize);
+    pagination.pageCount = Math.ceil(counting / pagination.pageSize);
 
     this.setState({ restaurants, pagination }, () => {
       console.log(this.state);
@@ -135,6 +135,14 @@ class Restaurants extends Component {
     return filtered.length > 0 ? filtered : restaurants;
   };
 
+  paginate = restaurants => {
+    let { pageSize, currentPage } = this.state.pagination;
+    let startIndex = (currentPage - 1) * pageSize;
+    let endIndex = Math.min(pageSize + startIndex, restaurants.length);
+    restaurants = restaurants.slice(startIndex, endIndex);
+    return restaurants;
+  };
+
   render() {
     /***
      * this is the point where data as restaurants
@@ -148,20 +156,8 @@ class Restaurants extends Component {
     }
 
     restaurants = this.filterByNameSearch(restaurants);
-
-    const renderPagesForPagination = () => {
-      let pages = [];
-      for (let i = 0; i < this.state.pagination.pages; i++) {
-        pages[i] = (
-          <li className="page-item">
-            <a className="page-link" href="/restaurants">
-              {i + 1}
-            </a>
-          </li>
-        );
-      }
-      return pages;
-    };
+    let totalCount = restaurants.length;
+    restaurants = this.paginate(restaurants);
 
     return (
       <div className="container">
@@ -170,7 +166,7 @@ class Restaurants extends Component {
         </div>
         <h3 style={{ fontWeight: 900 }}>
           Places available in {captialize(this.props.match.params.city)} :{" "}
-          {restaurants.length}
+          {totalCount}
         </h3>
 
         <div className="row no-gutters" style={{ marginBottom: "150px" }}>
@@ -192,6 +188,70 @@ class Restaurants extends Component {
                     value={this.state.seachQuery}
                     onChange={this.handleSearchRestaurant}
                   />
+                </div>
+                <div className="col-2">
+                  <nav>
+                    <ul className="pagination">
+                      <li
+                        className={
+                          this.state.pagination.currentPage < 2
+                            ? "page-item disabled"
+                            : "page-item"
+                        }
+                      >
+                        <Link
+                          className={
+                            this.state.pagination.currentPage < 2
+                              ? "page-link"
+                              : "page-link text-danger"
+                          }
+                          aria-label="Previous"
+                          onClick={() => {
+                            let { pagination } = this.state;
+                            if (pagination.currentPage < 2) return;
+                            pagination.currentPage = pagination.currentPage - 1;
+                            this.setState({ pagination });
+                          }}
+                        >
+                          <span aria-hidden="true">
+                            <i className="fa fa-chevron-left" />
+                          </span>
+                        </Link>
+                      </li>
+                      <li
+                        className={
+                          this.state.pagination.currentPage >
+                          this.state.pagination.pageCount - 1
+                            ? "page-item disabled"
+                            : "page-item"
+                        }
+                      >
+                        <Link
+                          className={
+                            this.state.pagination.currentPage >
+                            this.state.pagination.pageCount - 1
+                              ? "page-link"
+                              : "page-link  text-danger"
+                          }
+                          aria-label="Next"
+                          onClick={() => {
+                            let { pagination } = this.state;
+                            if (
+                              pagination.currentPage >
+                              pagination.pageCount - 1
+                            )
+                              return;
+                            pagination.currentPage = pagination.currentPage + 1;
+                            this.setState({ pagination });
+                          }}
+                        >
+                          <span aria-hidden="true">
+                            <i className="fa fa-chevron-right" />
+                          </span>
+                        </Link>
+                      </li>
+                    </ul>
+                  </nav>
                 </div>
               </div>
               {(parseInt(this.state.no_of_filter) > 0 ||
@@ -231,9 +291,7 @@ class Restaurants extends Component {
             </div>
             <RestaurantsCatalogue restaurants={restaurants} />
             {/* Pagination */}
-            <nav aria-label="Page navigation example">
-              <ul className="pagination">{renderPagesForPagination()}</ul>
-            </nav>
+
             {/* Pagination end */}
             {/* end of display catalogue */}
           </div>
