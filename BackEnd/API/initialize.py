@@ -106,18 +106,18 @@ def get_restaurant():
         cursor.execute("DELETE FROM Day")
         cursor.execute("DELETE FROM Restaurant")
         cursor.execute("DELETE FROM Location")
-        # cursor.execute("DELETE FROM Cities")
+        cursor.execute("DELETE FROM Cities")
         cursor.execute("DELETE FROM Cuisines")
         cursor.execute("DELETE FROM Establishments")
         cursor.execute("DELETE FROM Highlights")
 
         conn.commit()
         loc_id = 1
-        # for tt in cities_data:
-        #     sql="INSERT INTO Cities(id,name,state) VALUES(%s,%s,%s)"
-        #     values=(int(tt['id']),tt['name'],tt['state'])
-        #     cursor.execute(sql,values)
-        #     conn.commit()
+        for tt in cities_data:
+            sql="INSERT INTO Cities(id,name,state) VALUES(%s,%s,%s)"
+            values=(int(tt['id']),tt['name'],tt['state'])
+            cursor.execute(sql,values)
+            conn.commit()
         establishments=[]
         cuisines=[]
         highlights=[]
