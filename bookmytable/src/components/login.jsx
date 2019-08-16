@@ -85,7 +85,24 @@ class Login extends Component {
     let finalData = { ...this.state.account };
     finalData["restaurant"] = finalData["isRestaurant"];
     delete finalData["isRestaurant"];
-    await auth.login(finalData);
+
+    try {
+      let response = await auth.login(finalData);
+      console.log(response);
+      localStorage.setItem("token", response.headers["x-token"]);
+      window.location = "/restaurants/" + this.props.match.params.city;
+    } catch (ex) {
+      if (
+        ex.response &&
+        ex.response.status < 500 &&
+        ex.response.status >= 400
+      ) {
+        const errors = { ...this.state.errors };
+        errors.email = ex.response.status + ": " + ex.response.data;
+        console.log(ex.response);
+        this.setState({ errors });
+      }
+    }
   };
 
   render() {

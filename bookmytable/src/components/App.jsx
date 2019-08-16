@@ -14,8 +14,32 @@ import HomeBottom from "./subComponents/homeBottom";
 import RestaurantRegistration from "./restaurantRegistration";
 import Restaurant from "./restaurant";
 import UserProfile from "./userProfile";
+import jwtDecode from "jwt-decode";
+import Logout from "./subComponents/logout";
 
 class App extends Component {
+  state = {};
+
+  componentDidMount() {
+    const jwt = localStorage.getItem("token");
+    try {
+      const user = jwtDecode(jwt);
+      console.log("appdidm: ", user);
+
+      // let isExpired = false;
+      var dateNow = new Date();
+
+      if (decodedToken.exp < dateNow.getTime()) {
+        // isExpired = true;
+        window.location = "/logout";
+      }
+
+      this.setState({ user }, () => {
+        console.log(this.state);
+      });
+    } catch (ex) {}
+  }
+
   handleCloseLogin = e => {
     e.preventDefault();
     let target = document.getElementsByClassName("loginPage")[0];
@@ -68,6 +92,7 @@ class App extends Component {
                   <NaviagtionBar
                     openLogin={this.handleOpenLogin}
                     openSignUp={this.handleOpenSignUp}
+                    user={this.state.user}
                     {...props}
                   />
                 )}
@@ -78,6 +103,7 @@ class App extends Component {
                   <NaviagtionBar
                     openLogin={this.handleOpenLogin}
                     openSignUp={this.handleOpenSignUp}
+                    user={this.state.user}
                     {...props}
                   />
                 )}
@@ -108,6 +134,7 @@ class App extends Component {
                 path="/restaurants/:city"
                 render={props => <Restaurants {...props} />}
               />
+              <Route path="/logout" component={Logout} />
               <Route path="/not-found" render={() => <NotFound />} />
               <Route path="/home" render={() => <HomeBottom />} />
               <Redirect from="/restaurants" to="/restaurants/delhi" />
@@ -116,15 +143,36 @@ class App extends Component {
             </Switch>
           </div>
           <div className="loginPage" style={{ display: "none" }}>
-            <Login closeTab={this.handleCloseLogin} />
+            <Switch>
+              <Route
+                path="/restaurants/:city?"
+                render={props => (
+                  <Login {...props} closeTab={this.handleCloseLogin} />
+                )}
+              />
+              <Route
+                path="/"
+                render={props => (
+                  <Login {...props} closeTab={this.handleCloseLogin} />
+                )}
+              />
+            </Switch>
           </div>
           <div className="loginPage" style={{ display: "none" }}>
-            <Route
-              path="/"
-              render={props => (
-                <SignUp {...props} closeTab={this.handleCloseSignUp} />
-              )}
-            />
+            <Switch>
+              <Route
+                path="/restaurants/:city?"
+                render={props => (
+                  <SignUp {...props} closeTab={this.handleCloseSignUp} />
+                )}
+              />
+              <Route
+                path="/"
+                render={props => (
+                  <SignUp {...props} closeTab={this.handleCloseSignUp} />
+                )}
+              />
+            </Switch>
           </div>
         </div>
 

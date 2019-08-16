@@ -36,6 +36,7 @@ class NaviagtionBar extends Component {
   };
 
   render() {
+    console.log("navigation", this.props);
     return (
       <React.Fragment>
         <div className="navBar-design">
@@ -93,19 +94,6 @@ class NaviagtionBar extends Component {
                     </Link>
                   </div>
                 </div>
-                {/* <form className="form-inline my-2 my-lg-0">
-                  <input
-                    className="form-control mr-sm-2"
-                    type="search"
-                    aria-label="Search"
-                  />
-                  <button
-                    className="btn btn-danger btn-outine-info my-2 my-sm-0"
-                    to="/restaurants"
-                  >
-                    <i className="fa fa-search" aria-hidden="true" />
-                  </button>
-                </form> */}
               </div>
             </nav>
           </div>
@@ -113,7 +101,7 @@ class NaviagtionBar extends Component {
         {/* this is the user bar will appear as user logsin */}
         <div className="userBar-design">
           <div className="container" style={{ textAlign: "right" }}>
-            {auth.getUser() && (
+            {this.props.user ? (
               <React.Fragment>
                 <div className="dropdown">
                   <button
@@ -153,8 +141,7 @@ class NaviagtionBar extends Component {
                   </div>
                 </div>
               </React.Fragment>
-            )}
-            {!auth.getUser() && (
+            ) : (
               <React.Fragment>
                 <div className="dropdown">
                   <button

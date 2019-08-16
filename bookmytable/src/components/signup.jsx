@@ -74,7 +74,22 @@ class SignUp extends Component {
     finalData["email_id"] = finalData["email"];
     delete finalData.email;
     console.log(finalData);
-    await auth.registerUser(finalData);
+
+    try {
+      let promise = await auth.registerUser(finalData);
+      console.log(promise);
+    } catch (ex) {
+      if (
+        ex.response &&
+        ex.response.status < 500 &&
+        ex.response.status >= 400
+      ) {
+        const errors = { ...this.state.errors };
+        errors.email = ex.response.status + ": " + ex.response.data;
+        console.log(ex.response);
+        this.setState({ errors });
+      }
+    }
   };
 
   handleGotoRegistration = e => {
