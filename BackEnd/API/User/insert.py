@@ -26,7 +26,7 @@ def addUser():
         id=get_last_id(cursor)
         token=jwt.encode({
             'public_id':id,
-            'exp':datetime.datetime.utcnow()+datetime.timedelta(minutes=60),
+            'exp':datetime.datetime.utcnow()+datetime.timedelta(minutes=app.config['token_expire_time']),
             'name':data[0]['name'],
             'email':data[0]['email_id'],
             'restaurant':0
