@@ -8,14 +8,15 @@ class RestaurantBookingWindow extends Component {
   state = {
     data: {
       date: "",
-      size: 0,
-      time: "",
-      first_name: "",
-      last_name: "",
-      email_id: "",
-      phone_no: ""
+      size: 10,
+      time: "01:12",
+      first_name: "Anshul",
+      last_name: "Garg",
+      email_id: "sci.agarg@gmail.com",
+      phone_no: "9810301064"
     },
-    errors: {}
+    errors: {},
+    availableSlots: []
   };
 
   handleInputChange = ({ currentTarget: input }) => {
@@ -43,7 +44,10 @@ class RestaurantBookingWindow extends Component {
     submissionData.restaurant_id = this.props.restaurant_id;
     console.log("state at submisson: \n", submissionData);
     try {
-      await bookingServices.bookTable(submissionData);
+      let response = await bookingServices.bookTable(submissionData);
+      if (response.status === 201) {
+        console.log(response.data);
+      }
     } catch (ex) {
       const errors = { ...this.state.errors };
       // errors.email = ex.response.status + ": " + ex.response.data;
@@ -145,6 +149,8 @@ class RestaurantBookingWindow extends Component {
         >
           Submit
         </button>
+
+        <RegistrationSubForm title="Avilable Slots" />
       </div>
     );
   }
