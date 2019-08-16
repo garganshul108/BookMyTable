@@ -11,7 +11,6 @@ from LoginSignUp.util.required import token_required
 def insert_review(current_user):
     try:
         data=request.json[0]
-        # print(data)
         _comment=data['comment']
         _rating=data['rating']
         _rating_text=data['rating_text']
@@ -47,7 +46,6 @@ def insert_review(current_user):
     finally:
         conn.close()
         cursor.close()
-        return "FINLA"
 
 
 

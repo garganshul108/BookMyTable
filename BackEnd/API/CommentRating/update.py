@@ -4,19 +4,23 @@ from db_config import mysql
 from flask import jsonify
 from flask import flash, request
 from util.lastId import get_last_id
+from LoginSignUp.util.required import token_required
 
 @app.route('/api/reviews/<id>',methods=['PUT'])
-def update_review(id):
+@token_required
+def update_review(current_user,id):
+    if(current_user['id']!=int(id)):
+        return jsonify("Unauthorized"),401
     try:
         data=request.json[0]
         _comment=data['comment']
         _rating=data['rating']
         _rating_text=data['rating_text']
-        # _user_id=data['user_id']
+        _user_id=current_user['user_id']
 
         conn=mysql.connect()
         cursor=conn.cursor()
-        print("sfdsd")
+
         cursor.execute("SELECT restaurant_id,rating from Review where id=%s",id)
         (_res_id,rating1)=cursor.fetchall()[0]
         cursor.execute("SELECT rating,votes FROM Restaurant where id=%s",_res_id)
@@ -33,9 +37,10 @@ def update_review(id):
             values=(id,url)
             cursor.execute(sql,values)
         conn.commit()
-        return jsonify("Comment Insertion Successfull")
+        return jsonify("Comment Updation Successfull")
     except Exception as e:
         print("commmment ",e," comment")
+        return jsonify("Error"),500
     finally:
         conn.close()
         cursor.close()

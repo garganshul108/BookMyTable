@@ -5,6 +5,7 @@ from flask import jsonify
 from flask import flash, request
 from decimal import Decimal
 from operator import itemgetter
+from LoginSignUp.util.required import token_required
 
 # 19151027
 # data=[
@@ -49,7 +50,7 @@ def get_slots(cursor,date,res_id):
         slot['end_time']=convert_time(slot['end_time'])
     return slots
 
-def insert_booking(cursor,data,start,end):
+def insert_booking(cursor,_user_id,data,start,end):
     _date=data['date']
     _time=convert_time(data['time'])
     _size=data['size']
@@ -59,8 +60,8 @@ def insert_booking(cursor,data,start,end):
     _email_id=data['email_id']
     _phone_no=data['phone_no']
     try:
-        sql="INSERT INTO Booking(restaurant_id,size,start_time,end_time,date,first_name,last_name,email_id,phone_no) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s)"
-        values=(_res_id,_size,start,end,_date,_f_name,_l_name,_email_id,_phone_no)
+        sql="INSERT INTO Booking(user_id,restaurant_id,size,start_time,end_time,date,first_name,last_name,email_id,phone_no) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+        values=(_user_id,_res_id,_size,start,end,_date,_f_name,_l_name,_email_id,_phone_no)
         cursor.execute(sql,values)
     except Exception as e:
         print("Booking ",e," Booking")
@@ -68,8 +69,9 @@ def insert_booking(cursor,data,start,end):
 def toI(value):
     return int(2*value)
 
-@app.route('/api/bookings',methods=['POST'])
-def book_table():
+@app.route('/api/users/bookings',methods=['POST'])
+@token_required
+def book_table(current_user):
     data=request.json[0]
     _date=data['date']
     _time=convert_time(data['time'])
@@ -79,7 +81,7 @@ def book_table():
     _l_name=data['last_name']
     _email_id=data['email_id']
     _phone_no=data['phone_no']
-    # _user_id=data['user_id']
+    _user_id=current_user['id']
 
     newSlot={
         "start":toI(_time),
@@ -130,7 +132,7 @@ def book_table():
     
     if count==0:
         try:
-            insert_booking(cursor,data,rev_convert_time(newSlot['start']),rev_convert_time(newSlot['end']))
+            insert_booking(cursor,_user_id,data,rev_convert_time(newSlot['start']),rev_convert_time(newSlot['end']))
         except Exception as e:
             resp=jsonify("ERROR")
             resp.status_code=500
