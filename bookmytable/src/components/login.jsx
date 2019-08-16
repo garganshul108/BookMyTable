@@ -8,7 +8,7 @@ import welcomeback from "./images/welcomeback.jpg";
 import "./css/login.css";
 
 class Login extends Component {
-  state = { account: { email: "", password: "" }, errors: {} };
+  state = { account: { email: "", password: "", userType: "" }, errors: {} };
 
   schema = {
     email: Joi.string()
@@ -90,6 +90,18 @@ class Login extends Component {
                   type="password"
                   name="password"
                   placeholder="Password"
+                />
+                <FormInput
+                  value={this.state.account.userType}
+                  onChange={this.handleInputChange}
+                  type="radio"
+                  name="userType"
+                />
+                <FormInput
+                  value={this.state.account.userType}
+                  onChange={this.handleInputChange}
+                  type="radio"
+                  name="userType"
                 />
                 <button type="submit" className="btn btn-danger">
                   Submit

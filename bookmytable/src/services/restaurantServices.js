@@ -57,7 +57,7 @@ export const getRestaurantsByCity = async (city) => {
 }
 
 export const getRestaurantById = async (id) => {
-    let { data } = await http.get(apiBaseURL + '/restaurants/' + id);
+    let { data } = await http.get(apiBaseURL + '/restaurants?restaurantId=' + id);
     data = renamingProperties(data);
     data = adjustingProperties(data);
     // console.log("id", id, "iredd", data);
@@ -66,7 +66,7 @@ export const getRestaurantById = async (id) => {
 
 
 export const postNewRestaurant = (data) => {
-    return http.post(apiBaseURL + '/restaurants', [{ ...data, errors: {} }], {
+    return http.post(apiBaseURL + '/restaurants', [{ ...data, password: "qwerty", errors: {} }], {
         headers: {
             'Content-Type': 'application/json',
             "Access-Control-Allow-Origin": "*",
