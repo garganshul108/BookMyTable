@@ -23,9 +23,18 @@ class App extends Component {
   componentDidMount() {
     const jwt = localStorage.getItem("token");
     try {
-      const p = jwtDecode(jwt);
-      console.log("appdidm: ", p);
-      this.setState({ user: { ...p } }, () => {
+      const user = jwtDecode(jwt);
+      console.log("appdidm: ", user);
+
+      // let isExpired = false;
+      var dateNow = new Date();
+
+      if (decodedToken.exp < dateNow.getTime()) {
+        // isExpired = true;
+        window.location = "/logout";
+      }
+
+      this.setState({ user }, () => {
         console.log(this.state);
       });
     } catch (ex) {}
