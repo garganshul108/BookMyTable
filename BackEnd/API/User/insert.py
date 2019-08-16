@@ -31,7 +31,8 @@ def addUser():
         
         resp=jsonify([{"name":data[0]['name'],"city":data[0]['city']}])
         resp.status_code=201
-        resp.headers.add('token',token.decode("UTF-8"))
+        resp.headers.add('x-token',token.decode("UTF-8"))
+        resp.headers.add("access-control-expose-headers",'x-token')
         return resp
     except Exception as e:
         print("ERROR ",e," ERROR")

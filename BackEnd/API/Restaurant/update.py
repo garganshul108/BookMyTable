@@ -8,15 +8,15 @@ from util.sendGetResponse import send_get_response
 from LoginSignUp.util.required2 import token_required
 
 def update_days(cursor,data,res_id):
-    try:
+    # try:
         sql="UPDATE Day SET Monday=%s,Tuesday=%s,Wednesday=%s,Thursday=%s,Friday=%s,Saturday=%s,Sunday=%s WHERE restaurant_id=%s"
         values=(data['Monday'],data['Tuesday'],data['Wednesday'],data['Thursday'],data['Friday'],data['Saturday'],data['Sunday'],res_id)
         cursor.execute(sql,values)
-    except Exception as e:
-        print("Days ",e)
+    # except Exception as e:
+        # print("Days ",e)
 
 def update_location(cursor,data,loc_id):
-    try:
+    # try:
         _address=data['address']['line_1']+data['address']['line_2']
         _city=data['city']
         _zipcode=None
@@ -28,8 +28,8 @@ def update_location(cursor,data,loc_id):
         sql="UPDATE Location SET city=%s,zipcode=%s,locality=%s,address=%s,locality_verbose=%s WHERE id=%s"
         values=(_city,_zipcode,_locality,_address,_loc_verb,loc_id)
         cursor.execute(sql,values)
-    except Exception as e:
-        print("LOCATION ",e," LOCATION")
+    # except Exception as e:
+        # print("LOCATION ",e," LOCATION")
 
 
 def update_highlights(data,cursor):
@@ -63,7 +63,7 @@ def update_cuisines(data,cursor):
     return ", ".join(data)
 
 def update_restaurant_table(cursor,data,res_id):
-    try:
+    # try:
         _ave_cost=int("0"+data['average_cost_for_two'])
         _cuisines=update_cuisines(data['cuisines'],cursor)
         _establishment=update_establishments(data['establishment'],cursor)
@@ -81,17 +81,16 @@ def update_restaurant_table(cursor,data,res_id):
                 WHERE id=%s"""
         values=(_name,_email,_ave_cost,_cuisines,_timings,_establishment,_highlights,_thumb,_phone,_capacity,_opening_status,_website,res_id)
         cursor.execute(sql,values)
-    except Exception as e:
-        print("resta",e,"resta")
+    # except Exception as e:
+        # print("resta",e,"resta")
 
 def update_slot(cursor,data,res_id):
-    try:
+    # try:
+        cursor.execute("DELETE FROM Slot WHERE restaurant_id=%s",res_id)
         for slot in data:
-            sql="UPDATE Slot SET start_time=%s,end_time=%s WHERE restaurant_id=%s"
-            values=(slot['start_time'],slot['end_time'],res_id)
-            cursor.execute(sql,values)
-    except Exception as e:
-        print("slot ",e," slot")
+            sql="INSERT INTO Slot(restaurant_id,start_time,end_time) VALUES(%s,%s,%s)"
+            values=(res_id,slot['start_time'],slot['end_time'])
+            cursor.execute(sql,values)   
 
 @app.route('/api/restaurants',methods=['PUT'])
 @token_required
