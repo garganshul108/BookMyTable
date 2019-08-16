@@ -28,13 +28,19 @@ def login():
         Users=cursor.fetchall()
         if not Users:
             return make_response('Check Email', 401, {'WWW-Authenticate' : 'Basic realm="Login required!"'})
+        email=""
+        if int(data['restaurant'])==0:
+            email=Users[0]['email_id']
+        else:
+            email=Users[0]['email']
+        
         User=Users[0]
         conn.close()
         cursor.close()
         
 
         if check_password_hash(User['password'],data['password']):
-            token = jwt.encode({'public_id' : User['id'], 'exp' : datetime.datetime.utcnow() + datetime.timedelta(minutes=120)}, app.config['SECRET_KEY'])
+            token = jwt.encode({'public_id' : User['id'], 'exp' : datetime.datetime.utcnow() + datetime.timedelta(minutes=120),'name':User['name'],'email':email}, app.config['SECRET_KEY'])
             resp=jsonify("Successful")
             resp.headers.add("x-token",token.decode('UTF-8'))
             resp.headers.add("access-control-expose-headers","x-token")
