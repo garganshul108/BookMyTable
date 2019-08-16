@@ -10,17 +10,17 @@ from functools import wraps
 from util.lastId import get_last_id
 from LoginSignUp.util.required import token_required
 
-@app.route('/api/users',methods=['POST'])
+@app.route('/api/users',methods=['PUT'])
 @token_required
-def addUser(current_user):
+def updateUser(current_user):
     try:
         data=request.json
         hashed_password=generate_password_hash(data[0]['password'],method='sha256')
         conn=mysql.connect()
         cursor=conn.cursor()
         
-        sql="UPDATE User SET name=%s,email_id=%s,city=%s,password=%s) VALUES(%s,%s,%s,%s)"
-        values=(data[0]['name'],data[0]['email_id'],data[0]['city'],hashed_password) 
+        sql="UPDATE User SET name=%s,email_id=%s,city=%s,password=%s where id=%s"
+        values=(data[0]['name'],data[0]['email_id'],data[0]['city'],hashed_password,current_user['id']) 
         cursor.execute(sql,values)
         conn.commit()
         

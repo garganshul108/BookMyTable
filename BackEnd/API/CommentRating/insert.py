@@ -28,7 +28,7 @@ def insert_review(current_user):
         cursor.execute("UPDATE Restaurant SET rating=%s,votes=%s where id=%s",
                     ((rating*votes+_rating)/(votes+1),votes+1,_res_id))
         print("working")
-        sql="INSERT INTO Review(restaurant_id,user_id,comment,rating,rating_text,_date,_time) values(%s,%s,%s,%s,%s,%s,%s)"
+        sql="INSERT INTO Review(restaurant_id,user_id,comment,rating,rating_text,date,time) values(%s,%s,%s,%s,%s,%s,%s)"
         values=(_res_id,_user_id,_comment,_rating,_rating_text,_date,_time)
         cursor.execute(sql,values)
         review_id=get_last_id(cursor)
@@ -42,6 +42,7 @@ def insert_review(current_user):
         resp.status_code=201
         return resp
     except Exception as e:
+        print("review ",e," review")
         resp=jsonify("Error")
         resp.status_code=500
         return resp

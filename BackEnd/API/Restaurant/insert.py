@@ -110,7 +110,7 @@ def insert_slot(cursor,data,res_id):
         # print("slot "+e+" slot")
 
 @app.route('/api/restaurants',methods=['POST'])
-def add_restaurant(current_user):
+def add_restaurant():
     try:
         data=request.json
         conn=mysql.connect()

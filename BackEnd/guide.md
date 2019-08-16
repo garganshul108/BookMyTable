@@ -64,4 +64,4 @@
 
 37. [http://127.0.0.1:5000/api/bookmarks](http://127.0.0.1:5000/api/beentheres) "id" as query and login required (DELETE request )I have to check it
 
-38. [http://127.0.0.1:5000/api/login](http://127.0.0.1:5000/api/login) (GET Request) SEND credentials in authorisation not json
+38. [http://127.0.0.1:5000/api/login](http://127.0.0.1:5000/api/login) (GET Request)

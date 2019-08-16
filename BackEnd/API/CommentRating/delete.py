@@ -17,8 +17,11 @@ def delete_review(current_user):
         conn=mysql.connect()
         cursor=conn.cursor()
         cursor.execute("SELECT user_id from Review where id=%s",id)
-        u_id=cursor.fetchall()[0]
-        if(u_id!=_user_id):
+        try:
+            u_id=cursor.fetchall()[0][0]
+            if(u_id!=_user_id):
+                raise Exception
+        except:
             return jsonify("Unauthorized"),401
 
         delete_review_query(id,cursor)

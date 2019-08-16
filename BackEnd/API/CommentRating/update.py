@@ -17,15 +17,18 @@ def update_review(current_user):
         _comment=data['comment']
         _rating=data['rating']
         _rating_text=data['rating_text']
-        _user_id=current_user['user_id']
+        _user_id=current_user['id']
         _date=data['date']
         _time=data['time']
 
         conn=mysql.connect()
         cursor=conn.cursor()
         cursor.execute("SELECT user_id from Review where id=%s",id)
-        u_id=cursor.fetchall()[0]
-        if(u_id!=_user_id):
+        try:
+            u_id=cursor.fetchall()[0][0]
+            if(u_id!=_user_id):
+                raise Exception
+        except:
             return jsonify("Unauthorized"),401
 
         cursor.execute("SELECT restaurant_id,rating from Review where id=%s",id)
@@ -35,7 +38,7 @@ def update_review(current_user):
         cursor.execute("UPDATE Restaurant SET rating=%s where id=%s",
                     ((rating*(votes)-rating1+_rating)/(votes),_res_id))
 
-        sql="UPDATE Review SET comment=%s,rating=%s,rating_text=%s,data=%s,time=%s WHERE id=%s"
+        sql="UPDATE Review SET comment=%s,rating=%s,rating_text=%s,date=%s,time=%s WHERE id=%s"
         values=(_comment,_rating,_rating_text,_date,_time,id)
         cursor.execute(sql,values)
         cursor.execute("DELETE FROM Photo where review_id=%s",id)
