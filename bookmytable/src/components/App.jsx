@@ -15,15 +15,20 @@ import RestaurantRegistration from "./restaurantRegistration";
 import Restaurant from "./restaurant";
 import UserProfile from "./userProfile";
 import jwtDecode from "jwt-decode";
+import Logout from "./subComponents/logout";
 
 class App extends Component {
   state = {};
 
   componentDidMount() {
     const jwt = localStorage.getItem("token");
-    const user = jwtDecode(jwt);
-    console.log(user);
-    this.setState({ user });
+    try {
+      const p = jwtDecode(jwt);
+      console.log("appdidm: ", p);
+      this.setState({ user: { ...p } }, () => {
+        console.log(this.state);
+      });
+    } catch (ex) {}
   }
 
   handleCloseLogin = e => {
@@ -78,6 +83,7 @@ class App extends Component {
                   <NaviagtionBar
                     openLogin={this.handleOpenLogin}
                     openSignUp={this.handleOpenSignUp}
+                    user={this.state.user}
                     {...props}
                   />
                 )}
@@ -88,6 +94,7 @@ class App extends Component {
                   <NaviagtionBar
                     openLogin={this.handleOpenLogin}
                     openSignUp={this.handleOpenSignUp}
+                    user={this.state.user}
                     {...props}
                   />
                 )}
@@ -118,6 +125,7 @@ class App extends Component {
                 path="/restaurants/:city"
                 render={props => <Restaurants {...props} />}
               />
+              <Route path="/logout" component={Logout} />
               <Route path="/not-found" render={() => <NotFound />} />
               <Route path="/home" render={() => <HomeBottom />} />
               <Redirect from="/restaurants" to="/restaurants/delhi" />
@@ -126,20 +134,36 @@ class App extends Component {
             </Switch>
           </div>
           <div className="loginPage" style={{ display: "none" }}>
-            <Route
-              path="/"
-              render={props => (
-                <Login {...props} closeTab={this.handleCloseLogin} />
-              )}
-            />
+            <Switch>
+              <Route
+                path="/restaurants/:city?"
+                render={props => (
+                  <Login {...props} closeTab={this.handleCloseLogin} />
+                )}
+              />
+              <Route
+                path="/"
+                render={props => (
+                  <Login {...props} closeTab={this.handleCloseLogin} />
+                )}
+              />
+            </Switch>
           </div>
           <div className="loginPage" style={{ display: "none" }}>
-            <Route
-              path="/"
-              render={props => (
-                <SignUp {...props} closeTab={this.handleCloseSignUp} />
-              )}
-            />
+            <Switch>
+              <Route
+                path="/restaurants/:city?"
+                render={props => (
+                  <SignUp {...props} closeTab={this.handleCloseSignUp} />
+                )}
+              />
+              <Route
+                path="/"
+                render={props => (
+                  <SignUp {...props} closeTab={this.handleCloseSignUp} />
+                )}
+              />
+            </Switch>
           </div>
         </div>
 

@@ -90,7 +90,7 @@ class Login extends Component {
       let response = await auth.login(finalData);
       console.log(response);
       localStorage.setItem("token", response.headers["x-token"]);
-      this.props.closeTab(e);
+      window.location = "/restaurants/" + this.props.match.params.city;
     } catch (ex) {
       if (
         ex.response &&
