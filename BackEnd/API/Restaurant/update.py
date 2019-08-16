@@ -93,19 +93,15 @@ def update_slot(cursor,data,res_id):
     except Exception as e:
         print("slot ",e," slot")
 
-@app.route('/api/restaurants/<id>',methods=['PUT'])
+@app.route('/api/restaurants',methods=['PUT'])
 @token_required
-def update_restaurant(current_user,id):
-    if(current_user['id']!=int(id)):
-        resp=jsonify("Unauthorizedd")
-        resp.status_code=401
-        return resp
+def update_restaurant(current_user):
     try:
         data=request.json
-        print(type(data))
-        resp={"status":"correct"}
         conn=mysql.connect()
         cursor=conn.cursor()
+        id=current_user['id']
+        
         loc_id=cursor.execute("SELECT location_id FROM Restaurant WHERE id=%s",id)
         update_location(cursor,data[0]['location'],loc_id)
         update_restaurant_table(cursor,data[0],id)  

@@ -5,16 +5,13 @@ from flask import jsonify
 from flask import flash, request
 from LoginSignUp.util.required2 import token_required
 
-@app.route('/api/restaurants/<id>',methods=['DELETE'])
+@app.route('/api/restaurants',methods=['DELETE'])
 @token_required
-def delete_restaurant(current_user,id):
-    if(current_user['id']!=int(id)):
-        resp=jsonify("Unauthorizedd")
-        resp.status_code=401
-        return resp
+def delete_restaurant(current_user):
     try:
         conn=mysql.connect()
         cursor=conn.cursor()
+        id=current_user['id']
         cursor.execute("DELETE FROM Photo where review_id=(SELECT id from Review where Review.restaurant_id=%s)",id)
         cursor.execute("DELETE FROM Review where restaurant_id=%s",id)
         cursor.execute("DELETE FROM Slot where restaurant_id=%s",id)

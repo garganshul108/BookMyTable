@@ -6,7 +6,7 @@ from flask import flash, request
 from util.lastId import get_last_id
 from LoginSignUp.util.required import token_required
 
-@app.route('/api/users/reviews',methods=['POST'])
+@app.route('/api/reviews',methods=['POST'])
 @token_required
 def insert_review(current_user):
     try:

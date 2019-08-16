@@ -6,11 +6,12 @@ from flask import flash, request
 from util.lastId import get_last_id
 from LoginSignUp.util.required import token_required
 
-@app.route('/api/users/reviews/<id>',methods=['PUT'])
+@app.route('/api/reviews',methods=['PUT'])
 @token_required
-def update_review(current_user,id):
-    if(current_user['id']!=int(id)):
-        return jsonify("Unauthorized"),401
+def update_review(current_user):
+    id=request.args.get('id',default='%',type=int)
+    if(id=='%'):
+        return jsonify("BAD REQUEST"),400
     try:
         data=request.json[0]
         _comment=data['comment']
@@ -20,6 +21,10 @@ def update_review(current_user,id):
 
         conn=mysql.connect()
         cursor=conn.cursor()
+        cursor.execute("SELECT user_id from Review where id=%s",id)
+        u_id=cursor.fetchall()[0]
+        if(u_id!=_user_id):
+            return jsonify("Unauthorized"),401
 
         cursor.execute("SELECT restaurant_id,rating from Review where id=%s",id)
         (_res_id,rating1)=cursor.fetchall()[0]
