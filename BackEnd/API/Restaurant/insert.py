@@ -137,7 +137,8 @@ def add_restaurant():
             }, app.config['SECRET_KEY'])
         resp=jsonify(rows)
         resp.status_code=201
-        resp.headers.add('token',token.decode("UTF-8"))
+        resp.headers.add('x-token',token.decode("UTF-8"))
+        resp.headers.add("access-control-expose-headers",'x-token')
         return resp
 
 
