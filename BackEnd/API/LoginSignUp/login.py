@@ -40,7 +40,7 @@ def login():
         
 
         if check_password_hash(User['password'],data['password']):
-            token = jwt.encode({'public_id' : User['id'], 'exp' : datetime.datetime.utcnow() + datetime.timedelta(minutes=120),'name':User['name'],'email':email}, app.config['SECRET_KEY'])
+            token = jwt.encode({'public_id' : User['id'], 'exp' : datetime.datetime.utcnow() + datetime.timedelta(minutes=120),'name':User['name'],'email':email,'restaurant':data['restaurant']}, app.config['SECRET_KEY'])
             resp=jsonify("Successful")
             resp.headers.add("x-token",token.decode('UTF-8'))
             resp.headers.add("access-control-expose-headers","x-token")

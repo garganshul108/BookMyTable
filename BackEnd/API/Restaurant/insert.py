@@ -135,7 +135,8 @@ def add_restaurant():
             'public_id':res_id,
             'exp':datetime.datetime.utcnow()+datetime.timedelta(minutes=120),
             'name':data[0]['name'],
-            'email':data[0]['email']
+            'email':data[0]['email'],
+            'restaurant':1
             }, app.config['SECRET_KEY'])
         resp=jsonify(rows)
         resp.status_code=201

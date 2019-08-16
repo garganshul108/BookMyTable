@@ -28,7 +28,8 @@ def addUser():
             'public_id':id,
             'exp':datetime.datetime.utcnow()+datetime.timedelta(minutes=60),
             'name':data[0]['name'],
-            'email':data[0]['email_id']
+            'email':data[0]['email_id'],
+            'restaurant':0
 
             }, app.config['SECRET_KEY'])
         
