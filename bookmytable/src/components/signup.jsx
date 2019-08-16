@@ -3,10 +3,17 @@ import Joi from "joi-browser";
 import { Link } from "react-router-dom";
 import "./css/login.css";
 import FormInput from "./subComponents/formInput";
+import auth from "../services/authServices";
 
 class SignUp extends Component {
   state = {
-    account: { name: "", email: "", password: "", confirmPassword: "" },
+    account: {
+      name: "",
+      city: "",
+      email: "",
+      password: "",
+      confirmPassword: ""
+    },
     errors: {}
   };
 
@@ -15,6 +22,10 @@ class SignUp extends Component {
       .min(3)
       .required()
       .label("Name"),
+    city: Joi.string()
+      .min(3)
+      .required()
+      .label("City"),
     email: Joi.string()
       .email()
       .required()
@@ -49,7 +60,7 @@ class SignUp extends Component {
     return errors;
   };
 
-  handleSubmit = e => {
+  handleSubmit = async e => {
     e.preventDefault();
 
     let errors = this.validate();
@@ -57,7 +68,13 @@ class SignUp extends Component {
     this.setState({ errors: errors || {} });
 
     if (errors) return;
-    console.log("submitting signup form");
+    console.log("submitting signup form", this.state.account);
+    let finalData = { ...this.state.account };
+    delete finalData.confirmPassword;
+    finalData["email_id"] = finalData["email"];
+    delete finalData.email;
+    console.log(finalData);
+    await auth.registerUser(finalData);
   };
 
   handleGotoRegistration = e => {
@@ -103,6 +120,13 @@ class SignUp extends Component {
                   onChange={this.handleInputChange}
                   name="name"
                   placeholder="Name"
+                  error={this.state.errors.name}
+                />
+                <FormInput
+                  value={this.state.account.city}
+                  onChange={this.handleInputChange}
+                  name="city"
+                  placeholder="City"
                   error={this.state.errors.name}
                 />
                 <small id="emailHelp" className="form-text text-muted">
