@@ -2,9 +2,56 @@ import React, { Component } from "react";
 import RegistrationSubForm from "./registrationSubForm";
 import FormInput from "./formInput";
 import "../css/restaurant.css";
+import * as bookingServices from "../../services/bookingServices";
 
 class RestaurantBookingWindow extends Component {
-  state = {};
+  state = {
+    data: {
+      date: "",
+      size: 0,
+      time: "",
+      first_name: "",
+      last_name: "",
+      email_id: "",
+      phone_no: ""
+    },
+    errors: {}
+  };
+
+  handleInputChange = ({ currentTarget: input }) => {
+    // console.log(
+    //   input.name,
+    //   input.value,
+    //   input.dataset.parent,
+    //   input.dataset.gparent
+    // );
+    let data = { ...this.state.data };
+    if (input.dataset.gparent) {
+      data[input.dataset.gparent][input.dataset.parent][input.name] =
+        input.value;
+    } else if (input.dataset.parent) {
+      data[input.dataset.parent][input.name] = input.value;
+    } else {
+      data[input.name] = input.value;
+    }
+    this.setState({ data });
+  };
+
+  handleSubmit = async e => {
+    e.preventDefault();
+    let submissionData = { ...this.state.data };
+    submissionData.restaurant_id = this.props.restaurant_id;
+    console.log("state at submisson: \n", submissionData);
+    try {
+      await bookingServices.bookTable(submissionData);
+    } catch (ex) {
+      const errors = { ...this.state.errors };
+      // errors.email = ex.response.status + ": " + ex.response.data;
+      console.log(ex.response);
+      this.setState({ errors });
+    }
+  };
+
   render() {
     return (
       <div className="bookingDiv">
@@ -14,20 +61,18 @@ class RestaurantBookingWindow extends Component {
             <div className="col-4">
               <FormInput
                 label="SELECT A DATE"
-                // value={this.state.data.phone.std}
-                // onChange={this.handleInputChange}
-                name="date_of_arrival"
-                data-parent="phone"
+                value={this.state.data.date}
+                onChange={this.handleInputChange}
+                name="date"
                 type="date"
               />
             </div>
             <div className="col-4">
               <FormInput
                 label="NO OF GUESTS"
-                // value={this.state.data.phone.std}
-                // onChange={this.handleInputChange}
-                name="guests_count"
-                data-parent="phone"
+                value={this.state.data.size}
+                onChange={this.handleInputChange}
+                name="size"
                 type="number"
                 min="0"
                 max="20"
@@ -36,10 +81,9 @@ class RestaurantBookingWindow extends Component {
             <div className="col-4">
               <FormInput
                 label="TIME"
-                // value={this.state.data.phone.std}
-                // onChange={this.handleInputChange}
-                name="time_of_arrival"
-                data-parent="phone"
+                value={this.state.data.time}
+                onChange={this.handleInputChange}
+                name="time"
                 type="time"
               />
             </div>
@@ -51,24 +95,19 @@ class RestaurantBookingWindow extends Component {
               {" "}
               <FormInput
                 label="FIRST NAME"
-                // value={this.state.data.phone.std}
-                // onChange={this.handleInputChange}
-                name="time_of_booking"
-                data-parent="phone"
+                value={this.state.data.first_name}
+                onChange={this.handleInputChange}
+                name="first_name"
                 placeholder="eg. Abbu"
-
-                // type="time"
               />
             </div>
             <div className="col">
               {" "}
               <FormInput
                 label="LAST NAME"
-                // value={this.state.data.phone.std}
-                // onChange={this.handleInputChange}
-                name="time_of_booking"
-                data-parent="phone"
-                // type="text"
+                value={this.state.data.last_name}
+                onChange={this.handleInputChange}
+                name="last_name"
                 placeholder="eg. Johannes"
               />
             </div>
@@ -78,10 +117,9 @@ class RestaurantBookingWindow extends Component {
               {" "}
               <FormInput
                 label="EMAIL"
-                // value={this.state.data.phone.std}
-                // onChange={this.handleInputChange}
-                name="time_of_booking"
-                data-parent="phone"
+                value={this.state.data.email_id}
+                onChange={this.handleInputChange}
+                name="email_id"
                 type="email"
                 placeholder="eg. abbu.johannes@mymail.com"
               />
@@ -90,10 +128,9 @@ class RestaurantBookingWindow extends Component {
               {" "}
               <FormInput
                 label="PHONE NO"
-                // value={this.state.data.phone.std}
-                // onChange={this.handleInputChange}
-                name="time_of_booking"
-                data-parent="phone"
+                value={this.state.data.phone_no}
+                onChange={this.handleInputChange}
+                name="phone_no"
                 type="number"
                 placeholder="eg. 9876543210"
               />
@@ -104,6 +141,7 @@ class RestaurantBookingWindow extends Component {
           type="submit"
           style={{ width: "100%", marginTop: "20px" }}
           className="btn btn-success"
+          onClick={this.handleSubmit}
         >
           Submit
         </button>

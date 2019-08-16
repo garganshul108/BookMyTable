@@ -330,7 +330,12 @@ class Restaurant extends Component {
                   {/* <Switch> */}
                   <Route
                     path="/restaurant/:id"
-                    render={props => <RestaurantBookingWindow {...props} />}
+                    render={props => (
+                      <RestaurantBookingWindow
+                        restaurant_id={this.props.match.params.id}
+                        {...props}
+                      />
+                    )}
                   />
 
                   <Route
