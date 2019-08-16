@@ -6,9 +6,13 @@ import FormInput from "./subComponents/formInput";
 import welcomeback from "./images/welcomeback.jpg";
 
 import "./css/login.css";
+import FormCheckbox from "./subComponents/formCheckbox";
 
 class Login extends Component {
-  state = { account: { email: "", password: "", userType: "" }, errors: {} };
+  state = {
+    account: { email: "", password: "", isRestaurant: false },
+    errors: {}
+  };
 
   schema = {
     email: Joi.string()
@@ -18,12 +22,32 @@ class Login extends Component {
     password: Joi.string()
       .min(3)
       .required()
-      .label("Password")
+      .label("Password"),
+    isRestaurant: Joi.boolean()
   };
   handleInputChange = e => {
     let account = { ...this.state.account };
     account[e.currentTarget.name] = e.currentTarget.value;
     this.setState({ account });
+  };
+
+  handleCheckboxChange = ({ currentTarget: checkbox }) => {
+    // console.log(
+    //   "name " + checkbox.name,
+    //   "\nch " + checkbox.checked,
+    //   "\npa " + checkbox.dataset.parent,
+    //   "\nga " + checkbox.dataset.gparent
+    // );
+    let data = { ...this.state.account };
+    if (checkbox.dataset.gparent) {
+      data[checkbox.dataset.gparent][checkbox.dataset.parent][checkbox.name] =
+        checkbox.checked;
+    } else if (checkbox.dataset.parent) {
+      data[checkbox.dataset.parent][checkbox.name] = checkbox.checked;
+    } else {
+      data[checkbox.name] = checkbox.checked;
+    }
+    this.setState({ account: data });
   };
 
   validate = () => {
@@ -37,12 +61,12 @@ class Login extends Component {
     for (let error of validationResult.error.details) {
       errors[error.path[0]] = error.message;
     }
-    // if (this.state.account.email.trim() === "") {
-    //   errors.email = "Email is req.";
-    // }
-    // if (this.state.account.password.trim() === "") {
-    //   errors.password = "Password is req.";
-    // }
+    if (this.state.account.email.trim() === "") {
+      errors.email = "Email is req.";
+    }
+    if (this.state.account.password.trim() === "") {
+      errors.password = "Password is req.";
+    }
 
     return errors;
   };
@@ -55,7 +79,7 @@ class Login extends Component {
     this.setState({ errors: errors || {} });
 
     if (errors) return;
-    console.log("submitting LOGIN form");
+    console.log("submitting LOGIN form", this.state.account);
   };
 
   render() {
@@ -91,19 +115,16 @@ class Login extends Component {
                   name="password"
                   placeholder="Password"
                 />
-                <FormInput
-                  value={this.state.account.userType}
-                  onChange={this.handleInputChange}
-                  type="radio"
-                  name="userType"
-                />
-                <FormInput
-                  value={this.state.account.userType}
-                  onChange={this.handleInputChange}
-                  type="radio"
-                  name="userType"
-                />
-                <button type="submit" className="btn btn-danger">
+                <span className="text-muted">
+                  <FormCheckbox
+                    label="  I am a restaurant"
+                    xClass="d-inline"
+                    checked={this.state.account.isRestaurant}
+                    name="isRestaurant"
+                    onChange={this.handleCheckboxChange}
+                  />
+                </span>
+                <button type="submit" className="btn btn-danger my-2">
                   Submit
                 </button>
               </form>
