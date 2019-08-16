@@ -8,6 +8,8 @@ import welcomeback from "./images/welcomeback.jpg";
 import "./css/login.css";
 import FormCheckbox from "./subComponents/formCheckbox";
 
+import auth from "../services/authServices";
+
 class Login extends Component {
   state = {
     account: { email: "", password: "", isRestaurant: false },
@@ -71,7 +73,7 @@ class Login extends Component {
     return errors;
   };
 
-  handleSubmit = e => {
+  handleSubmit = async e => {
     e.preventDefault();
 
     let errors = this.validate();
@@ -80,6 +82,10 @@ class Login extends Component {
 
     if (errors) return;
     console.log("submitting LOGIN form", this.state.account);
+    let finalData = { ...this.state.account };
+    finalData["restaurant"] = finalData["isRestaurant"];
+    delete finalData["isRestaurant"];
+    await auth.login(finalData);
   };
 
   render() {

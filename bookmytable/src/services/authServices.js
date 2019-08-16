@@ -8,8 +8,17 @@ const getUser = () => {
 }
 
 
+const login = (data) => {
+    return http.post(apiBaseURL + "/login", [{ ...data }], {
+        headers: {
+            'Content-Type': 'application/json',
+            "Access-Control-Allow-Origin": "*",
+        }
+    });
+}
+
 const registerUser = (data) => {
-    return http.post(apiBaseURL + "/users", { ...data }, {
+    return http.post(apiBaseURL + "/users", [{ ...data }], {
         headers: {
             'Content-Type': 'application/json',
             "Access-Control-Allow-Origin": "*",
@@ -19,5 +28,6 @@ const registerUser = (data) => {
 
 export default {
     getUser: getUser,
-    registerUser: registerUser
+    registerUser: registerUser,
+    login: login
 }
