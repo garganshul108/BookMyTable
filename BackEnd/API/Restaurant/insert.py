@@ -19,7 +19,7 @@ def insert_days(cursor,data,res_id):
 
 def insert_location(cursor,data):
     # try:
-        _address=data['address']['line_1']+data['address']['line_2']
+        _address=data['address']['line_1']+data['address']['line_2']+", "+data['locality_verbose']+", "+data['city']
         _city=data['city']
         _zipcode=None
         if data['zipcode'].isdigit():
@@ -82,7 +82,7 @@ def insert_restaurant(cursor,data,_loc_id):
         _highlights=insert_highlights(data['highlights'],cursor)
 
         _name=data['name']
-        _phone=data['phone']['std']+" , "+data['phone']['number']
+        _phone=data['phone']['std']+"-"+data['phone']['number']
         _thumb=data['thumb']
         _timings=data['timings']
         _opening_status=int(data['opening_status'])
