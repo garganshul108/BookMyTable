@@ -14,8 +14,18 @@ import HomeBottom from "./subComponents/homeBottom";
 import RestaurantRegistration from "./restaurantRegistration";
 import Restaurant from "./restaurant";
 import UserProfile from "./userProfile";
+import jwtDecode from "jwt-decode";
 
 class App extends Component {
+  state = {};
+
+  componentDidMount() {
+    const jwt = localStorage.getItem("token");
+    const user = jwtDecode(jwt);
+    console.log(user);
+    this.setState({ user });
+  }
+
   handleCloseLogin = e => {
     e.preventDefault();
     let target = document.getElementsByClassName("loginPage")[0];
@@ -116,7 +126,12 @@ class App extends Component {
             </Switch>
           </div>
           <div className="loginPage" style={{ display: "none" }}>
-            <Login closeTab={this.handleCloseLogin} />
+            <Route
+              path="/"
+              render={props => (
+                <Login {...props} closeTab={this.handleCloseLogin} />
+              )}
+            />
           </div>
           <div className="loginPage" style={{ display: "none" }}>
             <Route
