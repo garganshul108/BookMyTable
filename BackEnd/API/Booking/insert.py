@@ -53,8 +53,8 @@ def get_slots(cursor,date,res_id):
 def insert_booking(cursor,_user_id,data,start,end):
     _date=data['date']
     _time=convert_time(data['time'])
-    _size=int("0"+data['size'])
-    _res_id=int(data['restaurant_id'])
+    _size=int("0"+str(data['size']))
+    _res_id=int("0"+str(data['restaurant_id']))
     _f_name=data['first_name']
     _l_name=data['last_name']
     _email_id=data['email_id']
@@ -75,8 +75,8 @@ def book_table(current_user):
     data=request.json[0]
     _date=data['date']
     _time=convert_time(data['time'])
-    _size=int("0"+data['size'])
-    _res_id=int(data['restaurant_id'])
+    _size=int("0"+str(data['size']))
+    _res_id=int("0"+str(data['restaurant_id']))
     _f_name=data['first_name']
     _l_name=data['last_name']
     _email_id=data['email_id']
