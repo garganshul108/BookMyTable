@@ -30,6 +30,8 @@ def get_bookmark(current_user,row=None):
             bookmark['restaurant']=rrs
             del bookmark['restaurant_id']
         current_user['bookmarks']=bookmarks
+        if row==None:
+            return jsonify(current_user['bookmarks'])
         return current_user
     except Exception as e:
         print("ERRrrOR ",e," ERROR")

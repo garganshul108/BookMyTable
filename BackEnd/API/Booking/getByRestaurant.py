@@ -3,20 +3,16 @@ from app import app
 from db_config import mysql
 from flask import jsonify,request
 from util.sendGetResponse import send_get_response
+from LoginSignUp.util.required2 import token_required
 
-@app.route('/api/bookings')
-def get_bookings():
-    _user_id=request.args.get('userId',default="%",type=int)
-    _restaurant_id=request.args.get('restaurantId',default="%",type=int)
-
-    if _user_id=="%" and _restaurant_id=="%":
-        print("Unauthorized")
-
+@app.route('/api/restaurants/bookings')
+@token_required
+def get_restaurant_bookings(current_user):
     try:
         conn = mysql.connect()
         cursor = conn.cursor(pymysql.cursors.DictCursor)
         cursor.execute(
-            "SELECT * FROM Booking where user_id LIKE %s AND restaurant_id LIKE %s",(_user_id,_restaurant_id))
+            "SELECT * FROM Booking where restaurant_id=%s",current_user['id'])
         rows = cursor.fetchall()
         return send_get_response(rows,"No Booking Found")
     except Exception as e:

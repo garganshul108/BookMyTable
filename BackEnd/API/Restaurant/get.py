@@ -4,13 +4,12 @@ from db_config import mysql
 from flask import jsonify,flash,request
 from Restaurant.util.convertRestaurant import convert_restaurant
 from util.sendGetResponse import send_get_response
-from LoginSignUp.util.required import token_required
+from LoginSignUp.util.required2 import token_required
 
 
     # eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwdWJsaWNfaWQiOjIyLCJleHAiOjE1NjU4NjAzNzJ9.cIP4Vp4sE9d6C1BIn1tfCjcSkXVwysculT6tZr0BUF4
 
 @app.route('/api/restaurants')
-# @token_required
 def get_restaurants():
     try:
         _city=request.args.get('city',default='%',type=str)

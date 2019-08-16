@@ -8,19 +8,17 @@ from Restaurant import get
 from Restaurant import insert
 from Restaurant import delete
 from Restaurant import update
-from Restaurant import getById
+
 
 from Location import getAll
 from Location import getLocalitiesByCity
 from Location import getAllCities
 
-from LoginSignUp import signup
 from LoginSignUp import login
+
 from User import insert
-from User import deleteALL
 from User import get
-from User import getById
-from User import delete
+from User import update
 from User.BeenThere import insert
 from User.BeenThere import delete
 from User.BeenThere import get
@@ -28,10 +26,12 @@ from User.Bookmark import insert
 from User.Bookmark import delete
 from User.Bookmark import get
 
-from Booking import get
 from Booking import insert
 from Booking import delete
 from Booking import deleteAll
+from Booking import getByRestaurant
+from Booking import getByUser
+
 from CommentRating import insert
 from CommentRating import delete
 from CommentRating import update

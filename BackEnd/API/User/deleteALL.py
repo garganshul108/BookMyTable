@@ -8,12 +8,16 @@ import uuid
 import datetime
 from functools import wraps
 from util.lastId import get_last_id
-
+from CommentRating.util.delete import all_delete_review_query
 
 @app.route('/api/deleteAllUser',methods=['DELETE'])
 def delete():
     conn=mysql.connect()
     cursor=conn.cursor()
+    
+    all_delete_review_query(cursor)
+    cursor.execute("DELETE FROM BeenThere")
+    cursor.execute("DELETE FROM Bookmark")
     cursor.execute("DELETE FROM User")
     conn.commit()
     conn.close()

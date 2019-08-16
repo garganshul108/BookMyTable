@@ -14,9 +14,16 @@ from LoginSignUp.util.required import token_required
 @app.route('/api/beentheres/<id>',methods=['DELETE'])
 @token_required
 def DeleteBeenThere(current_user,id):
+    id=request.args.get('id',default='%',type=int)
+    if(id=='%'):
+        return jsonify("BAD REQUEST"),400
     try:
         conn=mysql.connect()
         cursor=conn.cursor()
+        cursor.execute("SELECT user_id from BeenThere where id=%s",id)
+        u_id=cursor.fetchall()[0]
+        if(u_id!=_user_id):
+            return jsonify("Unauthorized"),401
         cursor.execute("DELETE FROM BeenThere WHERE id=%s",id)
         conn.commit()
         resp=jsonify("")

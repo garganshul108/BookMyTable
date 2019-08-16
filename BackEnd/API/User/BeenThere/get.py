@@ -30,6 +30,8 @@ def get_beenthere(current_user,row=None):
             beenthere['restaurant']=rrs
             del beenthere['restaurant_id']
         current_user['beenthere']=beentheres
+        if row==None:
+            return jsonify(current_user['beenthere'])
         return current_user
     except Exception as e:
         print("ERRrrOR ",e," ERROR")
