@@ -23,14 +23,15 @@ class App extends Component {
   componentDidMount() {
     const jwt = localStorage.getItem("token");
     try {
-      const user = jwtDecode(jwt);
+      const user = jwtDecode(jwt, { complete: true });
       console.log("appdidm: ", user);
 
-      // let isExpired = false;
       var dateNow = new Date();
 
-      if (decodedToken.exp < dateNow.getTime()) {
-        // isExpired = true;
+      if (user.exp < dateNow.getTime() / 1000) {
+        console.log(user.exp);
+        console.log(dateNow.getTime());
+        alert("login expired");
         window.location = "/logout";
       }
 

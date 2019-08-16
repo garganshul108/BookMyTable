@@ -113,7 +113,7 @@ class NaviagtionBar extends Component {
                     aria-haspopup="true"
                     aria-expanded="false"
                   >
-                    <small>User</small>
+                    <small>{this.props.user.name}</small>
                   </button>
 
                   <div
