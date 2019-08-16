@@ -60,7 +60,7 @@ def insert_booking(cursor,_user_id,data,start,end):
     _email_id=data['email_id']
     _phone_no=data['phone_no']
     try:
-        sql="INSERT INTO Booking(user_id,restaurant_id,size,start_time,end_time,date,first_name,last_name,email_id,phone_no) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+        sql="INSERT INTO Booking(user_id,restaurant_id,size,start_time,end_time,date,first_name,last_name,email_id,phone_no) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
         values=(_user_id,_res_id,_size,start,end,_date,_f_name,_l_name,_email_id,_phone_no)
         cursor.execute(sql,values)
     except Exception as e:
@@ -134,7 +134,7 @@ def book_table(current_user):
         try:
             insert_booking(cursor,_user_id,data,rev_convert_time(newSlot['start']),rev_convert_time(newSlot['end']))
         except Exception as e:
-            resp=jsonify("ERROR")
+            resp=jsonify("ERRROR")
             resp.status_code=500
             return resp
         conn.commit()

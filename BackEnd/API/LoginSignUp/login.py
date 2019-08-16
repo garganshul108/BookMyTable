@@ -15,7 +15,7 @@ def login():
     try:
         data=request.json[0]
         if not data or not "email" in data or not "password" in data:
-            return make_response('Could not verify 1', 401, {'WWW-Authenticate' : 'Basic realm="Login required!"'})
+            return make_response('Bad Request', 401, {'WWW-Authenticate' : 'Basic realm="Login required!"'})
 
         conn=mysql.connect()
         cursor=conn.cursor(pymysql.cursors.DictCursor)
@@ -27,7 +27,7 @@ def login():
         
         Users=cursor.fetchall()
         if not Users:
-            return make_response('Could not verify 2', 401, {'WWW-Authenticate' : 'Basic realm="Login required!"'})
+            return make_response('Check Email', 401, {'WWW-Authenticate' : 'Basic realm="Login required!"'})
         User=Users[0]
         conn.close()
         cursor.close()
@@ -36,10 +36,12 @@ def login():
         if check_password_hash(User['password'],data['password']):
             token = jwt.encode({'public_id' : User['id'], 'exp' : datetime.datetime.utcnow() + datetime.timedelta(minutes=120)}, app.config['SECRET_KEY'])
             resp=jsonify("Successful")
-            resp.headers.add("token",token.decode('UTF-8'))
+            resp.headers.add("x-token",token.decode('UTF-8'))
+            resp.headers.add("access-control-expose-headers","x-token")
+            resp.status_code=201
             return resp
 
-        return make_response('Could not verify 3', 401, {'WWW-Authenticate' : 'Basic realm="Login required!"'})
+        return make_response('Check Password', 401, {'WWW-Authenticate' : 'Basic realm="Login required!"'})
     except Exception as e:
         print (e)
         return jsonify("BAD request"),400
