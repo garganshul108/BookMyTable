@@ -8,7 +8,7 @@ class RestaurantBookingWindow extends Component {
   state = {
     data: {
       date: "",
-      size: 10,
+      size: "10",
       time: "01:12",
       first_name: "Anshul",
       last_name: "Garg",
@@ -16,7 +16,7 @@ class RestaurantBookingWindow extends Component {
       phone_no: "9810301064"
     },
     errors: {},
-    availableSlots: []
+    availableSlots: [{ start: "20:00" }]
   };
 
   handleInputChange = ({ currentTarget: input }) => {
@@ -45,8 +45,9 @@ class RestaurantBookingWindow extends Component {
     console.log("state at submisson: \n", submissionData);
     try {
       let response = await bookingServices.bookTable(submissionData);
-      if (response.status === 201) {
-        console.log(response.data);
+      if (response.status === 202) {
+        let availableSlots = response.data;
+        this.setState({ availableSlots });
       }
     } catch (ex) {
       const errors = { ...this.state.errors };
@@ -141,6 +142,29 @@ class RestaurantBookingWindow extends Component {
             </div>
           </div>
         </RegistrationSubForm>
+        {this.state.availableSlots.length > 0 && (
+          <RegistrationSubForm title="Available Slots">
+            {this.state.availableSlots.map(slot => (
+              <button
+                className="btn btn-info"
+                value={slot.start + ":00"}
+                onClick={e => {
+                  let { ...data } = this.state.data;
+                  data.time = e.currentTarget.value;
+                  console.log(e.currentTarget);
+                  this.setState({ data }, console.log(this.state));
+                }}
+              >
+                {slot.start.split(":")[0] > "12"
+                  ? parseInt(slot.start.split(":")[0] - 12).toString() +
+                    ":" +
+                    slot.start.split(":")[1] +
+                    " PM"
+                  : slot.start + " AM"}
+              </button>
+            ))}
+          </RegistrationSubForm>
+        )}
         <button
           type="submit"
           style={{ width: "100%", marginTop: "20px" }}
@@ -149,8 +173,6 @@ class RestaurantBookingWindow extends Component {
         >
           Submit
         </button>
-
-        <RegistrationSubForm title="Avilable Slots" />
       </div>
     );
   }
