@@ -17,7 +17,6 @@ def get_users(current_user):
         rows=cursor.fetchall()
         print("sdfsdssssssssss")
         convert_user(cursor,rows)
-        # return jsonify(rows)
         
         return send_get_response(rows,"Success")
     except Exception as e:

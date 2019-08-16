@@ -5,8 +5,9 @@ from flask import jsonify
 from flask import flash, request
 from util.lastId import get_last_id
 from LoginSignUp.util.required import token_required
+from CommentRating.util.delete import delete_review_query
 
-@app.route('/api/reviews/<id>',methods=['DELETE'])
+@app.route('/api/users/reviews/<id>',methods=['DELETE'])
 @token_required
 def delete_review(current_user,id):
     if(current_user['id']!=int(id)):
@@ -14,18 +15,7 @@ def delete_review(current_user,id):
     try:
         conn=mysql.connect()
         cursor=conn.cursor()
-        cursor.execute("SELECT restaurant_id,rating from Review where id=%s",id)
-        (res_id,rating)=cursor.fetchall()[0]
-        cursor.execute("SELECT rating,votes from Restaurant where id=%s",res_id)
-        (rating2,votes)=cursor.fetchall()[0]
-        print("res ",votes)
-        new_rating=rating2*votes-rating
-        votes=votes-1
-        if votes>0:
-            new_rating=new_rating/(votes)
-        cursor.execute("UPDATE Restaurant SET rating=%s,votes=%s",(new_rating,votes))
-        cursor.execute("DELETE FROM Photo where review_id=%s",id)
-        cursor.execute("DELETE FROM Review where id=%s",id)
+        delete_review_query(id,cursor)
         conn.commit()
         resp=jsonify("Success")
         resp.status_code=204

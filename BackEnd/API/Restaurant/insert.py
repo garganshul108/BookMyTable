@@ -10,6 +10,7 @@ from flask import flash, request
 from util.lastId import get_last_id
 from util.sendGetResponse import send_get_response
 from Restaurant.util.convertRestaurant import convert_restaurant
+from LoginSignUp.util.required2 import token_required
 
 def insert_days(cursor,data,res_id):
         sql="INSERT INTO Day(restaurant_id,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday) VALUES(%s,%s,%s,%s,%s,%s,%s,%s)"
@@ -109,7 +110,7 @@ def insert_slot(cursor,data,res_id):
         # print("slot "+e+" slot")
 
 @app.route('/api/restaurants',methods=['POST'])
-def add_restaurant():
+def add_restaurant(current_user):
     try:
         data=request.json
         conn=mysql.connect()

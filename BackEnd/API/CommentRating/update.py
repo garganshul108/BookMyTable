@@ -6,7 +6,7 @@ from flask import flash, request
 from util.lastId import get_last_id
 from LoginSignUp.util.required import token_required
 
-@app.route('/api/reviews/<id>',methods=['PUT'])
+@app.route('/api/users/reviews/<id>',methods=['PUT'])
 @token_required
 def update_review(current_user,id):
     if(current_user['id']!=int(id)):

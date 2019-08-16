@@ -14,7 +14,7 @@ def delete_booking(current_user,id):
         rows=cursor.fetchall()
         if len(rows)==0 or rows[0]['user_id']!=current_user['id']:
             return jsonify("Unauthorized"),401
-
+        cursor=conn.cursor()
         try:
             cursor.execute("DELETE FROM Booking where id=%s",id)
             conn.commit()
