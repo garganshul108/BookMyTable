@@ -18,6 +18,8 @@ def update_review(current_user):
         _rating=data['rating']
         _rating_text=data['rating_text']
         _user_id=current_user['user_id']
+        _date=data['date']
+        _time=data['time']
 
         conn=mysql.connect()
         cursor=conn.cursor()
@@ -33,8 +35,8 @@ def update_review(current_user):
         cursor.execute("UPDATE Restaurant SET rating=%s where id=%s",
                     ((rating*(votes)-rating1+_rating)/(votes),_res_id))
 
-        sql="UPDATE Review SET comment=%s,rating=%s,rating_text=%s WHERE id=%s"
-        values=(_comment,_rating,_rating_text,id)
+        sql="UPDATE Review SET comment=%s,rating=%s,rating_text=%s,data=%s,time=%s WHERE id=%s"
+        values=(_comment,_rating,_rating_text,_date,_time,id)
         cursor.execute(sql,values)
         cursor.execute("DELETE FROM Photo where review_id=%s",id)
         for url in data['photos']:
