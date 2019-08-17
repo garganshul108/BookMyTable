@@ -3,10 +3,6 @@ import apiConfig from './config/apiConfig.json';
 
 const apiBaseURL = apiConfig.baseURL;
 
-const getUser = () => {
-    return "";
-}
-
 
 const login = (data) => {
     return http.post(apiBaseURL + "/login", [{ ...data }], {
@@ -27,7 +23,6 @@ const registerUser = (data) => {
 }
 
 export default {
-    getUser: getUser,
     registerUser: registerUser,
     login: login
 }

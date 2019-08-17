@@ -36,7 +36,7 @@ class NaviagtionBar extends Component {
   };
 
   render() {
-    console.log("navigation", this.props);
+    // console.log("navigation bar", this.props);
     return (
       <React.Fragment>
         <div className="navBar-design">
@@ -120,7 +120,10 @@ class NaviagtionBar extends Component {
                     className="dropdown-menu"
                     aria-labelledby="dropdownMenuButton"
                   >
-                    <NavLink className="dropdown-item" to="/profile">
+                    <NavLink
+                      className="dropdown-item"
+                      to={"/user/" + this.props.user.public_id}
+                    >
                       <span className="text-muted">
                         <i className="fa fa-user" aria-hidden="true" />
                       </span>
