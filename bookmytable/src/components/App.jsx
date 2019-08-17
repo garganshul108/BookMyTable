@@ -33,7 +33,7 @@ class App extends Component {
       if (user.exp < dateNow.getTime() / 1000) {
         console.log(user.exp);
         console.log(dateNow.getTime());
-        alert("login expired");
+        toast.info("login expired");
         window.location = "/logout";
       }
 
