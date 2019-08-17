@@ -5,3 +5,5 @@ BackEnd/.vscode/
 BackEnd/API/**/__pycache__/
 
 BackEnd/API/db_config.py
+
+BackEnd/API/static/photos/*
