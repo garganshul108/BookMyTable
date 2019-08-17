@@ -3,13 +3,15 @@ import "../css/restaurant.css";
 import RegistrationSubForm from "./registrationSubForm";
 import RatingStar from "./ratingStar";
 import * as fileServices from "../../services/fileServices";
+import * as reviewServices from "../../services/reviewServices";
 
 const placeholderContent =
   "Tip: A great review covers food, service, and ambience. Got recommendations for your favourite dishes and drinks, or something everyone should try here? Include that too! And remember, your review needs to be at least 140 characters long :)";
 class ReviewInputForm extends Component {
   state = {
-    data: { rating: "", user: {}, comment: "", photos: [] },
+    data: { rating: "", comment: "", photos: [] },
     photopath: "",
+    user: {},
     ratingArray: [
       { value: "1", trueClass: "text-danger" },
       { value: "2", trueClass: "text-danger" },
@@ -19,42 +21,25 @@ class ReviewInputForm extends Component {
     ],
     uploadInput: { files: [] }
   };
-  /***
-   * 
-   * finalData = {
-    "comment": "sdfsfssssssssssssssssssssssssssssssssssssssssssssssssssssssss",
-    "rating": 1,
-    "rating_text": "Excellent",
-    "photos": ["adfb"],
-    "restaurant_id": 19151039,
-    "date": "12/08/2019",
-    "time": "12:00"
-  }
-   */
 
   handleImageUpload = async e => {
     e.preventDefault();
     let reviewPhoto = new FormData();
     let photo = this.state.uploadInput.files[0];
-    console.log("state file photo", photo);
+    // console.log("state file photo", photo);
     reviewPhoto.set("file", photo);
-    console.log("front end formData");
-    for (var pair of reviewPhoto.entries()) {
-      console.log(pair[0] + ", " + pair[1]);
-    }
+    // console.log("front end formData");
+    // for (var pair of reviewPhoto.entries()) {
+    //   console.log(pair[0] + ", " + pair[1]);
+    // }
 
     try {
       let response = await fileServices.fileUpload(reviewPhoto, "review");
-      console.log(response);
+      // console.log(response);
+      let { data } = this.state;
+      data.photos.push(response.data);
+      this.setState({ data });
     } catch (ex) {}
-    // fetch("http://localhost:8000/upload", {
-    //   method: "POST",
-    //   body: data
-    // }).then(response => {
-    //   response.json().then(body => {
-    //     this.setState({ imageURL: `http://localhost:8000/${body.file}` });
-    //   });
-    // });
   };
 
   handleInputChange = ({ currentTarget: input }) => {
@@ -73,13 +58,60 @@ class ReviewInputForm extends Component {
     } else {
       data[input.name] = input.value;
     }
-    this.setState({ data }, console.log(this.state.data));
+    this.setState({ data });
   };
 
   setRating = rate => {
     let { data } = this.state;
     data.rating = rate;
-    this.setState({ data }, console.log(this.state.data));
+    this.setState({ data });
+  };
+
+  /***
+   * 
+   * finalData = {
+    "comment": "sdfsfssssssssssssssssssssssssssssssssssssssssssssssssssssssss",
+    "rating": 1,
+    "rating_text": "Excellent",
+    "photos": ["adfb"],
+    "restaurant_id": 19151039,
+    "date": "12/08/2019",
+    "time": "12:00"
+  }
+   */
+  getDateTime = today => {
+    let date =
+      today.getFullYear() +
+      "/" +
+      (today.getMonth() + 1) +
+      "/" +
+      today.getDate();
+    let time = today.getHours() + ":" + today.getMinutes();
+
+    return { date, time };
+  };
+
+  handleSubmit = async e => {
+    e.preventDefault();
+    let submissionData = { ...this.state.data };
+    submissionData.restaurant_id = this.props.restaurant_id;
+    let { date: dateToday, time: timeNow } = this.getDateTime(new Date());
+    submissionData.date = dateToday;
+    submissionData.time = timeNow;
+    submissionData.rating_text = "Excellent";
+    console.log("state at submisson: \n", submissionData);
+    try {
+      let response = await reviewServices.postReview(submissionData);
+      // if (response.status === 201) {
+      //   let availableSlots = response.data;
+      //   this.setState({ availableSlots });
+      // }
+    } catch (ex) {
+      const errors = { ...this.state.errors };
+      // errors.email = ex.response.status + ": " + ex.response.data;
+      console.log(ex.response);
+      this.setState({ errors });
+    }
   };
 
   render() {
@@ -139,12 +171,11 @@ class ReviewInputForm extends Component {
                         id="photoInput"
                         onChange={e => {
                           console.log(e.target.files);
+                          let { photopath } = this.state;
+                          photopath = e.target.files[0].name;
                           let { uploadInput } = this.state;
                           uploadInput.files = e.target.files;
-                          this.setState(
-                            { uploadInput },
-                            console.log(this.state)
-                          );
+                          this.setState({ uploadInput, photopath });
                         }}
                       />
                       <label className="custom-file-label" htmlFor="photoInput">
@@ -154,7 +185,7 @@ class ReviewInputForm extends Component {
                       </label>
                     </div>
                   </div>
-                  <div className="col-3 text-right">
+                  <div className="col-2 text-right">
                     <div
                       className="btn btn-info"
                       onClick={this.handleImageUpload}
@@ -167,6 +198,7 @@ class ReviewInputForm extends Component {
                   type="submit"
                   style={{ width: "100%", marginTop: "20px" }}
                   className="btn btn-success"
+                  onClick={this.handleSubmit}
                 >
                   Submit
                 </button>
