@@ -24,6 +24,12 @@ class UserProfile extends Component {
     delete data.bookmarks;
     let user = data;
 
+    for (let review of reviews) {
+      review.photos = review.photos.map(
+        photo => "http://localhost:5000/api/photos/" + photo + "?dir=review"
+      );
+    }
+
     this.setState({ user, reviews, beentheres, bookmarks }, () => {
       console.log("state userPROFILE", this.state);
     });
@@ -145,7 +151,13 @@ class UserProfile extends Component {
                           </span>
                         </div>
                         <div className="col-3">
-                          {/* <img src="http:localhost/5000/api/" alt=""/> */}
+                          {review.photos.map(photo => (
+                            <img
+                              src={photo}
+                              style={{ width: "100%" }}
+                              alt="Image not available"
+                            />
+                          ))}
                         </div>
                       </div>
                     </div>
