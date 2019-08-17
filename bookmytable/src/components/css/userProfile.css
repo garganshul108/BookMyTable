@@ -21,11 +21,15 @@
   color: black;
 }
 
-.showingReviews {
+.showingReviews,
+.showingBeenTheres,
+.showingBookmarks {
   background: white;
   padding: 20px;
 }
-.showingReviews .reviewDiv {
+.showingReviews .reviewDiv,
+.showingBeenTheres .beenThereDiv,
+.showingBookmarks .bookmarkDiv {
   padding: 10px;
   box-shadow: 0px 0px 2px gray;
   margin: 10px auto;

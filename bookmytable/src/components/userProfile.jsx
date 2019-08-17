@@ -9,7 +9,8 @@ class UserProfile extends Component {
     user: {},
     reviews: [],
     beentheres: [],
-    bookmarks: []
+    bookmarks: [],
+    currentDiv: 1
   };
 
   async componentDidMount() {
@@ -32,6 +33,11 @@ class UserProfile extends Component {
       console.log("state userPROFILE", this.state);
     });
   }
+
+  changeCurrentDiv = val => {
+    this.setState({ currentDiv: val });
+  };
+
   render() {
     const renderUserInfo = () => {
       return (
@@ -109,6 +115,12 @@ class UserProfile extends Component {
                   />
                 </div>
                 <div className="col">
+                  <small>
+                    <span className="text text-muted d-block">
+                      <i class="fa fa-street-view" aria-hidden="true" />
+                      &nbsp;&nbsp;review
+                    </span>
+                  </small>
                   <h6 className="title">{review.restaurant.name}</h6>
                   <small>
                     <span className="text text-muted d-block">
@@ -148,52 +160,80 @@ class UserProfile extends Component {
 
     const renderBeenTheres = () => {
       return (
-        <div className="showingReviews">
-          <h5>BeenTheres</h5>
-          {/* {this.state.beentheres.map(beenThere => (
+        <div className="showingBeenTheres">
+          <h5>Been Theres</h5>
+          {this.state.beentheres.map(beenThere => (
             <div className="beenThereDiv">
               <div className="row">
-                <div className="col-2">
+                <div className="col-3">
                   <img
                     style={{ width: "100%" }}
-                    src={review.restaurant.thumb}
+                    src={beenThere.restaurant.thumb}
                     alt="not Found"
                   />
                 </div>
                 <div className="col">
-                  <h6 className="title">{review.restaurant.name}</h6>
                   <small>
                     <span className="text text-muted d-block">
-                      {review.restaurant.locality}
+                      <i class="fa fa-map-marker" aria-hidden="true" />
+                      &nbsp;&nbsp;been there
+                    </span>
+                  </small>
+                  <h6 className="title">{beenThere.restaurant.name}</h6>
+                  <small>
+                    <span className="text text-muted d-block">
+                      {beenThere.restaurant.city}
                     </span>
                     <span className="text text-muted d-block">
-                      {review.restaurant.city}
+                      {beenThere.restaurant.address}
                     </span>
+
+                    <small className="text-muted">{beenThere.date}</small>
                   </small>
                 </div>
               </div>
-              <div className="row my-3">
-                <div className="col">
-                  <small className="text-muted">{review.date}</small>
-                  <span className="d-block text-dark rateDisplay">
-                    Rated:&nbsp;
-                    <span className="badge badge-danger">{review.rating}</span>
-                    &nbsp;{review.rating_text}
-                  </span>
-                  <span className="d-block comment">{review.comment}</span>
+            </div>
+          ))}
+        </div>
+      );
+    };
+
+    const renderBookmarks = () => {
+      return (
+        <div className="showingBookmarks">
+          <h5>Bookmarks</h5>
+          {this.state.bookmarks.map(bookmark => (
+            <div className="bookmarkDiv">
+              <div className="row">
+                <div className="col-3">
+                  <img
+                    style={{ width: "100%" }}
+                    src={bookmark.restaurant.thumb}
+                    alt="not Found"
+                  />
                 </div>
-                <div className="col-2">
-                  {review.photos.map(photo => (
-                    <img
-                      src={photo}
-                      style={{ width: "100%" }}
-                      alt="Image not available"
-                    />
-                  ))}
+                <div className="col">
+                  <small>
+                    <span className="text text-muted d-block">
+                      <i class="fa fa-bookmark" aria-hidden="true" />
+                      &nbsp;&nbsp;bookmark
+                    </span>
+                  </small>
+                  <h6 className="title">{bookmark.restaurant.name}</h6>
+                  <small>
+                    <span className="text text-muted d-block">
+                      {bookmark.restaurant.city}
+                    </span>
+                    <span className="text text-muted d-block">
+                      {bookmark.restaurant.address}
+                    </span>
+
+                    <small className="text-muted">{bookmark.date}</small>
+                  </small>
                 </div>
               </div>
             </div>
-          ))} */}
+          ))}
         </div>
       );
     };
@@ -204,18 +244,49 @@ class UserProfile extends Component {
           <div className="row">
             <div className="col-4">
               <ul class="list-group">
-                <li class="list-group-item options">Dineline</li>
-                <li class="list-group-item options">Reviews</li>
-                <li class="list-group-item options">Bookmarks</li>
-                <li class="list-group-item options">Been There</li>
-                <li class="list-group-item options">Recently Visited</li>
-                <li class="list-group-item options">Bills</li>
+                <li
+                  class="list-group-item options"
+                  onClick={() => this.changeCurrentDiv(1)}
+                >
+                  Dineline
+                </li>
+                <li
+                  class="list-group-item options"
+                  onClick={() => this.changeCurrentDiv(2)}
+                >
+                  Reviews
+                </li>
+                <li
+                  class="list-group-item options"
+                  onClick={() => this.changeCurrentDiv(3)}
+                >
+                  Bookmarks
+                </li>
+                <li
+                  class="list-group-item options"
+                  onClick={() => this.changeCurrentDiv(4)}
+                >
+                  Been There
+                </li>
+                <li
+                  class="list-group-item options"
+                  onClick={() => this.changeCurrentDiv(5)}
+                >
+                  Recently Visited
+                </li>
+                <li
+                  class="list-group-item options"
+                  onClick={() => this.changeCurrentDiv(6)}
+                >
+                  Bills
+                </li>
               </ul>
             </div>
             <div className="col">
               <div className="displayHistoryElements">
-                {/* {renderReviews()} */}
-                {renderBeenTheres()}
+                {this.state.currentDiv == 2 && renderReviews()}
+                {this.state.currentDiv == 3 && renderBookmarks()}
+                {this.state.currentDiv == 4 && renderBeenTheres()}
               </div>
             </div>
           </div>

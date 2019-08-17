@@ -10,6 +10,7 @@ import PhotoGallery from "./subComponents/photoGallery";
 
 import * as beenThereServices from "../services/beenThereServices";
 import { toast } from "react-toastify";
+import * as bookmarkServices from "../services/bookmarkServices";
 
 let photo = [
   "https://b.zmtcdn.com/data/pictures/chains/5/18895645/24279bed659c9c07ea57444d841a305c.jpg?crop=3738%3A3738%3B764%2C0&fit=around%7C200%3A200",
@@ -97,6 +98,19 @@ class Restaurant extends Component {
     } catch (error) {}
   };
 
+  handleAddBookmark = async e => {
+    e.preventDefault();
+    console.log("bookmark clicked");
+    let restaurant_id = this.props.match.params.id;
+    let { date, time } = this.getDateTime(new Date());
+    let submissionData = { restaurant_id, date, time };
+    console.log(submissionData);
+    try {
+      await bookmarkServices.postBookmark(submissionData);
+      toast.info("Restaurant Archived");
+    } catch (error) {}
+  };
+
   renderRestaurantInfo = () => {
     return (
       <div className="restaurantInfoBanner">
@@ -130,7 +144,11 @@ class Restaurant extends Component {
         <div className="row">
           <div className="col">
             <div className="topButtons">
-              <button type="button" class="btn ">
+              <button
+                type="button"
+                class="btn "
+                onClick={this.handleAddBookmark}
+              >
                 <i class="fa fa-bookmark" aria-hidden="true" />
                 &nbsp;&nbsp;Archive
               </button>
