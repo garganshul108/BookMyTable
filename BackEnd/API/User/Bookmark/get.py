@@ -21,7 +21,7 @@ def get_bookmark(current_user,row=None):
         cursor.execute("SELECT date,time,restaurant_id from Bookmark where user_id=%s",current_user['id'])
         bookmarks=cursor.fetchall()
         for bookmark in bookmarks:
-            sql="""SELECT Restaurant.id, Restaurant.name, Location.address,Location.city
+            sql="""SELECT Restaurant.id, Restaurant.name,Restaurant.thumb, Location.address,Location.city
                     FROM Restaurant 
                     JOIN Location ON Restaurant.location_id=Location.id 
                     WHERE Restaurant.id=%s"""
