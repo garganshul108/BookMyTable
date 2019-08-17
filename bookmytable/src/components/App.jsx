@@ -6,6 +6,8 @@ import HomeTop from "./home";
 import Restaurants from "./restaurants";
 import Login from "./login";
 import NotFound from "./notFound";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import "./css/dummy.css";
 import "./css/scrollbar.css";
@@ -74,6 +76,17 @@ class App extends Component {
     console.log("My App loaded.=000=... ");
     return (
       <React.Fragment>
+        <div
+          className="container-fluid"
+          style={{
+            position: "fixed",
+            top: "10px",
+            right: "10px",
+            zIndex: "10"
+          }}
+        >
+          <ToastContainer />
+        </div>
         <div className="container-fluid">
           <div className="row">
             <Switch>
