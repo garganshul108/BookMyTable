@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 // const axios = require('axios');
 
@@ -10,7 +11,7 @@ axios.interceptors.response.use(null, error => {
 
     if (!expectedError) {
         console.log(error);
-        alert("Un expected error occurred");
+        toast.error("Unexpected error occurred");
     }
 
     return Promise.reject(error);
