@@ -4,6 +4,7 @@ from flask import Flask,flash,request,redirect,url_for,session,jsonify
 from werkzeug.utils import secure_filename
 from flask_cors import CORS, cross_origin
 from LoginSignUp.util.required import token_required
+import uuid
 
 
 @app.route('/api/photos', methods=['POST'])
@@ -17,13 +18,18 @@ def fileUpload(current_user):
     if not os.path.isdir(target):
         os.mkdir(target)
     
+    required_extension=["png","jpeg","jpg"]
     if 'file' not in request.files:
-        return "NO FILE"
+        return jsonify("NO FILE"),400
     file = request.files['file'] 
-    filename = secure_filename(file.filename)
-    destination="/".join([target, filename])
+    extension=file.filename.split(".")[-1]
+    if not extension in required_extension:
+        return jsonify("Check file type"),400
+    filename=str(uuid.uuid4())
+    destination="/".join([target, filename+"."+extension])
     file.save(destination)
-    response=jsonify(filename)
+    response=jsonify(filename+"."+extension)
+    print(filename+"."+extension)
     response.headers.add('Access-Control-Allow-Origin','*')
     return response,201
 

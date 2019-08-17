@@ -12,7 +12,7 @@ def insert_review(current_user):
     try:
         data=request.json[0]
         _comment=data['comment']
-        _rating=data['rating']
+        _rating=float("0"+str(data['rating']))
         _rating_text=data['rating_text']
         _res_id=data['restaurant_id']
         _user_id=current_user['id']

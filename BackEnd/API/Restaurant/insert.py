@@ -76,7 +76,7 @@ def insert_cuisines(data,cursor):
 
 def insert_restaurant(cursor,data,_loc_id):
     # try:
-        _ave_cost=int("0"+data['average_cost_for_two'])
+        _ave_cost=int("0"+str(data['average_cost_for_two']))
         _cuisines=insert_cuisines(data['cuisines'],cursor)
         _establishment=insert_establishments(data['establishment'],cursor)
         _highlights=insert_highlights(data['highlights'],cursor)
@@ -88,7 +88,7 @@ def insert_restaurant(cursor,data,_loc_id):
         _opening_status=int(data['opening_status'])
         _email=data['email']
         _website=data['website']
-        _capacity=int("0"+data['capacity'])
+        _capacity=int("0"+str(data['capacity']))
         hashed_password=generate_password_hash(data['password'],method='sha256')
         sql="""INSERT INTO 
             Restaurant(location_id,name,email,average_cost_for_two,cuisines,timings,establishment,highlights,thumb,phone_numbers,capacity,opening_status,website,password)
