@@ -3,6 +3,7 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import RestaurantBookingWindow from "./subComponents/restaurantBookingWindow";
 import NotFound from "./notFound";
 import { Link } from "react-router-dom";
+import * as Scroll from "react-scroll";
 import ReviewInputForm from "./subComponents/reviewInputForm";
 import { getRestaurantById } from "../services/restaurantServices";
 import "./css/restaurant.css";
@@ -160,22 +161,43 @@ class Restaurant extends Component {
                 <i class="fa fa-child" aria-hidden="true" />
                 &nbsp;&nbsp;Been There
               </button>
-              <button type="button" class="btn ">
+              <Scroll.Link
+                to="bookingWindow"
+                smooth={true}
+                offset={-70}
+                duration={500}
+                type="button"
+                class="btn "
+              >
                 <i class="fa fa-cutlery" aria-hidden="true" />
                 &nbsp;&nbsp;Book a Table
-              </button>
-              <button type="button" class="btn ">
+              </Scroll.Link>
+              <Scroll.Link
+                to="reviewForm"
+                smooth={true}
+                offset={-70}
+                duration={1000}
+                type="button"
+                class="btn "
+              >
                 <i class="fa fa-pencil-square-o" aria-hidden="true" />
                 &nbsp;&nbsp;Review Visit
-              </button>
+              </Scroll.Link>
               <button type="button" class="btn ">
                 <i class="fa fa-file-text" aria-hidden="true" />
                 &nbsp;&nbsp;All reviews
               </button>
-              <button type="button" class="btn ">
+              <Scroll.Link
+                to="photoGallery"
+                smooth={true}
+                offset={-70}
+                duration={1000}
+                type="button"
+                class="btn "
+              >
                 <i class="fa fa-picture-o" aria-hidden="true" />
                 &nbsp;&nbsp;Photos/Gallery
-              </button>
+              </Scroll.Link>
             </div>
           </div>
         </div>
@@ -382,6 +404,7 @@ class Restaurant extends Component {
                     path="/restaurant/:id"
                     render={props => (
                       <RestaurantBookingWindow
+                        id="bookingWindow"
                         restaurant_id={this.props.match.params.id}
                         {...props}
                       />
@@ -390,12 +413,19 @@ class Restaurant extends Component {
 
                   <Route
                     path="/restaurant/:id"
-                    render={props => <PhotoGallery photos={photo} {...props} />}
+                    render={props => (
+                      <PhotoGallery
+                        id="photoGallery"
+                        photos={photo}
+                        {...props}
+                      />
+                    )}
                   />
                   <Route
                     path="/restaurant/:id"
                     render={props => (
                       <ReviewInputForm
+                        id="reviewForm"
                         restaurant_id={this.props.match.params.id}
                         {...props}
                       />
