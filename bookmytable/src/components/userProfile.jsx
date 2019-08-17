@@ -144,6 +144,9 @@ class UserProfile extends Component {
                             {review.comment}
                           </span>
                         </div>
+                        <div className="col-3">
+                          {/* <img src="http:localhost/5000/api/" alt=""/> */}
+                        </div>
                       </div>
                     </div>
                   ))}
