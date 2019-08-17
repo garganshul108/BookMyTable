@@ -22,31 +22,32 @@
 }
 
 .showingReviews,
+.showingDineline,
 .showingBeenTheres,
 .showingBookmarks {
   background: white;
   padding: 20px;
 }
-.showingReviews .reviewDiv,
-.showingBeenTheres .beenThereDiv,
-.showingBookmarks .bookmarkDiv {
+.reviewDiv,
+.beenThereDiv,
+.bookmarkDiv {
   padding: 10px;
   box-shadow: 0px 0px 2px gray;
   margin: 10px auto;
   border-radius: 5px;
 }
-.showingReviews .reviewDiv .title {
+.reviewDiv .title {
   font-weight: 900;
   margin-bottom: 2px !important;
 }
 
-.showingReviews .reviewDiv .rateDisplay {
+.reviewDiv .rateDisplay {
   font-weight: 900;
   margin-top: 2px;
   font-size: 0.9rem;
 }
 
-.showingReviews .reviewDiv .comment {
+.reviewDiv .comment {
   font-size: 0.95rem;
   letter-spacing: 0.01rem;
 }
