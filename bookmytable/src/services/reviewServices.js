@@ -11,3 +11,12 @@ export const postReview = (data) => {
         }
     });
 }
+
+export const getReviewsByUser = (id) => {
+    return http.get(apiBaseURL + "/reviews?userId=" + id, {
+        headers: {
+            'Content-Type': 'application/json',
+            "Access-Control-Allow-Origin": "*",
+        }
+    });
+}
