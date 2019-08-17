@@ -9,6 +9,7 @@ import "./css/login.css";
 import FormCheckbox from "./subComponents/formCheckbox";
 
 import auth from "../services/authServices";
+import { toast } from "react-toastify";
 
 class Login extends Component {
   state = {
@@ -90,7 +91,10 @@ class Login extends Component {
       let response = await auth.login(finalData);
       console.log(response);
       localStorage.setItem("token", response.headers["x-token"]);
-      window.location = "/restaurants/" + this.props.match.params.city;
+      toast.success("Login Successful");
+      setTimeout(() => {
+        window.location = "/restaurants/" + this.props.match.params.city;
+      }, 1000);
     } catch (ex) {
       if (
         ex.response &&

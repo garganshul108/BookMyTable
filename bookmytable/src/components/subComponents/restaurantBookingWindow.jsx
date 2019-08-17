@@ -3,6 +3,7 @@ import RegistrationSubForm from "./registrationSubForm";
 import FormInput from "./formInput";
 import "../css/restaurant.css";
 import * as bookingServices from "../../services/bookingServices";
+import { toast } from "react-toastify";
 
 class RestaurantBookingWindow extends Component {
   state = {
@@ -48,6 +49,19 @@ class RestaurantBookingWindow extends Component {
       if (response.status === 202) {
         let availableSlots = response.data;
         this.setState({ availableSlots });
+      }
+      if (response.status === 201) {
+        let newData = {
+          date: "",
+          size: "",
+          time: "",
+          first_name: "",
+          last_name: "",
+          email_id: "",
+          phone_no: ""
+        };
+        this.setState({ data: newData });
+        toast.info("Booking Successful");
       }
     } catch (ex) {
       const errors = { ...this.state.errors };
@@ -152,7 +166,10 @@ class RestaurantBookingWindow extends Component {
                   let { ...data } = this.state.data;
                   data.time = e.currentTarget.value;
                   console.log(e.currentTarget);
-                  this.setState({ data }, console.log(this.state));
+                  this.setState({ data }, () => {
+                    this.handleSubmit(e);
+                    console.log(this.state);
+                  });
                 }}
               >
                 {slot.start.split(":")[0] > "12"
