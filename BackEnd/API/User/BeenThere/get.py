@@ -29,7 +29,7 @@ def get_beenthere(current_user,row=None):
             rrs=cursor.fetchall()[0]
             beenthere['restaurant']=rrs
             del beenthere['restaurant_id']
-        current_user['beenthere']=beentheres
+        current_user['beentheres']=beentheres
         if row==None:
             return jsonify(current_user['beenthere'])
         return current_user
