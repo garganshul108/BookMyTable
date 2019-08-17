@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import "./css/userProfile.css";
 import { getUser } from "../services/userServices";
-import { getReviewsByUser } from "../services/reviewServices";
-import { getRestaurantById } from "../services/restaurantServices";
 
 const tempProfile =
   "https://b.zmtcdn.com/data/user_profile_pictures/6e4/9f999a3334fd5ea937fa98f2843276e4.jpg?fit=around%7C300%3A300&crop=300%3A300%3B%2A%2C%2A";
@@ -96,6 +94,110 @@ class UserProfile extends Component {
       );
     };
 
+    const renderReviews = () => {
+      return (
+        <div className="showingReviews">
+          <h5>Reviews</h5>
+          {this.state.reviews.map(review => (
+            <div className="reviewDiv">
+              <div className="row">
+                <div className="col-2">
+                  <img
+                    style={{ width: "100%" }}
+                    src={review.restaurant.thumb}
+                    alt="not Found"
+                  />
+                </div>
+                <div className="col">
+                  <h6 className="title">{review.restaurant.name}</h6>
+                  <small>
+                    <span className="text text-muted d-block">
+                      {review.restaurant.locality}
+                    </span>
+                    <span className="text text-muted d-block">
+                      {review.restaurant.city}
+                    </span>
+                  </small>
+                </div>
+              </div>
+              <div className="row my-3">
+                <div className="col">
+                  <small className="text-muted">{review.date}</small>
+                  <span className="d-block text-dark rateDisplay">
+                    Rated:&nbsp;
+                    <span className="badge badge-danger">{review.rating}</span>
+                    &nbsp;{review.rating_text}
+                  </span>
+                  <span className="d-block comment">{review.comment}</span>
+                </div>
+                <div className="col-2">
+                  {review.photos.map(photo => (
+                    <img
+                      src={photo}
+                      style={{ width: "100%" }}
+                      alt="Image not available"
+                    />
+                  ))}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      );
+    };
+
+    const renderBeenTheres = () => {
+      return (
+        <div className="showingReviews">
+          <h5>BeenTheres</h5>
+          {/* {this.state.beentheres.map(beenThere => (
+            <div className="beenThereDiv">
+              <div className="row">
+                <div className="col-2">
+                  <img
+                    style={{ width: "100%" }}
+                    src={review.restaurant.thumb}
+                    alt="not Found"
+                  />
+                </div>
+                <div className="col">
+                  <h6 className="title">{review.restaurant.name}</h6>
+                  <small>
+                    <span className="text text-muted d-block">
+                      {review.restaurant.locality}
+                    </span>
+                    <span className="text text-muted d-block">
+                      {review.restaurant.city}
+                    </span>
+                  </small>
+                </div>
+              </div>
+              <div className="row my-3">
+                <div className="col">
+                  <small className="text-muted">{review.date}</small>
+                  <span className="d-block text-dark rateDisplay">
+                    Rated:&nbsp;
+                    <span className="badge badge-danger">{review.rating}</span>
+                    &nbsp;{review.rating_text}
+                  </span>
+                  <span className="d-block comment">{review.comment}</span>
+                </div>
+                <div className="col-2">
+                  {review.photos.map(photo => (
+                    <img
+                      src={photo}
+                      style={{ width: "100%" }}
+                      alt="Image not available"
+                    />
+                  ))}
+                </div>
+              </div>
+            </div>
+          ))} */}
+        </div>
+      );
+    };
+
     const renderUserHistory = () => {
       return (
         <div className="userHistory">
@@ -112,57 +214,8 @@ class UserProfile extends Component {
             </div>
             <div className="col">
               <div className="displayHistoryElements">
-                <div className="showingReviews">
-                  <h5>Reviews</h5>
-                  {this.state.reviews.map(review => (
-                    <div className="reviewDiv">
-                      <div className="row">
-                        <div className="col-2">
-                          <img
-                            style={{ width: "100%" }}
-                            src={review.restaurant.thumb}
-                            alt="not Found"
-                          />
-                        </div>
-                        <div className="col">
-                          <h6 className="title">{review.restaurant.name}</h6>
-                          <small>
-                            <span className="text text-muted d-block">
-                              {review.restaurant.locality}
-                            </span>
-                            <span className="text text-muted d-block">
-                              {review.restaurant.city}
-                            </span>
-                          </small>
-                        </div>
-                      </div>
-                      <div className="row my-3">
-                        <div className="col">
-                          <small className="text-muted">{review.date}</small>
-                          <span className="d-block text-dark rateDisplay">
-                            Rated:&nbsp;
-                            <span className="badge badge-danger">
-                              {review.rating}
-                            </span>
-                            &nbsp;{review.rating_text}
-                          </span>
-                          <span className="d-block comment">
-                            {review.comment}
-                          </span>
-                        </div>
-                        <div className="col-2">
-                          {review.photos.map(photo => (
-                            <img
-                              src={photo}
-                              style={{ width: "100%" }}
-                              alt="Image not available"
-                            />
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
+                {/* {renderReviews()} */}
+                {renderBeenTheres()}
               </div>
             </div>
           </div>

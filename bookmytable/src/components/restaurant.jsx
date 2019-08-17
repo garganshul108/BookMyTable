@@ -8,6 +8,9 @@ import { getRestaurantById } from "../services/restaurantServices";
 import "./css/restaurant.css";
 import PhotoGallery from "./subComponents/photoGallery";
 
+import * as beenThereServices from "../services/beenThereServices";
+import { toast } from "react-toastify";
+
 let photo = [
   "https://b.zmtcdn.com/data/pictures/chains/5/18895645/24279bed659c9c07ea57444d841a305c.jpg?crop=3738%3A3738%3B764%2C0&fit=around%7C200%3A200",
   "https://b.zmtcdn.com/data/pictures/chains/1/491/d9cdb557070f37c148b81aacd239593c.jpg?crop=3744%3A3744%3B1392%2C0&fit=around%7C200%3A200",
@@ -69,6 +72,31 @@ class Restaurant extends Component {
     });
   }
 
+  getDateTime = today => {
+    let date =
+      today.getFullYear() +
+      "/" +
+      (today.getMonth() + 1) +
+      "/" +
+      today.getDate();
+    let time = today.getHours() + ":" + today.getMinutes();
+
+    return { date, time };
+  };
+
+  handleAddBeenThere = async e => {
+    e.preventDefault();
+    console.log("been there clicked");
+    let restaurant_id = this.props.match.params.id;
+    let { date, time } = this.getDateTime(new Date());
+    let submissionData = { restaurant_id, date, time };
+    console.log(submissionData);
+    try {
+      await beenThereServices.postBeenThere(submissionData);
+      toast.info("Been There added");
+    } catch (error) {}
+  };
+
   renderRestaurantInfo = () => {
     return (
       <div className="restaurantInfoBanner">
@@ -106,7 +134,11 @@ class Restaurant extends Component {
                 <i class="fa fa-bookmark" aria-hidden="true" />
                 &nbsp;&nbsp;Archive
               </button>
-              <button type="button" class="btn ">
+              <button
+                type="button"
+                class="btn "
+                onClick={this.handleAddBeenThere}
+              >
                 <i class="fa fa-child" aria-hidden="true" />
                 &nbsp;&nbsp;Been There
               </button>
