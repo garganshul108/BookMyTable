@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { toast } from "react-toastify";
 
 class FormInput extends Component {
   render() {
@@ -27,7 +28,10 @@ class FormInput extends Component {
         />
         {error && (
           <div className="alert alert-danger">
-            <small>{error}</small>
+            <small>
+              <strong>OOPS!&nbsp;</strong>
+              {error}
+            </small>
           </div>
         )}
       </div>

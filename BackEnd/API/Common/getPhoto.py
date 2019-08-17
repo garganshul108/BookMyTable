@@ -7,4 +7,4 @@ def get_file(path):
     directory=request.args.get('dir',default='%',type=str)
     if directory!="review" and directory!="restaurantProfile" and directory!="userProfile":
         return jsonify("BAD REQUEST"),400
-    return send_from_directory(os.path.join(app.config['UPLOAD_FOLDER'],directory),path,as_attachment=True)
+    return send_from_directory(os.path.join(app.config['UPLOAD_FOLDER'],directory),path,as_attachment=False)

@@ -4,9 +4,19 @@ import RegistrationSubForm from "./registrationSubForm";
 import RatingStar from "./ratingStar";
 import * as fileServices from "../../services/fileServices";
 import * as reviewServices from "../../services/reviewServices";
+import { toast } from "react-toastify";
 
 const placeholderContent =
   "Tip: A great review covers food, service, and ambience. Got recommendations for your favourite dishes and drinks, or something everyone should try here? Include that too! And remember, your review needs to be at least 140 characters long :)";
+
+const ratingText = {
+  "1": "Very Poor",
+  "2": "Poor",
+  "3": "Good",
+  "4": "Excellent",
+  "5": "Outstanding"
+};
+
 class ReviewInputForm extends Component {
   state = {
     data: { rating: "", comment: "", photos: [] },
@@ -38,7 +48,9 @@ class ReviewInputForm extends Component {
       // console.log(response);
       let { data } = this.state;
       data.photos.push(response.data);
-      this.setState({ data });
+      this.setState({ data }, () => {
+        toast.info("Photo uploaded");
+      });
     } catch (ex) {}
   };
 
@@ -98,14 +110,17 @@ class ReviewInputForm extends Component {
     let { date: dateToday, time: timeNow } = this.getDateTime(new Date());
     submissionData.date = dateToday;
     submissionData.time = timeNow;
-    submissionData.rating_text = "Excellent";
+    submissionData.rating_text = ratingText[submissionData.rating];
     console.log("state at submisson: \n", submissionData);
     try {
       let response = await reviewServices.postReview(submissionData);
-      // if (response.status === 201) {
-      //   let availableSlots = response.data;
-      //   this.setState({ availableSlots });
-      // }
+      toast.success("Review Submitted");
+      let newData = { rating: "", comment: "", photos: [] };
+      this.setState({
+        data: newData,
+        uploadInput: { files: [] },
+        photopath: ""
+      });
     } catch (ex) {
       const errors = { ...this.state.errors };
       // errors.email = ex.response.status + ": " + ex.response.data;

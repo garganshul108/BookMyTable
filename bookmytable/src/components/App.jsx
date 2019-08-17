@@ -37,9 +37,7 @@ class App extends Component {
         window.location = "/logout";
       }
 
-      this.setState({ user }, () => {
-        console.log(this.state);
-      });
+      this.setState({ user });
     } catch (ex) {}
   }
 
@@ -130,7 +128,9 @@ class App extends Component {
             <Switch>
               <Route
                 path="/user/:id"
-                render={props => <UserProfile {...props} />}
+                render={props => (
+                  <UserProfile user={this.state.user} {...props} />
+                )}
               />
               <Route
                 path="/restaurant/registration"
