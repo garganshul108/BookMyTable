@@ -6,7 +6,7 @@ import HomeTop from "./home";
 import Restaurants from "./restaurants";
 import Login from "./login";
 import NotFound from "./notFound";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import "./css/dummy.css";
@@ -33,7 +33,7 @@ class App extends Component {
       if (user.exp < dateNow.getTime() / 1000) {
         console.log(user.exp);
         console.log(dateNow.getTime());
-        alert("login expired");
+        toast.info("login expired");
         window.location = "/logout";
       }
 
