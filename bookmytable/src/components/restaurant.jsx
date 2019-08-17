@@ -344,7 +344,12 @@ class Restaurant extends Component {
                   />
                   <Route
                     path="/restaurant/:id"
-                    render={props => <ReviewInputForm {...props} />}
+                    render={props => (
+                      <ReviewInputForm
+                        restaurant_id={this.props.match.params.id}
+                        {...props}
+                      />
+                    )}
                   />
                   {/* </Switch> */}
                 </div>
