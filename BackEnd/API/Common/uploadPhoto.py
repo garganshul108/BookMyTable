@@ -8,7 +8,7 @@ from LoginSignUp.util.required import token_required
 
 @app.route('/api/photos', methods=['POST'])
 @token_required
-def fileUpload():
+def fileUpload(current_user):
     directory=request.args.get('dir',default='%',type=str)
     if directory!="review" and directory!="restaurantProfile" and directory!="userProfile":
         return jsonify("BAD REQUEST"),400
