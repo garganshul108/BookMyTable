@@ -9,17 +9,22 @@ const tempProfile =
 class UserProfile extends Component {
   state = {
     user: {},
-    reviews: []
+    reviews: [],
+    beentheres: [],
+    bookmarks: []
   };
 
   async componentDidMount() {
-    let { data: users } = await getUser();
-    let user = users[0];
-    let response = await getReviewsByUser(user.id);
-    console.log(response);
-    let reviews = response.data;
-    console.log(typeof reviews, reviews);
-    this.setState({ user, reviews }, () => {
+    let { data } = await getUser();
+    console.log(data);
+    data = data[0];
+    let { beentheres, reviews, bookmarks } = data;
+    delete data.beentheres;
+    delete data.reviews;
+    delete data.bookmarks;
+    let user = data;
+
+    this.setState({ user, reviews, beentheres, bookmarks }, () => {
       console.log("state userPROFILE", this.state);
     });
   }
@@ -86,23 +91,6 @@ class UserProfile extends Component {
     };
 
     const renderUserHistory = () => {
-      const renderReview = async review => {
-        let restuarant = await getRestaurantById(review.restaurant_id);
-        console.log("restaurant", restuarant);
-        return (
-          <div className="review">
-            <div className="row">
-              <div className="col">
-                <div className="row">
-                  <div className="col">
-                    {review.comment} {review.rating}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        );
-      };
       return (
         <div className="userHistory">
           <div className="row">
@@ -120,6 +108,45 @@ class UserProfile extends Component {
               <div className="displayHistoryElements">
                 <div className="showingReviews">
                   <h5>Reviews</h5>
+                  {this.state.reviews.map(review => (
+                    <div className="reviewDiv">
+                      <div className="row">
+                        <div className="col-2">
+                          <img
+                            style={{ width: "100%" }}
+                            src={review.restaurant.thumb}
+                            alt="not Found"
+                          />
+                        </div>
+                        <div className="col">
+                          <h6 className="title">{review.restaurant.name}</h6>
+                          <small>
+                            <span className="text text-muted d-block">
+                              {review.restaurant.locality}
+                            </span>
+                            <span className="text text-muted d-block">
+                              {review.restaurant.city}
+                            </span>
+                          </small>
+                        </div>
+                      </div>
+                      <div className="row my-3">
+                        <div className="col">
+                          <small className="text-muted">{review.date}</small>
+                          <span className="d-block text-dark rateDisplay">
+                            Rated:&nbsp;
+                            <span className="badge badge-danger">
+                              {review.rating}
+                            </span>
+                            &nbsp;{review.rating_text}
+                          </span>
+                          <span className="d-block comment">
+                            {review.comment}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>

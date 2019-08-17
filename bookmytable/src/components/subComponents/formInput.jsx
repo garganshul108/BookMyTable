@@ -28,7 +28,10 @@ class FormInput extends Component {
         />
         {error && (
           <div className="alert alert-danger">
-            <small>{error}</small>
+            <small>
+              <strong>OOPS!&nbsp;</strong>
+              {error}
+            </small>
           </div>
         )}
       </div>

@@ -20,3 +20,19 @@
   background: rgb(224, 224, 224);
   color: black;
 }
+
+.showingReviews .reviewDiv .title {
+  font-weight: 900;
+  margin-bottom: 2px !important;
+}
+
+.showingReviews .reviewDiv .rateDisplay {
+  font-weight: 900;
+  margin-top: 2px;
+  font-size: 0.9rem;
+}
+
+.showingReviews .reviewDiv .comment {
+  font-size: 0.95rem;
+  letter-spacing: 0.01rem;
+}
