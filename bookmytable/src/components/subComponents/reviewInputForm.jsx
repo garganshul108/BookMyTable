@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "../css/restaurant.css";
 import RegistrationSubForm from "./registrationSubForm";
 import RatingStar from "./ratingStar";
+import * as fileServices from "../../services/fileServices";
 
 const placeholderContent =
   "Tip: A great review covers food, service, and ambience. Got recommendations for your favourite dishes and drinks, or something everyone should try here? Include that too! And remember, your review needs to be at least 140 characters long :)";
@@ -15,7 +16,8 @@ class ReviewInputForm extends Component {
       { value: "3", trueClass: "text-warning" },
       { value: "4", trueClass: "text-warning" },
       { value: "5", trueClass: "text-primary" }
-    ]
+    ],
+    uploadInput: { files: [] }
   };
   /***
    * 
@@ -29,6 +31,32 @@ class ReviewInputForm extends Component {
     "time": "12:00"
   }
    */
+
+  handleImageUpload = async e => {
+    e.preventDefault();
+    let reviewPhoto = new FormData();
+    let photo = this.state.uploadInput.files[0];
+    console.log("state file photo", photo);
+    reviewPhoto.set("file", photo);
+    console.log("front end formData");
+    for (var pair of reviewPhoto.entries()) {
+      console.log(pair[0] + ", " + pair[1]);
+    }
+
+    try {
+      let response = await fileServices.fileUpload(reviewPhoto, "review");
+      console.log(response);
+    } catch (ex) {}
+    // fetch("http://localhost:8000/upload", {
+    //   method: "POST",
+    //   body: data
+    // }).then(response => {
+    //   response.json().then(body => {
+    //     this.setState({ imageURL: `http://localhost:8000/${body.file}` });
+    //   });
+    // });
+  };
+
   handleInputChange = ({ currentTarget: input }) => {
     // console.log(
     //   input.name,
@@ -77,7 +105,7 @@ class ReviewInputForm extends Component {
                           rate={rate.value}
                           baseClass="fa fa-star"
                           trueClass={rate.trueClass}
-                          falseClass="text-secondary"
+                          falseClass="text-black-50"
                           currentRate={this.state.data.rating}
                           style={{ cursor: "pointer" }}
                           onClick={({ currentTarget }) => {
@@ -101,25 +129,39 @@ class ReviewInputForm extends Component {
                     />
                   </div>
                 </div>
-                <div>
-                  <form>
+
+                <div className="row">
+                  <div className="col">
                     <div className="custom-file">
                       <input
                         type="file"
                         className="custom-file-input"
-                        id="customFile"
+                        id="photoInput"
                         onChange={e => {
                           console.log(e.target.files);
-                          // this.setState({ photopath: t.value });
+                          let { uploadInput } = this.state;
+                          uploadInput.files = e.target.files;
+                          this.setState(
+                            { uploadInput },
+                            console.log(this.state)
+                          );
                         }}
                       />
-                      <label className="custom-file-label" htmlFor="customFile">
+                      <label className="custom-file-label" htmlFor="photoInput">
                         {this.state.photopath
                           ? this.state.photopath
-                          : "Choose file"}
+                          : "Add a Photo"}
                       </label>
                     </div>
-                  </form>
+                  </div>
+                  <div className="col-3 text-right">
+                    <div
+                      className="btn btn-info"
+                      onClick={this.handleImageUpload}
+                    >
+                      Upload
+                    </div>
+                  </div>
                 </div>
                 <button
                   type="submit"
