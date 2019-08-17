@@ -40,6 +40,9 @@ from CommentRating import get
 from Common import getAllCuisines
 from Common import getAllHighlights
 from Common import getAllEstablishments
+from Common import uploadPhoto
+from Common import getPhoto
+from Common import getPhotosByRestaurant
 
 
 @app.route('/')

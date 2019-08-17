@@ -46,6 +46,7 @@ def update_review(current_user):
             sql="INSERT INTO Photo(review_id,url) values(%s,%s)"
             values=(id,url)
             cursor.execute(sql,values)
+            print("sssssssss")
         conn.commit()
         return jsonify("Comment Updation Successfull")
     except Exception as e:
