@@ -3,6 +3,7 @@ import RegistrationSubForm from "./registrationSubForm";
 import FormInput from "./formInput";
 import "../css/restaurant.css";
 import * as bookingServices from "../../services/bookingServices";
+import Joi from "joi-browser";
 import { toast } from "react-toastify";
 
 class RestaurantBookingWindow extends Component {
@@ -17,7 +18,56 @@ class RestaurantBookingWindow extends Component {
       phone_no: "9810301064"
     },
     errors: {},
-    availableSlots: [{ start: "20:00" }]
+    availableSlots: []
+  };
+
+  schema = {
+    date: Joi.date()
+      .min("now")
+      .required()
+      .label("Date"),
+    size: Joi.number()
+      .min(1)
+      .max(20)
+      .required()
+      .label("No of Guests"),
+    time: Joi.string()
+      .required()
+      .label("Time"),
+    first_name: Joi.string()
+      .required()
+      .label("First Name"),
+    last_name: Joi.any(),
+    email_id: Joi.string()
+      .email()
+      .required()
+      .label("Email"),
+    phone_no: Joi.string()
+      .min(10)
+      .required()
+      .label("Phone Number")
+  };
+
+  validate = () => {
+    let errors = null;
+    console.log("validate running");
+
+    let validationResult = Joi.validate(this.state.data, this.schema, {
+      abortEarly: false
+    });
+    if (!validationResult.error) return null;
+    errors = {};
+    for (let error of validationResult.error.details) {
+      errors[error.path[0]] = error.message;
+    }
+    // if (this.state.account.email.trim() === "") {
+    //   errors.email = "Email is req.";
+    // }
+    // if (this.state.account.password.trim() === "") {
+    //   errors.password = "Password is req.";
+    // }
+
+    return errors;
   };
 
   handleInputChange = ({ currentTarget: input }) => {
@@ -41,6 +91,12 @@ class RestaurantBookingWindow extends Component {
 
   handleSubmit = async e => {
     e.preventDefault();
+
+    let errors = this.validate();
+    console.log(errors);
+    this.setState({ errors: errors || {} });
+    if (errors) return;
+
     let submissionData = { ...this.state.data };
     submissionData.restaurant_id = this.props.restaurant_id;
     console.log("state at submisson: \n", submissionData);
@@ -60,7 +116,7 @@ class RestaurantBookingWindow extends Component {
           email_id: "",
           phone_no: ""
         };
-        this.setState({ data: newData });
+        this.setState({ data: newData, availableSlots: [] });
         toast.info("Booking Successful");
       }
     } catch (ex) {
@@ -84,6 +140,7 @@ class RestaurantBookingWindow extends Component {
                 onChange={this.handleInputChange}
                 name="date"
                 type="date"
+                error={this.state.errors.date}
               />
             </div>
             <div className="col-4">
@@ -93,8 +150,9 @@ class RestaurantBookingWindow extends Component {
                 onChange={this.handleInputChange}
                 name="size"
                 type="number"
-                min="0"
+                min="1"
                 max="20"
+                error={this.state.errors.size}
               />
             </div>
             <div className="col-4">
@@ -104,6 +162,7 @@ class RestaurantBookingWindow extends Component {
                 onChange={this.handleInputChange}
                 name="time"
                 type="time"
+                error={this.state.errors.time}
               />
             </div>
           </div>
@@ -118,6 +177,7 @@ class RestaurantBookingWindow extends Component {
                 onChange={this.handleInputChange}
                 name="first_name"
                 placeholder="eg. Abbu"
+                error={this.state.errors.first_name}
               />
             </div>
             <div className="col">
@@ -128,6 +188,7 @@ class RestaurantBookingWindow extends Component {
                 onChange={this.handleInputChange}
                 name="last_name"
                 placeholder="eg. Johannes"
+                error={this.state.errors.last_name}
               />
             </div>
           </div>
@@ -141,6 +202,7 @@ class RestaurantBookingWindow extends Component {
                 name="email_id"
                 type="email"
                 placeholder="eg. abbu.johannes@mymail.com"
+                error={this.state.errors.email_id}
               />
             </div>
             <div className="col">
@@ -152,6 +214,7 @@ class RestaurantBookingWindow extends Component {
                 name="phone_no"
                 type="number"
                 placeholder="eg. 9876543210"
+                error={this.state.errors.phone_no}
               />
             </div>
           </div>
@@ -184,6 +247,7 @@ class RestaurantBookingWindow extends Component {
         )}
         <button
           type="submit"
+          disabled={this.state.availableSlots.length > 0}
           style={{ width: "100%", marginTop: "20px" }}
           className="btn btn-success"
           onClick={this.handleSubmit}
