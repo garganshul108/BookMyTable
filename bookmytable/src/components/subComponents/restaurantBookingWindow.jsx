@@ -221,6 +221,14 @@ class RestaurantBookingWindow extends Component {
         </RegistrationSubForm>
         {this.state.availableSlots.length > 0 && (
           <RegistrationSubForm title="Available Slots">
+            <small style={{ display: "block" }} className="text text-secondary">
+              Please opt a suitable slot
+            </small>
+            <small style={{ display: "block" }} className="text text-danger">
+              Clicking on the slots available will directly book it for you at
+              that time
+            </small>
+            <br />
             {this.state.availableSlots.map(slot => (
               <button
                 className="btn btn-info"
