@@ -150,7 +150,7 @@ class UserProfile extends Component {
                             {review.comment}
                           </span>
                         </div>
-                        <div className="col-3">
+                        <div className="col-2">
                           {review.photos.map(photo => (
                             <img
                               src={photo}
