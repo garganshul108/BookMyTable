@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Aug 16, 2019 at 12:22 PM
+-- Generation Time: Aug 17, 2019 at 12:02 PM
 -- Server version: 5.7.26-0ubuntu0.18.04.1
 -- PHP Version: 7.2.19-0ubuntu0.18.04.1
 
@@ -1349,6 +1349,7 @@ INSERT INTO `Cuisines` (`id`, `name`) VALUES
 (479, 'Gujarati'),
 (455, 'Healthy Food'),
 (473, 'Ice Cream'),
+(486, 'inissss'),
 (470, 'Italian'),
 (445, 'Japanese'),
 (466, 'Juices'),
@@ -1373,7 +1374,8 @@ INSERT INTO `Cuisines` (`id`, `name`) VALUES
 (462, 'Sushi'),
 (476, 'Tamil'),
 (444, 'Thai'),
-(449, 'Tibetan');
+(449, 'Tibetan'),
+(485, 'uoip');
 
 -- --------------------------------------------------------
 
@@ -1495,7 +1497,8 @@ INSERT INTO `Day` (`restaurant_id`, `Monday`, `Tuesday`, `Wednesday`, `Thursday`
 (19147011, 1, 1, 1, 1, 0, 1, 1),
 (19148264, 0, 1, 1, 1, 1, 1, 1),
 (19149885, 1, 1, 1, 1, 1, 0, 1),
-(19151003, 1, 1, 1, 1, 1, 0, 1);
+(19151003, 1, 1, 1, 1, 1, 0, 1),
+(19151069, 1, 1, 1, 1, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -1513,6 +1516,7 @@ CREATE TABLE `Establishments` (
 --
 
 INSERT INTO `Establishments` (`id`, `name`) VALUES
+(148, 'aasfsa'),
 (139, 'Bakery'),
 (134, 'Bar'),
 (144, 'Beverage Shop'),
@@ -1525,7 +1529,8 @@ INSERT INTO `Establishments` (`id`, `name`) VALUES
 (145, 'Microbrewery'),
 (140, 'Pub'),
 (141, 'Quick Bites'),
-(135, 'Sweet Shop');
+(135, 'Sweet Shop'),
+(147, 'zcvxz');
 
 -- --------------------------------------------------------
 
@@ -1545,6 +1550,8 @@ CREATE TABLE `Highlights` (
 INSERT INTO `Highlights` (`id`, `name`) VALUES
 (660, '4/5 Star'),
 (647, 'Above 18 Only'),
+(688, 'adflkjiojoij'),
+(687, 'adfsaf'),
 (682, 'Air Conditioned'),
 (678, 'All Day Breakfast'),
 (617, 'Axis Bank - Dining Delights'),
@@ -1737,7 +1744,8 @@ INSERT INTO `Location` (`id`, `city`, `zipcode`, `locality`, `address`, `localit
 (96, 'Noida', NULL, 'DLF Mall of India, Sector 18,  Noida', '3rd Floor, DLF Mall of India, Sector 18, Noida', 'DLF Mall of India, Sector 18,  Noida, Noida', 28.5667826052, 77.3213776946),
 (97, 'Delhi', NULL, 'Lajpat Nagar 4', 'Moolchand Metro Station, Lajpat Nagar 4, New Delhi', 'Lajpat Nagar 4, New Delhi', 28.56413479, 77.2343477234),
 (98, 'Delhi', NULL, 'Chanakyapuri', '10, Santushti Shopping Complex, Race Course Road, Chanakyapuri, New Delhi', 'Chanakyapuri, New Delhi', 28.5951564512, 77.1979239956),
-(99, 'Delhi', NULL, 'Ashok Vihar Phase 2', '10, Community Centre, Ashok Vihar Phase 2, New Delhi', 'Ashok Vihar Phase 2, New Delhi', 28.6961178, 77.1793854);
+(99, 'Delhi', NULL, 'Ashok Vihar Phase 2', '10, Community Centre, Ashok Vihar Phase 2, New Delhi', 'Ashok Vihar Phase 2, New Delhi', 28.6961178, 77.1793854),
+(269, 'Kanpur', 208002, 'Azad nagar', '2a/61a Azad Nagarkanpur ', 'Near Chandra Bakery', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1879,7 +1887,8 @@ INSERT INTO `Restaurant` (`id`, `location_id`, `name`, `email`, `average_cost_fo
 (19147011, 12, 'Hotel Thatti Vilas ', NULL, 250, 'Biryani, Chettinad, Chinese, South Indian, Tamil', '7 AM to 12 Midnight', 'Casual Dining', 'Cash, Dinner, Delivery, Lunch, Indoor Seating', 'https://b.zmtcdn.com/data/reviews_photos/9fd/485e458f8c1df23e23774071f859d9fd_1564133652.jpg?crop=528%3A528%3B245%2C0&fit=around%7C200%3A200', '+91 8870329317', 42, NULL, NULL, 0.0, 0, NULL),
 (19148264, 6, 'Savariya Cake House', NULL, 250, '', '', '', '', 'https://b.zmtcdn.com/data/reviews_photos/09d/e7d21e438d1a739ac3885108485f509d_1564571873.jpg?crop=960%3A960%3B31%2C0&fit=around%7C200%3A200', 'Not available for this place', 26, NULL, NULL, 3.4, 3, NULL),
 (19149885, 1, 'Gopal Juice and Ice Cream', NULL, 150, 'Beverages, Juices', '9 AM to 10 PM', 'Beverage Shop', 'Takeaway Available, Cash, Delivery, Indoor Seating, Air Conditioned, Digital Payments Accepted', 'https://b.zmtcdn.com/data/reviews_photos/2a4/903ae6cbab9baced72063214ca75b2a4_1563651875.jpg?crop=1080%3A1080%3B0%2C209&fit=around%7C200%3A200', 'Not available for this place', 24, NULL, NULL, 0.0, 0, NULL),
-(19151003, 9, 'Mini Punjab Restaurant', NULL, 100, 'North Indian', '11 AM to 11 PM', 'Casual Dining', 'Cash', 'https://b.zmtcdn.com/data/reviews_photos/5cc/17e40bcae32bbb42b5d94300917cf5cc_1563634703.jpg?crop=774%3A774%3B0%2C0&fit=around%7C200%3A200', '+91 8209242188, +91 9462060657', 39, NULL, NULL, 0.0, 0, NULL);
+(19151003, 9, 'Mini Punjab Restaurant', NULL, 100, 'North Indian', '11 AM to 11 PM', 'Casual Dining', 'Cash', 'https://b.zmtcdn.com/data/reviews_photos/5cc/17e40bcae32bbb42b5d94300917cf5cc_1563634703.jpg?crop=774%3A774%3B0%2C0&fit=around%7C200%3A200', '+91 8209242188, +91 9462060657', 39, NULL, NULL, 0.0, 0, NULL),
+(19151069, 269, 'Pizza Celebrations', 'pizza@gmail.com', 700, 'inissss, uoip', '10AM - 10PM', 'aasfsa, zcvxz', 'adfsaf, adflkjiojoij', '', '+91 , 234234324', 12, '1', 'pizza.com', 0.0, 0, 'sha256$7bcb1E01$42d63e3154828533620a095beb5ab4bb9e91623e441d8ba010c1a63dea269b1d');
 
 -- --------------------------------------------------------
 
@@ -2115,7 +2124,9 @@ INSERT INTO `Slot` (`id`, `restaurant_id`, `start_time`, `end_time`, `day`, `sta
 (4881, 18562836, '09:00', '15:00', NULL, 1),
 (4882, 18562836, '18:00', '23:00', NULL, 1),
 (4883, 307406, '10:00', '16:00', NULL, 1),
-(4884, 307406, '17:00', '23:00', NULL, 1);
+(4884, 307406, '17:00', '23:00', NULL, 1),
+(4885, 19151069, '10:00', '15:00', NULL, 1),
+(4886, 19151069, '18:00', '22:00', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -2203,7 +2214,7 @@ ALTER TABLE `Location`
 -- Indexes for table `Photo`
 --
 ALTER TABLE `Photo`
-  ADD PRIMARY KEY (`review_id`);
+  ADD KEY `Photo_ibfk_1` (`review_id`);
 
 --
 -- Indexes for table `Restaurant`
@@ -2263,27 +2274,27 @@ ALTER TABLE `Cities`
 -- AUTO_INCREMENT for table `Cuisines`
 --
 ALTER TABLE `Cuisines`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=485;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=487;
 --
 -- AUTO_INCREMENT for table `Establishments`
 --
 ALTER TABLE `Establishments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=147;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=149;
 --
 -- AUTO_INCREMENT for table `Highlights`
 --
 ALTER TABLE `Highlights`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=687;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=689;
 --
 -- AUTO_INCREMENT for table `Location`
 --
 ALTER TABLE `Location`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=269;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=271;
 --
 -- AUTO_INCREMENT for table `Restaurant`
 --
 ALTER TABLE `Restaurant`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19151069;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19151071;
 --
 -- AUTO_INCREMENT for table `Review`
 --
@@ -2293,7 +2304,7 @@ ALTER TABLE `Review`
 -- AUTO_INCREMENT for table `Slot`
 --
 ALTER TABLE `Slot`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4885;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4887;
 --
 -- AUTO_INCREMENT for table `User`
 --
