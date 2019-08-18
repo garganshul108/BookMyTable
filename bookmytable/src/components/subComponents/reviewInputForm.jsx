@@ -222,6 +222,23 @@ class ReviewInputForm extends Component {
                         <img
                           src={apiBaseURL + "/photos/" + photo + "?dir=review"}
                           alt="not available"
+                          data-value={photo}
+                          onClick={({ currentTarget }) => {
+                            console.log(
+                              "photo",
+                              photo,
+                              currentTarget.dataset.value
+                            );
+                            let targetPhoto = currentTarget.dataset.value;
+                            let { data } = this.state;
+                            let index = data.photos.indexOf(targetPhoto);
+
+                            data.photos.splice(index, 1);
+
+                            this.setState({ data }, () =>
+                              console.log(this.state.data)
+                            );
+                          }}
                         />
                       ))}
                     </div>

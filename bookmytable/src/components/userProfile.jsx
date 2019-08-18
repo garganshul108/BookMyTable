@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./css/userProfile.css";
 import { getUser } from "../services/userServices";
-
+import _ from "lodash";
 import apiConfig from "../services/config/apiConfig.json";
 
 const apiBaseURL = apiConfig.baseURL;
@@ -166,10 +166,15 @@ class UserProfile extends Component {
     }
 
     dineline = [...bookmarks, ...reviews, ...beentheres];
+    dineline = _.shuffle(_.shuffle(dineline));
+
+    console.log("dl", dineline);
 
     dineline = dineline.sort((a, b) => {
       return new Date(b.date) - new Date(a.date);
     });
+
+    console.log("dl", dineline);
 
     reviews = reviews.sort((a, b) => {
       return new Date(b.date) - new Date(a.date);
