@@ -60,14 +60,16 @@
 
 33. [http://127.0.0.1:5000/api/bookmarks](http://127.0.0.1:5000/api/bookmarks) user login required(POST GET request )
 
-34. [http://127.0.0.1:5000/api/beentheres](http://127.0.0.1:5000/api/beentheres) "id" as query and login required (DELETE request )I have to check it
+34. [http://127.0.0.1:5000/api/recentvisits](http://127.0.0.1:5000/api/recentvisits) user login required(GET request )
 
-35. [http://127.0.0.1:5000/api/bookmarks](http://127.0.0.1:5000/api/beentheres) "id" as query and login required (DELETE request )I have to check it
+35. [http://127.0.0.1:5000/api/beentheres](http://127.0.0.1:5000/api/beentheres) "id" as query and login required (DELETE request )I have to check it
 
-36. [http://127.0.0.1:5000/api/login](http://127.0.0.1:5000/api/login) (POST Request)
+36. [http://127.0.0.1:5000/api/bookmarks](http://127.0.0.1:5000/api/beentheres) "id" as query and login required (DELETE request )I have to check it
 
-37. [http://127.0.0.1:5000/api/photos](http://127.0.0.1:5000/api/photos) (POST Request) a query parameter "dir=review","dir=restaurantProfile","dir=userProfile" is expected to know get the info of photos else error 400 will be returned
+37. [http://127.0.0.1:5000/api/login](http://127.0.0.1:5000/api/login) (POST Request)
 
-38. [http://127.0.0.1:5000/api/photos/<path>](http://127.0.0.1:5000/api/photos) (GET Request) a query parameter "dir=review","dir=restaurantProfile","dir=userProfile" is expected to know get the info of photos else error 400 will be returned and path is the url of the photo
+38. [http://127.0.0.1:5000/api/photos](http://127.0.0.1:5000/api/photos) (POST Request) a query parameter "dir=review","dir=restaurantProfile","dir=userProfile" is expected to know get the info of photos else error 400 will be returned
 
-39. [http://127.0.0.1:5000/api/restaurants/photos/<res_id>](http://127.0.0.1:5000/api/photos) (GET Request) to get all the photos of restaurant uploaded by any user
+39. [http://127.0.0.1:5000/api/photos/<path>](http://127.0.0.1:5000/api/photos) (GET Request) a query parameter "dir=review","dir=restaurantProfile","dir=userProfile" is expected to know get the info of photos else error 400 will be returned and path is the url of the photo
+
+40. [http://127.0.0.1:5000/api/restaurants/photos/<res_id>](http://127.0.0.1:5000/api/photos) (GET Request) to get all the photos of restaurant uploaded by any user
