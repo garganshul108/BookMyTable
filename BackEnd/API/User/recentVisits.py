@@ -7,7 +7,7 @@ from LoginSignUp.util.required import token_required
 
 
 
-@app.route('/api/users/recentVisits')
+@app.route('/api/recentvisits')
 @token_required
 def get_user_getrecent_visits(current_user):
     try:
@@ -15,7 +15,7 @@ def get_user_getrecent_visits(current_user):
         cursor = conn.cursor(pymysql.cursors.DictCursor)
         cursor.execute(
             "SELECT * FROM Booking where user_id=%s ORDER BY date_time_of_booking DESC",current_user['id'])
-        rows = cursor.fetchall()
+        rows = cursor.fetchall()[:5]
         return send_get_response(rows,"No Booking Found")
     except Exception as e:
         print(e)
