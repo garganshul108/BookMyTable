@@ -58,11 +58,12 @@ def insert_booking(cursor,_user_id,data,start,end):
     _res_id=int("0"+str(data['restaurant_id']))
     _f_name=data['first_name']
     _l_name=data['last_name']
-    data_time=datetime.now.strftime("%Y/%m/%d %H:%M:%S")
-    _email_id=data['email_id']
-    _phone_no=data['phone_no']
-    print(date_time)
     try:
+        data_time=datetime.now.strftime("%Y/%m/%d %H:%M:%S")
+        _email_id=data['email_id']
+        _phone_no=data['phone_no']
+        print(date_time)
+    
         sql="INSERT INTO Booking(user_id,restaurant_id,size,start_time,end_time,date,first_name,last_name,email_id,phone_no) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
         values=(_user_id,_res_id,_size,start,end,_date,_f_name,_l_name,_email_id,_phone_no)
         cursor.execute(sql,values)
