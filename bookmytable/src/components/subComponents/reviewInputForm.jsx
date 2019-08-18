@@ -5,6 +5,7 @@ import RatingStar from "./ratingStar";
 import * as fileServices from "../../services/fileServices";
 import * as reviewServices from "../../services/reviewServices";
 import { toast } from "react-toastify";
+import apiConfig from "../../services/config/apiConfig.json";
 
 const placeholderContent =
   "Tip: A great review covers food, service, and ambience. Got recommendations for your favourite dishes and drinks, or something everyone should try here? Include that too! And remember, your review needs to be at least 140 characters long :)";
@@ -16,6 +17,8 @@ const ratingText = {
   "4": "Excellent",
   "5": "Outstanding"
 };
+
+const apiBaseURL = apiConfig.baseURL;
 
 class ReviewInputForm extends Component {
   state = {
@@ -51,7 +54,9 @@ class ReviewInputForm extends Component {
       this.setState({ data }, () => {
         toast.info("Photo uploaded");
       });
-    } catch (ex) {}
+    } catch (ex) {
+      console.log(ex);
+    }
   };
 
   handleInputChange = ({ currentTarget: input }) => {
@@ -207,6 +212,18 @@ class ReviewInputForm extends Component {
                     >
                       Upload
                     </div>
+                  </div>
+                </div>
+                {/* photo => "http://localhost:5000/api/photos/" + photo + "?dir=review" */}
+                <div className="row">
+                  <div className="col">
+                    {this.state.data.photos.map(photo => (
+                      <img
+                        style={{ width: "200px" }}
+                        src={apiBaseURL + "/photos/" + photo + "?dir=review"}
+                        alt="not available"
+                      />
+                    ))}
                   </div>
                 </div>
                 <button
