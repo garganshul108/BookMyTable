@@ -59,7 +59,7 @@ def insert_booking(cursor,_user_id,data,start,end):
     _f_name=data['first_name']
     _l_name=data['last_name']
     try:
-        data_time=datetime.now.strftime("%Y/%m/%d %H:%M:%S")
+        data_time=datetime.now().strftime("%Y/%m/%d %H:%M:%S")
         _email_id=data['email_id']
         _phone_no=data['phone_no']
         print(date_time)
