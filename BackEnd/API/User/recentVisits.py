@@ -7,14 +7,14 @@ from LoginSignUp.util.required import token_required
 
 
 
-@app.route('/api/users/bookings')
+@app.route('/api/users/recentVisits')
 @token_required
 def get_user_bookings(current_user):
     try:
         conn = mysql.connect()
         cursor = conn.cursor(pymysql.cursors.DictCursor)
         cursor.execute(
-            "SELECT * FROM Booking where user_id=%s",current_user['id'])
+            "SELECT * FROM Booking where user_id=%s ORDER BY date_time_of_booking DESC",current_user['id'])
         rows = cursor.fetchall()
         return send_get_response(rows,"No Booking Found")
     except Exception as e:
