@@ -9,7 +9,7 @@ from LoginSignUp.util.required import token_required
 
 @app.route('/api/users/recentVisits')
 @token_required
-def get_user_bookings(current_user):
+def get_user_getrecent_visits(current_user):
     try:
         conn = mysql.connect()
         cursor = conn.cursor(pymysql.cursors.DictCursor)

@@ -34,6 +34,7 @@ from User.BeenThere import get
 from User.Bookmark import insert
 from User.Bookmark import delete
 from User.Bookmark import get
+from User import recentVisits
 
 from Booking import insert
 from Booking import delete
