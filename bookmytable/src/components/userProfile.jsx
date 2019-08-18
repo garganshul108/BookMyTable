@@ -2,6 +2,10 @@ import React, { Component } from "react";
 import "./css/userProfile.css";
 import { getUser } from "../services/userServices";
 
+import apiConfig from "../services/config/apiConfig.json";
+
+const apiBaseURL = apiConfig.baseURL;
+
 const tempProfile =
   "https://b.zmtcdn.com/data/user_profile_pictures/6e4/9f999a3334fd5ea937fa98f2843276e4.jpg?fit=around%7C300%3A300&crop=300%3A300%3B%2A%2C%2A";
 
@@ -11,7 +15,7 @@ class ReviewDiv extends Component {
     return (
       <div className="reviewDiv">
         <div className="row">
-          <div className="col-2">
+          <div className="col-3">
             <img
               style={{ width: "100%" }}
               src={review.restaurant.thumb}
@@ -46,13 +50,11 @@ class ReviewDiv extends Component {
             </span>
             <span className="d-block comment">{review.comment}</span>
           </div>
-          <div className="col-2">
+        </div>
+        <div className="row my-3 reviewPhotos">
+          <div className="col">
             {review.photos.map(photo => (
-              <img
-                src={photo}
-                style={{ width: "100%" }}
-                alt="Image not available"
-              />
+              <img src={photo} alt="Image not available" />
             ))}
           </div>
         </div>
@@ -189,7 +191,7 @@ class UserProfile extends Component {
 
     for (let review of reviews) {
       review.photos = review.photos.map(
-        photo => "http://localhost:5000/api/photos/" + photo + "?dir=review"
+        photo => apiBaseURL + "/photos/" + photo + "?dir=review"
       );
     }
 

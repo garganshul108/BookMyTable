@@ -215,15 +215,16 @@ class ReviewInputForm extends Component {
                   </div>
                 </div>
                 {/* photo => "http://localhost:5000/api/photos/" + photo + "?dir=review" */}
-                <div className="row">
-                  <div className="col">
-                    {this.state.data.photos.map(photo => (
-                      <img
-                        style={{ width: "200px" }}
-                        src={apiBaseURL + "/photos/" + photo + "?dir=review"}
-                        alt="not available"
-                      />
-                    ))}
+                <div className="uploadedPhotoDisplay">
+                  <div className="row">
+                    <div className="col">
+                      {this.state.data.photos.map(photo => (
+                        <img
+                          src={apiBaseURL + "/photos/" + photo + "?dir=review"}
+                          alt="not available"
+                        />
+                      ))}
+                    </div>
                   </div>
                 </div>
                 <button

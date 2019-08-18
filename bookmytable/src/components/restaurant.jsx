@@ -397,41 +397,43 @@ class Restaurant extends Component {
                   </Link>
                 </div>
               </div> */}
-              <div className="row">
-                <div className="col">
-                  {/* <Switch> */}
-                  <Route
-                    path="/restaurant/:id"
-                    render={props => (
-                      <RestaurantBookingWindow
-                        id="bookingWindow"
-                        restaurant_id={this.props.match.params.id}
-                        {...props}
-                      />
-                    )}
-                  />
+              <div className="restaurantActiions">
+                <div className="row">
+                  <div className="col">
+                    {/* <Switch> */}
+                    <Route
+                      path="/restaurant/:id"
+                      render={props => (
+                        <RestaurantBookingWindow
+                          id="bookingWindow"
+                          restaurant_id={this.props.match.params.id}
+                          {...props}
+                        />
+                      )}
+                    />
 
-                  <Route
-                    path="/restaurant/:id"
-                    render={props => (
-                      <PhotoGallery
-                        id="photoGallery"
-                        photos={photo}
-                        {...props}
-                      />
-                    )}
-                  />
-                  <Route
-                    path="/restaurant/:id"
-                    render={props => (
-                      <ReviewInputForm
-                        id="reviewForm"
-                        restaurant_id={this.props.match.params.id}
-                        {...props}
-                      />
-                    )}
-                  />
-                  {/* </Switch> */}
+                    <Route
+                      path="/restaurant/:id"
+                      render={props => (
+                        <PhotoGallery
+                          id="photoGallery"
+                          photos={photo}
+                          {...props}
+                        />
+                      )}
+                    />
+                    <Route
+                      path="/restaurant/:id"
+                      render={props => (
+                        <ReviewInputForm
+                          id="reviewForm"
+                          restaurant_id={this.props.match.params.id}
+                          {...props}
+                        />
+                      )}
+                    />
+                    {/* </Switch> */}
+                  </div>
                 </div>
               </div>
             </div>
