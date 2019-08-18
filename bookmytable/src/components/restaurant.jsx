@@ -3,10 +3,15 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import RestaurantBookingWindow from "./subComponents/restaurantBookingWindow";
 import NotFound from "./notFound";
 import { Link } from "react-router-dom";
+import * as Scroll from "react-scroll";
 import ReviewInputForm from "./subComponents/reviewInputForm";
 import { getRestaurantById } from "../services/restaurantServices";
 import "./css/restaurant.css";
 import PhotoGallery from "./subComponents/photoGallery";
+
+import * as beenThereServices from "../services/beenThereServices";
+import { toast } from "react-toastify";
+import * as bookmarkServices from "../services/bookmarkServices";
 
 let photo = [
   "https://b.zmtcdn.com/data/pictures/chains/5/18895645/24279bed659c9c07ea57444d841a305c.jpg?crop=3738%3A3738%3B764%2C0&fit=around%7C200%3A200",
@@ -69,6 +74,44 @@ class Restaurant extends Component {
     });
   }
 
+  getDateTime = today => {
+    let date =
+      today.getFullYear() +
+      "/" +
+      (today.getMonth() + 1) +
+      "/" +
+      today.getDate();
+    let time = today.getHours() + ":" + today.getMinutes();
+
+    return { date, time };
+  };
+
+  handleAddBeenThere = async e => {
+    e.preventDefault();
+    console.log("been there clicked");
+    let restaurant_id = this.props.match.params.id;
+    let { date, time } = this.getDateTime(new Date());
+    let submissionData = { restaurant_id, date, time };
+    console.log(submissionData);
+    try {
+      await beenThereServices.postBeenThere(submissionData);
+      toast.info("Been There added");
+    } catch (error) {}
+  };
+
+  handleAddBookmark = async e => {
+    e.preventDefault();
+    console.log("bookmark clicked");
+    let restaurant_id = this.props.match.params.id;
+    let { date, time } = this.getDateTime(new Date());
+    let submissionData = { restaurant_id, date, time };
+    console.log(submissionData);
+    try {
+      await bookmarkServices.postBookmark(submissionData);
+      toast.info("Restaurant Archived");
+    } catch (error) {}
+  };
+
   renderRestaurantInfo = () => {
     return (
       <div className="restaurantInfoBanner">
@@ -102,30 +145,59 @@ class Restaurant extends Component {
         <div className="row">
           <div className="col">
             <div className="topButtons">
-              <button type="button" class="btn ">
+              <button
+                type="button"
+                class="btn "
+                onClick={this.handleAddBookmark}
+              >
                 <i class="fa fa-bookmark" aria-hidden="true" />
                 &nbsp;&nbsp;Archive
               </button>
-              <button type="button" class="btn ">
+              <button
+                type="button"
+                class="btn "
+                onClick={this.handleAddBeenThere}
+              >
                 <i class="fa fa-child" aria-hidden="true" />
                 &nbsp;&nbsp;Been There
               </button>
-              <button type="button" class="btn ">
+              <Scroll.Link
+                to="bookingWindow"
+                smooth={true}
+                offset={-70}
+                duration={500}
+                type="button"
+                class="btn "
+              >
                 <i class="fa fa-cutlery" aria-hidden="true" />
                 &nbsp;&nbsp;Book a Table
-              </button>
-              <button type="button" class="btn ">
+              </Scroll.Link>
+              <Scroll.Link
+                to="reviewForm"
+                smooth={true}
+                offset={-70}
+                duration={1000}
+                type="button"
+                class="btn "
+              >
                 <i class="fa fa-pencil-square-o" aria-hidden="true" />
                 &nbsp;&nbsp;Review Visit
-              </button>
+              </Scroll.Link>
               <button type="button" class="btn ">
                 <i class="fa fa-file-text" aria-hidden="true" />
                 &nbsp;&nbsp;All reviews
               </button>
-              <button type="button" class="btn ">
+              <Scroll.Link
+                to="photoGallery"
+                smooth={true}
+                offset={-70}
+                duration={1000}
+                type="button"
+                class="btn "
+              >
                 <i class="fa fa-picture-o" aria-hidden="true" />
                 &nbsp;&nbsp;Photos/Gallery
-              </button>
+              </Scroll.Link>
             </div>
           </div>
         </div>
@@ -332,6 +404,7 @@ class Restaurant extends Component {
                     path="/restaurant/:id"
                     render={props => (
                       <RestaurantBookingWindow
+                        id="bookingWindow"
                         restaurant_id={this.props.match.params.id}
                         {...props}
                       />
@@ -340,12 +413,19 @@ class Restaurant extends Component {
 
                   <Route
                     path="/restaurant/:id"
-                    render={props => <PhotoGallery photos={photo} {...props} />}
+                    render={props => (
+                      <PhotoGallery
+                        id="photoGallery"
+                        photos={photo}
+                        {...props}
+                      />
+                    )}
                   />
                   <Route
                     path="/restaurant/:id"
                     render={props => (
                       <ReviewInputForm
+                        id="reviewForm"
                         restaurant_id={this.props.match.params.id}
                         {...props}
                       />

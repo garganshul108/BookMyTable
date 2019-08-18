@@ -131,7 +131,7 @@ class ReviewInputForm extends Component {
 
   render() {
     return (
-      <div className="reviewDiv">
+      <div className="reviewDiv" id={this.props.id}>
         <h4 style={{ fontWeight: "900" }}>Add a Review</h4>
         <RegistrationSubForm>
           <div className="container">
