@@ -83,4 +83,4 @@ def drop_id():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(ss_context='adhoc',host=0.0.0.0)
