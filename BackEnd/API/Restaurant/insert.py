@@ -110,6 +110,7 @@ def insert_slot(cursor,data,res_id):
         print("slot "+e+" slot")
 
 @app.route('/api/restaurants',methods=['POST'])
+@token_required
 def add_restaurant():
     try:
         data=request.json 

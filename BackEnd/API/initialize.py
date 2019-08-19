@@ -55,12 +55,14 @@ def update_restaurant(tt, loc_id, cursor):
     _highlights = ", ".join(tt['highlights'])
     _rating=Decimal(tt['user_rating']['aggregate_rating'])
     _votes=tt['user_rating']['votes']
+    _email="example"+str(loc_id)+"@gmail.com"
+    _password=generate_password_hash("asdfjkl",method='sha256')    
 
     _thumb = tt['thumb']
     _phone_numbers = tt['phone_numbers']
     _capacity=random.randrange(20,50)
-    sql = "INSERT INTO Restaurant(id,location_id,name,average_cost_for_two,cuisines,timings,establishment,highlights,thumb,phone_numbers,capacity,rating,votes) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
-    value = (_id,loc_id, _name, _average_cost, _cuisines, _timings, _establishment, _highlights,
+    sql = "INSERT INTO Restaurant(id,email,password,location_id,name,average_cost_for_two,cuisines,timings,establishment,highlights,thumb,phone_numbers,capacity,rating,votes) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+    value = (_id,_email,_password,loc_id, _name, _average_cost, _cuisines, _timings, _establishment, _highlights,
              _thumb, _phone_numbers,_capacity,_rating,_votes)
     cursor.execute(sql, value)
 
@@ -106,18 +108,18 @@ def get_restaurant():
         cursor.execute("DELETE FROM Day")
         cursor.execute("DELETE FROM Restaurant")
         cursor.execute("DELETE FROM Location")
-        cursor.execute("DELETE FROM Cities")
+        # cursor.execute("DELETE FROM Cities")
         cursor.execute("DELETE FROM Cuisines")
         cursor.execute("DELETE FROM Establishments")
         cursor.execute("DELETE FROM Highlights")
 
         conn.commit()
         loc_id = 1
-        for tt in cities_data:
-            sql="INSERT INTO Cities(id,name,state) VALUES(%s,%s,%s)"
-            values=(int(tt['id']),tt['name'],tt['state'])
-            cursor.execute(sql,values)
-            conn.commit()
+        # for tt in cities_data:
+        #     sql="INSERT INTO Cities(id,name,state) VALUES(%s,%s,%s)"
+        #     values=(int(tt['id]),tt['name'],tt['state'])
+        #     cursor.execute(sql,values)
+        #     conn.commit()
         establishments=[]
         cuisines=[]
         highlights=[]

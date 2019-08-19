@@ -14,10 +14,11 @@ def convert_restaurant(cursor, rows,reviews=False,meta="NO"):
                 del row['days']['restaurant_id']
                 
                 
-                if reviews:
-                        cursor.execute("SELECT * FROM Slot where restaurant_id=%s",row['id'])
-                        slots=cursor.fetchall()
-                        row['slots']=slots
+                
+                cursor.execute("SELECT * FROM Slot where restaurant_id=%s",row['id'])
+                slots=cursor.fetchall()
+                row['slots']=slots
+                del row['timings']
 
                 if reviews:
                         row['reviews']=get_reviews(resId=row['id']).json
