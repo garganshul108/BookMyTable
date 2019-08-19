@@ -31,9 +31,9 @@ def get_reviews(resId=None,userId=None):
     _restaurant_id=request.args.get('restaurantId',default="%",type=int)
     _user_id=request.args.get('userId',default="%",type=int)
     if resId != None:
-        _restaurant_id='%'
+        _restaurant_id=resId
     if userId!=None:
-        _user_id='%'
+        _user_id=userId
     try:
         conn=mysql.connect()
         cursor=conn.cursor(pymysql.cursors.DictCursor)

@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import "./css/login.css";
 import FormInput from "./subComponents/formInput";
 import auth from "../services/authServices";
+import { toast } from "react-toastify";
 
 class SignUp extends Component {
   state = {
@@ -78,6 +79,7 @@ class SignUp extends Component {
     try {
       let promise = await auth.registerUser(finalData);
       console.log(promise);
+      toast.success("Signup Successful");
     } catch (ex) {
       if (
         ex.response &&

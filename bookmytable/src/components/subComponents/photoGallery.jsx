@@ -3,7 +3,7 @@ import React, { Component } from "react";
 class PhotoGallery extends Component {
   render() {
     return (
-      <div className="photoDiv">
+      <div className="photoDiv" id={this.props.id}>
         <h4 style={{ fontWeight: "900" }}>Gallery</h4>
         <small className="text-muted">
           NOTE: All the photos in the gallery below are added by the reviewer

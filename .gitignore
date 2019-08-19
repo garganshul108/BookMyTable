@@ -1,8 +1,9 @@
-BackEnd/API/venv/
-
 BackEnd/venv/
+BackEnd/API/venv/
 BackEnd/.vscode/
 
 BackEnd/API/**/__pycache__/
-
+.pyc
 BackEnd/API/db_config.py
+
+BackEnd/API/static/photos/*
