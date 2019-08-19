@@ -84,16 +84,15 @@ def insert_restaurant(cursor,data,_loc_id):
         _name=data['name']
         _phone=data['phone']['std']+"-"+data['phone']['number']
         _thumb=data['thumb']
-        _timings=data['timings']
-        _opening_status=int(data['opening_status'])
+        _opening_status=int("0"+str(data['opening_status']))
         _email=data['email']
         _website=data['website']
         _capacity=int("0"+str(data['capacity']))
         hashed_password=generate_password_hash(data['password'],method='sha256')
         sql="""INSERT INTO 
-            Restaurant(location_id,name,email,average_cost_for_two,cuisines,timings,establishment,highlights,thumb,phone_numbers,capacity,opening_status,website,password)
-            VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
-        values=(_loc_id,_name,_email,_ave_cost,_cuisines,_timings,_establishment,_highlights,_thumb,_phone,_capacity,_opening_status,_website,hashed_password)
+            Restaurant(location_id,name,email,average_cost_for_two,cuisines,establishment,highlights,thumb,phone_numbers,capacity,opening_status,website,password)
+            VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
+        values=(_loc_id,_name,_email,_ave_cost,_cuisines,_establishment,_highlights,_thumb,_phone,_capacity,_opening_status,_website,hashed_password)
         cursor.execute(sql,values)
     # except Exception as e:
         # print("res "+e+" res")
@@ -110,17 +109,20 @@ def insert_slot(cursor,data,res_id):
         print("slot "+e+" slot")
 
 @app.route('/api/restaurants',methods=['POST'])
+# @token_required
 def add_restaurant():
     try:
         data=request.json 
         conn=mysql.connect()
         cursor=conn.cursor()
         cursor2=conn.cursor(pymysql.cursors.DictCursor)
-
         insert_location(cursor,data[0]['location'])
         loc_id=get_last_id(cursor)
 
-        insert_restaurant(cursor,data[0],loc_id)  
+        try:
+            insert_restaurant(cursor,data[0],loc_id)  
+        except Exception as e:
+            return jsonify("Duplicate email"),400
         res_id=get_last_id(cursor)
         
         insert_days(cursor,data[0]['days'],res_id)

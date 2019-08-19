@@ -129,7 +129,7 @@ class RestaurantBookingWindow extends Component {
 
   render() {
     return (
-      <div className="bookingDiv">
+      <div className="bookingDiv" id={this.props.id}>
         <h4 style={{ fontWeight: "900" }}>Booking Window</h4>
         <RegistrationSubForm title="1. Booking Details">
           <div className="row">
