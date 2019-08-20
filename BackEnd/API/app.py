@@ -95,7 +95,6 @@ from werkzeug import generate_password_hash, check_password_hash
 #         return "final"
 
 
-
-# # if __name__ == "__app__":
-#     # app.run(debug=True)
+# if __name__ == "__app__":
+#    app.run(debug=True)
 
