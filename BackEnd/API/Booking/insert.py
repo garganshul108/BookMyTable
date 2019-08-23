@@ -17,8 +17,9 @@ from datetime import datetime
 #     user_id:"1"
 # ]
 def convert_time(time):
-    ans=time[0]+time[1]
-    if time[3]=='0' and time[4]=='0':
+    data=time.split(":")
+    ans=data[0]
+    if int(data[1])==0:
         return float(ans)
     return (float(ans)+(0.5))
 
